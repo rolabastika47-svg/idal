@@ -1,0 +1,372 @@
+/* ============================================
+   RTL (Right-to-Left) Styles for Arabic Pages
+   ============================================ */
+
+/* Almarai Font for Arabic */
+html[dir="rtl"],
+body[dir="rtl"],
+html[dir="rtl"] *,
+body[dir="rtl"] * {
+    font-family: 'Almarai', sans-serif !important;
+}
+
+/* Hero Section RTL */
+html[dir="rtl"] .hero-section,
+body[dir="rtl"] .hero-section {
+    background-position: right;
+}
+
+html[dir="rtl"] .hero-section .container .row .col-lg-6,
+body[dir="rtl"] .hero-section .container .row .col-lg-6 {
+    text-align: right;
+}
+
+html[dir="rtl"] .hero-title,
+body[dir="rtl"] .hero-title {
+    text-align: right;
+}
+
+html[dir="rtl"] .hero-description,
+body[dir="rtl"] .hero-description {
+    text-align: right;
+}
+
+/* Button RTL - Icon positioning */
+/* html[dir="rtl"] .btn-custom,
+body[dir="rtl"] .btn-custom {
+    flex-direction: row-reverse;
+} */
+
+html[dir="rtl"] .btn-custom .icon-circle i,
+body[dir="rtl"] .btn-custom .icon-circle i {
+    transform: rotate(180deg);
+}
+
+/* Impact Section RTL */
+/* html[dir="rtl"] .impact-cards-container,
+body[dir="rtl"] .impact-cards-container {
+    flex-direction: row-reverse;
+} */
+
+html[dir="rtl"] .impact-card,
+body[dir="rtl"] .impact-card {
+    margin-left: 0;
+    margin-right: -20px;
+    border-left: none;
+    border-right: 1px solid rgba(0, 0, 0, 0.05);
+    box-shadow: 5px 0 15px rgba(0, 0, 0, 0.05);
+    background-position: left bottom;
+    /* RTL: slide from left */
+    transform: translateX(-80px);
+}
+
+/* RTL animated state */
+html[dir="rtl"] .impact-card.card-animated,
+body[dir="rtl"] .impact-card.card-animated {
+    transform: translateX(0) scale(1);
+}
+
+/* RTL hover state - combine translateX(0) with scale */
+html[dir="rtl"] .impact-card:hover,
+body[dir="rtl"] .impact-card:hover {
+    transform: translateX(0) scale(1.02) !important;
+    flex: 1.75 !important;
+    transition: opacity 0.3s ease,
+        transform 0.3s ease,
+        flex 0.4s cubic-bezier(0.25, 1, 0.5, 1),
+        background-color 0.3s ease !important;
+}
+
+html[dir="rtl"] .impact-card:not(:first-child),
+body[dir="rtl"] .impact-card:not(:first-child) {
+    /* margin-right: -90px; */
+    margin-left: 0;
+}
+
+html[dir="rtl"] .impact-card:last-child,
+body[dir="rtl"] .impact-card:last-child {
+    margin-right: -20px;
+    margin-left: 0;
+}
+
+html[dir="rtl"] .impact-card .e-services-card,
+body[dir="rtl"] .impact-card .e-services-card {
+    background-position: left bottom;
+}
+
+/* Pillars Section RTL */
+html[dir="rtl"] .pillar-card,
+body[dir="rtl"] .pillar-card {
+    text-align: right;
+}
+
+/* html[dir="rtl"] .pillar-card .d-flex,
+body[dir="rtl"] .pillar-card .d-flex {
+    flex-direction: row-reverse;
+} */
+
+html[dir="rtl"] .pillar-arrow,
+body[dir="rtl"] .pillar-arrow {
+    transform: scaleX(-1);
+}
+
+/* Latest Projects Section RTL */
+html[dir="rtl"] .latest-projects-section,
+body[dir="rtl"] .latest-projects-section {
+    direction: rtl;
+}
+
+/* Latest News Section RTL */
+html[dir="rtl"] .latest-news-section,
+body[dir="rtl"] .latest-news-section {
+    direction: rtl;
+}
+
+/* Minister Section RTL */
+html[dir="rtl"] .minister-section .row,
+body[dir="rtl"] .minister-section .row,
+html[dir="rtl"] .minister-card .row,
+body[dir="rtl"] .minister-card .row {
+    flex-direction: row-reverse !important;
+    display: flex !important;
+}
+
+html[dir="rtl"] .minister-section .col-lg-7,
+body[dir="rtl"] .minister-section .col-lg-7 {
+    text-align: right;
+    order: 2;
+}
+
+html[dir="rtl"] .minister-section .col-lg-5,
+body[dir="rtl"] .minister-section .col-lg-5 {
+    text-align: left !important;
+    order: 1;
+}
+
+/* Override text-end class for RTL */
+html[dir="rtl"] .minister-section .col-lg-5.text-end,
+body[dir="rtl"] .minister-section .col-lg-5.text-end {
+    text-align: left !important;
+}
+
+html[dir="rtl"] .quote-author,
+body[dir="rtl"] .quote-author {
+    text-align: right;
+}
+
+/* Testimonials Section RTL */
+html[dir="rtl"] .testimonials-section,
+body[dir="rtl"] .testimonials-section {
+    direction: rtl;
+}
+
+html[dir="rtl"] .testimonial-card,
+body[dir="rtl"] .testimonial-card {
+    text-align: right;
+}
+
+/* Owl Carousel RTL Support */
+html[dir="rtl"] .owl-carousel,
+body[dir="rtl"] .owl-carousel {
+    direction: ltr; /* Keep carousel direction LTR for proper functionality */
+}
+
+/* Projects carousel should use RTL direction */
+html[dir="rtl"] .projects-carousel,
+body[dir="rtl"] .projects-carousel {
+    direction: rtl; /* Allow RTL for projects carousel */
+}
+
+html[dir="rtl"] .owl-carousel .item,
+body[dir="rtl"] .owl-carousel .item {
+    direction: rtl; /* But make content inside RTL */
+}
+
+/* Hero Banner Carousel RTL */
+html[dir="rtl"] .hero-banner-carousel .item,
+body[dir="rtl"] .hero-banner-carousel .item {
+    direction: rtl;
+}
+
+/* Section Titles RTL */
+html[dir="rtl"] .section-title,
+body[dir="rtl"] .section-title {
+    text-align: center; /* Keep centered but ensure proper rendering */
+}
+
+html[dir="rtl"] .impact-title,
+body[dir="rtl"] .impact-title {
+    text-align: center;
+}
+
+/* Buttons RTL */
+html[dir="rtl"] .btn-primary-custom,
+body[dir="rtl"] .btn-primary-custom {
+    direction: rtl;
+}
+
+/* Responsive RTL Adjustments */
+@media (max-width: 991.98px) {
+    html[dir="rtl"] .hero-section .col-lg-6,
+    body[dir="rtl"] .hero-section .col-lg-6 {
+        text-align: center;
+    }
+    
+    html[dir="rtl"] .impact-card,
+    body[dir="rtl"] .impact-card {
+        margin-right: 0;
+        margin-left: 0;
+    }
+    
+    /* Ensure animated cards are visible on mobile RTL */
+    html[dir="rtl"] .impact-card.card-animated,
+    body[dir="rtl"] .impact-card.card-animated {
+        transform: translateX(0) scale(1) !important;
+    }
+    
+    /* Disable hover scale on mobile RTL */
+    html[dir="rtl"] .impact-card:hover,
+    body[dir="rtl"] .impact-card:hover {
+        transform: translateX(0) scale(1) !important;
+    }
+}
+
+@media (min-width: 768px) {
+    .text-md-start {
+        text-align: right !important;
+    }
+    .text-md-end {
+        text-align: left !important;
+    }
+}
+
+html[dir="rtl"].e-services-card {
+    background:
+        var(--card-bg) no-repeat left bottom,#ffffff !important;
+}
+html[dir="rtl"].e-services-card:hover {
+    background:
+        var(--card-bg) no-repeat left bottom ,
+        linear-gradient(180deg, #E0F2FF 0%, #6EA8FE 100%) !important;
+
+    background-size: 234px 238px, auto;
+}
+
+
+
+.minister-quote,
+.quote-author,
+.testimonial-text,
+.testimonial-author .author-name, .author-role
+{
+font-style: normal;
+}
+
+html[dir="rtl"] .nav-link.dropdown-toggle::after,
+body[dir="rtl"] .nav-link.dropdown-toggle::after {
+    margin-left: 0;
+    margin-right: 12px;
+}
+
+html[dir="rtl"] .dropdown-menu .dropdown-item,
+body[dir="rtl"] .dropdown-menu .dropdown-item {
+    text-align: right;
+    float: none;
+    direction: rtl;
+}
+
+/* Mobile dropdown menu RTL fixes */
+@media (max-width: 991.98px) {
+    html[dir="rtl"] .dropdown-menu,
+    body[dir="rtl"] .dropdown-menu {
+        padding-right: 1.5rem;
+        padding-left: 0;
+        direction: rtl;
+    }
+
+    html[dir="rtl"] .dropdown-item,
+    body[dir="rtl"] .dropdown-item {
+        padding-right: 1rem;
+        padding-left: 0;
+        text-align: right;
+    }
+
+    html[dir="rtl"] .nav-link.dropdown-toggle::after,
+    body[dir="rtl"] .nav-link.dropdown-toggle::after {
+        margin-left: 0;
+        margin-right: 15px;
+    }
+}
+
+html[dir="rtl"] .minister-name,
+html[dir="rtl"] .badge-minister,
+body[dir="rtl"] .minister-name,
+body[dir="rtl"] .badge-minister {
+    text-align: right !important;
+}
+
+/* Ensure the badge container is also right-aligned */
+html[dir="rtl"] .minister-section .col-lg-8 .mb-4,
+body[dir="rtl"] .minister-section .col-lg-8 .mb-4 {
+    text-align: right;
+}
+
+/* Statistics / Mission-Vision cards — RTL alignment */
+html[dir="rtl"] .dt-stat-card .card-content,
+html[dir="rtl"] .dt-stat-card .card-number,
+html[dir="rtl"] .dt-stat-card .card-text,
+body[dir="rtl"] .dt-stat-card .card-content,
+body[dir="rtl"] .dt-stat-card .card-number,
+body[dir="rtl"] .dt-stat-card .card-text {
+    text-align: right;
+}
+
+html[dir="rtl"] .dt-stat-card .card-text,
+body[dir="rtl"] .dt-stat-card .card-text {
+    margin-left: auto;
+    margin-right: 0;
+}
+
+/* Breakdance Icon Box — mission/vision title class */
+html[dir="rtl"] .bde-icon-box .titleee-iconbox-title.bde-h3,
+html[dir="rtl"] .bde-icon-box .ee-iconbox-title.titleee-iconbox-title,
+body[dir="rtl"] .bde-icon-box .titleee-iconbox-title.bde-h3,
+body[dir="rtl"] .bde-icon-box .ee-iconbox-title.titleee-iconbox-title {
+    text-align: right !important;
+    align-self: stretch;
+    width: 100%;
+}
+
+html[dir="rtl"] .bde-icon-box:has(.titleee-iconbox-title),
+body[dir="rtl"] .bde-icon-box:has(.titleee-iconbox-title) {
+    align-items: flex-end !important;
+}
+
+html[dir="rtl"] .bde-icon-box:has(.titleee-iconbox-title) .ee-iconbox-content,
+body[dir="rtl"] .bde-icon-box:has(.titleee-iconbox-title) .ee-iconbox-content {
+    align-items: flex-end !important;
+    text-align: right !important;
+    width: 100%;
+}
+
+html[dir="rtl"] .bde-icon-box:has(.titleee-iconbox-title) .ee-iconbox-text,
+body[dir="rtl"] .bde-icon-box:has(.titleee-iconbox-title) .ee-iconbox-text {
+    text-align: right !important;
+    width: 80%;
+    margin-left: auto;
+    margin-right: 0;
+}
+
+html[dir="rtl"] .dt-stat-card .bde-icon-box,
+body[dir="rtl"] .dt-stat-card .bde-icon-box {
+    align-items: flex-end !important;
+    width: 100%;
+    padding: 0;
+}
+
+html[dir="rtl"] .dt-stat-card .bde-icon-box .ee-iconbox-content,
+body[dir="rtl"] .dt-stat-card .bde-icon-box .ee-iconbox-content {
+    align-items: flex-end !important;
+    text-align: right !important;
+    width: 100%;
+}

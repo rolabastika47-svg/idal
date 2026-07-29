@@ -1,0 +1,55 @@
+{% set bg_color = content.content.background_color ?? '#ffffff' %}
+{% set border_style = design.card.border_style ?? 'none' %}
+{% set hover_enabled = design.hover.enable_hover_effect ?? true %}
+{% set overlay_opacity = design.hover.overlay_opacity.number ?? design.hover.overlay_opacity ?? 0.77 %}
+{% set hover_scale = design.hover.hover_scale.number ?? design.hover.hover_scale ?? 1.02 %}
+
+{# Card #}
+%%SELECTOR%% .dt-stat-card {
+  background-color: {{ bg_color }};
+  border-radius: {{ design.card.border_radius.style ?? '20px' }};
+  min-height: {{ design.card.min_height.style ?? '200px' }};
+  {{ macros.spacing_padding_all(design.card.padding) }}
+  {{ macros.borders(design.card.borders) }}
+  border-style: {{ border_style }};
+  {% if border_style != 'none' %}
+  border-color: {{ design.card.border_color ?? 'rgba(0, 0, 0, 0.05)' }};
+  {{ macros.borders(design.card.border_width) }}
+  {% endif %}
+}
+
+{# Number #}
+%%SELECTOR%% .dt-stat-card .card-number {
+  color: {{ design.number.color ?? '#000000' }};
+  margin-bottom: {{ design.number.margin_bottom.style ?? '20px' }};
+  {{ macros.typography(design.number.typography, globalSettings) }}
+}
+
+{# Title #}
+%%SELECTOR%% .dt-stat-card .card-content {
+  text-align: start;
+}
+
+%%SELECTOR%% .dt-stat-card .card-number,
+%%SELECTOR%% .dt-stat-card .card-text {
+  text-align: start;
+}
+
+%%SELECTOR%% .dt-stat-card .card-text {
+  color: {{ design.title.color ?? '#000000' }};
+  width: 80%;
+  margin-inline-end: auto;
+  {{ macros.typography(design.title.typography, globalSettings) }}
+}
+
+{# Hover overlay #}
+{% if hover_enabled %}
+%%SELECTOR%% .dt-stat-card::after {
+  background: rgb(255 255 255 / {{ overlay_opacity }});
+}
+
+%%SELECTOR%% .dt-stat-card:hover {
+  transform: scale({{ hover_scale }});
+  {{ macros.borders(design.hover.hover_shadow) }}
+}
+{% endif %}

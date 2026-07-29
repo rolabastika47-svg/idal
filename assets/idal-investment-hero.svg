@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 760" role="img" aria-labelledby="title desc">
+  <title id="title">Lebanon investment skyline</title>
+  <desc id="desc">A stylized coastal city skyline and mountain horizon in IDAL brand colors.</desc>
+  <defs>
+    <linearGradient id="sky" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0" stop-color="#173b4f"/>
+      <stop offset=".55" stop-color="#0c6c72"/>
+      <stop offset="1" stop-color="#051927"/>
+    </linearGradient>
+    <linearGradient id="water" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#082033"/>
+      <stop offset=".55" stop-color="#075c75"/>
+      <stop offset="1" stop-color="#05b8d8"/>
+    </linearGradient>
+    <linearGradient id="beam" x1="0" x2="1" y1="0" y2="0">
+      <stop offset="0" stop-color="#00d1ef" stop-opacity=".08"/>
+      <stop offset=".45" stop-color="#00d1ef" stop-opacity=".35"/>
+      <stop offset="1" stop-color="#00d1ef" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="soft" x="-10%" y="-10%" width="120%" height="120%">
+      <feGaussianBlur stdDeviation="14"/>
+    </filter>
+  </defs>
+  <rect width="1440" height="760" fill="url(#sky)"/>
+  <path d="M0 296c129-92 241-75 351-118 120-47 207-122 338-93 79 18 129 73 205 85 121 18 205-77 333-51 88 18 149 68 213 129v512H0z" fill="#183d34" opacity=".42"/>
+  <path d="M0 349c154-55 268-43 379-78 105-33 169-90 291-66 87 17 129 65 215 73 98 9 168-54 268-37 109 19 190 72 287 135v384H0z" fill="#062133" opacity=".62"/>
+  <path d="M0 476c183-25 344-33 507-6 199 33 373 16 541-15 154-29 277-14 392 36v269H0z" fill="url(#water)" opacity=".75"/>
+  <path d="M0 557c156-43 294-39 442-5 159 36 309 65 499 17 189-48 346-39 499 14v177H0z" fill="#03111c" opacity=".62"/>
+  <ellipse cx="1095" cy="594" rx="325" ry="62" fill="#00c7e8" opacity=".13" filter="url(#soft)"/>
+  <path d="M152 436h42v86h-42zm58-58h62v144h-62zm82 32h46v112h-46zm62-88h78v200h-78zm101 52h42v148h-42zm60-110h76v258h-76zm96 71h48v187h-48zm70 38h44v149h-44zm66-129h83v278h-83zm103 94h54v184h-54zm74-54h71v238h-71zm96 100h42v138h-42zm59-71h64v209h-64zm82 45h51v164h-51z" fill="#061928" opacity=".82"/>
+  <path d="M168 455h10v10h-10zm58-52h13v13h-13zm153-54h14v14h-14zm161-58h12v12h-12zm235-77h15v15h-15zm172 96h12v12h-12zm157 29h12v12h-12z" fill="#52e7ff" opacity=".75"/>
+  <path d="M0 330h1440v220H0z" fill="url(#beam)"/>
+  <path d="M928 178l78 64-78 64h-96l78-64-78-64h96z" fill="#0ab9e1" opacity=".9"/>
+  <path d="M980 178h47l78 64-78 64h-47l78-64-78-64z" fill="#1a52d6" opacity=".88"/>
+  <path d="M1048 178h39l78 64-78 64h-39l78-64-78-64z" fill="#13b96d" opacity=".76"/>
+</svg>

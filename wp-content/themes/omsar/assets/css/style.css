@@ -1,0 +1,3206 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&display=swap');
+
+/* ------------------------------------------ */
+/*              Hero Section                  */
+/* ------------------------------------------ */
+.background.front-page {
+    margin-top: -27px;
+}
+
+.hero-section {
+    position: relative;
+    /* Fallback image if video isn't available */
+    background-image: url('../images/empowering.svg');
+    background-size: cover;
+    background-position: left;
+    background-repeat: no-repeat;
+    min-height: 90vh;
+    /* Full screen height */
+    /* padding-top: 60px; */
+    /* Account for fixed navbar */
+    /* margin-top: 68px; */
+    overflow: hidden;
+}
+
+.hero-bg-video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+}
+
+/* Remove background image when video is present */
+.hero-section.hero-has-video {
+    background-image: none !important;
+}
+
+/* Static background mode (when no repeater items have media) */
+.hero-section-static {
+    position: relative;
+}
+
+/* Text-only carousel (slides only text/content, background stays static) */
+.hero-banner-text-only {
+    position: relative;
+    z-index: 1;
+}
+
+.hero-banner-text-only .item {
+    min-height: auto;
+}
+
+/* Hero Banner Animation - Sequential fade in up */
+/* MODE 1: Text-only carousel */
+.hero-banner-text-only .item .hero-title,
+/* MODE 2: Full carousel */
+.hero-banner-carousel:not(.hero-banner-text-only) .item .hero-title {
+    opacity: 0 !important;
+    transform: translateY(30px) scale(0.95);
+    transition: opacity 0.8s ease-out, transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Hide text in inactive slides */
+.hero-banner-text-only .owl-item:not(.active) .item .hero-title,
+.hero-banner-text-only .owl-item:not(.active) .item .hero-description,
+.hero-banner-text-only .owl-item:not(.active) .item .btn-custom,
+.hero-banner-carousel:not(.hero-banner-text-only) .owl-item:not(.active) .item .hero-title,
+.hero-banner-carousel:not(.hero-banner-text-only) .owl-item:not(.active) .item .hero-description,
+.hero-banner-carousel:not(.hero-banner-text-only) .owl-item:not(.active) .item .btn-custom {
+    opacity: 0 !important;
+}
+
+.hero-banner-text-only .item .hero-title.hero-animated,
+.hero-banner-carousel:not(.hero-banner-text-only) .item .hero-title.hero-animated {
+    opacity: 1 !important;
+    transform: translateY(0) scale(1);
+}
+
+.hero-banner-text-only .item .hero-description,
+.hero-banner-carousel:not(.hero-banner-text-only) .item .hero-description {
+    opacity: 0;
+    transform: translateY(25px);
+    transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+}
+
+.hero-banner-text-only .item .hero-description.hero-animated,
+.hero-banner-carousel:not(.hero-banner-text-only) .item .hero-description.hero-animated {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.hero-banner-text-only .item .btn-custom,
+.hero-banner-carousel:not(.hero-banner-text-only) .item .btn-custom {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.hero-banner-text-only .item .btn-custom.hero-animated,
+.hero-banner-carousel:not(.hero-banner-text-only) .item .btn-custom.hero-animated {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* After first-slide intro: show active slide text instantly (no animation on change) */
+.hero-banner-carousel.hero-text-static .owl-item.active .item .hero-title,
+.hero-banner-carousel.hero-text-static .owl-item.active .item .hero-description,
+.hero-banner-carousel.hero-text-static .owl-item.active .item .btn-custom {
+    opacity: 1 !important;
+    transform: none;
+    transition: none !important;
+}
+
+/* Position dots consistently at bottom of banner for both modes */
+
+/* Full carousel mode - dots are siblings to .item, position relative to carousel */
+.hero-banner-carousel:not(.hero-banner-text-only) {
+    position: relative;
+}
+
+.hero-banner-carousel:not(.hero-banner-text-only).owl-theme .owl-dots {
+    position: absolute;
+    bottom: 30px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    z-index: 10;
+    margin-top: 0;
+}
+
+/* Text-only carousel mode - dots are inside carousel, position relative to hero-section-static */
+.hero-section-static {
+    position: relative;
+    overflow: visible;
+    /* Allow dots to escape container constraints */
+}
+
+/* Override overflow hidden from base hero-section for static mode */
+.hero-section.hero-section-static {
+    overflow: visible;
+}
+
+/* Ensure container and Bootstrap grid don't clip the dots */
+.hero-section-static .container,
+.hero-section-static .container .row,
+.hero-section-static .container .row [class*="col-"] {
+    overflow: visible;
+}
+
+/* Ensure carousel doesn't interfere with dot positioning */
+.hero-section-static .hero-banner-text-only {
+    overflow: visible;
+}
+
+/* Position dots relative to hero-section-static, matching full carousel mode exactly */
+/* Target dots both when they're in the carousel (before JS moves them) and after JS moves them */
+.hero-section-static .hero-banner-text-only.owl-theme .owl-dots,
+.hero-section-static>.owl-dots,
+.hero-section-static>.owl-theme.owl-dots {
+    position: absolute !important;
+    bottom: 30px !important;
+    left: 0 !important;
+    right: 0 !important;
+    text-align: center !important;
+    z-index: 10 !important;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    width: 100% !important;
+    pointer-events: auto !important;
+    display: block !important;
+}
+
+/* Ensure dots container is properly styled */
+.hero-section-static>.owl-dots.owl-theme,
+.hero-section-static>.owl-theme.owl-dots {
+    position: absolute !important;
+    bottom: 30px !important;
+    left: 0 !important;
+    right: 0 !important;
+    text-align: center !important;
+}
+
+/* 1. Big Title Typography */
+.hero-title {
+    font-weight: 700;
+    /* Bold */
+    font-size: 60px;
+    /* 60px */
+    line-height: 1.3;
+    /* 130% */
+    letter-spacing: -0.005em;
+    /* -0.5% */
+    color: #000000;
+}
+
+/* 2. Description Typography */
+.hero-description {
+    font-weight: 500;
+    /* Medium */
+    font-size: 20px;
+    /* 20px */
+    line-height: 1.5;
+    /* 150% */
+    letter-spacing: -0.005em;
+    /* -0.5% */
+    color: #000000;
+}
+
+/* 3. Button Styling */
+.btn-custom {
+    background-color: #192D50;
+    color: #ffffff;
+    border-radius: 60px;
+    /* 60px radius */
+    padding: 8px 24px 8px 24px;
+    /* Adjust padding to match height ~41px */
+    font-weight: 500;
+    font-size: 14px;
+    /* Estimated font size for button text */
+    border: none;
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+}
+
+.btn-custom:hover {
+    background-color: #12223d;
+    /* Slightly darker on hover */
+    color: #ffffff;
+}
+
+/* Circle with > icon */
+.btn-custom .icon-circle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    /* Thin white border */
+    border-radius: 50%;
+}
+
+.btn-custom .icon-circle i {
+    font-size: 10px;
+    /* Small chevron icon */
+    line-height: 1;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 991.98px) {
+    .hero-section {
+        min-height: auto;
+        padding-top: 140px;
+        padding-bottom: 60px;
+        text-align: center;
+    }
+
+    .hero-title {
+        font-size: 40px;
+        /* Smaller title on mobile */
+    }
+
+    .hero-description {
+        font-size: 16px;
+    }
+
+    .col-lg-6 {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+/* ------------------------------------------ */
+/*              Impact Section                */
+/* ------------------------------------------ */
+.background {
+    position: relative;
+}
+
+/* .background::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    margin-left: -50vw;
+    width: 100vw;
+    height: 100%;
+    background-image: var(--background-pattern-url, url('../images/background.svg'));
+    background-size: cover;
+    background-position: top center;
+    background-repeat: no-repeat;
+    z-index: -1;
+    min-height: 600px;
+} */
+
+.background::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: var(--background-pattern-url, url('../images/background.svg'));
+    background-size: cover;
+    background-position: top center;
+    background-repeat: no-repeat;
+    z-index: -1;
+    /* height: 700px; */
+    max-height: 2500px;
+}
+
+.background.front-page::before {
+    max-height: none;
+    height: unset;
+
+}
+
+/* 
+.background::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 200px;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.7) 100%);
+    pointer-events: none;
+    z-index: 0;
+} */
+
+/* Mobile: Show full pattern contained instead of cover */
+@media (max-width: 767.98px) {
+    .background::before {
+        background-size: cover;
+        background-position: top center;
+    }
+}
+
+.impact-title {
+    font-weight: 600;
+    font-size: 32px;
+    /* Standard section title size, adjust if needed */
+    color: #000;
+    /* margin-bottom: 3rem; */
+}
+
+/* Flex Container for Cards */
+.impact-cards-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    max-width: 1400px;
+    margin: 0 auto;
+    height: 330px;
+    /* Fixed height for the cards */
+    /* padding-left: 20px; */
+    /* Add some padding to account for the overlap shift if needed */
+}
+
+/* .impact-cards-container:hover {
+    max-width: 1000px;
+} */
+.impact-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgb(255 255 255 / 77%);
+    z-index: 1;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+    border-radius: 20px;
+}
+
+/* Remove white overlay on hover */
+.impact-card:hover::before {
+    opacity: 0;
+}
+
+/* Individual Card Styling */
+.impact-card {
+    position: relative;
+    height: 100%;
+    border-radius: 20px;
+    overflow: hidden;
+    /* cursor: pointer; */
+    flex: 1;
+    min-width: 225px;
+    margin-left: -20px;
+    padding: 25px;
+    /* Initial state for slide-in animation (LTR: slide from right) */
+    opacity: 0;
+    transform: translateX(80px);
+    /* BACKGROUND CONFIGURATION */
+    background-image: var(--bg-img);
+    background-repeat: no-repeat;
+    background-position: right bottom;
+    /* SET SIZE FROM SCREENSHOT */
+    /* Width 108px, Height auto (or 238px if you want to force it) */
+    background-size: 108px auto;
+    background-color: #ffffff;
+    z-index: 1;
+    /* Shadow setup */
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.05);
+    border-left: 1px solid rgba(0, 0, 0, 0.05);
+    /* SMOOTH TRANSITIONS - much slower for initial animation */
+    transition: opacity 1.8s ease-out,
+        transform 1.8s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+        flex 0.6s cubic-bezier(0.25, 1, 0.5, 1),
+        background-color 0.4s ease;
+}
+
+/* Animated state - card is visible */
+.impact-card.card-animated {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+    /* Faster transition for hover effects after animation */
+    transition: opacity 1.8s ease-out,
+        transform 0.4s ease,
+        flex 0.6s cubic-bezier(0.25, 1, 0.5, 1),
+        background-color 0.4s ease;
+}
+
+/* ------------------------------------------ */
+/*           Recruitments Widget              */
+/* ------------------------------------------ */
+.omsar-recruitment-content .omsar-recruitment-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.omsar-recruitment-content .omsar-recruitment-title {
+    margin: 0;
+}
+
+/* HOVER STATE - Fast transitions for responsive hover */
+.impact-card:hover {
+    flex: 1.75 !important;
+    z-index: 10;
+    /* Combine translateX(0) with scale for hover - works with animation */
+    transform: translateX(0) scale(1.02) !important;
+    background-color: transparent;
+    /* Reveal gradient */
+    box-shadow: 0 20px 50px rgba(25, 45, 80, 0.15);
+    max-width: 400px !important;
+    /* Fast transition for hover effects - override base transition */
+    transition: opacity 0.3s ease,
+        transform 0.3s ease,
+        flex 0.4s cubic-bezier(0.25, 1, 0.5, 1),
+        background-color 0.3s ease !important;
+}
+
+.impact-card:not(:first-child) {
+    margin-right: -90px;
+    /* opacity: 0.7; */
+}
+
+.impact-card:last-child {
+    margin-right: 0;
+}
+
+/* The Background Icon Image */
+.card-bg-icon {
+    position: absolute;
+    bottom: -10px;
+    /* Adjust to push it slightly off screen like the design */
+    right: -10px;
+    /* Adjust to push it slightly off screen like the design */
+    width: 150px;
+    /* Set a fixed width or percentage */
+    height: auto;
+    opacity: 0.5;
+    /* Adjust transparency if needed */
+    z-index: 0;
+    /* Sit behind the text */
+    pointer-events: none;
+    /* Click through to the card */
+    transition: transform 0.5s ease;
+    /* Optional: animate slightly on hover */
+}
+
+/* Ensure Text stays on top */
+.card-content {
+    position: relative;
+    z-index: 2;
+    /* Sit on top of the image */
+    /* min-width: 200px; */
+    white-space: nowrap;
+}
+
+/* Optional: Move image slightly on hover for effect */
+.impact-card:hover .card-bg-icon {
+    transform: scale(1.1);
+}
+
+/* Fix the first card so it doesn't pull off screen */
+.impact-card:first-child {
+    margin-left: 0;
+}
+
+/* Expand on Hover */
+/* .impact-card:hover {
+    flex: 3; /* Expands */
+/* z-index: 10; /* Bring to front on hover */
+/* transform: scale(1.02); /* Slight pop up effect */
+/* box-shadow: 0 15px 40px rgba(25, 45, 80, 0.2); /* larger shadow */
+/* } */
+
+/* Also make the first one active by default or if you want one always open */
+/* .impact-card.active { flex: 3; } */
+/* Only use .active if you want one expanded by default without hover */
+
+/* Typography */
+.card-content {
+    /* min-width: 200px; */
+    /* Prevents text wrapping too tightly when collapsed */
+    white-space: nowrap;
+    /* Keeps text on same lines during animation */
+}
+
+.card-number {
+    font-weight: 600;
+    /* Semi Bold */
+    font-size: 35px;
+    /* 35px */
+    line-height: 1.1;
+    /* Adjusted from 35% to be readable */
+    letter-spacing: -0.005em;
+    /* -0.5% */
+    color: #000000;
+    margin-bottom: 20px;
+}
+
+.card-text {
+    font-weight: 500;
+    /* Medium */
+    font-size: 24px;
+    /* 24px */
+    line-height: 1.4;
+    /* 140% */
+    letter-spacing: -0.005em;
+    /* -0.5% */
+    color: #000000;
+}
+
+.digital-transformation-card {
+    /* Define background layers */
+    background: #fff url('../images/digits-transformation-projects.svg') no-repeat right bottom;
+    /* Fix: Use only two values (Width Height) */
+    background-size: 200px 238px;
+}
+
+.digital-transformation-card:hover {
+    background: url('../images/digits-transformation-projects.svg') no-repeat right bottom,
+        linear-gradient(180deg, #E0F2FF 0%, #6EA8FE 100%);
+
+    /* Fix: First layer (image) size, Second layer (gradient) size */
+    background-size: 200px 238px, auto;
+}
+
+.e-services-card {
+    background: #fff url('../images/e-services-implemented.svg') no-repeat right bottom;
+    background-size: 234px 238px;
+}
+
+.e-services-card:hover {
+    /* Correct Syntax: Image FIRST, then Gradient */
+    background: url('../images/e-services-implemented.svg') no-repeat right bottom,
+        linear-gradient(180deg, #E0F2FF 0%, #6EA8FE 100%);
+
+    /* Ensure background size stays consistent */
+    background-size: 234px 238px, auto;
+    /* First size for image, second for gradient */
+}
+
+.public-servants-card {
+    background: #fff url('../images/public-servants-trained.svg') no-repeat right bottom;
+    background-size: 234px 238px;
+}
+
+
+.public-servants-card:hover {
+    /* Correct Syntax: Image FIRST, then Gradient */
+    background: url('../images/public-servants-trained.svg') no-repeat right bottom,
+        linear-gradient(180deg, #E0F2FF 0%, #6EA8FE 100%);
+
+    /* Ensure background size stays consistent */
+    background-size: 234px 238px, auto;
+    /* First size for image, second for gradient */
+}
+
+.reform-programs-card {
+    background: #fff url('../images/reform-programs.svg') no-repeat right bottom;
+    background-size: 200px 238px;
+}
+
+
+.reform-programs-card:hover {
+    /* Correct Syntax: Image FIRST, then Gradient */
+    background: url('../images/reform-programs.svg') no-repeat right bottom,
+        linear-gradient(180deg, #E0F2FF 0%, #6EA8FE 100%);
+
+    /* Ensure background size stays consistent */
+    background-size: 200px 238px, auto;
+    /* First size for image, second for gradient */
+}
+
+.anti-corruption-card {
+    background: #fff url('../images/anti-corruption-initiatives.svg') no-repeat right bottom;
+    background-size: 200px 238px;
+}
+
+.anti-corruption-card:hover {
+    /* Correct Syntax: Image FIRST, then Gradient */
+    background: url('../images/anti-corruption-initiatives.svg') no-repeat right bottom,
+        linear-gradient(180deg, #E0F2FF 0%, #6EA8FE 100%);
+
+    /* Ensure background size stays consistent */
+    background-size: 200px 238px, auto;
+    /* First size for image, second for gradient */
+}
+
+/* Responsive: Two columns on mobile */
+@media (max-width: 991.98px) {
+    .impact-cards-container {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+        height: auto;
+        padding: 0 15px;
+        max-width: 100%;
+    }
+
+    .impact-card {
+        height: 165px;
+        /* Fixed height for mobile items */
+        width: 100%;
+        flex: none !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        min-width: unset !important;
+        max-width: 100% !important;
+        /* Disable flex expansion on mobile */
+        pointer-events: none;
+        /* Disable clicks on mobile */
+        /* Keep animation transform on mobile - only reset translateX, not scale */
+    }
+
+    /* Disable hover effects on mobile - but allow animation */
+    .impact-card:hover {
+        flex: none !important;
+        transform: translateX(0) scale(1) !important;
+        z-index: 1 !important;
+        background-color: #ffffff !important;
+        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.05) !important;
+        max-width: none !important;
+    }
+
+    /* Ensure animated cards are visible on mobile */
+    .impact-card.card-animated {
+        transform: translateX(0) scale(1) !important;
+    }
+
+    .impact-card:hover::before {
+        opacity: 1 !important;
+    }
+
+    .card-content {
+        white-space: normal;
+    }
+
+
+    .digital-transformation-card {
+        background-size: 110px 135px;
+    }
+
+    .digital-transformation-card:hover {
+        /* Fix: First layer (image) size, Second layer (gradient) size */
+        background-size: 110px 135px, auto;
+    }
+
+    .e-services-card {
+        background-size: 110px 135px !important;
+    }
+
+    .e-services-card:hover {
+        background-size: 110px 135px, auto;
+
+    }
+
+    .public-servants-card {
+        background-size: 110px 135px;
+    }
+
+
+    .public-servants-card:hover {
+        background-size: 110px 135px, auto;
+        /* First size for image, second for gradient */
+    }
+
+    .reform-programs-card {
+        background-size: 110px 135px;
+    }
+
+
+    .reform-programs-card:hover {
+
+        background-size: 110px 135px, auto;
+        /* First size for image, second for gradient */
+    }
+
+    .anti-corruption-card {
+        background-size: 110px 135px;
+    }
+
+    .anti-corruption-card:hover {
+
+        background-size: 110px 135px, auto;
+        /* First size for image, second for gradient */
+    }
+
+}
+
+/* ------------------------------------------ */
+/*              Pillars Section               */
+/* ------------------------------------------ */
+.section-title {
+    font-family: 'Barlow', sans-serif;
+    font-weight: 700;
+    font-size: 42px;
+    line-height: 1.15;
+    color: var(--idal-blue);
+    letter-spacing: -0.02em;
+}
+
+.pillars-container {
+    max-width: 1240px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.investment-export-row {
+    max-width: 1180px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.pillar-card {
+    position: relative;
+    width: 100%;
+    min-height: 320px;
+    padding: 36px;
+    border-radius: 24px;
+    overflow: hidden;
+    color: #ffffff;
+    font-family: 'Barlow', sans-serif;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    background-color: var(--idal-blue);
+    display: flex;
+    align-items: flex-end;
+
+    opacity: 0;
+    transform: translateY(40px) scale(0.95);
+    transition:
+        opacity 1.8s ease-out,
+        transform 1.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.pillar-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg,
+            rgba(26, 59, 181, 0.92) 0%,
+            rgba(0, 181, 216, 0.76) 55%,
+            rgba(0, 179, 136, 0.52) 100%);
+    z-index: 1;
+    pointer-events: none;
+}
+
+.pillar-card-content {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+}
+
+.pillar-eyebrow {
+    display: block;
+    margin-bottom: 12px;
+    color: #ffffff;
+    font-family: 'Barlow', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+}
+
+.pillar-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 22px;
+    padding: 11px 20px;
+    border: 2px solid #ffffff;
+    border-radius: 999px;
+    background: #ffffff;
+    color: var(--idal-blue);
+    font-family: 'Barlow', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1;
+    text-decoration: none;
+    transition:
+        transform 0.25s ease,
+        background-color 0.25s ease,
+        color 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.pillar-button:hover {
+    background: var(--idal-green);
+    border-color: var(--idal-green);
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 12px 28px rgba(26, 59, 181, 0.2);
+}
+
+/* Animated state - card is visible */
+.pillar-card.pillar-animated {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    /* Faster transition for hover after animation */
+    transition: opacity 1.8s ease-out,
+        transform 0.3s ease;
+}
+
+.pillar-card:hover {
+    transform: translateY(-5px) scale(1);
+    transition: transform 0.3s ease;
+}
+
+/* Title Typography */
+.pillar-title {
+    color: #ffffff;
+    font-family: 'Barlow', sans-serif;
+    font-weight: 700;
+    font-size: 38px;
+    line-height: 1.1;
+    margin-bottom: 0;
+    z-index: 2;
+    position: relative;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.22);
+}
+
+/* Description Typography */
+.pillar-desc {
+    color: #ffffff;
+    font-family: 'Barlow', sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 1.55;
+    opacity: 1;
+    max-width: 88%;
+    margin-bottom: 0;
+    z-index: 2;
+    position: relative;
+    text-shadow: 0 2px 7px rgba(0, 0, 0, 0.24);
+}
+
+.pillar-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    z-index: 2;
+    position: relative;
+}
+
+.pillar-link:hover {
+    opacity: 0.9;
+}
+
+.pillar-arrow {
+    width: 46px;
+    height: 46px;
+    display: block;
+}
+
+/* Background Image Layer */
+.pillar-digital {
+    background-image: url('../images/digital-transformation-icon.svg');
+}
+
+.pillar-corruption {
+    background-image: url('../images/anti-corruption-icon.svg');
+}
+
+.pillar-reform {
+    background-image: url('../images/admin-reform-icon.svg');
+}
+
+
+/* Responsive */
+@media (max-width: 768px) {
+    .pillar-card {
+        height: auto;
+        min-height: 260px;
+    }
+
+    /* Ensure animated cards are visible on mobile */
+    .pillar-card.pillar-animated {
+        transform: translateY(0) scale(1) !important;
+    }
+
+    .pillar-title {
+        font-size: 20px;
+
+    }
+
+    /* Description Typography */
+    .pillar-desc {
+        font-weight: 200;
+        font-size: 18px;
+
+    }
+}
+
+/* ------------------------------------------ */
+/*           Latest Projects Section          */
+/* ------------------------------------------ */
+.latest-projects-section {
+    /* Assuming you want the same background pattern continuing or a specific one */
+    /* background-color: ...; */
+    overflow: hidden;
+    /* Hide scrollbar if items pop out */
+}
+
+/* Animation for latest-projects-section title (slower) */
+/* Impact Section Title Animation */
+.impact-section .title-section {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 1.2s ease-out, transform 1.2s ease-out;
+}
+
+.impact-section .title-section.section-animated {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Pillars Section Title Animation */
+.pillars-section .title-section {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 1.2s ease-out, transform 1.2s ease-out;
+}
+
+.pillars-section .title-section.section-animated {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.latest-projects-section .title-section {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+}
+
+.latest-projects-section .title-section.section-animated {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Project cards */
+.latest-projects-section .projects-carousel .item {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.3s ease-out,
+        transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.latest-projects-section .projects-carousel .item.card-animated {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Ensure project-card scale is preserved for non-center items */
+.latest-projects-section .projects-carousel .item.card-animated .project-card {
+    transform: scale(0.85);
+}
+
+.latest-projects-section .projects-carousel .owl-item.center .item.card-animated .project-card {
+    transform: scale(1) translateY(-30px) !important;
+}
+
+/* View All button */
+.latest-projects-section .row.mt-4 {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.35s ease-out, transform 0.35s ease-out;
+}
+
+.latest-projects-section .row.mt-4.button-animated {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.project-card {
+    position: relative;
+    height: 330px;
+    border-radius: 20px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    overflow: hidden;
+    transform: scale(0.85);
+    /* opacity: 0.6; */
+    transition: all 0.4s ease;
+    margin: 20px 0;
+    /* Ensure the background is positioned right on mobile */
+}
+
+/* Background image layer for zoom effect using transform */
+.projects-carousel .project-card::before {
+    content: '';
+    position: absolute;
+    top: -5%;
+    left: -5%;
+    width: 110%;
+    height: 110%;
+    background-image: inherit;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: 0;
+    transform: scale(1);
+    transition: transform 0.3s ease;
+    pointer-events: none;
+}
+
+
+.projects-carousel-wrapper {
+    position: relative;
+}
+
+/* Clickable shadow overlays */
+.carousel-shadow-overlay {
+    position: absolute;
+    top: 0;
+    width: 160px;
+    height: 100%;
+    z-index: 11;
+    cursor: pointer;
+    pointer-events: auto;
+}
+
+.carousel-shadow-left {
+    left: 0;
+    background: linear-gradient(to right, #fff, transparent);
+}
+
+.carousel-shadow-right {
+    right: 0;
+    background: linear-gradient(to left, #fff, transparent);
+}
+
+/* Ensure radius is visible and background position is correct on mobile */
+@media (max-width: 768px) {
+    .project-card {
+        height: auto;
+        min-height: 320px;
+        background-position: right center !important;
+        border-radius: 20px !important;
+        /* Ensure the overflow is hidden so border-radius works */
+        overflow: hidden !important;
+        transform: scale(1);
+        /* Reset scale on mobile if needed */
+        opacity: 1;
+        /* Make fully visible */
+        margin: 10px 16px;
+        /* horizontal margin so left/right radius is visible */
+    }
+
+    .project-content {
+        padding: 24px;
+    }
+
+    .owl-item.center .project-card {
+        transform: none;
+    }
+
+    /* Adjust container padding if needed */
+    .projects-carousel .owl-stage-outer {
+        padding-top: 0 !important;
+    }
+
+    .title-section {
+        margin-bottom: unset !important;
+    }
+
+    .projects-carousel-wrapper::before,
+    .projects-carousel-wrapper::after {
+        content: unset !important;
+    }
+
+    .carousel-shadow-overlay {
+        display: none !important;
+    }
+}
+
+/* The Overlay (Gradient Blue) */
+.project-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    /* Blue gradient overlay similar to design */
+    background: linear-gradient(90deg, rgba(110, 168, 254, 0.85) 0%, rgba(224, 242, 255, 0.4) 100%);
+    z-index: 1;
+}
+
+/* Content Styling */
+.project-content {
+    position: relative;
+    z-index: 2;
+    padding: 40px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    color: #fff;
+}
+
+.project-title {
+    font-weight: 600;
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.project-subtitle {
+    display: inline-block;
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    border-radius: 44px;
+    padding: 4px 12px;
+    font-size: 12px;
+    margin-bottom: 20px;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Open Badge - Light Green Gradient */
+/* .project-subtitle.status-open {
+    background: linear-gradient(135deg, #6ee7b7 0%, #34d399 100%);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+} */
+
+/* Closed Badge - Light Red Gradient */
+/* .project-subtitle.status-closed {
+    background: linear-gradient(135deg, #fca5a5 0%, #f87171 100%);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+} */
+
+.project-desc {
+    font-size: 15px;
+    margin-bottom: 25px;
+    max-width: 80%;
+    line-height: 1.6;
+}
+
+.project-desc .date-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.project-desc .date-row:last-child {
+    margin-bottom: 0;
+}
+
+.project-desc .date-row .detail-value {
+    display: inline;
+}
+
+.project-desc .date-row i {
+    color: inherit;
+    font-size: 15px;
+    min-width: 16px;
+}
+
+/* Ensure non-center items always maintain base styling */
+.owl-item:not(.center) .project-card {
+    transform: scale(1.0) !important;
+    /* opacity: 0.6 !important; */
+}
+
+/* Active/Center Item Styling - must override animation */
+.owl-item.center .project-card {
+    /* Combine Scale + Move Up */
+    /* scale(1.1) makes it slightly larger than 'normal' size if needed, or keep 1 if others are 0.85 */
+    /* translateY(-20px) moves it UP */
+    transform: scale(1) translateY(-30px) !important;
+
+    opacity: 1;
+    z-index: 10;
+}
+
+/* Ensure center card styling works even with animation classes */
+.latest-projects-section .projects-carousel .owl-item.center .item.card-animated .project-card {
+    transform: scale(1) translateY(-30px) !important;
+}
+
+/* Add padding to the top of the carousel stage so the lifted item doesn't get cut off */
+.projects-carousel .owl-stage-outer {
+    padding-top: 20px;
+    overflow: unset !important;
+    /* Space for the translateY(-30px) */
+    /* Ensure overflow isn't clipping the pop-out */
+    /* Owl Carousel applies overflow:hidden to .owl-stage-outer by default. 
+       Adding padding INSIDE this wrapper fixes the clip. */
+}
+
+.projects-carousel.owl-theme .owl-dots .owl-dot span,
+.hero-banner-carousel.owl-theme .owl-dots .owl-dot span,
+.hero-section-static>.owl-dots .owl-dot span,
+.hero-section-static>.owl-theme.owl-dots .owl-dot span,
+.news-carousel.owl-theme .owl-dots .owl-dot span {
+    background: transparent !important;
+    border: #192D50 1px solid !important;
+    width: 10px !important;
+    height: 10px !important;
+    border-radius: 50% !important;
+    display: block !important;
+    margin: 5px 7px !important;
+}
+
+.projects-carousel.owl-theme .owl-dots .owl-dot.active span,
+.hero-banner-carousel.owl-theme .owl-dots .owl-dot.active span,
+.hero-section-static>.owl-dots .owl-dot.active span,
+.hero-section-static>.owl-theme.owl-dots .owl-dot.active span,
+.news-carousel.owl-theme .owl-dots .owl-dot.active span {
+    background: #192D50 !important;
+    border-color: #192D50 !important;
+}
+
+
+
+
+/* Owl Dots Styling */
+.owl-theme .owl-dots .owl-dot span {
+    width: 10px;
+    height: 10px;
+    margin: 5px 7px;
+    background: transparent;
+    border: 1px solid #6EA8FE;
+}
+
+.owl-theme .owl-dots .owl-dot.active span {
+    background: #6EA8FE;
+}
+
+@media(min-width: 1919px) {
+    .project-card {
+        height: 280px;
+    }
+
+    /* .project-title {
+    font-size: 20px;
+}
+
+
+.project-desc {
+    font-size: 18px;
+} */
+}
+
+/* ------------------------------------------ */
+/*            Latest News Section             */
+/* ------------------------------------------ */
+.latest-news-section {
+    overflow: hidden;
+    /* Hide overflow to create cut-off effect */
+}
+
+/* Animation for latest-news-section title - fade in up  */
+.latest-news-section .title-section {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 1.2s ease-out, transform 1.2s ease-out;
+}
+
+.latest-news-section .title-section.section-animated {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* News carousel items */
+.latest-news-section .news-carousel .item {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.3s ease-out,
+        transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.latest-news-section .news-carousel .item.card-animated {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* View All News button */
+.latest-news-section .row.mt-4 {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.35s ease-out, transform 0.35s ease-out;
+}
+
+.latest-news-section .row.mt-4.button-animated {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.carousel-container.col-12 {
+    padding-right: 0px;
+    padding-left: 0px;
+}
+
+/* Spacing for the cut-off effect */
+.news-carousel .item {
+    margin-left: 20px;
+}
+
+.news-carousel .owl-item:first-child .item {
+    margin-left: 0;
+}
+
+/* Ensure the carousel container clips the overflow */
+.news-carousel .owl-stage-outer {
+    overflow: hidden;
+}
+
+/* Ensure news carousel items have overflow hidden for zoom effect */
+.news-carousel .item {
+    overflow: hidden;
+    border-radius: 20px;
+}
+
+.news-card {
+    position: relative;
+    height: 370px;
+    /* Updated from screenshot (approx 430.36) */
+    border-radius: 20px;
+    /* Updated from screenshot */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+/* Background image layer for zoom effect using transform */
+.news-carousel .news-card::before {
+    content: '';
+    position: absolute;
+    top: -5%;
+    left: -5%;
+    width: 110%;
+    height: 110%;
+    background-image: inherit;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: 0;
+    transform: scale(1);
+    transition: transform 0.3s ease;
+    pointer-events: none;
+}
+
+/* Ensure content stays above the background layer */
+.news-card .news-content {
+    position: relative;
+    z-index: 2;
+}
+
+.news-card:hover,
+.project-card:hover {
+    transform: translateY(-5px);
+}
+
+/* Zoom effect on the background image using transform scale */
+.news-carousel .news-card:hover::before,
+.projects-carousel .project-card:hover::before {
+    transform: scale(1.2);
+}
+
+/* Dark Overlay */
+/* The screenshot showed 30% opacity on a layer. 
+   Assuming this is the gradient overlay strength or a base tint. */
+.news-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    /* Gradient from transparent to black. 
+       Adjusted bottom opacity to 0.9 based on readability needs, 
+       but you can lower it to 0.3 if the image is meant to be brighter. */
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.3) 50%, rgba(0, 0, 0, 0.9) 100%);
+    z-index: 1;
+}
+
+.news-content {
+    position: relative;
+    z-index: 2;
+    padding: 30px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+    color: #fff;
+}
+
+.news-date {
+    font-size: 17px;
+    font-weight: 300;
+    opacity: 0.9;
+    display: flex;
+    align-items: center;
+}
+
+.news-date-icon {
+    width: 24px !important;
+    height: 28px;
+    margin-right: 8px;
+    margin-left: 8px;
+    display: inline-block;
+}
+
+.news-date i {
+    margin-right: 8px;
+}
+
+.news-title {
+    font-weight: 600;
+    font-size: 23px;
+    line-height: 1.4;
+    margin-bottom: 20px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    min-height: 110px;
+}
+
+.news-content .btn {
+    font-size: 14px;
+    padding: 8px 24px;
+}
+
+.view-all-btn {
+    margin-top: 10px;
+}
+
+.latest-news-section .read-more-button {
+    background-color: transparent !important;
+    border: 1px solid #ffffff !important;
+    color: #ffffff !important;
+}
+
+.latest-news-section .read-more-button:hover {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    border-color: #ffffff !important;
+    color: #ffffff !important;
+}
+
+.latest-news-section .news-card-link,
+.latest-news-section .news-card-link:hover {
+    text-decoration: none !important;
+    color: inherit;
+}
+
+.news-carousel .owl-nav.disabled+.owl-dots {
+    margin-top: 20px !important;
+}
+
+.access-info-card {
+    background-color: #F8F9FA;
+    /* Light gray/white background */
+    /* Add your pattern image here if you have one */
+    background-image: url('../images/pattern-bg.svg');
+    background-size: cover;
+    background-position: center;
+    border-radius: 24px;
+    overflow: hidden;
+    /* Optional shadow */
+    /* box-shadow: 0 10px 30px rgba(0,0,0,0.05); */
+}
+
+/* Badge / Pill Title */
+.badge-custom {
+    display: inline-block;
+    background-color: #E0F2FF;
+    /* Light Blue */
+    color: #0056b3;
+    /* Darker Blue Text */
+    font-weight: 600;
+    font-size: 14px;
+    padding: 8px 16px;
+    border-radius: 50px;
+}
+
+/* Typography */
+.access-title {
+    font-weight: 700;
+    font-size: 36px;
+    color: #000;
+}
+
+.access-desc {
+    font-weight: 400;
+    font-size: 18px;
+    color: #555;
+    max-width: 90%;
+}
+
+/* Buttons */
+.btn-primary-custom {
+    background-color: #192D50;
+    /* Deep Blue */
+    color: #fff;
+    border: none;
+    padding: 10px 24px;
+    font-weight: 500;
+    transition: background-color 0.3s;
+}
+
+.btn-primary-custom:hover {
+    background-color: #12223d;
+    color: #fff;
+}
+
+.btn-outline-custom {
+    background-color: transparent;
+    color: #192D50;
+    border: 1px solid #192D50;
+    padding: 10px 24px;
+    font-weight: 500;
+    transition: all 0.3s;
+}
+
+.btn-outline-custom:hover {
+    background-color: #192D50;
+    color: #fff;
+}
+
+/* Image Styling */
+.access-img {
+    max-height: 350px;
+    /* Adjust based on image aspect ratio */
+    /* If you want the image to hang off the bottom or have specific positioning, adjust here */
+}
+
+/* ------------------------------------------ */
+/*             Minister Section               */
+/* ------------------------------------------ */
+
+.minister-card {
+    background-color: #FFFFFF;
+    /* Add the subtle line pattern background image here if available */
+    background-image: url('../images/fadi-pattern.svg');
+    background-size: cover;
+    background-position: center;
+    border-radius: 20px;
+    /* Soft large shadow */
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.05);
+    overflow: visible;
+    /* Allow image to overlap if needed, or hidden if contained */
+    position: relative;
+    /* Initial state for fade-in-up animation */
+    /* opacity: 0; */
+    transform: translateY(50px);
+    transition: opacity 1s ease-out, transform 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Animated state - card is visible */
+.minister-card.minister-animated {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Blue Badge */
+.badge-minister {
+    display: inline-block;
+    background: linear-gradient(0deg, #4C8CFE 0%, #A9C8FF 100%);
+    /* Lighter Blue from design */
+    color: #ffffff;
+    font-weight: 400;
+    font-size: 20px;
+    padding: 8px 16px;
+    border-radius: 24px;
+    /* Slightly squared corners */
+}
+
+/* Name Title */
+.minister-name {
+    font-weight: 600;
+    /* Semibold Bold */
+    font-size: 20px;
+    color: #000;
+}
+
+/* Quote Body */
+.minister-quote {
+    /* Or a Serif font if preferred */
+    /* font-style: italic; */
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 1.6;
+    color: #333;
+    /* max-width: 95%; */
+    text-align: justify;
+}
+
+/* Attribution */
+.quote-author {
+    font-size: 16px;
+    color: #000;
+    /* font-style: italic; */
+}
+
+/* Image Styling */
+.minister-img {
+    /* Adjust styling to match the cutout look */
+    /* max-height: 400px; */
+    vertical-align: bottom;
+    /* Aligns image to bottom of col */
+    margin-bottom: -1px;
+    /* Fix specific pixel gaps */
+    /* border-bottom-right-radius: 24px; */
+    /* border-radius: 24px; */
+    /* Match card radius if contained */
+}
+
+/* .image-container-minister{
+    padding-left: 0;
+} */
+
+/* Responsive */
+@media (max-width: 991.98px) {
+    .minister-card {
+        text-align: left;
+    }
+
+    /* Ensure animated card is visible on mobile */
+    .minister-card.minister-animated {
+        transform: translateY(0) !important;
+    }
+
+    .minister-img {
+        max-height: 300px;
+        margin-top: 20px;
+    }
+
+    .col-lg-7.p-5 {
+        padding: 2rem !important;
+    }
+}
+
+/* ------------------------------------------ */
+/*            Testimonials Section            */
+/* ------------------------------------------ */
+.testimonials-section {
+    /* Adjust if section needs background */
+    overflow: hidden;
+}
+
+.testimonial-card {
+    background-color: #ffffff;
+    border-radius: 24px;
+    padding: 70px 40px;
+    transition: all 0.4s ease;
+    height: 100%;
+    position: relative;
+    opacity: 0.8;
+    /* Fade inactive items slightly */
+    transform: scale(0.9);
+    min-height: 450px;
+    /* Scale down inactive items */
+}
+
+/* Quote Icon */
+.quote-icon {
+    width: 52px;
+    height: 32px;
+    margin-bottom: 20px;
+    background-image: url('../images/quote.svg');
+    background-repeat: no-repeat;
+    background-position: left top;
+    background-size: contain;
+}
+
+/* Text */
+.testimonial-text {
+    font-style: italic;
+    font-size: 16px;
+    line-height: 1.6;
+    font-weight: 300;
+    color: #000;
+    margin-bottom: 30px;
+}
+
+/* Author */
+.author-name {
+    font-weight: 700;
+    font-size: 16px;
+    color: #000;
+    margin-bottom: 5px;
+}
+
+.author-role {
+    font-size: 14px;
+    color: #666;
+    font-style: italic;
+}
+
+/* ------------------------------------------ */
+/*        Center / Active Item Styles         */
+/* ------------------------------------------ */
+.owl-item.center .testimonial-card {
+    background: url('../images/voices-pattern.svg');
+    background-size: auto;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 24px;
+    overflow: hidden;
+    transition: all 0.4s ease;
+    position: relative;
+    opacity: 0.8;
+    transform: scale(1) translateY(-40px);
+    /* Pop up effect */
+    opacity: 1;
+    color: #000;
+    /* Keep text dark as per screenshot, or white if preferred */
+}
+
+/* Change icon color on active card */
+.owl-item.center .quote-icon {
+    color: rgba(0, 0, 0, 0.1);
+    /* Darker quote icon */
+}
+
+/* Ensure text colors work on the blue background */
+.owl-item.center .testimonial-text {
+    color: #192D50;
+}
+
+.testimonial-author .author-name,
+.author-role {
+    color: #000;
+    font-size: 16px;
+    font-weight: 500;
+    font-style: italic;
+}
+
+/* .testimonial-author .author-name{
+    font-weight: 700;
+} */
+
+/* .owl-item.center .author-name {
+    color: #000;
+    font-size: 16px;
+    font-weight: 400;
+    font-style: italic;
+}
+
+.owl-item.center .author-role {
+    color: #000;
+    font-size: 16px;
+    font-weight: 400;
+    font-style: italic;
+} */
+
+/* ------------------------------------------ */
+/*             Navigation Arrows              */
+/* ------------------------------------------ */
+.testimonials-carousel .owl-nav {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    /* Allow clicks to pass through the container area */
+    display: flex;
+    justify-content: space-between;
+}
+
+.testimonials-carousel .owl-nav button.owl-prev,
+.testimonials-carousel .owl-nav button.owl-next {
+    pointer-events: auto;
+    /* Re-enable clicks on buttons */
+    background: transparent !important;
+    color: #000 !important;
+    font-size: 24px !important;
+    width: 40px;
+    height: 40px;
+    /* Position them outside the items */
+    position: absolute;
+}
+
+.testimonials-carousel .owl-nav button.owl-prev {
+    left: -40px;
+    /* Adjust based on container width */
+}
+
+.testimonials-carousel .owl-nav button.owl-next {
+    right: -40px;
+    /* Adjust based on container width */
+}
+
+/* Hover effect for arrows */
+.testimonials-carousel .owl-nav button:hover {
+    color: #6EA8FE !important;
+}
+
+/* Container padding to show shadow/pop-up without clip */
+.testimonials-carousel .owl-stage-outer {
+    /* padding-top: 70px; */
+    /* padding-bottom: 50px; */
+    /* Allow visible overflow if arrows need to sit outside or cards pop out */
+    overflow: visible;
+}
+
+.testimonials-carousel.owl-theme .owl-dots .owl-dot span {
+    background: #6EA8FE !important;
+    border: #6EA8FE;
+}
+
+.testimonials-carousel.owl-theme .owl-dots .owl-dot.active span {
+    background: #0066ff !important;
+}
+
+.testimonials-carousel .owl-nav.disabled+.owl-dots {
+    margin-top: -35px !important;
+}
+
+/* Ensure dots are clickable on mobile */
+.testimonials-carousel .owl-dots {
+    position: relative;
+    z-index: 20;
+    pointer-events: auto !important;
+}
+
+.testimonials-carousel .owl-dots .owl-dot {
+    pointer-events: auto !important;
+    cursor: pointer;
+}
+
+.testimonials-carousel .owl-dots .owl-dot button {
+    pointer-events: auto !important;
+    cursor: pointer;
+}
+
+
+
+@media (max-width: 991.98px) {
+
+    .section-title,
+    .impact-title {
+        font-size: 22px;
+    }
+
+    .card-text {
+        font-size: 16px;
+
+    }
+
+    .card-number {
+        font-size: 18px;
+
+    }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+    .pillars-section .col-md-4 {
+        width: 50%;
+    }
+}
+
+.testimonials-carousel .owl-item.active {
+    margin-top: 30px;
+}
+
+/* Footer styles moved to css/header-footer.css */
+
+.no-style-link {
+    color: inherit;
+    /* Use parent text color instead of default blue */
+    text-decoration: none;
+    /* Remove underline */
+}
+
+
+.owl-dots.owl-theme .owl-dot {
+    border: none;
+    background: transparent;
+    padding: 0px;
+}
+
+/* ------------------------------------------ */
+/*        Digital Transformation Stats Cards  */
+/*        Hover Effect (like homepage)        */
+/* ------------------------------------------ */
+
+/* White overlay that fades on hover - use ::after for overlay */
+.dt-stat-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgb(255 255 255 / 77%);
+    z-index: 2;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+    border-radius: inherit;
+    opacity: 0;
+    /* Cards have full opacity by default (no overlay) */
+}
+
+/* Overlay stays hidden on hover - cards remain fully visible */
+.dt-stat-card:hover::after {
+    opacity: 0;
+}
+
+/* Hover state - scale and reveal gradient */
+.dt-stat-card {
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.4s ease,
+        box-shadow 0.4s ease;
+}
+
+.dt-stat-card:hover {
+    transform: scale(1.02);
+    z-index: 10;
+    box-shadow: 0 20px 50px rgba(25, 45, 80, 0.15) !important;
+}
+
+/* Background gradient on hover - default colors (can be overridden by Elementor) */
+.dt-stat-card:hover {
+    background: linear-gradient(180deg, #E0F2FF 0%, #6EA8FE 100%);
+}
+
+/* Keep icon visible on hover - ::before contains the icon from widget */
+.dt-stat-card::before {
+    z-index: 1;
+}
+
+.dt-stat-card:hover::before {
+    z-index: 1;
+    opacity: 0.8;
+}
+
+/* Ensure card content stays on top */
+.dt-stat-card .card-content {
+    position: relative;
+    z-index: 3;
+}
+
+/* ------------------------------------------ */
+/*          Single Post Publish Date          */
+/* ------------------------------------------ */
+.post-publish-date {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 16px;
+    color: #666;
+    font-weight: 500;
+}
+
+.post-publish-date i {
+    font-size: 18px;
+    color: #5693ff;
+}
+
+.post-publish-date time {
+    color: inherit;
+}
+
+/* Recruitment Notify Me Modal Styles */
+.omsar-recruitment-notify-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    pointer-events: none;
+}
+
+.omsar-recruitment-notify-modal.active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+.omsar-recruitment-notify-modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(2px);
+}
+
+.omsar-recruitment-notify-modal-content {
+    position: relative;
+    background: #ffffff;
+    border-radius: 12px;
+    max-width: 500px;
+    width: 90%;
+    max-height: calc(100vh - 40px);
+    overflow-y: auto;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    transform: scale(0.9) translateY(20px);
+    transition: transform 0.3s ease;
+    z-index: 1;
+}
+
+.omsar-recruitment-notify-modal.active .omsar-recruitment-notify-modal-content {
+    transform: scale(1) translateY(0);
+}
+
+.omsar-recruitment-notify-modal-close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: transparent;
+    border: none;
+    font-size: 28px;
+    line-height: 1;
+    color: #666;
+    cursor: pointer;
+    padding: 0;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+    z-index: 10;
+}
+
+.omsar-recruitment-notify-modal-close:hover,
+.omsar-recruitment-notify-modal-close:focus {
+    background-color: #f0f0f0;
+    color: #333;
+    outline: none;
+}
+
+.omsar-recruitment-notify-modal-close span {
+    display: block;
+    line-height: 1;
+}
+
+.omsar-recruitment-notify-modal-body {
+    padding: 30px;
+}
+
+.omsar-recruitment-notify-modal-title {
+    margin: 0 0 20px 0;
+    font-size: 24px;
+    font-weight: 600;
+    color: #333;
+}
+
+.omsar-recruitment-notify-modal-message {
+    margin: 0 0 25px 0;
+    font-size: 16px;
+    line-height: 1.6;
+    color: #666;
+}
+
+.omsar-recruitment-notify-modal-message small {
+    display: block;
+    margin-top: 8px;
+    font-size: 14px;
+    color: #999;
+}
+
+.omsar-recruitment-notify-form-group {
+    margin-bottom: 20px;
+}
+
+.omsar-recruitment-notify-label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+}
+
+.omsar-recruitment-notify-input {
+    width: 100%;
+    padding: 12px 15px;
+    font-size: 16px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    box-sizing: border-box;
+}
+
+.omsar-recruitment-notify-input:focus {
+    outline: none;
+    border-color: #192D50;
+    box-shadow: 0 0 0 3px rgba(86, 147, 255, 0.1);
+}
+
+.omsar-recruitment-notify-input.error {
+    border-color: #e74c3c;
+}
+
+.omsar-recruitment-notify-input.error:focus {
+    box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.1);
+}
+
+.omsar-recruitment-notify-error {
+    display: block;
+    margin-top: 8px;
+    font-size: 14px;
+    color: #e74c3c;
+    min-height: 20px;
+}
+
+.omsar-recruitment-notify-form-actions {
+    margin-top: 25px;
+}
+
+.omsar-recruitment-notify-submit-btn {
+    width: 100%;
+    padding: 14px 24px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #ffffff;
+    background-color: #192D50;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.omsar-recruitment-notify-submit-btn:hover:not(:disabled) {
+    background-color: #192D50;
+}
+
+.omsar-recruitment-notify-submit-btn:active:not(:disabled) {
+    transform: translateY(1px);
+}
+
+.omsar-recruitment-notify-submit-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.omsar-recruitment-notify-submit-loader {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.omsar-recruitment-notify-submit-loader .spinner {
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top-color: #ffffff;
+    border-radius: 50%;
+    animation: omsar-spin 0.8s linear infinite;
+}
+
+@keyframes omsar-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.omsar-recruitment-notify-success {
+    margin-top: 0;
+    margin-bottom: 0;
+    padding: 20px;
+    background-color: #d4edda;
+    border: 1px solid #c3e6cb;
+    border-radius: 8px;
+    color: #155724;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+/* RTL Support */
+[dir="rtl"] .omsar-recruitment-notify-modal-close {
+    right: auto;
+    left: 15px;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .omsar-recruitment-notify-modal-content {
+        width: 95%;
+        max-height: calc(100vh - 20px);
+    }
+
+    .omsar-recruitment-notify-modal-body {
+        padding: 20px;
+    }
+
+    .omsar-recruitment-notify-modal-title {
+        font-size: 20px;
+        margin-bottom: 15px;
+    }
+
+    .omsar-recruitment-notify-modal-message {
+        font-size: 15px;
+        margin-bottom: 20px;
+    }
+
+    .omsar-recruitment-notify-submit-btn {
+        padding: 12px 20px;
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .omsar-recruitment-notify-modal-body {
+        padding: 15px;
+    }
+
+    .omsar-recruitment-notify-modal-title {
+        font-size: 18px;
+        padding-right: 30px;
+    }
+
+    .omsar-recruitment-notify-modal-close {
+        top: 10px;
+        right: 10px;
+    }
+
+    [dir="rtl"] .omsar-recruitment-notify-modal-close {
+        left: 10px;
+    }
+}
+
+/* Prevent body scroll when modal is open */
+body.omsar-modal-open {
+    overflow: hidden;
+}
+
+/* Accessibility: Focus trap */
+/* .omsar-recruitment-notify-modal.active .omsar-recruitment-notify-input:focus,
+.omsar-recruitment-notify-modal.active .omsar-recruitment-notify-submit-btn:focus,
+.omsar-recruitment-notify-modal.active .omsar-recruitment-notify-modal-close:focus {
+    outline: 2px solid #192D50;
+    outline-offset: 2px;
+} */
+
+/* Procurement Apply Modal (same design as recruitment notify modal) */
+.omsar-procurement-apply-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    pointer-events: none;
+}
+
+.omsar-procurement-apply-modal.active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+.omsar-procurement-apply-modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(2px);
+}
+
+.omsar-procurement-apply-modal-content {
+    position: relative;
+    background: #ffffff;
+    border-radius: 12px;
+    max-width: 500px;
+    width: 90%;
+    max-height: calc(100vh - 40px);
+    overflow-y: auto;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    transform: scale(0.9) translateY(20px);
+    transition: transform 0.3s ease;
+    z-index: 1;
+}
+
+.omsar-procurement-apply-modal.active .omsar-procurement-apply-modal-content {
+    transform: scale(1) translateY(0);
+}
+
+.omsar-procurement-apply-modal-close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: transparent;
+    border: none;
+    font-size: 28px;
+    line-height: 1;
+    color: #666;
+    cursor: pointer;
+    padding: 0;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+    z-index: 10;
+}
+
+.omsar-procurement-apply-modal-close:hover,
+.omsar-procurement-apply-modal-close:focus {
+    background-color: #f0f0f0;
+    color: #333;
+    outline: none;
+}
+
+.omsar-procurement-apply-modal-body {
+    padding: 30px;
+}
+
+.omsar-procurement-apply-modal-title {
+    margin: 0 0 20px 0;
+    font-size: 24px;
+    font-weight: 600;
+    color: #333;
+}
+
+.omsar-procurement-apply-modal-message {
+    margin: 0 0 25px 0;
+    font-size: 16px;
+    line-height: 1.6;
+    color: #666;
+}
+
+.omsar-procurement-apply-form-group {
+    margin-bottom: 20px;
+}
+
+.omsar-procurement-apply-label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+}
+
+.omsar-procurement-apply-input {
+    width: 100%;
+    padding: 12px 15px;
+    font-size: 16px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    box-sizing: border-box;
+}
+
+.omsar-procurement-apply-input:focus {
+    outline: none;
+    border-color: #192D50;
+    box-shadow: 0 0 0 3px rgba(86, 147, 255, 0.1);
+}
+
+.omsar-procurement-apply-input.error {
+    border-color: #e74c3c;
+}
+
+.omsar-procurement-apply-error {
+    display: block;
+    margin-top: 8px;
+    font-size: 14px;
+    color: #e74c3c;
+    min-height: 20px;
+}
+
+.omsar-procurement-apply-form-actions {
+    margin-top: 25px;
+}
+
+.omsar-procurement-apply-submit-btn {
+    width: 100%;
+    padding: 14px 24px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #ffffff;
+    background-color: #192D50;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.omsar-procurement-apply-submit-btn:hover:not(:disabled) {
+    background-color: #192D50;
+}
+
+.omsar-procurement-apply-submit-btn:active:not(:disabled) {
+    transform: translateY(1px);
+}
+
+.omsar-procurement-apply-submit-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.omsar-procurement-apply-success {
+    margin-top: 0;
+    margin-bottom: 0;
+    padding: 20px;
+    background-color: #d4edda;
+    border: 1px solid #c3e6cb;
+    border-radius: 8px;
+    color: #155724;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+[dir="rtl"] .omsar-procurement-apply-modal-close {
+    right: auto;
+    left: 15px;
+}
+
+@media (max-width: 768px) {
+    .omsar-procurement-apply-modal-content {
+        width: 95%;
+        max-height: calc(100vh - 20px);
+    }
+
+    .omsar-procurement-apply-modal-body {
+        padding: 20px;
+    }
+
+    .omsar-procurement-apply-modal-title {
+        font-size: 20px;
+        margin-bottom: 15px;
+    }
+
+    .omsar-procurement-apply-modal-message {
+        font-size: 15px;
+        margin-bottom: 20px;
+    }
+
+    .omsar-procurement-apply-submit-btn {
+        padding: 12px 20px;
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .omsar-procurement-apply-modal-body {
+        padding: 15px;
+    }
+
+    .omsar-procurement-apply-modal-title {
+        font-size: 18px;
+        padding-right: 30px;
+    }
+
+    .omsar-procurement-apply-modal-close {
+        top: 10px;
+        right: 10px;
+    }
+
+    [dir="rtl"] .omsar-procurement-apply-modal-close {
+        left: 10px;
+    }
+}
+
+.document-item .bi-file-earmark-pdf::before {
+    font-size: 1.125rem;
+    color: #dc3545;
+}
+
+.document-item .document-link {
+    gap: 0.5rem;
+    color: #1a3e7b;
+    text-decoration: none;
+}
+
+.document-item .document-link:hover {
+    color: #7db3e8;
+    text-decoration: underline;
+}
+
+.section-top-space {
+    padding-top: 3rem;
+}
+
+.title-bottom-space {
+    padding-bottom: 0.8rem;
+}
+
+
+html[dir="rtl"] .form-control {
+    text-align: right;
+}
+
+[dir="rtl"] .form-control {
+    font-family: 'Almarai', sans-serif !important;
+    height: 55px !important;
+    /* Manually set a tall height */
+    padding-top: 15px !important;
+    /* Give the top diacritics room */
+    padding-bottom: 15px !important;
+    /* Give the bottom dots room */
+    line-height: 1 !important;
+    /* Reset the line height */
+    display: block !important;
+}
+
+[dir="rtl"] .form-control::placeholder {
+    /* Sometimes the placeholder needs its own font-size reduction to fit */
+    font-size: 0.9em !important;
+    line-height: 1.5 !important;
+}
+
+.copyright-text a {
+    color: #192D50;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+@media (max-width: 767.98px) {
+    .investment-export-row {
+        max-width: 100%;
+    }
+
+    .pillar-card {
+        min-height: 300px;
+        padding: 24px;
+    }
+
+    .pillar-title {
+        font-size: 28px;
+    }
+
+    .pillar-desc {
+        max-width: 100%;
+        font-size: 15px;
+    }
+}
+
+:root {
+    --idal-green: #00B388;
+    --idal-cyan: #00B5D8;
+    --idal-blue: #1A3BB5;
+}
+
+
+/* IDAL brand color emphasis for Investment & Export cards */
+.pillar-card-1::before {
+    background: linear-gradient(90deg,
+            rgba(26, 59, 181, 0.94) 0%,
+            rgba(0, 181, 216, 0.74) 58%,
+            rgba(0, 179, 136, 0.42) 100%);
+}
+
+.pillar-card-2::before {
+    background: linear-gradient(90deg,
+            rgba(0, 179, 136, 0.92) 0%,
+            rgba(0, 181, 216, 0.74) 58%,
+            rgba(26, 59, 181, 0.45) 100%);
+}
+
+
+@media (max-width: 767.98px) {
+    .section-title {
+        font-size: 32px;
+    }
+
+    .pillar-card {
+        min-height: 290px;
+        padding: 26px;
+    }
+
+    .pillar-title {
+        font-size: 30px;
+    }
+
+    .pillar-desc {
+        font-size: 16px;
+        line-height: 1.5;
+        max-width: 100%;
+        font-weight: 400;
+    }
+
+    .pillar-button {
+        font-size: 14px;
+        padding: 10px 17px;
+    }
+}
+
+/* ==================================================
+   IDAL Raouche Hero — Brand Book
+   Image file location:
+   wp-content/themes/omsar/assets/images/raouche-hero.png
+   ================================================== */
+
+:root {
+    --idal-green: #00B388;
+    --idal-cyan: #00B5D8;
+    --idal-blue: #1A3BB5;
+    --idal-ink: #071A3D;
+}
+
+.idal-raouche-hero {
+    position: relative;
+    min-height: 690px;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    font-family: 'Barlow', sans-serif;
+    background-color: #ffffff;
+    background-image: url('../images/raouche-hero.png') !important;
+    background-repeat: no-repeat !important;
+    background-position: center right !important;
+    background-size: cover !important;
+}
+
+.idal-raouche-hero .container {
+    position: relative;
+    z-index: 2;
+}
+
+.idal-hero-content {
+    max-width: 650px;
+    padding: 90px 0 80px;
+    font-family: 'Barlow', sans-serif;
+}
+
+.idal-raouche-hero .hero-title {
+    margin: 0 0 28px;
+    font-family: 'Barlow', sans-serif;
+    font-size: clamp(52px, 5vw, 78px);
+    font-weight: 700;
+    line-height: 0.98;
+    letter-spacing: -0.035em;
+}
+
+.idal-raouche-hero .hero-title span {
+    display: block;
+}
+
+.idal-raouche-hero .hero-title-blue {
+    color: var(--idal-ink);
+}
+
+.idal-raouche-hero .hero-title-green {
+    margin-top: 10px;
+    color: var(--idal-green);
+}
+
+.idal-raouche-hero .hero-description {
+    max-width: 600px;
+    margin: 0 0 32px;
+    color: #18233b;
+    font-family: 'Barlow', sans-serif;
+    font-size: 21px;
+    font-weight: 400;
+    line-height: 1.45;
+    letter-spacing: 0;
+}
+
+.idal-hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+}
+
+.idal-hero-button {
+    min-height: 52px;
+    padding: 13px 24px;
+    border: 2px solid transparent;
+    border-radius: 14px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 28px;
+    font-family: 'Barlow', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1;
+    text-decoration: none;
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        background-color 0.25s ease,
+        color 0.25s ease,
+        border-color 0.25s ease;
+}
+
+.idal-hero-button-primary {
+    background: var(--idal-blue);
+    color: #ffffff;
+    border-color: var(--idal-blue);
+    box-shadow: 0 12px 26px rgba(26, 59, 181, 0.18);
+}
+
+.idal-hero-button-primary:hover {
+    background: var(--idal-cyan);
+    border-color: var(--idal-cyan);
+    color: #ffffff;
+    transform: translateY(-2px);
+}
+
+.idal-hero-button-secondary {
+    background: rgba(255, 255, 255, 0.85);
+    color: var(--idal-blue);
+    border-color: var(--idal-green);
+}
+
+.idal-hero-button-secondary:hover {
+    background: var(--idal-green);
+    border-color: var(--idal-green);
+    color: #ffffff;
+    transform: translateY(-2px);
+}
+
+.idal-button-arrow {
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 0;
+}
+
+@media (max-width: 1199.98px) {
+    .idal-raouche-hero {
+        min-height: 620px;
+        background-position: 58% center !important;
+    }
+
+    .idal-hero-content {
+        max-width: 570px;
+    }
+
+    .idal-raouche-hero .hero-title {
+        font-size: clamp(48px, 5.4vw, 66px);
+    }
+}
+
+@media (max-width: 991.98px) {
+    .idal-raouche-hero {
+        min-height: 760px;
+        align-items: flex-start;
+        background-position: 68% bottom !important;
+        background-size: auto 100% !important;
+    }
+
+    .idal-raouche-hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+            90deg,
+            rgba(255, 255, 255, 0.98) 0%,
+            rgba(255, 255, 255, 0.94) 45%,
+            rgba(255, 255, 255, 0.30) 75%,
+            rgba(255, 255, 255, 0.04) 100%
+        );
+        z-index: 1;
+        pointer-events: none;
+    }
+
+    .idal-hero-content {
+        max-width: 580px;
+        padding: 100px 0 70px;
+        text-align: left;
+        align-items: flex-start;
+    }
+
+    .idal-raouche-hero .hero-description {
+        font-size: 19px;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .idal-raouche-hero {
+        min-height: 720px;
+        background-position: 72% bottom !important;
+        background-size: auto 82% !important;
+    }
+
+    .idal-raouche-hero::before {
+        background: linear-gradient(
+            180deg,
+            rgba(255, 255, 255, 1) 0%,
+            rgba(255, 255, 255, 0.98) 42%,
+            rgba(255, 255, 255, 0.72) 64%,
+            rgba(255, 255, 255, 0.18) 100%
+        );
+    }
+
+    .idal-hero-content {
+        padding: 70px 0 40px;
+    }
+
+    .idal-raouche-hero .hero-title {
+        font-size: 46px;
+        line-height: 1.02;
+    }
+
+    .idal-raouche-hero .hero-description {
+        max-width: 100%;
+        font-size: 17px;
+    }
+
+    .idal-hero-actions {
+        flex-direction: column;
+        align-items: stretch;
+        max-width: 310px;
+    }
+
+    .idal-hero-button {
+        width: 100%;
+    }
+}
+
+@media (max-width: 479.98px) {
+    .idal-raouche-hero {
+        min-height: 680px;
+        background-position: 70% bottom !important;
+        background-size: auto 72% !important;
+    }
+
+    .idal-raouche-hero .hero-title {
+        font-size: 39px;
+    }
+}
+
+/* ==================================================
+   FINAL FIX: show the full Raouché hero artwork
+   ================================================== */
+
+.idal-raouche-hero {
+    position: relative !important;
+    min-height: 690px !important;
+    display: flex !important;
+    align-items: center !important;
+    overflow: hidden !important;
+    background: #ffffff !important;
+    font-family: 'Barlow', sans-serif !important;
+}
+
+.idal-raouche-hero-image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center right;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.idal-raouche-hero .container {
+    position: relative;
+    z-index: 2;
+}
+
+.idal-hero-content {
+    position: relative;
+    z-index: 3;
+    max-width: 650px;
+    padding: 88px 0 82px;
+}
+
+.idal-raouche-hero .hero-title {
+    margin: 0 0 28px;
+    font-family: 'Barlow', sans-serif;
+    font-size: clamp(54px, 5vw, 78px);
+    font-weight: 700;
+    line-height: 0.98;
+    letter-spacing: -0.035em;
+}
+
+.idal-raouche-hero .hero-title span {
+    display: block;
+}
+
+.idal-raouche-hero .hero-title-blue {
+    color: #071A3D;
+}
+
+.idal-raouche-hero .hero-title-green {
+    margin-top: 10px;
+    color: #00B388;
+}
+
+.idal-raouche-hero .hero-description {
+    max-width: 590px;
+    margin: 0 0 32px;
+    color: #18233b;
+    font-family: 'Barlow', sans-serif;
+    font-size: 21px;
+    font-weight: 400;
+    line-height: 1.45;
+}
+
+.idal-hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+}
+
+.idal-hero-button {
+    min-height: 52px;
+    padding: 13px 24px;
+    border: 2px solid transparent;
+    border-radius: 14px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 28px;
+    font-family: 'Barlow', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1;
+    text-decoration: none;
+}
+
+.idal-hero-button-primary {
+    background: #1A3BB5;
+    border-color: #1A3BB5;
+    color: #ffffff;
+}
+
+.idal-hero-button-primary:hover {
+    background: #00B5D8;
+    border-color: #00B5D8;
+    color: #ffffff;
+}
+
+.idal-hero-button-secondary {
+    background: rgba(255, 255, 255, 0.88);
+    border-color: #00B388;
+    color: #1A3BB5;
+}
+
+.idal-hero-button-secondary:hover {
+    background: #00B388;
+    border-color: #00B388;
+    color: #ffffff;
+}
+
+@media (max-width: 991.98px) {
+    .idal-raouche-hero {
+        min-height: 760px !important;
+        align-items: flex-start !important;
+    }
+
+    .idal-raouche-hero::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+            90deg,
+            rgba(255,255,255,0.98) 0%,
+            rgba(255,255,255,0.92) 48%,
+            rgba(255,255,255,0.18) 100%
+        );
+        z-index: 1;
+        pointer-events: none;
+    }
+
+    .idal-raouche-hero-image {
+        object-position: 68% center;
+    }
+
+    .idal-hero-content {
+        max-width: 560px;
+        padding: 95px 0 70px;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .idal-raouche-hero {
+        min-height: 720px !important;
+    }
+
+    .idal-raouche-hero::after {
+        background: linear-gradient(
+            180deg,
+            rgba(255,255,255,1) 0%,
+            rgba(255,255,255,0.98) 48%,
+            rgba(255,255,255,0.40) 75%,
+            rgba(255,255,255,0.08) 100%
+        );
+    }
+
+    .idal-raouche-hero-image {
+        object-position: 72% bottom;
+    }
+
+    .idal-hero-content {
+        padding: 70px 0 42px;
+    }
+
+    .idal-raouche-hero .hero-title {
+        font-size: 44px;
+        line-height: 1.02;
+    }
+
+    .idal-raouche-hero .hero-description {
+        font-size: 17px;
+    }
+
+    .idal-hero-actions {
+        flex-direction: column;
+        align-items: stretch;
+        max-width: 315px;
+    }
+
+    .idal-hero-button {
+        width: 100%;
+    }
+}
+
+/* Remove dotted/pattern background from the front page */
+.background.front-page::before {
+    background-image: none !important;
+    background: #ffffff !important;
+}
+
+.background.front-page {
+    background-color: #ffffff !important;
+}
+
+/* ==================================================
+   Vision & Mission — reference layout with side waves
+   ================================================== */
+
+.vision-mission-reference {
+    position: relative;
+    overflow: hidden;
+    padding: 88px 0 92px;
+    background: #ffffff;
+    font-family: 'Barlow', sans-serif;
+}
+
+.vision-mission-reference::before,
+.vision-mission-reference::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    width: min(31vw, 430px);
+    height: 250px;
+    background-image: url('../images/vision-wave-lines.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    pointer-events: none;
+    opacity: 0.95;
+    transform: translateY(-50%);
+}
+
+.vision-mission-reference::before {
+    left: -90px;
+}
+
+.vision-mission-reference::after {
+    right: -90px;
+    transform: translateY(-50%) scaleX(-1);
+}
+
+.vision-mission-reference .container {
+    position: relative;
+    z-index: 2;
+}
+
+.vision-mission-copy {
+    max-width: 520px;
+    margin: 0 auto;
+    font-family: 'Barlow', sans-serif;
+}
+
+.vision-mission-copy h3 {
+    margin: 0;
+    font-family: 'Barlow', sans-serif;
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 1.15;
+}
+
+.vision-copy h3 {
+    color: #00B388;
+}
+
+.mission-copy h3 {
+    color: #1A3BB5;
+}
+
+.vision-mission-line {
+    display: block;
+    width: 42px;
+    height: 3px;
+    margin: 14px 0 18px;
+    border-radius: 999px;
+}
+
+.vision-copy .vision-mission-line {
+    background: #00B388;
+}
+
+.mission-copy .vision-mission-line {
+    background: #1A3BB5;
+}
+
+.vision-mission-copy p {
+    margin: 0;
+    color: #19233a;
+    font-family: 'Barlow', sans-serif;
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 1.65;
+}
+
+@media (max-width: 1199.98px) {
+    .vision-mission-reference::before,
+    .vision-mission-reference::after {
+        width: 300px;
+        opacity: 0.72;
+    }
+
+    .vision-mission-reference::before {
+        left: -145px;
+    }
+
+    .vision-mission-reference::after {
+        right: -145px;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .vision-mission-reference {
+        padding: 68px 0 72px;
+    }
+
+    .vision-mission-reference::before,
+    .vision-mission-reference::after {
+        width: 230px;
+        height: 170px;
+        opacity: 0.45;
+    }
+
+    .vision-mission-reference::before {
+        top: 18%;
+        left: -135px;
+    }
+
+    .vision-mission-reference::after {
+        top: 82%;
+        right: -135px;
+    }
+
+    .vision-mission-copy {
+        padding: 0 8px;
+    }
+
+    .vision-mission-copy h3 {
+        font-size: 26px;
+    }
+
+    .vision-mission-copy p {
+        font-size: 16px;
+    }
+}

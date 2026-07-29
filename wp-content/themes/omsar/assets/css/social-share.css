@@ -1,0 +1,270 @@
+/* ------------------------------------------ */
+/*          Social Share Banner Button        */
+/* ------------------------------------------ */
+.btn-share-banner {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background-color: #192D50;
+    color: #ffffff;
+    border: none;
+    border-radius: 25px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 8px;
+}
+
+.btn-share-banner:hover {
+    background-color: #23375a;
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.btn-share-banner i {
+    font-size: 16px;
+}
+
+/* ------------------------------------------ */
+/*          Social Share Modal                */
+/* ------------------------------------------ */
+#socialShareModal .modal-content {
+    border-radius: 12px;
+    border: none;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+}
+
+#socialShareModal .modal-header {
+    border-bottom: 1px solid #e0e0e0;
+    padding: 20px 24px;
+}
+
+#socialShareModal .modal-title {
+    font-weight: 600;
+    font-size: 20px;
+    color: #192D50;
+    display: flex;
+    align-items: center;
+}
+
+#socialShareModal .modal-body {
+    padding: 24px;
+}
+
+.share-description {
+    font-size: 14px;
+    color: #666666;
+    line-height: 1.6;
+}
+
+.social-share-buttons-modal {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+}
+
+/* ------------------------------------------ */
+/*          Social Share Buttons              */
+/* ------------------------------------------ */
+.social-share-wrapper {
+    margin-top: 40px;
+    padding-top: 30px;
+    border-top: 1px solid #e0e0e0;
+}
+
+.social-share-label {
+    font-weight: 600;
+    font-size: 16px;
+    color: #192D50;
+    margin-bottom: 15px;
+}
+
+.social-share-label span {
+    color: #000000;
+}
+
+.social-share-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+}
+
+.social-share-btn,
+.social-share-btn-modal {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 18px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border: 1px solid #e0e0e0;
+    background-color: #ffffff;
+    color: #333333;
+    cursor: pointer;
+    width: 100%;
+}
+
+.social-share-btn:hover,
+.social-share-btn-modal:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-decoration: none;
+}
+
+.social-share-btn i,
+.social-share-btn-modal i {
+    font-size: 18px;
+}
+
+.social-share-btn-modal {
+    flex-direction: column;
+    padding: 16px 12px;
+    min-height: 80px;
+}
+
+/* Facebook */
+.social-share-facebook {
+    border-color: #1877f2;
+    color: #1877f2;
+}
+
+.social-share-facebook:hover {
+    background-color: #1877f2;
+    color: #ffffff;
+    border-color: #1877f2;
+}
+
+/* Twitter */
+.social-share-twitter {
+    border-color: #1da1f2;
+    color: #1da1f2;
+}
+
+.social-share-twitter:hover {
+    background-color: #1da1f2;
+    color: #ffffff;
+    border-color: #1da1f2;
+}
+
+/* LinkedIn */
+.social-share-linkedin {
+    border-color: #0077b5;
+    color: #0077b5;
+}
+
+.social-share-linkedin:hover {
+    background-color: #0077b5;
+    color: #ffffff;
+    border-color: #0077b5;
+}
+
+/* WhatsApp */
+.social-share-whatsapp {
+    border-color: #25d366;
+    color: #25d366;
+}
+
+.social-share-whatsapp:hover {
+    background-color: #25d366;
+    color: #ffffff;
+    border-color: #25d366;
+}
+
+/* Copy Link */
+.social-share-copy {
+    border-color: #666666;
+    color: #666666;
+}
+
+.social-share-copy:hover {
+    background-color: #666666;
+    color: #ffffff;
+    border-color: #666666;
+}
+
+.social-share-copy.copied {
+    background-color: #28a745;
+    border-color: #28a745;
+    color: #ffffff;
+}
+
+.social-share-copy.copied:hover {
+    background-color: #218838;
+    border-color: #218838;
+}
+
+/* Responsive Design */
+@media (max-width: 991.98px) {
+    .btn-share-banner {
+        padding: 8px 16px;
+        font-size: 13px;
+    }
+    
+    .btn-share-banner span {
+        display: none;
+    }
+    
+    .social-share-buttons-modal {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 767.98px) {
+    .social-share-wrapper {
+        margin-top: 30px;
+        padding-top: 20px;
+    }
+    
+    .social-share-buttons {
+        gap: 10px;
+    }
+    
+    .social-share-btn {
+        padding: 8px 14px;
+        font-size: 13px;
+    }
+    
+    .social-share-btn span {
+        display: none;
+    }
+    
+    .social-share-btn i {
+        font-size: 18px;
+    }
+    
+    /* Show text on mobile for copy button */
+    .social-share-copy .copy-text,
+    .social-share-copy .copied-text {
+        display: inline !important;
+    }
+    
+    .social-share-buttons-modal {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .social-share-btn-modal {
+        padding: 14px 10px;
+        min-height: 70px;
+    }
+    
+    .social-share-btn-modal i {
+        font-size: 20px;
+    }
+    
+    .social-share-btn-modal span {
+        font-size: 12px;
+    }
+    
+    #socialShareModal .modal-body {
+        padding: 20px;
+    }
+}
+

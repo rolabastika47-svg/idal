@@ -1,0 +1,794 @@
+.navbar.navbar-expand-lg{
+    background: linear-gradient(to bottom, rgb(254 254 255) 0%, rgb(254 254 255) 50%, rgb(254 254 255) 60%, rgba(173, 202, 255, 0) 90%);
+}
+
+.navbar.navbar-expand-lg.bg-white img{
+    height: 75px;
+}
+/* ------------------------------------------ */
+/*                 Header (Navbar)            */
+/* ------------------------------------------ */
+.navbar {
+    min-height: 90px;
+    /* Define a fixed height for calculation */
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    /* Smooth transition */
+    position: sticky;
+    top: 0;
+    z-index: 1020;
+    overflow: visible;
+}
+
+/* Ensure navbar container uses flexbox */
+.navbar .container {
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+    overflow: visible;
+}
+
+/* Logo link container */
+.navbar > .container > a[href] {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+}
+
+/* Ensure action icons are always visible on desktop */
+@media (min-width: 992px) {
+    .navbar .action-icons {
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
+}
+/* Mobile Arabic header layout */
+@media (max-width: 991px) {
+    html[dir="rtl"] .mobile-actions-group {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        margin-left: 0 !important;
+        margin-right: auto !important; /* push to left */
+        /* gap: 10px; */
+        padding-left:12px
+    }  
+}
+.nav-link {
+    font-weight: 500;
+    /* Medium */
+    font-size: 14px;
+    /* 14px */
+    line-height: 1.5;
+    /* 150% */
+    letter-spacing: -0.005em;
+    /* -0.5% */
+    color: #000000;
+    /* Black */
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+}
+
+/* Custom Dropdown Arrow Styling - Simple downward chevron */
+.nav-link.dropdown-toggle::after {
+    /* Remove Bootstrap's default caret */
+    width: 0;
+    height: 0;
+    border: none;
+    /* Create simple downward chevron - V shape pointing down */
+    width: 6px;
+    height: 6px;
+    border-right: 1.5px solid #000000;
+    border-bottom: 1.5px solid #000000;
+    transform: rotate(45deg);
+    display: inline-block;
+    position: relative;
+    top: 2px;
+    margin-left: 7px;
+    /* Smooth transition for rotation */
+    transition: transform 0.3s ease, top 0.3s ease;
+}
+
+/* Rotate chevron when dropdown is open (point up) */
+.nav-link.dropdown-toggle[aria-expanded="true"]::after {
+    transform: rotate(225deg);
+    top: 4px;
+}
+
+/* Rotate chevron on hover (point up) - same as when expanded */
+.nav-link.dropdown-toggle:hover::after {
+    transform: rotate(225deg);
+    top: 4px;
+}
+
+
+/* Dropdown Menu Hover Functionality for Desktop */
+@media (min-width: 992px) {
+    .nav-item.dropdown {
+        position: relative;
+    }
+
+    .nav-item.dropdown .dropdown-menu {
+        margin-top: 0;
+        border: none;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Show dropdown on hover - works alongside Bootstrap's click functionality */
+    .nav-item.dropdown:hover > .dropdown-menu {
+        display: block;
+    }
+
+    /* Keep dropdown open when hovering over the dropdown menu itself */
+    .nav-item.dropdown .dropdown-menu:hover {
+        display: block;
+    }
+    
+}
+
+/* Language Button Styling - YOUR CUSTOM CHANGES PRESERVED */
+.lang-toggle {
+    width: 32px;
+    height: 32px;
+    background-color: #e8eaed;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: #000;
+    font-size: 14px;
+}
+
+/* Logo Styling - YOUR CUSTOM CHANGES PRESERVED */
+.logo-image {
+    width: 72px;
+    height: 98px;
+}
+.logo {
+    width: auto;
+    max-width: 120px;
+    height: auto;
+    max-height: 100px;
+    object-fit: contain;
+}
+/* ------------------------------------------ */
+/*        Burger Menu to X Animation          */
+/* ------------------------------------------ */
+.navbar-toggler {
+    border: none;
+    padding: 0;
+    width: 30px;
+    height: 20px;
+    position: relative;
+    transition: .5s ease-in-out;
+}
+
+.navbar-toggler:focus {
+    box-shadow: none;
+}
+
+.navbar-toggler .icon-bar {
+    display: block;
+    position: absolute;
+    height: 2px;
+    width: 100%;
+    background: #003366;
+    /* Dark Blue color */
+    border-radius: 9px;
+    opacity: 1;
+    left: 0;
+    transform: rotate(0deg);
+    transition: .25s ease-in-out;
+    transform-origin: center;
+}
+
+.navbar-toggler .top-bar {
+    top: 0px;
+}
+
+.navbar-toggler .middle-bar {
+    top: 9px;
+}
+
+.navbar-toggler .bottom-bar {
+    top: 18px;
+}
+
+/* Animation State when Open (aria-expanded="true") */
+.navbar-toggler[aria-expanded="true"] .top-bar {
+    top: 9px;
+    transform: rotate(45deg);
+}
+
+.navbar-toggler[aria-expanded="true"] .middle-bar {
+    opacity: 0;
+}
+
+.navbar-toggler[aria-expanded="true"] .bottom-bar {
+    top: 9px;
+    transform: rotate(-45deg);
+}
+
+/* ------------------------------------------ */
+/*      Mobile Full Screen Overlay Menu       */
+/* ------------------------------------------ */
+@media (max-width: 991.98px) {
+
+    /* Logo Styling Mobile - YOUR CUSTOM CHANGES PRESERVED */
+    .logo-image {
+        width: 56px;
+        height: 72px;
+    }
+
+    .navbar-collapse {
+        position: fixed;
+        top: 90px;
+        /* Matches navbar min-height */
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+        height: calc(100vh - 90px);
+        background-color: white;
+        padding: 2rem;
+        overflow-y: auto;
+
+        /* Start hidden/collapsed */
+        display: block;
+        transform: translateX(100%);
+        transition: transform 0.3s ease-in-out;
+
+        /* Ensure it covers other content */
+        z-index: 1000;
+    }
+
+    /* When menu is showing */
+    .navbar-collapse.show,
+    .navbar-collapse.collapsing {
+        transform: translateX(0);
+        display: block;
+    }
+
+    /* Reset Bootstrap's collapsing height animation since we use transform */
+    .navbar-collapse.collapsing {
+        height: calc(100vh - 90px) !important;
+        position: fixed;
+        overflow: hidden;
+    }
+
+    .navbar-nav {
+        text-align: left;
+        padding-bottom: 2rem;
+    }
+
+    /* Arabic (RTL) - Right align */
+    html[dir="rtl"] .navbar-nav,
+    body[dir="rtl"] .navbar-nav {
+        text-align: right;
+    }
+
+    .nav-item {
+        margin-bottom: 1rem;
+    }
+
+    .nav-link {
+        text-align: left;
+    }
+
+    /* Arabic (RTL) - Right align nav links */
+    html[dir="rtl"] .nav-link,
+    body[dir="rtl"] .nav-link {
+        text-align: right;
+    }
+
+    /* Dropdown toggle arrow positioning for mobile */
+    .nav-link.dropdown-toggle::after {
+        margin-left: 15px;
+        margin-right: 0;
+    }
+
+    /* Arabic (RTL) - Dropdown toggle arrow on the left */
+    html[dir="rtl"] .nav-link.dropdown-toggle::after,
+    body[dir="rtl"] .nav-link.dropdown-toggle::after {
+        margin-left: 0;
+        margin-right: 7px;
+    }
+
+    /* Dropdown menu items alignment */
+    .dropdown-menu {
+        text-align: left;
+        padding-left: 1.5rem;
+    }
+
+    /* Arabic (RTL) - Right align dropdown menu */
+    html[dir="rtl"] .dropdown-menu,
+    body[dir="rtl"] .dropdown-menu {
+        text-align: right;
+        padding-left: 0;
+        padding-right: 1.5rem;
+        direction: rtl;
+    }
+
+    .dropdown-item {
+        text-align: left;
+        padding-left: 1rem;
+    }
+
+    /* Arabic (RTL) - Right align dropdown items */
+    html[dir="rtl"] .dropdown-item,
+    body[dir="rtl"] .dropdown-item {
+        text-align: right;
+        padding-left: 0;
+        padding-right: 1rem;
+        direction: rtl;
+    }
+
+    /* Form elements in dropdown (search inputs, etc.) */
+    .dropdown-menu input,
+    .dropdown-menu form {
+        direction: ltr;
+    }
+
+    /* Arabic (RTL) - Form elements in dropdown */
+    html[dir="rtl"] .dropdown-menu input,
+    html[dir="rtl"] .dropdown-menu form,
+    body[dir="rtl"] .dropdown-menu input,
+    body[dir="rtl"] .dropdown-menu form {
+        direction: rtl;
+        text-align: right;
+    }
+
+    .dropdown-menu .dropdown-item {
+        white-space: normal !important;  
+    }
+}
+
+/* ------------------------------------------ */
+/*          iPad Pro / Tablet Fixes           */
+/* ------------------------------------------ */
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+    /* Ensure navbar container uses flexbox properly */
+    .navbar .container {
+        display: flex;
+        align-items: center;
+        flex-wrap: nowrap;
+        overflow: visible;
+        width: 100%;
+        max-width: 100%;
+    }
+
+    /* Constrain logo width on iPad Pro */
+    .navbar > .container > a[href*="home"] {
+        flex-shrink: 0;
+        max-width: 120px;
+        min-width: 80px;
+        display: flex;
+        align-items: center;
+    }
+
+    .navbar .logo {
+        width: auto;
+        max-width: 100px;
+        height: auto;
+        max-height: 80px;
+        object-fit: contain;
+    }
+
+    /* Ensure action icons are visible and properly spaced */
+    .navbar .action-icons {
+        display: flex !important;
+        align-items: center;
+        flex-shrink: 0;
+        gap: 12px;
+        margin-left: auto !important;
+        margin-right: 15px !important;
+        order: 3;
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
+
+    /* Ensure search icon is visible */
+    .navbar .header-search-wrapper {
+        display: inline-block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
+
+    /* Ensure language switcher is visible */
+    .navbar .lang-toggle {
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
+
+    /* Menu items container - allow shrinking if needed */
+    .navbar-collapse {
+        flex: 1 1 auto;
+        min-width: 0;
+        overflow: visible;
+    }
+
+    /* Nav items - reduce padding on tablets to save space */
+    .navbar-nav .nav-link {
+        padding-left: 0.75rem !important;
+        padding-right: 0.75rem !important;
+        font-size: 13px;
+    }
+
+    /* Ensure burger menu is visible when menu is collapsed */
+    .navbar-toggler {
+        flex-shrink: 0;
+        order: 4;
+        margin-left: 10px;
+    }
+}
+
+/* Additional fix for iPad Pro in portrait (1024px exactly) */
+@media screen and (min-width: 992px) and (max-width: 1024px) {
+    .navbar .container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    /* Reduce nav link padding slightly to fit more content */
+    .navbar-nav .nav-link {
+        padding-left: 0.6rem !important;
+        padding-right: 0.6rem !important;
+        font-size: 13px;
+    }
+}
+
+/* ------------------------------------------ */
+/*           Sticky footer (all pages)        */
+/* ------------------------------------------ */
+html {
+    height: 100%;
+}
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+/* Inner pages: .background (nav + content) grows so footer stays at bottom */
+body > .background:not(.front-page) {
+    flex: 1 0 auto;
+}
+/* Front page: .background wraps content + footer; push footer to bottom */
+.background.front-page {
+    display: flex;
+    flex-direction: column;
+    flex: 1 0 auto;
+}
+.background.front-page > .footer-section {
+    margin-top: auto;
+}
+/* Pages without .background (e.g. archive, search): content wrapper grows */
+body > .omsar-site-content {
+    flex: 1 0 auto;
+}
+
+/* ------------------------------------------ */
+/*                 Footer                     */
+/* ------------------------------------------ */
+
+.footer-section {
+    padding-top: 80px;
+    color: #192D50;
+    position: relative;
+    background-position: right;
+    background-image: var(--footer-pattern-url);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+
+.front-page .footer-section {
+    padding-top: 0px;
+}
+
+/* Remove background styles on front page */
+body.home .footer-section {
+    background-image: none;
+    background-color: transparent;
+}
+
+body.home .footer-section::before,
+body.home .footer-section::after {
+    display: none;
+}
+
+.footer-section::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: top center;
+    background-repeat: no-repeat;
+    z-index: -1;
+}
+
+/* Blue gradient overlay - only applies when footer_pattern exists */
+.footer-section[style*="--footer-pattern-url"]::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: 0;
+    background: linear-gradient(to top, 
+        var(--footer-main-color, rgba(173, 202, 255, 1) 0%),
+        var(--footer-shadow-color, rgba(173, 202, 255, 0) 100%)
+    );
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Ensure footer content is above the gradient */
+.footer-section[style*="--footer-pattern-url"] > .container {
+    position: relative;
+    z-index: 1;
+}
+
+.footer-heading {
+    font-weight: 700;
+    /* Bold */
+    font-size: 13px;
+    line-height: 1.35;
+    letter-spacing: -0.005em;
+    /* -0.5% */
+    text-transform: uppercase;
+    color: #192D50;
+    margin-bottom: 1.5rem;
+    /* Increased margin bottom */
+}
+
+.footer-links li {
+    margin-bottom: 8px;
+    /* Increased margin for spacing */
+}
+
+.footer-links a {
+    font-weight: 500;
+    /* Medium */
+    font-size: 13px;
+    line-height: 1.35;
+    letter-spacing: -0.005em;
+    /* -0.5% */
+    color: #192D50;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.footer-links a:hover {
+    color: #0d6efd;
+    text-decoration: underline;
+}
+
+.footer-contact-row {
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 1.35;
+    letter-spacing: -0.005em;
+    color: #192D50;
+    flex-wrap: nowrap;
+    gap: 100px;
+}
+
+.footer-contact-row > div {
+    white-space: nowrap;
+}
+
+.footer-contact-row .fw-bold {
+    font-weight: 700 !important;
+}
+.contact-section.row{
+    margin-bottom: 20px;
+}
+
+.contact-us-column {
+    flex: 0 0 70%;
+    max-width: 70%;
+}
+
+.follow-us-wrapper {
+    flex: 0 0 30%;
+    max-width: 30%;
+}
+
+@media (max-width: 767.98px) {
+    .contact-us-column,
+    .follow-us-wrapper {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+}
+
+/* Tablet breakpoint */
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+     .footer-contact-row {
+        flex-direction: column;
+        align-items: flex-start !important;
+        gap: 12px !important;
+    }
+
+    .follow-us-wrapper {
+        justify-content: flex-start !important;
+    }
+}
+
+.footer-contact-row a {
+    text-decoration: none !important;
+}
+.footer-contact-row a {
+    color: inherit;
+}
+.social-icons {
+    margin-top: 0px;
+    /* Removed top margin to align with title */
+}
+
+.social-icon-img {
+    width: 26px;
+    /* Adjusted size to match uploaded SVGs (26x26) */
+    height: 26px;
+    display: inline-block;
+    transition: opacity 0.3s ease;
+}
+
+.social-icon-img:hover {
+    opacity: 0.8;
+}
+
+.footer-divider {
+    border-color: #192D50;
+    opacity: 1;
+    /* Made fully opaque/bold */
+    border-top-width: 1px;
+    /* Thin bold line */
+    margin: 0;
+}
+
+.copyright-text {
+    font-weight: 300;
+    /* Light */
+    font-size: 12px;
+    line-height: 1.3;
+    letter-spacing: -0.005em;
+    /* -0.5% */
+    color: #192D50 !important;
+    /* Specified color */
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .footer-section {
+        background-size: contain;
+    }
+
+    .footer-section::before {
+        background-size: contain;
+    }
+
+    .footer-heading {
+        margin-top: 20px;
+    }
+
+    .social-icons {
+        justify-content: flex-start;
+        margin-bottom: 20px;
+    }
+
+    .col-lg-6.d-flex.justify-content-lg-end {
+        justify-content: flex-start !important;
+    }
+
+    .footer-contact-row {
+        flex-direction: column;
+        align-items: flex-start !important;
+        gap: 12px !important;
+        flex-wrap: wrap;
+    }
+}
+
+/* ==================================================
+   IDAL Footer Contact Details
+   ================================================== */
+
+.footer-section {
+    font-family: 'Barlow', sans-serif;
+    color: #071A3D;
+}
+
+.idal-footer-contact-grid {
+    display: grid;
+    grid-template-columns: minmax(280px, 2fr) repeat(3, minmax(150px, 1fr));
+    gap: 24px 36px;
+    align-items: start;
+}
+
+.idal-footer-contact-item {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    min-width: 0;
+}
+
+.idal-footer-label {
+    color: #1A3BB5;
+    font-family: 'Barlow', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1.2;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.idal-footer-value {
+    color: #071A3D;
+    font-family: 'Barlow', sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 1.55;
+    text-decoration: none;
+    overflow-wrap: anywhere;
+}
+
+a.idal-footer-value:hover {
+    color: #00B388;
+    text-decoration: underline;
+}
+
+.idal-social-link {
+    width: 38px;
+    height: 38px;
+    border: 1px solid rgba(26, 59, 181, 0.18);
+    border-radius: 10px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #1A3BB5;
+    color: #ffffff !important;
+    font-family: 'Barlow', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1;
+    text-decoration: none !important;
+    transition:
+        transform 0.25s ease,
+        background-color 0.25s ease,
+        border-color 0.25s ease;
+}
+
+.idal-social-link:hover {
+    background: #00B388;
+    border-color: #00B388;
+    color: #ffffff !important;
+    transform: translateY(-2px);
+}
+
+@media (max-width: 1199.98px) {
+    .idal-footer-contact-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .idal-footer-address {
+        grid-column: 1 / -1;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .idal-footer-contact-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .idal-footer-address {
+        grid-column: auto;
+    }
+
+    .follow-us-wrapper {
+        margin-top: 28px;
+    }
+}

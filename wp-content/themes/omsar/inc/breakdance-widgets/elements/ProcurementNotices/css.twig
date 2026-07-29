@@ -1,0 +1,137 @@
+{# Filter tabs #}
+%%SELECTOR%% .omsar-procurement-status-tab {
+  color: {{ design.filters.text_color ?? '#7db3e8' }};
+  background-color: {{ design.filters.background_color ?? 'transparent' }};
+  border-color: {{ design.filters.border_color ?? '#7db3e8' }};
+  border-width: {{ design.filters.border_width.style ?? '2px' }};
+  border-style: solid;
+  border-radius: {{ design.filters.border_radius.style ?? '24px' }};
+  {{ macros.spacing_padding_all(design.filters.padding) }}
+  {{ macros.typography(design.filters.typography, globalSettings) }}
+}
+
+%%SELECTOR%% .omsar-procurement-status-tab.active {
+  color: {{ design.filters.active_text_color ?? '#ffffff' }};
+  background-color: {{ design.filters.active_background_color ?? '#7db3e8' }};
+  border-color: {{ design.filters.active_border_color ?? '#7db3e8' }};
+}
+
+%%SELECTOR%% .omsar-procurement-status-tab:hover:not(.active) {
+  color: {{ design.filters.hover_text_color ?? '#ffffff' }};
+  background-color: {{ design.filters.hover_background_color ?? '#7db3e8' }};
+  border-color: {{ design.filters.hover_border_color ?? '#7db3e8' }};
+}
+
+{# Title #}
+%%SELECTOR%% .omsar-procurement-card-title {
+  color: {{ design.title.color ?? '#000000' }};
+  {{ macros.typography(design.title.typography, globalSettings) }}
+  {{ macros.spacing_margin_all(design.title.margin) }}
+}
+
+{# Badges #}
+%%SELECTOR%% .omsar-status-open {
+  color: {{ design.badge_open.text_color ?? '#28a745' }};
+  background-color: {{ design.badge_open.background_color ?? 'transparent' }};
+  border-color: {{ design.badge_open.border_color ?? '#28a745' }};
+  border-radius: {{ design.badge_open.border_radius.style ?? '20px' }};
+  {{ macros.typography(design.badge_open.typography, globalSettings) }}
+  {{ macros.spacing_padding_all(design.badge_open.padding) }}
+}
+
+%%SELECTOR%% .omsar-status-closed {
+  color: {{ design.badge_closed.text_color ?? '#dc3545' }};
+  background-color: {{ design.badge_closed.background_color ?? 'transparent' }};
+  border-color: {{ design.badge_closed.border_color ?? '#dc3545' }};
+  border-radius: {{ design.badge_closed.border_radius.style ?? '20px' }};
+  {{ macros.typography(design.badge_closed.typography, globalSettings) }}
+  {{ macros.spacing_padding_all(design.badge_closed.padding) }}
+}
+
+%%SELECTOR%% .omsar-status-cancelled {
+  color: {{ design.badge_cancelled.text_color ?? '#6c757d' }};
+  background-color: {{ design.badge_cancelled.background_color ?? 'transparent' }};
+  border-color: {{ design.badge_cancelled.border_color ?? '#6c757d' }};
+  border-radius: {{ design.badge_cancelled.border_radius.style ?? '20px' }};
+  {{ macros.typography(design.badge_cancelled.typography, globalSettings) }}
+  {{ macros.spacing_padding_all(design.badge_cancelled.padding) }}
+}
+
+{# Card #}
+{% set columns = content.content.columns ?? '3' %}
+%%SELECTOR%% .omsar-procurement-notices-grid {
+  gap: {{ design.card.grid_gap.style ?? '20px' }};
+  grid-template-columns: repeat({{ columns }}, 1fr);
+}
+
+%%SELECTOR%% .omsar-procurement-card {
+  border-radius: {{ design.card.border_radius.style ?? '8px' }};
+  min-height: {{ design.card.min_height.style ?? '150px' }};
+  {{ macros.borders(design.card.borders) }}
+}
+
+%%SELECTOR%% .omsar-procurement-card-content {
+  {{ macros.spacing_padding_all(design.card.padding) }}
+}
+
+{# Gradient overlay #}
+%%SELECTOR%% .omsar-procurement-card-gradient {
+  background: linear-gradient(
+    {{ design.gradient.angle.number ?? 135 }}deg,
+    {{ design.gradient.color_from ?? 'rgba(227, 242, 253, 0.8)' }} 0%,
+    {{ design.gradient.color_to ?? 'rgba(255, 255, 255, 0.6)' }} 100%
+  );
+  opacity: {{ design.gradient.opacity.number ?? 0.3 }};
+}
+
+{# Description & dates #}
+%%SELECTOR%% .omsar-procurement-description-info {
+  color: {{ design.description.color ?? '#666666' }};
+  {{ macros.typography(design.description.typography, globalSettings) }}
+}
+
+%%SELECTOR%% .omsar-procurement-description-info i {
+  color: {{ design.description.icon_color ?? '#999999' }};
+}
+
+%%SELECTOR%% .omsar-procurement-date-range {
+  color: {{ design.dates.color ?? '#666666' }};
+  {{ macros.typography(design.dates.typography, globalSettings) }}
+}
+
+%%SELECTOR%% .omsar-procurement-date-range i {
+  color: {{ design.dates.icon_color ?? '#999999' }};
+}
+
+{# Apply button #}
+%%SELECTOR%% .omsar-procurement-apply-button {
+  color: {{ design.apply_button.text_color ?? '#ffffff' }};
+  background-color: {{ design.apply_button.background_color ?? '#1a3e7b' }};
+  border-radius: {{ design.apply_button.border_radius.style ?? '25px' }};
+  {{ macros.typography(design.apply_button.typography, globalSettings) }}
+  {{ macros.spacing_padding_all(design.apply_button.padding) }}
+  {{ macros.spacing_margin_all(design.apply_button.margin) }}
+}
+
+{# Load more #}
+%%SELECTOR%% .omsar-procurement-load-more-btn {
+  background-color: {{ design.load_more.background_color ?? 'transparent' }};
+  color: {{ design.load_more.text_color ?? '#7db3e8' }};
+  border-color: {{ design.load_more.border_color ?? '#7db3e8' }};
+  border-width: {{ design.load_more.border_width.style ?? '2px' }};
+  border-style: solid;
+  border-radius: {{ design.load_more.border_radius.style ?? '24px' }};
+  {{ macros.spacing_padding_all(design.load_more.padding) }}
+  {{ macros.typography(design.load_more.typography, globalSettings) }}
+}
+
+%%SELECTOR%% .omsar-procurement-load-more-btn:hover:not(:disabled) {
+  background-color: {{ design.load_more.hover_background_color ?? '#7db3e8' }};
+  color: {{ design.load_more.hover_text_color ?? '#ffffff' }};
+  border-color: {{ design.load_more.hover_border_color ?? '#7db3e8' }};
+}
+
+%%SELECTOR%% .omsar-procurement-load-more-wrapper {
+  text-align: {{ design.load_more.wrapper_alignment ?? 'center' }};
+  {{ macros.spacing_margin_y(design.load_more.wrapper_margin) }}
+}

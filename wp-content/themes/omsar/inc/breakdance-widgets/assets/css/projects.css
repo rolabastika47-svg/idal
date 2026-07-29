@@ -1,0 +1,575 @@
+/* OMSAR Breakdance - Projects element (Style 4, matches elementor-style.css) */
+
+.omsar-bd-projects-widget,
+.omsar-projects-widget.omsar-bd-projects-widget {
+    width: 100%;
+    background: transparent;
+}
+
+.omsar-bd-projects-widget[dir="rtl"],
+.omsar-bd-projects-widget.omsar-bd-rtl {
+    direction: rtl;
+    text-align: right;
+}
+
+.omsar-bd-projects-widget[dir="rtl"] .omsar-style4-filters-container,
+.omsar-bd-projects-widget[dir="rtl"] .omsar-style4-filters-row,
+.omsar-bd-projects-widget.omsar-bd-rtl .omsar-style4-filters-container,
+.omsar-bd-projects-widget.omsar-bd-rtl .omsar-style4-filters-row {
+    direction: rtl;
+}
+
+.omsar-bd-projects-widget[dir="rtl"] .omsar-style4-filter-item,
+.omsar-bd-projects-widget.omsar-bd-rtl .omsar-style4-filter-item {
+    text-align: right;
+}
+
+.omsar-bd-projects-widget[dir="rtl"] .omsar-style4-filter-label,
+.omsar-bd-projects-widget.omsar-bd-rtl .omsar-style4-filter-label {
+    text-align: right;
+}
+
+.omsar-bd-projects-widget[dir="rtl"] .omsar-posts-search-input,
+.omsar-bd-projects-widget.omsar-bd-rtl .omsar-posts-search-input {
+    direction: rtl;
+    text-align: right;
+    padding: 10px 16px 10px 40px;
+}
+
+.omsar-bd-projects-widget[dir="rtl"] .omsar-style4-dropdown,
+.omsar-bd-projects-widget.omsar-bd-rtl .omsar-style4-dropdown {
+    direction: rtl;
+    text-align: right;
+    padding: 10px 16px 10px 40px;
+}
+
+/* RTL project cards */
+.omsar-bd-projects-widget .rtl-card .omsar-post-content,
+.omsar-bd-projects-widget[dir="rtl"] .omsar-post-card-style4 .omsar-post-content,
+.omsar-bd-projects-widget.omsar-bd-rtl .omsar-post-card-style4 .omsar-post-content {
+    text-align: right;
+}
+
+.omsar-bd-projects-widget .rtl-card .omsar-post-title,
+.omsar-bd-projects-widget .rtl-card .omsar-post-title a,
+.omsar-bd-projects-widget[dir="rtl"] .omsar-post-title,
+.omsar-bd-projects-widget[dir="rtl"] .omsar-post-title a,
+.omsar-bd-projects-widget.omsar-bd-rtl .omsar-post-title,
+.omsar-bd-projects-widget.omsar-bd-rtl .omsar-post-title a {
+    text-align: right;
+    direction: rtl;
+}
+
+.omsar-bd-projects-widget .rtl-card .omsar-post-excerpt,
+.omsar-bd-projects-widget[dir="rtl"] .omsar-post-excerpt,
+.omsar-bd-projects-widget.omsar-bd-rtl .omsar-post-excerpt {
+    text-align: right;
+    direction: rtl;
+}
+
+.omsar-bd-projects-widget .rtl-card .omsar-post-badge,
+.omsar-bd-projects-widget[dir="rtl"] .omsar-post-badge,
+.omsar-bd-projects-widget.omsar-bd-rtl .omsar-post-badge {
+    align-self: flex-start;
+    text-align: right;
+}
+
+.omsar-bd-projects-widget .rtl-card .omsar-post-read-more,
+.omsar-bd-projects-widget[dir="rtl"] .omsar-post-read-more,
+.omsar-bd-projects-widget.omsar-bd-rtl .omsar-post-read-more {
+    align-self: flex-start;
+    text-align: center;
+}
+
+.omsar-bd-projects-widget[dir="rtl"] .omsar-style4-no-results,
+.omsar-bd-projects-widget.omsar-bd-rtl .omsar-style4-no-results {
+    text-align: center;
+    direction: rtl;
+}
+
+.omsar-posts-search-wrapper-inline {
+    position: relative;
+    flex: 1;
+    min-width: 0;
+}
+
+.omsar-posts-search-wrapper-inline .omsar-posts-search-input {
+    width: 100%;
+    padding: 10px 40px 10px 16px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    font-size: 0.9375rem;
+    transition: border-color 0.3s ease;
+    box-sizing: border-box;
+}
+
+.omsar-posts-search-wrapper-inline .omsar-posts-search-input:focus {
+    outline: none;
+    border-color: #0073aa;
+}
+
+.omsar-posts-search-wrapper-inline .omsar-search-icon {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #6c757d;
+    pointer-events: none;
+    font-size: 1rem;
+}
+
+[dir="rtl"] .omsar-posts-search-wrapper-inline .omsar-search-icon {
+    right: auto;
+    left: 16px;
+}
+
+.omsar-posts-grid {
+    display: grid;
+    gap: 30px;
+    margin-top: 20px;
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    .omsar-posts-grid.style4 {
+        gap: 10px;
+    }
+}
+
+.omsar-posts-grid.style4 {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.omsar-card-clickable {
+    cursor: pointer;
+}
+
+.omsar-card-clickable .omsar-post-title a,
+.omsar-card-clickable .omsar-post-read-more {
+    pointer-events: none;
+}
+
+.omsar-post-card-style4 {
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background-size: cover;
+    background-position: center bottom;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: flex-end;
+}
+
+@media (max-width: 767px) {
+    .omsar-post-card-style4 {
+        min-height: 210px;
+    }
+}
+
+.omsar-post-card-style4::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(173, 216, 230, 0.4) 0%, rgba(255, 255, 255, 0.95) 100%);
+    z-index: 1;
+    opacity: 0.8;
+    pointer-events: none;
+}
+
+/* Breakdance: no default grey gradient wash on project cards */
+.omsar-bd-projects-widget .omsar-post-card-style4::before {
+    background: none !important;
+    opacity: 0 !important;
+}
+
+.omsar-post-card-style4:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+}
+
+.omsar-post-card-style4:hover::before {
+    opacity: 0.9;
+}
+
+.omsar-bd-projects-widget .omsar-post-card-style4:hover::before {
+    opacity: 0 !important;
+}
+
+.omsar-post-card-style4 .omsar-post-content {
+    position: relative;
+    z-index: 2;
+    padding: 30px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    flex-grow: 1;
+    min-height: 0;
+}
+
+.omsar-post-card-style4 .omsar-post-title {
+    margin: 0;
+    font-size: 17px;
+    font-weight: 700;
+    line-height: 1.3;
+    color: #1a1a1a;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.omsar-post-card-style4 .omsar-post-title a {
+    text-decoration: none;
+    color: #1a1a1a;
+    transition: color 0.3s ease;
+}
+
+.omsar-post-card-style4 .omsar-post-title a:hover {
+    color: #0073aa;
+}
+
+.omsar-post-badge {
+    display: inline-block;
+    padding: 3px 15px;
+    border: 1px solid #1a1a1a;
+    border-radius: 20px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    line-height: 1.4;
+    color: #1a1a1a;
+    background: transparent;
+    align-self: flex-start;
+    margin-bottom: 5px;
+}
+
+.omsar-post-excerpt {
+    margin: 0;
+    color: #1a1a1a;
+    font-size: 14px;
+    line-height: 1.6;
+    flex: 1;
+}
+
+.omsar-post-read-more {
+    display: inline-block;
+    padding: 12px 24px;
+    background-color: #1a1a1a;
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    line-height: 1.4;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    align-self: flex-start;
+    margin-top: 5px;
+}
+
+.omsar-post-read-more:hover {
+    background-color: #0073aa;
+    transform: translateY(-2px);
+    color: #ffffff;
+}
+
+.omsar-post-card-style4 .omsar-post-read-more {
+    background-color: #192D50;
+    border-radius: 50px;
+    padding: 10px 24px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #ffffff;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    border: none;
+    align-self: flex-start;
+    margin-top: 10px;
+}
+
+.omsar-post-card-style4 .omsar-post-read-more:hover {
+    background-color: #1a3d6b;
+    transform: translateY(-2px);
+    color: #ffffff;
+}
+
+.omsar-load-more-wrapper {
+    text-align: center;
+    margin-top: 40px;
+    padding: 20px 0;
+}
+
+.omsar-load-more-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 3px 18px;
+    background: #5693ff;
+    border-style: solid;
+    border-color: transparent;
+    border-width: 0;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    color: #ffffff;
+}
+
+.omsar-load-more-btn:hover {
+    background: #4a7cff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(86, 147, 255, 0.3);
+}
+
+.omsar-load-more-btn:disabled,
+.omsar-load-more-btn.loading {
+    opacity: 0.6;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.omsar-load-more-btn.loading::after {
+    content: '';
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border: 2px solid #000000;
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: omsar-bd-spin 0.6s linear infinite;
+    margin-left: 8px;
+}
+
+@keyframes omsar-bd-spin {
+    to { transform: rotate(360deg); }
+}
+
+.omsar-style4-filters-container {
+    margin-bottom: 30px;
+    padding: 0;
+}
+
+.omsar-style4-filters-row {
+    display: flex;
+    align-items: flex-end;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.omsar-style4-filter-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: 0 0 25%;
+    min-width: 200px;
+    max-width: 25%;
+}
+
+.omsar-style4-filter-item.omsar-search-filter-item {
+    flex: 0 0 25%;
+    min-width: 200px;
+    max-width: 25%;
+}
+
+.omsar-style4-filter-label {
+    font-weight: 700;
+    color: #1a1a1a;
+    font-size: 0.9375rem;
+    white-space: nowrap;
+    margin: 0;
+    flex-shrink: 0;
+}
+
+.omsar-style4-dropdown-input-wrapper {
+    position: relative;
+    flex: 1;
+    min-width: 0;
+}
+
+.omsar-style4-dropdown {
+    padding: 10px 40px 10px 16px;
+    width: 100%;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    font-size: 0.9375rem;
+    background-color: #fff;
+    background-image: none !important;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    cursor: pointer;
+    transition: border-color 0.3s ease;
+}
+
+.omsar-style4-dropdown:focus {
+    outline: none;
+    border-color: #0073aa;
+}
+
+.omsar-style4-dropdown-icon {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #6c757d;
+    pointer-events: none;
+    font-size: 0.875rem;
+}
+
+[dir="rtl"] .omsar-style4-dropdown-icon {
+    right: auto;
+    left: 16px;
+}
+
+.omsar-style4-no-results {
+    text-align: center;
+    padding: 40px 20px;
+    color: #6c757d;
+}
+
+@media (max-width: 1024px) {
+    .omsar-style4-filter-item,
+    .omsar-style4-filter-item.omsar-search-filter-item {
+        flex: 0 0 calc(50% - 10px);
+        min-width: calc(50% - 10px);
+        max-width: calc(50% - 10px);
+    }
+}
+
+@media (max-width: 767.98px) {
+    .omsar-bd-projects-widget .omsar-posts-grid.style4,
+    .omsar-bd-projects-widget .omsar-projects-grid {
+        grid-template-columns: 1fr !important;
+        gap: 20px;
+    }
+
+    .omsar-style4-filters-row {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .omsar-style4-filter-item,
+    .omsar-style4-filter-item.omsar-search-filter-item {
+        flex: 1 1 100% !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+        min-width: 100% !important;
+    }
+
+    .omsar-style4-filter-label {
+        width: 100%;
+        margin-bottom: 4px;
+    }
+
+    .omsar-posts-search-wrapper-inline,
+    .omsar-style4-dropdown-input-wrapper {
+        width: 100%;
+    }
+
+    .omsar-post-card-style4 .omsar-post-content {
+        padding: 20px;
+        gap: 12px;
+    }
+
+    .omsar-post-card-style4 .omsar-post-title {
+        font-size: 1.375rem;
+    }
+
+    .omsar-post-excerpt {
+        font-size: 0.9375rem;
+    }
+
+    .omsar-post-read-more {
+        padding: 10px 20px;
+        font-size: 0.875rem;
+    }
+}
+
+@media (max-width: 991.98px) {
+    .omsar-post-card-style4 .omsar-post-content {
+        padding: 25px;
+    }
+}
+
+/* Theme fonts — LTR: Inter, RTL/Arabic: Almarai (default) */
+.omsar-bd-projects-widget .omsar-post-content,
+.omsar-bd-projects-widget .omsar-post-title,
+.omsar-bd-projects-widget .omsar-post-title a,
+.omsar-bd-projects-widget .omsar-post-excerpt,
+.omsar-bd-projects-widget .omsar-post-badge,
+.omsar-bd-projects-widget .omsar-post-read-more,
+.omsar-bd-projects-widget .omsar-load-more-btn,
+.omsar-bd-projects-widget .omsar-style4-filter-label,
+.omsar-bd-projects-widget .omsar-posts-search-input,
+.omsar-bd-projects-widget .omsar-style4-dropdown,
+.omsar-bd-projects-widget .omsar-style4-no-results,
+.omsar-bd-projects-widget .omsar-style4-no-results p {
+    font-family: var(--font-main, 'Inter', sans-serif) !important;
+}
+
+html[dir="rtl"] .omsar-bd-projects-widget,
+html[dir="rtl"] .omsar-projects-widget.omsar-bd-projects-widget,
+.omsar-bd-projects-widget[dir="rtl"],
+.omsar-bd-projects-widget.omsar-bd-rtl {
+    font-family: 'Almarai', sans-serif !important;
+}
+
+html[dir="rtl"] .omsar-bd-projects-widget .omsar-post-content,
+html[dir="rtl"] .omsar-bd-projects-widget .omsar-post-card-style4 .omsar-post-title,
+html[dir="rtl"] .omsar-bd-projects-widget .omsar-post-card-style4 .omsar-post-title a,
+html[dir="rtl"] .omsar-bd-projects-widget .omsar-post-card-style4 .omsar-post-excerpt,
+html[dir="rtl"] .omsar-bd-projects-widget .omsar-post-card-style4 .omsar-post-badge,
+html[dir="rtl"] .omsar-bd-projects-widget .omsar-post-card-style4 .omsar-post-read-more,
+html[dir="rtl"] .omsar-bd-projects-widget .omsar-post-title,
+html[dir="rtl"] .omsar-bd-projects-widget .omsar-post-title a,
+html[dir="rtl"] .omsar-bd-projects-widget .omsar-post-excerpt,
+html[dir="rtl"] .omsar-bd-projects-widget .omsar-post-badge,
+html[dir="rtl"] .omsar-bd-projects-widget .omsar-post-read-more,
+html[dir="rtl"] .omsar-bd-projects-widget .omsar-load-more-btn,
+html[dir="rtl"] .omsar-bd-projects-widget .omsar-style4-filter-label,
+html[dir="rtl"] .omsar-bd-projects-widget .omsar-posts-search-input,
+html[dir="rtl"] .omsar-bd-projects-widget .omsar-style4-dropdown,
+html[dir="rtl"] .omsar-bd-projects-widget .omsar-style4-no-results,
+html[dir="rtl"] .omsar-bd-projects-widget .omsar-style4-no-results p,
+.omsar-bd-projects-widget[dir="rtl"] .omsar-post-content,
+.omsar-bd-projects-widget[dir="rtl"] .omsar-post-card-style4 .omsar-post-title,
+.omsar-bd-projects-widget[dir="rtl"] .omsar-post-card-style4 .omsar-post-title a,
+.omsar-bd-projects-widget[dir="rtl"] .omsar-post-card-style4 .omsar-post-excerpt,
+.omsar-bd-projects-widget[dir="rtl"] .omsar-post-card-style4 .omsar-post-badge,
+.omsar-bd-projects-widget[dir="rtl"] .omsar-post-card-style4 .omsar-post-read-more,
+.omsar-bd-projects-widget[dir="rtl"] .omsar-post-title,
+.omsar-bd-projects-widget[dir="rtl"] .omsar-post-title a,
+.omsar-bd-projects-widget[dir="rtl"] .omsar-post-excerpt,
+.omsar-bd-projects-widget[dir="rtl"] .omsar-post-badge,
+.omsar-bd-projects-widget[dir="rtl"] .omsar-post-read-more,
+.omsar-bd-projects-widget[dir="rtl"] .omsar-load-more-btn,
+.omsar-bd-projects-widget[dir="rtl"] .omsar-style4-filter-label,
+.omsar-bd-projects-widget[dir="rtl"] .omsar-posts-search-input,
+.omsar-bd-projects-widget[dir="rtl"] .omsar-style4-dropdown,
+.omsar-bd-projects-widget.omsar-bd-rtl .omsar-post-content,
+.omsar-bd-projects-widget.omsar-bd-rtl .omsar-post-card-style4 .omsar-post-title,
+.omsar-bd-projects-widget.omsar-bd-rtl .omsar-post-card-style4 .omsar-post-title a,
+.omsar-bd-projects-widget.omsar-bd-rtl .omsar-post-card-style4 .omsar-post-excerpt,
+.omsar-bd-projects-widget.omsar-bd-rtl .omsar-post-card-style4 .omsar-post-badge,
+.omsar-bd-projects-widget.omsar-bd-rtl .omsar-post-card-style4 .omsar-post-read-more,
+.omsar-bd-projects-widget.omsar-bd-rtl .omsar-post-title,
+.omsar-bd-projects-widget.omsar-bd-rtl .omsar-post-title a,
+.omsar-bd-projects-widget.omsar-bd-rtl .omsar-post-excerpt,
+.omsar-bd-projects-widget.omsar-bd-rtl .omsar-post-badge,
+.omsar-bd-projects-widget.omsar-bd-rtl .omsar-post-read-more,
+.omsar-bd-projects-widget.omsar-bd-rtl .omsar-load-more-btn,
+.omsar-bd-projects-widget.omsar-bd-rtl .omsar-style4-filter-label,
+.omsar-bd-projects-widget.omsar-bd-rtl .omsar-posts-search-input,
+.omsar-bd-projects-widget.omsar-bd-rtl .omsar-style4-dropdown {
+    font-family: 'Almarai', sans-serif !important;
+}
+
+html[dir="rtl"] .omsar-bd-projects-widget .omsar-posts-search-input::placeholder,
+.omsar-bd-projects-widget[dir="rtl"] .omsar-posts-search-input::placeholder,
+.omsar-bd-projects-widget.omsar-bd-rtl .omsar-posts-search-input::placeholder {
+    font-family: 'Almarai', sans-serif !important;
+}

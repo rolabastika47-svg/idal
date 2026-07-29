@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 520" role="img" aria-labelledby="title desc">
+  <title id="title">IDAL logo</title>
+  <desc id="desc">IDAL wordmark with the full Investment Development Authority of Lebanon descriptor.</desc>
+  <defs>
+    <linearGradient id="dmark" x1="260" x2="560" y1="140" y2="140" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#0fd789"/>
+      <stop offset=".48" stop-color="#08a9d9"/>
+      <stop offset="1" stop-color="#064bff"/>
+    </linearGradient>
+  </defs>
+  <g fill="#000">
+    <rect x="118" y="142" width="52" height="238"/>
+    <path d="M622 380h-64l151-238h58l151 238h-66l-34-58H656l-34 58zm63-111h103l-52-91-51 91z"/>
+    <path d="M954 142h52v191h181v47H954z"/>
+  </g>
+  <path d="M262 142h211l92 119-92 119H262V142zm52 46v146h132l56-73-56-73H314z" fill="url(#dmark)"/>
+  <g fill="#000" font-family="Arial, Helvetica, sans-serif" font-size="42" letter-spacing="15">
+    <text x="1234" y="200">INVESTMENT</text>
+    <text x="1234" y="255">DEVELOPMENT</text>
+    <text x="1234" y="310">AUTHORITY</text>
+    <text x="1234" y="365">OF LEBANON</text>
+  </g>
+</svg>

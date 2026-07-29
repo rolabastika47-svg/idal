@@ -1,0 +1,54 @@
+{% set icon_bg_type = design.icon.background_type ?? 'gradient' %}
+{% set icon_size = design.icon.size.style ?? '60px' %}
+
+{# Icon #}
+%%SELECTOR%% .omsar-stats-icon {
+  width: {{ icon_size }};
+  height: {{ icon_size }};
+  border-radius: {{ design.icon.border_radius.style ?? '50%' }};
+  margin-bottom: {{ design.icon.spacing.style ?? '20px' }};
+  {% if icon_bg_type == 'gradient' %}
+  background: linear-gradient(135deg, {{ design.icon.gradient_from ?? '#7c3aed' }}, {{ design.icon.gradient_to ?? '#6366f1' }});
+  {% elseif icon_bg_type == 'color' %}
+  background-color: {{ design.icon.background_color ?? '#7c3aed' }};
+  {% else %}
+  background: none;
+  {% endif %}
+}
+
+%%SELECTOR%% .omsar-stats-icon img {
+  width: {{ icon_size }};
+  height: {{ icon_size }};
+}
+
+%%SELECTOR%% .omsar-stats-icon i {
+  font-size: {{ icon_size }};
+  color: {{ design.icon.color ?? '#4c1d95' }};
+}
+
+{# Number #}
+%%SELECTOR%% .omsar-stats-number {
+  color: {{ design.number.color ?? '#1f2937' }};
+  margin-bottom: {{ design.number.spacing.style ?? '12px' }};
+  {{ macros.typography(design.number.typography, globalSettings) }}
+}
+
+{# Label #}
+%%SELECTOR%% .omsar-stats-label {
+  color: {{ design.label.color ?? '#6b7280' }};
+  {{ macros.typography(design.label.typography, globalSettings) }}
+}
+
+{# Card #}
+%%SELECTOR%% .omsar-stats-counter-item {
+  background-color: {{ design.card.background_color ?? '#ffffff' }};
+  border-radius: {{ design.card.border_radius.style ?? '12px' }};
+  max-width: {{ design.spacing.card_max_width.style ?? '240px' }};
+  {{ macros.spacing_padding_all(design.card.padding) }}
+  {{ macros.borders(design.card.borders) }}
+}
+
+{# Grid spacing #}
+%%SELECTOR%% .omsar-stats-counter-grid {
+  gap: {{ design.spacing.items_gap.style ?? '30px' }};
+}

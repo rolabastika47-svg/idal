@@ -1,0 +1,158 @@
+{# Tabs #}
+%%SELECTOR%% .omsar-taxonomy-tabs {
+  justify-content: {{ design.tabs.tabs_alignment ?? 'flex-start' }};
+}
+
+%%SELECTOR%% .omsar-taxonomy-tabs .nav-link:not(.active) {
+  color: {{ design.tabs.tab_inactive_text_color ?? '#21759b' }};
+  background-color: {{ design.tabs.tab_inactive_bg_color ?? '#e0e2e6' }};
+  border-color: {{ design.tabs.tab_inactive_border_color ?? 'transparent' }};
+  border-width: {{ design.tabs.tab_inactive_border_width.style ?? '0px' }};
+  border-style: solid;
+  border-radius: {{ design.tabs.tab_inactive_border_radius.style ?? '50px' }};
+}
+
+%%SELECTOR%% .omsar-taxonomy-tabs .nav-link.active {
+  color: {{ design.tabs.tab_active_text_color ?? '#ffffff' }};
+  background-color: {{ design.tabs.tab_active_bg_color ?? '#5693ff' }};
+  border-color: {{ design.tabs.tab_active_border_color ?? 'transparent' }};
+  border-width: {{ design.tabs.tab_active_border_width.style ?? '0px' }};
+  border-style: solid;
+  border-radius: {{ design.tabs.tab_active_border_radius.style ?? '50px' }};
+  box-shadow: 0 4px 12px {{ design.tabs.tab_active_shadow_color ?? 'rgba(86, 147, 255, 0.3)' }};
+}
+
+%%SELECTOR%% .omsar-taxonomy-tabs .nav-link:hover:not(.active) {
+  color: {{ design.tabs.tab_hover_text_color ?? '#ffffff' }};
+  background-color: {{ design.tabs.tab_hover_bg_color ?? '#4a7cff' }};
+  border-color: {{ design.tabs.tab_hover_border_color ?? 'transparent' }};
+}
+
+{# Search #}
+%%SELECTOR%% .omsar-posts-search-wrapper {
+  max-width: {{ design.search.search_width.style ?? '400px' }};
+}
+
+%%SELECTOR%% .omsar-posts-search-wrapper.omsar-search-align-left {
+  display: inline-block !important;
+  margin-left: 0 !important;
+  margin-right: auto !important;
+  text-align: left !important;
+}
+
+%%SELECTOR%% .omsar-posts-search-wrapper.omsar-search-align-center {
+  display: block !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  text-align: center !important;
+}
+
+%%SELECTOR%% .omsar-posts-search-wrapper.omsar-search-align-right {
+  display: block !important;
+  margin-left: auto !important;
+  margin-right: 0 !important;
+  text-align: right !important;
+}
+
+%%SELECTOR%% .omsar-posts-search-input {
+  border-color: {{ design.search.search_border_color ?? '#e0e2e6' }};
+}
+
+%%SELECTOR%% .omsar-posts-search-input:focus {
+  border-color: {{ design.search.search_border_color_focus ?? '#5693ff' }};
+}
+
+%%SELECTOR%% .omsar-search-icon {
+  color: {{ design.search.search_icon_color ?? '#999999' }};
+}
+
+{# Grid columns — Content > Columns is primary; Design > Posts Per Row overrides when set #}
+{% set posts_per_row = content.content.columns ?? design.posts.posts_per_row ?? '3' %}
+{% set posts_per_row_style2 = content.content.columns ?? design.posts.posts_per_row_style2 ?? '1' %}
+{% set image_fit = design.posts.image_fit ?? 'cover' %}
+
+%%SELECTOR%% .omsar-posts-grid.style1,
+%%SELECTOR%% .omsar-posts-grid.style3,
+%%SELECTOR%% .omsar-posts-grid.style5 {
+  grid-template-columns: repeat({{ posts_per_row }}, 1fr);
+}
+
+%%SELECTOR%% .omsar-posts-grid.style2 {
+  grid-template-columns: repeat({{ posts_per_row_style2 }}, 1fr) !important;
+}
+
+%%SELECTOR%% .omsar-post-image img,
+%%SELECTOR%% .omsar-post-image-header img {
+  object-fit: {{ image_fit }};
+}
+
+%%SELECTOR%% .omsar-post-card-style5-overlay {
+  background-size: {{ image_fit }};
+}
+
+{# Load more #}
+%%SELECTOR%% .omsar-load-more-btn {
+  background-color: {{ design.load_more.background_color ?? '#5693ff' }};
+  color: {{ design.load_more.text_color ?? '#ffffff' }};
+  border-color: {{ design.load_more.border_color ?? 'transparent' }};
+  border-width: {{ design.load_more.border_width.style ?? '0px' }};
+  border-style: solid;
+  {{ macros.spacing_padding_all(design.load_more.padding) }}
+  {{ macros.typography(design.load_more.typography, globalSettings) }}
+  {% if design.load_more.border_radius.style is defined %}
+  border-radius: {{ design.load_more.border_radius.style }};
+  {% else %}
+  border-radius: 50px;
+  {% endif %}
+}
+
+%%SELECTOR%% .omsar-load-more-btn:hover:not(:disabled) {
+  background-color: {{ design.load_more.hover_background_color ?? '#4a7cff' }};
+  color: {{ design.load_more.hover_text_color ?? '#ffffff' }};
+  border-color: {{ design.load_more.hover_border_color ?? 'transparent' }};
+}
+
+%%SELECTOR%% .omsar-load-more-wrapper {
+  text-align: {{ design.load_more.wrapper_alignment ?? 'center' }};
+  {{ macros.spacing_margin_y(design.load_more.wrapper_margin) }}
+}
+
+{# Style 5 overlay colors #}
+%%SELECTOR%% .omsar-post-card-style5-overlay-content .omsar-post-title,
+%%SELECTOR%% .omsar-post-card-style5-overlay-content .omsar-post-title a {
+  color: {{ design.style5.style5_title_color ?? '#ffffff' }};
+}
+
+%%SELECTOR%% .omsar-post-card-style5-overlay-content .omsar-post-excerpt {
+  color: {{ design.style5.style5_excerpt_color ?? 'rgba(255, 255, 255, 0.95)' }};
+}
+
+%%SELECTOR%% .omsar-post-card-style5-overlay-content .omsar-post-category-tag {
+  background-color: {{ design.style5.style5_category_bg_color ?? 'rgba(255, 255, 255, 0.2)' }};
+  color: {{ design.style5.style5_category_text_color ?? '#ffffff' }};
+}
+
+{% if design.style5.style5_normal_title_color %}
+%%SELECTOR%% .omsar-post-card-style5 .omsar-post-content .omsar-post-title,
+%%SELECTOR%% .omsar-post-card-style5 .omsar-post-content .omsar-post-title a {
+  color: {{ design.style5.style5_normal_title_color }};
+}
+{% endif %}
+
+{% if design.style5.style5_normal_excerpt_color %}
+%%SELECTOR%% .omsar-post-card-style5 .omsar-post-content .omsar-post-excerpt {
+  color: {{ design.style5.style5_normal_excerpt_color }};
+}
+{% endif %}
+
+{% if design.style5.style5_normal_category_bg_color %}
+%%SELECTOR%% .omsar-post-card-style5 .omsar-post-content .omsar-post-category-tag {
+  background-color: {{ design.style5.style5_normal_category_bg_color }};
+}
+{% endif %}
+
+{% if design.style5.style5_normal_category_text_color %}
+%%SELECTOR%% .omsar-post-card-style5 .omsar-post-content .omsar-post-category-tag {
+  color: {{ design.style5.style5_normal_category_text_color }};
+}
+{% endif %}

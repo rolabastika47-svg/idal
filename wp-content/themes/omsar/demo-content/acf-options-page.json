@@ -1,0 +1,71 @@
+{
+    "logo": 1931,
+    "contact_text": "CONTACT US",
+    "contact_text_arabic": "اتصل بنا",
+    "contact_details": [
+        {
+            "social_icon": 285,
+            "title": "Address",
+            "title_ar": "العنوان",
+            "value": "Beirut, Lebanon",
+            "value_ar": "بيروت، لبنان",
+            "link": "#"
+        },
+        {
+            "social_icon": 286,
+            "title": "Email",
+            "title_ar": "البريد الإلكتروني",
+            "value": "info@omsar.gov.lb",
+            "value_ar": "info@omsar.gov.lb",
+            "link": "#"
+        },
+        {
+            "social_icon": 287,
+            "title": "Telephone",
+            "title_ar": "الهاتف",
+            "value": "+ (961) 1 371505",
+            "value_ar": "3715051 (961) +",
+            "link": "#"
+        }
+    ],
+    "social_text": "FOLLOW US",
+    "social_text_arabic": "تابعنا",
+    "social_media": [
+        {
+            "icon": 147,
+            "social_link": "#"
+        },
+        {
+            "icon": 148,
+            "social_link": "#"
+        },
+        {
+            "icon": 149,
+            "social_link": "#"
+        },
+        {
+            "icon": 150,
+            "social_link": "#"
+        }
+    ],
+    "copy_right_text": "Office Of The Minister Of State For Administrative Reform 2025 ©",
+    "copy_right_text_ar": "مكتب وزير الدولة لشؤون الإصلاح الإداري 2026©",
+    "copy_right_designed_by": "Designed & Developed By IDS",
+    "copy_right_designed_by_ar": "تم التصميم والتطوير بواسطة IDS",
+    "homepage_pattern": 1450,
+    "homepage_pattern_ar": 1451,
+    "inner_page_pattern": 1452,
+    "inner_page_pattern_ar": 1453,
+    "footer_pattern": 1593,
+    "footer_pattern_ar": 1617,
+    "footer_main_color": "rgba(173, 202, 255, 1) 0%",
+    "footer_shadow_color": "rgba(173, 202, 255, 0) 100%",
+    "sidebar_dark_color": "#b8d2ff",
+    "sidebar_light_color": "#f4f8ff",
+    "sidebar_active_dark_color": "#5693ff",
+    "sidebar_active_light_color": "#d7e5ff",
+    "sidebar_sub_active_dark_color": " rgba(86, 147, 255, 0.3)",
+    "sidebar_sub_active_light_color": "rgba(215, 229, 255, 0.3)",
+    "map_location": "<iframe src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d26496.13582263592!2d35.48368274937676!3d33.8892165859779!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x151f17215880a78f%3A0x729182bae99836b4!2sBeirut!5e0!3m2!1sen!2slb!4v1765451166152!5m2!1sen!2slb\" class=\"contact-map\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\" referrerpolicy=\"no-referrer-when-downgrade\"></iframe>",
+    "recipient_email": "f.hammoud@ids.com.lb"
+}

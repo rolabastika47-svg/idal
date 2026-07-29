@@ -1,0 +1,220 @@
+/* OMSAR Breakdance - List Posts by Taxonomy (uses theme elementor-style.css for card/tab styles) */
+
+.omsar-posts-by-taxonomy-element,
+.omsar-bd-posts-by-taxonomy-widget,
+.omsar-posts-by-taxonomy-widget.omsar-bd-posts-by-taxonomy-widget {
+    background: transparent !important;
+    background-color: transparent !important;
+}
+
+.omsar-bd-posts-by-taxonomy-widget .omsar-posts-grid,
+.omsar-bd-posts-by-taxonomy-widget .omsar-posts-search-wrapper,
+.omsar-bd-posts-by-taxonomy-widget .omsar-taxonomy-tabs-nav,
+.omsar-bd-posts-by-taxonomy-widget .omsar-taxonomy-tabs-content,
+.omsar-bd-posts-by-taxonomy-widget .tab-content,
+.omsar-bd-posts-by-taxonomy-widget .omsar-load-more-wrapper {
+    background: transparent !important;
+    background-color: transparent !important;
+}
+
+/* Theme image placeholders use #f5f5f5 — keep cards clean in Breakdance */
+.omsar-bd-posts-by-taxonomy-widget .omsar-post-image,
+.omsar-bd-posts-by-taxonomy-widget .omsar-post-card-style1 .omsar-post-image,
+.omsar-bd-posts-by-taxonomy-widget .omsar-post-card-style2 .omsar-post-image,
+.omsar-bd-posts-by-taxonomy-widget .omsar-post-card-style3 .omsar-post-image {
+    background: transparent !important;
+}
+
+/* Style 4: no default grey gradient wash on cards */
+.omsar-bd-posts-by-taxonomy-widget .omsar-post-card-style4::before {
+    background: none !important;
+    opacity: 0 !important;
+}
+
+.omsar-bd-posts-by-taxonomy-widget .omsar-post-card-style4:hover::before {
+    opacity: 0 !important;
+}
+
+/* Search — icon anchored to input field, not label + input wrapper */
+.omsar-bd-posts-by-taxonomy-widget .omsar-posts-search-wrapper {
+    max-width: 400px;
+    width: 100%;
+}
+
+.omsar-bd-posts-by-taxonomy-widget .omsar-posts-search-field {
+    position: relative;
+    width: 100%;
+}
+
+.omsar-bd-posts-by-taxonomy-widget .omsar-posts-search-field .omsar-posts-search-input {
+    width: 100%;
+    display: block;
+    padding: 12px 45px 12px 20px;
+    border: 2px solid #e0e2e6;
+    border-radius: 50px;
+    background: #ffffff;
+    font-size: 0.9375rem;
+    line-height: 1.4;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    box-sizing: border-box;
+}
+
+.omsar-bd-posts-by-taxonomy-widget .omsar-posts-search-field .omsar-posts-search-input:focus {
+    outline: none;
+    border-color: #5693ff;
+    box-shadow: 0 0 0 3px rgba(86, 147, 255, 0.1);
+}
+
+.omsar-bd-posts-by-taxonomy-widget .omsar-posts-search-field .omsar-search-icon {
+    position: absolute;
+    right: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #6c757d;
+    pointer-events: none;
+    font-size: 1rem;
+    line-height: 1;
+}
+
+.omsar-bd-posts-by-taxonomy-widget[dir="rtl"] .omsar-posts-search-field .omsar-posts-search-input,
+html[dir="rtl"] .omsar-bd-posts-by-taxonomy-widget .omsar-posts-search-field .omsar-posts-search-input,
+.omsar-bd-posts-by-taxonomy-widget.omsar-bd-rtl .omsar-posts-search-field .omsar-posts-search-input {
+    padding: 12px 20px 12px 45px;
+    direction: rtl;
+    text-align: right;
+}
+
+.omsar-bd-posts-by-taxonomy-widget[dir="rtl"] .omsar-posts-search-field .omsar-search-icon,
+html[dir="rtl"] .omsar-bd-posts-by-taxonomy-widget .omsar-posts-search-field .omsar-search-icon,
+.omsar-bd-posts-by-taxonomy-widget.omsar-bd-rtl .omsar-posts-search-field .omsar-search-icon {
+    right: auto;
+    left: 18px;
+}
+
+/* RTL layout */
+.omsar-bd-posts-by-taxonomy-widget[dir="rtl"],
+.omsar-bd-posts-by-taxonomy-widget.omsar-bd-rtl {
+    direction: rtl;
+    text-align: right;
+}
+
+.omsar-bd-posts-by-taxonomy-widget[dir="rtl"] .omsar-posts-search-label,
+.omsar-bd-posts-by-taxonomy-widget.omsar-bd-rtl .omsar-posts-search-label {
+    text-align: right;
+}
+
+/* Theme align-left uses physical left — flip to start side in RTL */
+.omsar-bd-posts-by-taxonomy-widget[dir="rtl"] .omsar-posts-search-wrapper.omsar-search-align-left,
+.omsar-bd-posts-by-taxonomy-widget.omsar-bd-rtl .omsar-posts-search-wrapper.omsar-search-align-left {
+    display: block !important;
+    margin-left: auto !important;
+    margin-right: 0 !important;
+    text-align: right !important;
+}
+
+.omsar-bd-posts-by-taxonomy-widget[dir="rtl"] .omsar-posts-search-wrapper.omsar-search-align-right,
+.omsar-bd-posts-by-taxonomy-widget.omsar-bd-rtl .omsar-posts-search-wrapper.omsar-search-align-right {
+    display: inline-block !important;
+    margin-left: 0 !important;
+    margin-right: auto !important;
+    text-align: right !important;
+}
+
+.omsar-bd-posts-by-taxonomy-widget[dir="rtl"] .omsar-taxonomy-tabs,
+.omsar-bd-posts-by-taxonomy-widget.omsar-bd-rtl .omsar-taxonomy-tabs {
+    direction: rtl;
+}
+
+.omsar-bd-posts-by-taxonomy-widget[dir="rtl"] .omsar-post-card .omsar-post-content,
+.omsar-bd-posts-by-taxonomy-widget.omsar-bd-rtl .omsar-post-card .omsar-post-content {
+    text-align: right;
+}
+
+.omsar-bd-posts-by-taxonomy-widget[dir="rtl"] .omsar-post-title,
+.omsar-bd-posts-by-taxonomy-widget[dir="rtl"] .omsar-post-title a,
+.omsar-bd-posts-by-taxonomy-widget.omsar-bd-rtl .omsar-post-title,
+.omsar-bd-posts-by-taxonomy-widget.omsar-bd-rtl .omsar-post-title a {
+    text-align: right;
+    direction: rtl;
+}
+
+.omsar-bd-posts-by-taxonomy-widget[dir="rtl"] .omsar-post-date,
+.omsar-bd-posts-by-taxonomy-widget.omsar-bd-rtl .omsar-post-date {
+    direction: rtl;
+    justify-content: flex-start;
+}
+
+.omsar-bd-posts-by-taxonomy-widget[dir="rtl"] .omsar-post-pdfs,
+.omsar-bd-posts-by-taxonomy-widget.omsar-bd-rtl .omsar-post-pdfs {
+    text-align: right;
+    direction: rtl;
+}
+
+.omsar-bd-posts-by-taxonomy-widget[dir="rtl"] .omsar-post-pdfs strong,
+.omsar-bd-posts-by-taxonomy-widget.omsar-bd-rtl .omsar-post-pdfs strong {
+    text-align: right;
+}
+
+.omsar-bd-posts-by-taxonomy-widget[dir="rtl"] .pdf-list a,
+.omsar-bd-posts-by-taxonomy-widget[dir="rtl"] .pdf-list .document-link,
+.omsar-bd-posts-by-taxonomy-widget.omsar-bd-rtl .pdf-list a,
+.omsar-bd-posts-by-taxonomy-widget.omsar-bd-rtl .pdf-list .document-link {
+    direction: rtl;
+    justify-content: flex-start;
+    text-align: right;
+}
+
+.omsar-bd-posts-by-taxonomy-widget[dir="rtl"] .pdf-list i,
+.omsar-bd-posts-by-taxonomy-widget[dir="rtl"] .pdf-list .document-link i,
+.omsar-bd-posts-by-taxonomy-widget.omsar-bd-rtl .pdf-list i,
+.omsar-bd-posts-by-taxonomy-widget.omsar-bd-rtl .pdf-list .document-link i {
+    margin-right: 0;
+    margin-left: 8px;
+}
+
+.omsar-bd-posts-by-taxonomy-widget[dir="rtl"] .omsar-load-more-wrapper,
+.omsar-bd-posts-by-taxonomy-widget.omsar-bd-rtl .omsar-load-more-wrapper {
+    direction: rtl;
+}
+
+/* Respect Content > Columns — overrides theme defaults and Breakdance css.twig (incl. style2 !important) */
+@media (min-width: 768px) {
+    .omsar-bd-posts-by-taxonomy-widget .omsar-posts-grid[data-style5-side-layout="1"] {
+        grid-template-columns: 1fr !important;
+    }
+
+    .omsar-bd-posts-by-taxonomy-widget .omsar-posts-grid:not([data-style5-side-layout="1"]) {
+        grid-template-columns: repeat(var(--omsar-grid-columns, 3), 1fr) !important;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .omsar-bd-posts-by-taxonomy-widget .omsar-posts-grid {
+        grid-template-columns: 1fr !important;
+    }
+}
+
+/* Elementor widget on Arabic pages (no omsar-bd-rtl class on wrapper) */
+html[dir="rtl"] .omsar-posts-by-taxonomy-widget:not(.omsar-bd-posts-by-taxonomy-widget) {
+    direction: rtl;
+    text-align: right;
+}
+
+html[dir="rtl"] .omsar-posts-by-taxonomy-widget:not(.omsar-bd-posts-by-taxonomy-widget) .omsar-posts-search-wrapper.omsar-search-align-left {
+    display: block !important;
+    margin-left: auto !important;
+    margin-right: 0 !important;
+    text-align: right !important;
+}
+
+html[dir="rtl"] .omsar-posts-by-taxonomy-widget:not(.omsar-bd-posts-by-taxonomy-widget) .omsar-post-pdfs,
+html[dir="rtl"] .omsar-posts-by-taxonomy-widget:not(.omsar-bd-posts-by-taxonomy-widget) .omsar-post-pdfs strong,
+html[dir="rtl"] .omsar-posts-by-taxonomy-widget:not(.omsar-bd-posts-by-taxonomy-widget) .pdf-list .document-link {
+    text-align: right;
+    direction: rtl;
+}
+
+html[dir="rtl"] .omsar-posts-by-taxonomy-widget:not(.omsar-bd-posts-by-taxonomy-widget) .pdf-list .document-link i {
+    margin-right: 0;
+    margin-left: 8px;
+}

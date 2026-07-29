@@ -1,0 +1,8 @@
+/* Structural defaults — design tab controls css.twig */
+%%SELECTOR%% {
+  background-color: transparent;
+}
+
+%%SELECTOR%% .omsar-static-card-list-wrapper {
+  width: 100%;
+}

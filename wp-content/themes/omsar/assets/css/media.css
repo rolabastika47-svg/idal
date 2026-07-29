@@ -1,0 +1,295 @@
+/* ------------------------------------------ */
+/*              Media Page Section            */
+/* ------------------------------------------ */
+.media-page-section {
+    /* padding-top: 40px; */
+    padding-bottom: 60px;
+}
+
+/* Media Filter Dropdowns */
+.media-filters-row {
+    margin-bottom: 30px;
+}
+
+.media-filter-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.media-filter-label {
+    font-weight: 700;
+    font-size: 14px;
+    color: #000000;
+    margin-bottom: 8px;
+}
+
+.media-filter-select {
+    border: 1px solid #000000;
+    border-radius: 20px;
+    padding: 8px 12px;
+    font-size: 14px;
+    height: 40px;
+    background-color: #ffffff;
+    color: #999999;
+    width: 200px;
+    cursor: pointer;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath fill='none' stroke='%23333' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' d='M1 1l4 4 4-4'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    padding-right: 35px;
+}
+
+.media-filter-select:hover {
+    background-color: #ffffff;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath fill='none' stroke='%23333' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' d='M1 1l4 4 4-4'/%3E%3C/svg%3E");
+}
+
+.media-filter-select:focus {
+    background-color: #ffffff;
+}
+
+.media-filter-select option {
+    color: #000000;
+}
+
+.media-filter-select:not(:focus):invalid {
+    color: #999999;
+}
+
+/* .media-filter-select:focus {
+    border-color: #6EA8FE;
+    box-shadow: 0 0 0 0.2rem rgba(110, 168, 254, 0.25);
+    color: #000000;
+    outline: none;
+    background-color: #ffffff;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath fill='none' stroke='%23333' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' d='M1 1l4 4 4-4'/%3E%3C/svg%3E");
+} */
+
+.media-filter-select:not([value=""]):not([value=""]) {
+    color: #000000;
+}
+
+/* Style for default option to show light grey */
+.media-filter-select option:first-child {
+    color: #999999;
+}
+
+/* Responsive adjustments for media filters */
+@media (max-width: 767.98px) {
+    .media-filters-row {
+        margin-bottom: 24px;
+    }
+    
+    /* .media-filters-row .d-flex {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px !important;
+    }
+     */
+    .media-filter-select {
+        width: 100%;
+        max-width: 300px;
+    }
+}
+
+
+/* News Card Link - Makes entire card clickable */
+.news-card-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    width: 100%;
+    height: 100%;
+}
+
+.news-card-link:hover {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* News Cards - Using same styling as news-carousel */
+.media-page-section .news-card {
+    position: relative;
+    height: 293.78px;
+    border-radius: 20px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+
+/* Background image layer for zoom effect */
+.media-page-section .news-card::before {
+    content: '';
+    position: absolute;
+    top: -5%;
+    left: -5%;
+    width: 110%;
+    height: 110%;
+    background-image: inherit;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: 0;
+    transform: scale(1);
+    transition: transform 0.3s ease;
+    pointer-events: none;
+}
+
+/* Zoom effect on hover */
+.media-page-section .news-card:hover::before {
+    transform: scale(1.2);
+}
+
+.media-page-section .news-card:hover {
+    transform: translateY(-5px);
+}
+
+/* Upcoming Badge */
+.news-badge {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background-color: #ffffff;
+    color: #000000;
+    padding: 2px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    z-index: 3;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Position all content at the bottom */
+.media-page-section .news-content {
+    justify-content: flex-end;
+}
+
+.media-page-section .news-title {
+    margin-bottom: 16px;
+    padding-top: 0 !important;
+    font-size: 18px !important;
+}
+
+.media-page-section .news-date {
+    margin-bottom: 12px;
+}
+.media-page-section .news-card .news-content .btn {
+    padding: 2px;
+}
+/* View All Projects Button */
+.btn-load-more-projects {
+    background-color: #192D50;
+    color: #ffffff;
+    border: none;
+    border-radius: 37px;
+    padding: 5px 20px;
+    font-weight: 500;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-load-more-projects:hover {
+    background-color: #333333;
+    color: #ffffff;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 991.98px) {
+    .media-page-section .news-card {
+        height: 350px;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .media-page-section {
+        padding-top: 30px;
+        padding-bottom: 40px;
+    }
+
+    .media-page-section .news-card {
+        height: 300px;
+    }
+
+    .btn-load-more-projects {
+        padding: 12px 24px;
+        font-size: 14px;
+    }
+}
+
+.read-more-button{
+    border: 1px solid white;
+    color: white;
+}
+
+.read-more-button:hover{
+    background-color: #4f4f4fb3;
+    border: 1px solid white;
+
+}
+
+/* ============================================ */
+/* News Listing Page Animations */
+/* ============================================ */
+
+/* Filter Dropdowns Animation */
+.media-filters-row {
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: opacity 0.8s ease-out, transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.media-filters-row.filters-animated {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* News Cards Animation - Initial State */
+.media-page-section .news-card-item {
+    opacity: 0;
+    transform: translateY(50px) scale(0.95);
+    transition: opacity 1.2s ease-out, transform 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* News Cards Animation - Animated State */
+.media-page-section .news-card-item.card-animated {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+/* Load More Button Animation */
+.btn-load-more-projects {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.btn-load-more-projects.button-animated {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Ensure hover effects still work after animation */
+.media-page-section .news-card-item.card-animated .news-card:hover {
+    transform: translateY(-5px);
+    transition: transform 0.3s ease;
+}
+
+/* Mobile adjustments */
+@media (max-width: 767.98px) {
+    .media-page-section .news-card-item {
+        transform: translateY(30px) scale(0.98);
+    }
+    
+    .media-page-section .news-card-item.card-animated {
+        transform: translateY(0) scale(1);
+    }
+}

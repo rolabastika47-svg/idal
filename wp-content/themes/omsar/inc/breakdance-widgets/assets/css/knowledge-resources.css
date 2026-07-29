@@ -1,0 +1,152 @@
+/* OMSAR Breakdance - Knowledge and Resources element */
+
+.omsar-knowledge-resources-element,
+.omsar-bd-knowledge-resources-widget,
+.omsar-knowledge-resources-widget.omsar-bd-knowledge-resources-widget {
+	width: 100%;
+	background: transparent !important;
+	align-self: stretch !important;
+}
+
+/* Prevent Breakdance parent flex from centering the widget column */
+.omsar-knowledge-resources-element {
+	align-items: flex-start !important;
+}
+
+/* Search — logical start/end (Content > Search Alignment; works in LTR and RTL) */
+.omsar-bd-knowledge-resources-widget .omsar-kr-search-wrapper,
+.omsar-knowledge-resources-element .omsar-kr-search-wrapper {
+	display: flex !important;
+	width: 100% !important;
+	margin-bottom: 24px;
+}
+
+.omsar-bd-knowledge-resources-widget .omsar-kr-search-wrapper.omsar-kr-search-align-left,
+.omsar-knowledge-resources-element .omsar-kr-search-wrapper.omsar-kr-search-align-left,
+.omsar-bd-knowledge-resources-widget .omsar-kr-search-wrapper.omsar-kr-search-align-center,
+.omsar-knowledge-resources-element .omsar-kr-search-wrapper.omsar-kr-search-align-center {
+	justify-content: flex-start !important;
+}
+
+.omsar-bd-knowledge-resources-widget .omsar-kr-search-wrapper.omsar-kr-search-align-right,
+.omsar-knowledge-resources-element .omsar-kr-search-wrapper.omsar-kr-search-align-right {
+	justify-content: flex-end !important;
+}
+
+/* Inner must not be width:100% or flex alignment has no visible effect */
+.omsar-bd-knowledge-resources-widget .omsar-kr-search-inner,
+.omsar-knowledge-resources-element .omsar-kr-search-inner {
+	display: block;
+	position: relative;
+	flex: 0 0 auto;
+	width: min(400px, 100%);
+	max-width: 400px;
+	min-width: 200px;
+	box-sizing: border-box;
+	margin-left: 0;
+	margin-right: auto;
+}
+
+.omsar-bd-knowledge-resources-widget .omsar-kr-search-wrapper.omsar-kr-search-align-right .omsar-kr-search-inner,
+.omsar-knowledge-resources-element .omsar-kr-search-wrapper.omsar-kr-search-align-right .omsar-kr-search-inner,
+.omsar-bd-knowledge-resources-widget .omsar-kr-search-wrapper[data-search-align="right"] .omsar-kr-search-inner,
+.omsar-knowledge-resources-element .omsar-kr-search-wrapper[data-search-align="right"] .omsar-kr-search-inner {
+	margin-left: auto;
+	margin-right: 0;
+}
+
+.omsar-bd-knowledge-resources-widget .omsar-kr-list.omsar-kr-grid,
+.omsar-knowledge-resources-element .omsar-kr-list.omsar-kr-grid {
+	margin-top: 0;
+}
+
+.omsar-bd-knowledge-resources-widget .omsar-kr-search-input,
+.omsar-knowledge-resources-element .omsar-kr-search-input {
+	display: block;
+	width: 100%;
+	min-width: 0;
+	box-sizing: border-box;
+	padding: 12px 44px 12px 20px;
+	border: none;
+	outline: none;
+	appearance: none;
+	background: transparent;
+}
+
+.omsar-bd-knowledge-resources-widget .omsar-kr-search-icon,
+.omsar-knowledge-resources-element .omsar-kr-search-icon {
+	position: absolute;
+	right: 1rem;
+	top: 50%;
+	transform: translateY(-50%);
+	pointer-events: none;
+	font-size: 1.125rem;
+	line-height: 1;
+}
+
+@media (min-width: 769px) {
+	.omsar-bd-knowledge-resources-widget .omsar-kr-list.omsar-kr-grid {
+		grid-template-columns: repeat(var(--omsar-kr-columns, 2), 1fr) !important;
+	}
+}
+
+/* RTL — natural direction only (no row-reverse; matches Elementor reference) */
+.omsar-bd-knowledge-resources-widget[dir="rtl"],
+.omsar-bd-knowledge-resources-widget.omsar-bd-rtl,
+.omsar-bd-knowledge-resources-widget.omsar-kr-rtl,
+html[dir="rtl"] .omsar-bd-knowledge-resources-widget {
+	direction: rtl;
+	text-align: right;
+}
+
+.omsar-bd-knowledge-resources-widget[dir="rtl"] .omsar-kr-search-wrapper,
+.omsar-bd-knowledge-resources-widget.omsar-bd-rtl .omsar-kr-search-wrapper,
+html[dir="rtl"] .omsar-bd-knowledge-resources-widget .omsar-kr-search-wrapper {
+	direction: rtl;
+}
+
+.omsar-bd-knowledge-resources-widget[dir="rtl"] .omsar-kr-card-title,
+.omsar-bd-knowledge-resources-widget.omsar-bd-rtl .omsar-kr-card-title,
+.omsar-bd-knowledge-resources-widget.omsar-kr-rtl .omsar-kr-card-title,
+html[dir="rtl"] .omsar-bd-knowledge-resources-widget .omsar-kr-card-title {
+	text-align: start;
+}
+
+.omsar-bd-knowledge-resources-widget[dir="rtl"] .omsar-kr-downloads-label,
+.omsar-bd-knowledge-resources-widget.omsar-bd-rtl .omsar-kr-downloads-label,
+html[dir="rtl"] .omsar-bd-knowledge-resources-widget .omsar-kr-downloads-label {
+	text-align: start;
+}
+
+.omsar-bd-knowledge-resources-widget[dir="rtl"] .omsar-kr-search-input,
+.omsar-bd-knowledge-resources-widget.omsar-bd-rtl .omsar-kr-search-input,
+html[dir="rtl"] .omsar-bd-knowledge-resources-widget .omsar-kr-search-input {
+	text-align: start;
+	direction: rtl;
+}
+
+.omsar-bd-knowledge-resources-widget[dir="rtl"] .omsar-kr-search-icon,
+.omsar-bd-knowledge-resources-widget.omsar-bd-rtl .omsar-kr-search-icon,
+html[dir="rtl"] .omsar-bd-knowledge-resources-widget .omsar-kr-search-icon {
+	right: auto;
+	left: 1rem;
+}
+
+.omsar-bd-knowledge-resources-widget[dir="rtl"] .omsar-kr-search-input,
+.omsar-bd-knowledge-resources-widget.omsar-bd-rtl .omsar-kr-search-input,
+html[dir="rtl"] .omsar-bd-knowledge-resources-widget .omsar-kr-search-input {
+	padding-right: 1.25rem;
+	padding-left: 2.75rem;
+}
+
+.omsar-bd-knowledge-resources-widget[dir="rtl"] .omsar-kr-card-content,
+.omsar-bd-knowledge-resources-widget.omsar-bd-rtl .omsar-kr-card-content,
+html[dir="rtl"] .omsar-bd-knowledge-resources-widget .omsar-kr-card-content {
+	text-align: start;
+}
+
+.omsar-bd-knowledge-resources-widget[dir="rtl"] .omsar-kr-download-link,
+.omsar-bd-knowledge-resources-widget.omsar-bd-rtl .omsar-kr-download-link,
+html[dir="rtl"] .omsar-bd-knowledge-resources-widget .omsar-kr-download-link {
+	text-align: start;
+}

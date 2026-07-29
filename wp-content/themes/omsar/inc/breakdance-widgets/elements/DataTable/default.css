@@ -1,0 +1,19 @@
+/* Structural defaults — design tab controls css.twig */
+%%SELECTOR%% {
+  background-color: transparent;
+}
+
+%%SELECTOR%% .omsar-table-wrapper {
+  overflow-x: auto;
+}
+
+%%SELECTOR%% .omsar-table-empty-message {
+  padding: 20px;
+  text-align: center;
+  color: #6b7280;
+}
+
+%%SELECTOR%%[dir="rtl"] .omsar-table-empty-message,
+%%SELECTOR%%.omsar-bd-rtl .omsar-table-empty-message {
+  text-align: right;
+}

@@ -1,0 +1,549 @@
+/**
+ * Page Sidebar Styles
+ * 
+ * Styles for the page sidebar navigation menu
+ */
+
+.page-sidebar {
+    position: sticky;
+    top: 90px;
+    align-self: flex-start;
+    max-height: calc(100vh - 90px);
+    padding: 30px 30px;
+    background: linear-gradient(to top left, var(--sidebar-dark-color, #b8d2ff) 0%, var(--sidebar-light-color, #f4f8ff) 100%);
+    border-radius: 0 24px 24px 0;
+    z-index: 1;
+    margin-left: -15px;
+    margin-right: 15px;
+    padding-left: 45px;
+    overflow-y: auto;
+    margin-bottom: 30px;
+    /* Initial state - slide from left with more distance and fade */
+    opacity: 0;
+    transform: translateX(-100px);
+    transition: opacity 1s ease-out, transform 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Animated state - sidebar slides into position smoothly */
+.page-sidebar.sidebar-animated {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Ensure containers allow sticky positioning */
+.content-area {
+    overflow: visible;
+}
+
+.content-area .container-fluid {
+    overflow: visible;
+}
+
+/* Ensure row allows sticky positioning */
+.content-area .row {
+    align-items: flex-start;
+    overflow: visible;
+}
+
+/* Make the aside element sticky */
+.content-area aside {
+    position: sticky;
+    top: 90px;
+    align-self: flex-start;
+    max-height: calc(100vh - 90px);
+    margin-top: 0.8rem;
+}
+
+/* Reduce gap between sidebar and content */
+.content-area .row.g-0.g-md-2.g-lg-3 > aside + main,
+.content-area .row.g-0.g-md-2.g-lg-3 > aside + .site-main {
+    padding-left: 10px;
+}
+
+@media (min-width: 768px) {
+    .content-area .row.g-0.g-md-2.g-lg-3 > aside + main,
+    .content-area .row.g-0.g-md-2.g-lg-3 > aside + .site-main {
+        padding-left: 15px;
+    }
+}
+
+@media (min-width: 992px) {
+    .content-area .row.g-0.g-md-2.g-lg-3 > aside + main,
+    .content-area .row.g-0.g-md-2.g-lg-3 > aside + .site-main {
+        padding-left: 20px;
+    }
+}
+
+.sidebar-nav {
+    width: 100%;
+}
+
+.sidebar-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar-nav-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar-menu-item {
+    margin: 0;
+    padding: 0;
+    margin-bottom: 8px;
+}
+
+.sidebar-nav-item {
+    margin-bottom: 8px;
+}
+
+.sidebar-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    font-weight: 500;
+    font-size: 16px;
+    color: #333;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    width: 100%;
+    background-color: transparent;
+}
+
+.sidebar-nav-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    font-weight: 500;
+    font-size: 16px;
+    color: #333;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    width: 100%;
+}
+
+.sidebar-link:hover,
+.sidebar-nav-link:hover {
+    background-color: rgba(224, 242, 255, 0.5);
+    color: #000;
+    text-decoration: none;
+}
+
+/* Non-clickable menu items (pages without content that have children) */
+.sidebar-link-disabled,
+.sidebar-sublink-disabled {
+    cursor: default;
+    opacity: 1;
+}
+
+/* Non-clickable items with children should be clickable to expand/collapse */
+.sidebar-menu-item.not-clickable.has-children > .sidebar-link-disabled,
+.sidebar-submenu-item.not-clickable.has-children > .sidebar-sublink-disabled {
+    cursor: pointer;
+    pointer-events: auto;
+}
+
+.sidebar-link-disabled:hover,
+.sidebar-sublink-disabled:hover {
+    background-color: transparent !important;
+    color: inherit !important;
+    text-decoration: none !important;
+}
+
+/* Allow hover effect for non-clickable items with children */
+.sidebar-menu-item.not-clickable.has-children > .sidebar-link-disabled:hover,
+.sidebar-submenu-item.not-clickable.has-children > .sidebar-sublink-disabled:hover {
+    background-color: rgba(224, 242, 255, 0.5) !important;
+    color: #000 !important;
+}
+
+.sidebar-menu-item.not-clickable > .sidebar-link-disabled,
+.sidebar-submenu-item.not-clickable > .sidebar-sublink-disabled {
+    cursor: default;
+}
+
+.sidebar-menu-item.active > .sidebar-link.active,
+.sidebar-link.active,
+.sidebar-nav-link.active {
+    background: linear-gradient(90deg, var(--sidebar-active-dark-color, #5693ff) 0%, var(--sidebar-active-light-color, #d7e5ff) 100%);
+    color: #FFFFFF !important;
+    font-weight: 500;
+}
+
+html[dir="rtl"] .sidebar-menu-item.active > .sidebar-link.active,
+html[dir="rtl"] .sidebar-link.active,
+html[dir="rtl"] .sidebar-nav-link.active {
+    background: linear-gradient(90deg, var(--sidebar-active-light-color, #d7e5ff) 0%, var(--sidebar-active-dark-color, #5693ff)  100%);
+    color: #FFFFFF !important;
+    font-weight: 500;
+}
+.sidebar-link .link-text {
+    flex: 1;
+}
+
+/* Ensure chevrons align vertically - all should have same right padding */
+.sidebar-link,
+.sidebar-sublink {
+    padding-right: 16px; /* Consistent right padding for arrow alignment */
+}
+
+/* Ensure text in sublinks can flex properly */
+.sidebar-sublink {
+    min-width: 0; /* Allows text to shrink */
+}
+
+/* When sublink has chevron, ensure proper spacing and alignment */
+.sidebar-sublink .sidebar-chevron-nested {
+    margin-left: auto; /* Push nested chevron to the right to align with parent chevrons */
+    flex-shrink: 0;
+}
+
+/* Default (LTR) – keep chevron right */
+.sidebar-chevron-main.bi-chevron-right::before {
+    content: "\f285"; /* chevron-right */
+}
+
+/* RTL (Arabic) – switch to chevron left */
+html[dir="rtl"] .sidebar-chevron-main.bi-chevron-right::before {
+    content: "\f284"; /* chevron-left */
+}
+
+/* Default (LTR) – nested chevron points right */
+.sidebar-chevron-nested.bi-chevron-right::before {
+    content: "\f285"; /* chevron-right */
+}
+
+/* RTL (Arabic) – nested chevron points left */
+html[dir="rtl"] .sidebar-chevron-nested.bi-chevron-right::before {
+    content: "\f284"; /* chevron-left */
+}
+
+.sidebar-chevron {
+    font-size: 14px;
+    transition: transform 0.3s ease;
+    margin-left: 8px;
+    flex-shrink: 0;
+}
+
+.sidebar-dropdown-icon {
+    font-size: 14px;
+    transition: transform 0.3s ease;
+    margin-left: 8px;
+}
+
+/* Main level chevron - points right when closed, down when opened */
+.sidebar-menu-item.has-children > .sidebar-link .sidebar-chevron-main {
+    transform: rotate(0deg);
+    transition: transform 0.3s ease;
+}
+
+.sidebar-menu-item.has-children.active > .sidebar-link .sidebar-chevron-main {
+    transform: rotate(90deg);
+}
+
+/* RTL: Rotate counter-clockwise to point down when expanded */
+html[dir="rtl"] .sidebar-menu-item.has-children.active > .sidebar-link .sidebar-chevron-main {
+    transform: rotate(-90deg);
+}
+
+.sidebar-menu-item.active > .sidebar-link.active .sidebar-chevron-main {
+    color: #FFFFFF;
+}
+
+.sidebar-nav-link[aria-expanded="true"] .sidebar-dropdown-icon {
+    transform: rotate(90deg);
+    color: #333;
+}
+
+.sidebar-nav-link.active .sidebar-dropdown-icon {
+    color: #FFFFFF;
+}
+
+/* Nested submenu chevron - points right when closed, down when opened */
+.sidebar-submenu-item.has-children > .sidebar-sublink .sidebar-chevron-nested {
+    transform: rotate(0deg);
+    transition: transform 0.3s ease;
+}
+
+.sidebar-submenu-item.has-children.active > .sidebar-sublink .sidebar-chevron-nested {
+    transform: rotate(90deg);
+}
+
+/* RTL: Rotate counter-clockwise to point down when expanded */
+html[dir="rtl"] .sidebar-submenu-item.has-children.active > .sidebar-sublink .sidebar-chevron-nested {
+    transform: rotate(-90deg);
+}
+
+.sidebar-submenu-item.active > .sidebar-sublink .sidebar-chevron-nested {
+    color: #333;
+}
+
+.sidebar-link.has-dropdown,
+.sidebar-nav-link.has-dropdown {
+    padding-right: 12px;
+}
+
+.sidebar-section-header {
+    padding: 12px 16px;
+    font-weight: 600;
+    font-size: 16px;
+    color: #000;
+    margin-top: 8px;
+    margin-bottom: 4px;
+    text-transform: none;
+}
+
+.sidebar-section-header .section-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #000;
+    text-transform: none;
+}
+
+.sidebar-submenu {
+    list-style: none;
+    padding: 0;
+    margin: 8px 0 0 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+}
+
+.sidebar-menu-item.has-children.active > .sidebar-submenu,
+.sidebar-submenu.show {
+    max-height: 500px;
+}
+
+/* Allow all nested submenu items to expand (level 2+) */
+.sidebar-submenu-item.has-children.active > .sidebar-submenu {
+    max-height: 500px;
+}
+
+.sidebar-submenu-item {
+    margin: 0;
+    padding: 0;
+}
+
+.sidebar-sublink {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    background-color: transparent;
+    margin-left: 25px;
+    margin-right: 0;
+}
+
+.sidebar-submenu .sidebar-link {
+    padding-left: 44px;
+    font-size: 14px;
+}
+
+/* Nested submenu (third level and deeper) - supports unlimited depth */
+.sidebar-submenu-nested {
+    margin-top: 10px;
+    margin-left: 0;
+}
+
+.sidebar-submenu-nested .sidebar-sublink {
+    margin-left: 50px;
+    font-size: 13px;
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+/* Additional nesting levels - cumulative indentation */
+.sidebar-submenu-nested .sidebar-submenu-nested .sidebar-sublink {
+    margin-left: 75px; /* 25px (parent) + 50px (nested) = 75px total */
+}
+
+.sidebar-submenu-nested .sidebar-submenu-nested .sidebar-submenu-nested .sidebar-sublink {
+    margin-left: 100px; /* 25px + 50px + 25px = 100px total */
+}
+
+/* Continue pattern for deeper nesting - each level adds 25px */
+.sidebar-submenu-nested .sidebar-submenu-nested .sidebar-submenu-nested .sidebar-submenu-nested .sidebar-sublink {
+    margin-left: 125px;
+}
+
+/* Ensure all nested submenus at any depth can expand (unlimited nesting) */
+/* This rule applies to all nested submenu items regardless of depth level */
+.sidebar-submenu .sidebar-submenu-item.has-children.active > .sidebar-submenu,
+.sidebar-submenu-nested .sidebar-submenu-item.has-children.active > .sidebar-submenu {
+    max-height: 500px;
+}
+
+.sidebar-sublink:hover,
+.sidebar-submenu .sidebar-link:hover {
+    background-color: rgba(224, 242, 255, 0.5);
+    color: #000;
+    text-decoration: none;
+}
+
+/* Ensure children maintain default color when parent is opened (not clicked) */
+.sidebar-menu-item.active .sidebar-submenu .sidebar-sublink:not(.active),
+.sidebar-submenu-item.active .sidebar-submenu .sidebar-sublink:not(.active) {
+    background-color: transparent !important;
+    color: #333 !important;
+}
+
+.sidebar-submenu-item.active > .sidebar-sublink,
+.sidebar-sublink.active,
+.sidebar-submenu .sidebar-link.active {
+    background: linear-gradient(90deg, var(--sidebar-sub-active-dark-color, rgba(86, 147, 255, 0.3)) 0%, var(--sidebar-sub-active-light-color, rgba(215, 229, 255, 0.3)) 100%);
+    color: #333 !important;
+    font-weight: 500;
+    /* Background respects margin-left indentation */
+    margin-right: 0;
+}
+
+html[dir="rtl"] .sidebar-submenu-item.active > .sidebar-sublink,
+html[dir="rtl"] .sidebar-sublink.active,
+html[dir="rtl"] .sidebar-submenu .sidebar-link.active  {
+    background: linear-gradient(90deg, var(--sidebar-sub-active-light-color, rgba(215, 229, 255, 0.3)) 0%, var(--sidebar-sub-active-dark-color, rgba(86, 147, 255, 0.3)) 100%);
+    color: #333 !important;
+    font-weight: 500;
+}
+
+
+/* RTL Support */
+[dir="rtl"] .page-sidebar {
+    border-radius: 24px 0 0 24px;
+    margin-left: 0;
+    margin-right: -15px;
+    padding-right: 45px;
+    /* RTL: slide from right with more distance and fade */
+    opacity: 0;
+    transform: translateX(100px);
+}
+
+/* RTL animated state */
+[dir="rtl"] .page-sidebar.sidebar-animated {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+[dir="rtl"] .sidebar-link,
+[dir="rtl"] .sidebar-nav-link {
+    border-left: none;
+}
+
+[dir="rtl"] .sidebar-menu-item.active > .sidebar-link.active,
+[dir="rtl"] .sidebar-link.active,
+[dir="rtl"] .sidebar-nav-link.active {
+    border-radius: 8px;
+}
+
+[dir="rtl"] .sidebar-chevron,
+[dir="rtl"] .sidebar-dropdown-icon {
+    margin-left: 0;
+    margin-right: 8px;
+}
+
+[dir="rtl"] .sidebar-sublink,
+[dir="rtl"] .sidebar-submenu .sidebar-link {
+    padding-left: 16px;
+    padding-right: 16px;
+    margin-left: 0;
+    margin-right: 25px !important;
+}
+
+/* RTL: Nested submenu indentation */
+[dir="rtl"] .sidebar-submenu-nested .sidebar-sublink {
+    margin-right: 50px;
+    margin-left: 0;
+}
+
+[dir="rtl"] .sidebar-submenu-nested .sidebar-submenu-nested .sidebar-sublink {
+    margin-right: 75px;
+    margin-left: 0;
+}
+
+[dir="rtl"] .sidebar-submenu-nested .sidebar-submenu-nested .sidebar-submenu-nested .sidebar-sublink {
+    margin-right: 100px;
+    margin-left: 0;
+}
+
+[dir="rtl"] .sidebar-submenu-nested .sidebar-submenu-nested .sidebar-submenu-nested .sidebar-submenu-nested .sidebar-sublink {
+    margin-right: 125px;
+    margin-left: 0;
+}
+
+/* RTL: Chevron alignment */
+[dir="rtl"] .sidebar-sublink .sidebar-chevron-nested {
+    margin-right: auto; /* Push nested chevron to the left to align with parent chevrons in RTL */
+    margin-left: 0;
+}
+
+/* Responsive */
+@media (max-width: 991.98px) {
+    .content-area aside {
+        position: relative;
+        top: 0;
+        max-height: none;
+    }
+    
+    .page-sidebar {
+        position: relative;
+        top: 0;
+        height: auto;
+        max-height: none;
+        padding: 30px 20px;
+        margin-bottom: 20px;
+        margin-left: 0;
+        padding-left: 20px;
+        border-radius: 0;
+    }
+    
+    /* Ensure animated sidebar is visible on mobile */
+    .page-sidebar.sidebar-animated {
+        transform: translateX(0) !important;
+    }
+    
+    /* Mobile RTL */
+    [dir="rtl"] .page-sidebar.sidebar-animated {
+        transform: translateX(0) !important;
+    }
+}
+
+/* Custom Scrollbar Styling */
+.page-sidebar::-webkit-scrollbar {
+    width: 6px;
+}
+
+.page-sidebar::-webkit-scrollbar-track {
+    background: transparent;
+    margin: 8px 0;
+}
+
+.page-sidebar::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    transition: background 0.3s ease;
+}
+
+.page-sidebar::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.4);
+}
+
+/* Firefox Scrollbar */
+.page-sidebar {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 0, 0, 0.25) transparent;
+}
+

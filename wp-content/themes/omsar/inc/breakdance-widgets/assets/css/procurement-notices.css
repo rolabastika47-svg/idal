@@ -1,0 +1,113 @@
+/* OMSAR Breakdance - Procurement Notices element */
+
+.omsar-procurement-notices-element,
+.omsar-bd-procurement-notices-widget,
+.omsar-procurement-notices-widget.omsar-bd-procurement-notices-widget {
+    width: 100%;
+    background: transparent !important;
+}
+
+/* Respect Content > Columns on tablet+ */
+@media (min-width: 1025px) {
+    .omsar-bd-procurement-notices-widget .omsar-procurement-notices-grid {
+        grid-template-columns: repeat(var(--omsar-procurement-columns, 3), 1fr) !important;
+    }
+}
+
+/* RTL — natural direction only (no row-reverse; matches Elementor reference) */
+.omsar-bd-procurement-notices-widget[dir="rtl"],
+.omsar-bd-procurement-notices-widget.omsar-bd-rtl,
+html[dir="rtl"] .omsar-bd-procurement-notices-widget {
+    direction: rtl;
+    text-align: right;
+}
+
+.omsar-bd-procurement-notices-widget[dir="rtl"] .omsar-procurement-filters,
+.omsar-bd-procurement-notices-widget.omsar-bd-rtl .omsar-procurement-filters,
+html[dir="rtl"] .omsar-bd-procurement-notices-widget .omsar-procurement-filters {
+    direction: rtl;
+    justify-content: flex-start;
+}
+
+.omsar-bd-procurement-notices-widget[dir="rtl"] .omsar-procurement-filter-label,
+.omsar-bd-procurement-notices-widget.omsar-bd-rtl .omsar-procurement-filter-label,
+html[dir="rtl"] .omsar-bd-procurement-notices-widget .omsar-procurement-filter-label {
+    text-align: right;
+}
+
+.omsar-bd-procurement-notices-widget[dir="rtl"] .omsar-procurement-status-tabs,
+.omsar-bd-procurement-notices-widget.omsar-bd-rtl .omsar-procurement-status-tabs,
+html[dir="rtl"] .omsar-bd-procurement-notices-widget .omsar-procurement-status-tabs {
+    direction: rtl;
+}
+
+/* Title right, status badge left (space-between + direction: rtl) */
+.omsar-bd-procurement-notices-widget[dir="rtl"] .omsar-procurement-card-header,
+.omsar-bd-procurement-notices-widget.omsar-bd-rtl .omsar-procurement-card-header,
+.omsar-bd-procurement-notices-widget .rtl-card .omsar-procurement-card-header,
+html[dir="rtl"] .omsar-bd-procurement-notices-widget .omsar-procurement-card-header {
+    direction: rtl;
+}
+
+.omsar-bd-procurement-notices-widget[dir="rtl"] .omsar-procurement-card-title,
+.omsar-bd-procurement-notices-widget.omsar-bd-rtl .omsar-procurement-card-title,
+.omsar-bd-procurement-notices-widget .rtl-card .omsar-procurement-card-title,
+html[dir="rtl"] .omsar-bd-procurement-notices-widget .omsar-procurement-card-title {
+    text-align: right;
+}
+
+.omsar-bd-procurement-notices-widget[dir="rtl"] .omsar-procurement-card-content,
+.omsar-bd-procurement-notices-widget.omsar-bd-rtl .omsar-procurement-card-content,
+.omsar-bd-procurement-notices-widget .rtl-card .omsar-procurement-card-content,
+html[dir="rtl"] .omsar-bd-procurement-notices-widget .omsar-procurement-card-content {
+    text-align: right;
+}
+
+/* Date rows: icon on the right, label + value flow left */
+.omsar-bd-procurement-notices-widget[dir="rtl"] .omsar-procurement-date-range,
+.omsar-bd-procurement-notices-widget.omsar-bd-rtl .omsar-procurement-date-range,
+.omsar-bd-procurement-notices-widget .rtl-card .omsar-procurement-date-range,
+html[dir="rtl"] .omsar-bd-procurement-notices-widget .omsar-procurement-date-range {
+    direction: rtl;
+    align-items: flex-start;
+}
+
+.omsar-bd-procurement-notices-widget[dir="rtl"] .omsar-procurement-date-row,
+.omsar-bd-procurement-notices-widget.omsar-bd-rtl .omsar-procurement-date-row,
+.omsar-bd-procurement-notices-widget .rtl-card .omsar-procurement-date-row,
+html[dir="rtl"] .omsar-bd-procurement-notices-widget .omsar-procurement-date-row {
+    direction: rtl;
+    flex-direction: row;
+    justify-content: flex-start;
+    width: 100%;
+}
+
+.omsar-bd-procurement-notices-widget[dir="rtl"] .omsar-procurement-description-info,
+.omsar-bd-procurement-notices-widget.omsar-bd-rtl .omsar-procurement-description-info,
+.omsar-bd-procurement-notices-widget .rtl-card .omsar-procurement-description-info,
+html[dir="rtl"] .omsar-bd-procurement-notices-widget .omsar-procurement-description-info {
+    text-align: right;
+    direction: rtl;
+}
+
+/* Apply button — bottom right */
+.omsar-bd-procurement-notices-widget[dir="rtl"] .omsar-procurement-card-button,
+.omsar-bd-procurement-notices-widget.omsar-bd-rtl .omsar-procurement-card-button,
+.omsar-bd-procurement-notices-widget .rtl-card .omsar-procurement-card-button,
+html[dir="rtl"] .omsar-bd-procurement-notices-widget .omsar-procurement-card-button {
+    text-align: right;
+    direction: rtl;
+}
+
+.omsar-bd-procurement-notices-widget[dir="rtl"] .omsar-procurement-load-more-wrapper,
+.omsar-bd-procurement-notices-widget.omsar-bd-rtl .omsar-procurement-load-more-wrapper,
+html[dir="rtl"] .omsar-bd-procurement-notices-widget .omsar-procurement-load-more-wrapper {
+    direction: rtl;
+}
+
+.omsar-bd-procurement-notices-widget[dir="rtl"] .omsar-procurement-no-results,
+.omsar-bd-procurement-notices-widget.omsar-bd-rtl .omsar-procurement-no-results,
+html[dir="rtl"] .omsar-bd-procurement-notices-widget .omsar-procurement-no-results {
+    direction: rtl;
+    text-align: center;
+}

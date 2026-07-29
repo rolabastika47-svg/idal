@@ -1,0 +1,10 @@
+{{ builderShortPrefix }}-skip-link:focus {
+  --bde-skip-link-top: {{ settings.other.skip_link.nudge_y.style }};
+  --bde-skip-link-left: {{ settings.other.skip_link.nudge_x.style }};
+  {{ macros.typography(settings.other.skip_link.typography, globalSettings) }}
+  {{ macros.spacing_all(settings.other.skip_link.spacing) }}
+}
+
+{{ builderShortPrefix }}-skip-link:focus:hover {
+  {{ macros.typographyWithHoverableEverything(settings.other.skip_link.typography) }}
+}

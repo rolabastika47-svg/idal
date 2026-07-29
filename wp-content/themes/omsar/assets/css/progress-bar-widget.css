@@ -1,0 +1,172 @@
+/**
+ * Custom Progress Bar Widget Styles
+ * 
+ * @package OMSAR
+ */
+
+.omsar-progress-bars-container {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+}
+
+/* Horizontal layout for circular items */
+.omsar-progress-bars-container.omsar-circular-layout-horizontal {
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: flex-start;
+	align-items: flex-start;
+	gap: 30px;
+}
+
+.omsar-progress-bars-container.omsar-circular-layout-horizontal .omsar-progress-item {
+	width: auto;
+	flex: 0 0 auto;
+}
+
+/* Horizontal progress bars always stack vertically, even in horizontal layout */
+.omsar-progress-bars-container.omsar-circular-layout-horizontal .omsar-progress-item.omsar-progress-type-horizontal {
+	width: 100%;
+	flex: 1 1 100%;
+}
+
+/* Vertical layout (default) */
+.omsar-progress-bars-container.omsar-circular-layout-vertical .omsar-progress-item {
+	width: 100%;
+}
+
+.omsar-progress-item {
+	width: 100%;
+}
+
+.omsar-progress-wrapper {
+	width: 100%;
+}
+
+/* Horizontal Progress Bar */
+.omsar-progress-horizontal-wrapper {
+	display: flex;
+	flex-direction: column;
+}
+
+.omsar-progress-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 8px;
+}
+
+.omsar-progress-label {
+	font-size: 16px;
+	font-weight: 500;
+	color: #1f2937;
+	line-height: 1.4;
+}
+
+.omsar-progress-percentage {
+	font-size: 18px;
+	font-weight: 600;
+	color: #1f2937;
+	line-height: 1.4;
+}
+
+.omsar-progress-bar-track {
+	width: 100%;
+	height: 12px;
+	background-color: #e5e7eb;
+	border-radius: 6px;
+	overflow: hidden;
+	position: relative;
+}
+
+.omsar-progress-bar-fill {
+	height: 100%;
+	background-color: #7c3aed;
+	border-radius: 6px;
+	transition: width 1s ease-in-out;
+}
+
+/* Circular Progress Bar */
+.omsar-progress-circular-wrapper {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	margin: 0 auto;
+}
+
+.omsar-progress-circular-container {
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.omsar-progress-circular-svg {
+	width: 120px;
+	height: 120px;
+}
+
+.omsar-progress-circular-track {
+	stroke: #e5e7eb;
+	fill: none;
+}
+
+.omsar-progress-circular-fill {
+	stroke: #7c3aed;
+	fill: none;
+	stroke-linecap: round;
+	transition: stroke-dashoffset 1s ease-in-out;
+}
+
+.omsar-progress-circular-percentage {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	font-size: 24px;
+	font-weight: 600;
+	color: #1f2937;
+	text-align: center;
+	line-height: 1;
+}
+
+.omsar-progress-circular-label {
+	margin-top: 10px;
+	font-size: 16px;
+	font-weight: 500;
+	color: #1f2937;
+	text-align: center;
+	line-height: 1.4;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+	.omsar-progress-bars-container.omsar-circular-layout-horizontal {
+		flex-direction: column;
+		gap: 20px;
+	}
+
+	.omsar-progress-bars-container.omsar-circular-layout-horizontal .omsar-progress-item {
+		width: 100%;
+	}
+
+	.omsar-progress-circular-svg {
+		width: 100px;
+		height: 100px;
+	}
+
+	.omsar-progress-circular-percentage {
+		font-size: 20px;
+	}
+
+	.omsar-progress-label,
+	.omsar-progress-circular-label {
+		font-size: 14px;
+	}
+
+	.omsar-progress-percentage {
+		font-size: 16px;
+	}
+}
+

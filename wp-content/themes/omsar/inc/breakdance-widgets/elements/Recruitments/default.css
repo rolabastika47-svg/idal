@@ -1,0 +1,4 @@
+/* Structural defaults — colors/typography/spacing are controlled via Design tab (css.twig). */
+%%SELECTOR%% {
+  background-color: transparent;
+}

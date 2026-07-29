@@ -1,0 +1,318 @@
+/**
+ * Knowledge and Resources Widget Styles
+ *
+ * Cards: image + content (title, date, downloads).
+ * LTR: image left, content right. RTL: image right, content left.
+ *
+ * @package OMSAR
+ */
+
+.omsar-knowledge-resources-widget {
+	margin: 0;
+	padding: 0;
+}
+
+/* Search field: pill-shaped, icon on right */
+.omsar-kr-search-wrapper {
+	display: block;
+}
+
+.omsar-kr-search-inner {
+	display: inline-block;
+	position: relative;
+	max-width: 100%;
+	vertical-align: top;
+}
+
+.omsar-kr-search-input {
+	display: block;
+	width: 100%;
+	min-width: 200px;
+	border: none;
+	outline: none;
+	appearance: none;
+	background: transparent;
+	color: #4a5568;
+	font-size: 1rem;
+	line-height: 1.5;
+	padding-right: 2.75rem;
+}
+
+.omsar-kr-search-inner {
+	background: #f5f5f5;
+	border: 1px solid #e2e8f0;
+	border-radius: 50px;
+	overflow: hidden;
+}
+
+.omsar-kr-search-input::placeholder {
+	color: #718096;
+	opacity: 0.9;
+}
+
+/* Hide browser clear (x) button on search input */
+.omsar-kr-search-input::-webkit-search-cancel-button,
+.omsar-kr-search-input::-webkit-search-decoration {
+	-webkit-appearance: none;
+	appearance: none;
+	display: none;
+}
+.omsar-kr-search-input::-ms-clear {
+	display: none;
+}
+
+.omsar-kr-search-icon {
+	position: absolute;
+	right: 1rem;
+	top: 50%;
+	transform: translateY(-50%);
+	pointer-events: none;
+	font-size: 1.125rem;
+	color: #718096;
+}
+
+html[dir="rtl"] .omsar-kr-search-icon {
+	right: auto;
+	left: 1rem;
+}
+
+html[dir="rtl"] .omsar-kr-search-input {
+	padding-right: 1.25rem;
+	padding-left: 2.75rem;
+}
+
+.omsar-kr-list {
+	display: flex;
+	flex-direction: column;
+	gap: 1.5rem;
+}
+
+.omsar-kr-list.omsar-kr-grid {
+	display: grid;
+	gap: 1.5rem;
+}
+
+/* Card: flex row; RTL uses row-reverse */
+.omsar-kr-card {
+	display: flex;
+	flex-direction: row;
+	align-items: stretch;
+	background: #ffffff;
+	border-radius: 8px;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+	overflow: hidden;
+	min-height: 160px;
+}
+
+/* .omsar-knowledge-resources-widget.omsar-kr-rtl .omsar-kr-card {
+	flex-direction: row-reverse;
+} */
+
+.omsar-kr-card.omsar-kr-card--no-image {
+	min-height: 0;
+}
+
+/* Clickable card: cursor and hover */
+.omsar-kr-card.omsar-kr-card--clickable {
+	cursor: pointer;
+	transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+.omsar-kr-card.omsar-kr-card--clickable:hover {
+	box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+}
+.omsar-kr-card.omsar-kr-card--clickable .omsar-kr-download-link {
+	cursor: pointer;
+}
+
+/* Image */
+.omsar-kr-card-image {
+	flex-shrink: 0;
+	width: 200px;
+	min-height: 160px;
+	overflow: hidden;
+}
+
+.omsar-kr-card-image img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	display: block;
+}
+
+/* Content */
+.omsar-kr-card-content {
+	flex: 1;
+	min-width: 0;
+	padding: 1.25rem 1.5rem;
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+	justify-content: flex-start;
+}
+
+.omsar-kr-card-title {
+	margin: 0;
+	font-size: 1.125rem;
+	font-weight: 700;
+	line-height: 1.35;
+	color: #000000;
+}
+
+
+
+/* Downloads */
+.omsar-kr-downloads {
+	margin-top: 0.5rem;
+	border-top: 1px solid #eee;
+}
+
+.omsar-kr-downloads-label {
+	display: block;
+	font-size: 0.875rem;
+	font-weight: 600;
+	color: #333;
+	margin-bottom: 0.375rem;
+	margin-top: 0.5rem;
+}
+
+.omsar-kr-download-list {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	display: flex;
+	flex-direction: column;
+	gap: 0.25rem;
+}
+
+.omsar-kr-download-link {
+	display: inline-flex;
+	align-items: flex-start;
+	gap: 0.5rem;
+	color: #1a3e7b;
+	text-decoration: none;
+	font-weight: 500;
+	font-size: 0.9375rem;
+	transition: color 0.2s ease;
+	max-width: 100%;
+	word-break: break-word;
+}
+
+.omsar-kr-download-link:hover {
+	color: #7db3e8;
+	text-decoration: underline;
+}
+
+.omsar-kr-download-link i {
+	font-size: 1.125rem;
+	color: #dc3545;
+	flex-shrink: 0;
+}
+
+/* RTL: flip icon position */
+/* html[dir="rtl"] .omsar-kr-download-link,
+.omsar-knowledge-resources-widget.omsar-kr-rtl .omsar-kr-download-link {
+	flex-direction: row-reverse;
+} */
+
+/* No results */
+.omsar-kr-no-results {
+	padding: 2rem 1rem;
+	/* text-align: center; */
+}
+
+.omsar-kr-no-results-message {
+	font-size: 1rem;
+	color: #666;
+	margin: 0;
+	line-height: 1.6;
+}
+
+/* Load More */
+.omsar-kr-load-more-wrapper {
+	margin-top: 2rem;
+	text-align: center;
+}
+
+.omsar-kr-load-more-wrapper .omsar-load-more-btn,
+.omsar-kr-load-more-btn {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
+	padding: 10px 24px;
+	font-size: 1rem;
+	font-weight: 600;
+	color: #4a5568;
+	background: #ffffff;
+	border: 1px solid #4a5568;
+	border-radius: 50px;
+	cursor: pointer;
+	transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.omsar-kr-load-more-wrapper .omsar-load-more-btn:hover:not(:disabled),
+.omsar-kr-load-more-btn:hover:not(:disabled) {
+	background: #f7fafc;
+	color: #2d3748;
+	border-color: #2d3748;
+}
+
+.omsar-kr-load-more-wrapper .omsar-load-more-btn:disabled,
+.omsar-kr-load-more-btn:disabled {
+	opacity: 0.7;
+	cursor: not-allowed;
+}
+
+.omsar-kr-load-more-wrapper .omsar-load-more-btn.loading,
+.omsar-kr-load-more-btn.loading {
+	pointer-events: none;
+}
+
+.omsar-kr-load-more-wrapper .omsar-load-more-btn.loading::after,
+.omsar-kr-load-more-btn.loading::after {
+	content: '';
+	display: inline-block;
+	width: 16px;
+	height: 16px;
+	margin-left: 8px;
+	border: 2px solid currentColor;
+	border-top-color: transparent;
+	border-radius: 50%;
+	animation: omsar-kr-spin 0.6s linear infinite;
+	flex-shrink: 0;
+}
+
+@keyframes omsar-kr-spin {
+	to { transform: rotate(360deg); }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+	.omsar-kr-list.omsar-kr-grid {
+		grid-template-columns: 1fr !important;
+	}
+
+	.omsar-kr-card {
+		flex-direction: column;
+		min-height: 0;
+	}
+
+	.omsar-knowledge-resources-widget.omsar-kr-rtl .omsar-kr-card {
+		flex-direction: column;
+	}
+
+	.omsar-kr-card-image {
+		width: 100%;
+		min-height: 180px;
+	}
+}
+
+@media (max-width: 480px) {
+	.omsar-kr-card-content {
+		padding: 1rem 1.25rem;
+	}
+
+	.omsar-kr-card-title {
+		font-size: 1rem;
+	}
+}

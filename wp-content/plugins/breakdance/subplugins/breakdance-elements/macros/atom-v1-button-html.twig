@@ -1,0 +1,78 @@
+{% macro atomV1ButtonCss(buttonDesignSection, className, selectorPrefix, breakpoint, globalSettings) %}
+    {% if buttonDesignSection.style == 'text' or (buttonStyle == 'text' and buttonDesignSection.style is empty) %}
+        {{ _self.atomV1ButtonAsLinkCss(buttonDesignSection.text, selectorPrefix ~ ' .' ~ className, globalSettings) }}
+    {% elseif buttonDesignSection.style == 'custom' and buttonDesignSection.custom_type != 'preset' %}
+        {{ _self.atomV1ButtonButton(buttonDesignSection.custom, selectorPrefix ~ ' .' ~ className, "custom", breakpoint, globalSettings) }}
+    {% endif %}
+{% endmacro %}
+
+{% macro getButtonClasses(designProps, defaultButtonStyle) %}
+    {% set validButtonStyles = ['primary', 'secondary', 'custom', 'text'] %}
+    {% if designProps.style is not empty %}
+        {% set baseStyle = designProps.style %}
+    {% elseif defaultButtonStyle in validButtonStyles %}
+        {% set baseStyle = defaultButtonStyle %}
+    {% else %}
+        {% set baseStyle = 'primary' %}
+    {% endif %}
+    {% set buttonStyleClass = 'button-atom--' ~ baseStyle %}
+    {% if designProps.preset and baseStyle == 'custom' and designProps.custom_type == 'preset' %}
+        {% set buttonStyleClass = buttonStyleClass ~ ' button-atom--preset-' ~ designProps.preset %}
+    {% endif %}
+    {{- 'button-atom ' ~ buttonStyleClass -}}
+{% endmacro %}
+
+{# "Disabled" is used to disable the form builder button when on free mode #}
+{% macro atomV1ButtonHtmlManual(text, link, className, designProps, defaultButtonStyle, buttonId = '', isSubmit = false, contentEditablePath = '', disabled = false) %}
+    {% set buttonStyleClass = trim_whitespace(_self.getButtonClasses(designProps, defaultButtonStyle)) %}
+
+    {% if link.html.id %}
+      {% set buttonId = link.html.id %}
+    {% endif %}
+
+    {% set cssClasses = [
+        buttonStyleClass,
+        className
+    ]|join(" ") %}
+
+    {% set attrs = '' %}
+
+    {% for attribute in link.html.attributes %}
+      {% if attribute.name %}
+        {% set attrs = attrs ~ ' ' ~ attribute.name ~ '="' ~ attribute.value ~ '"' %}
+      {% endif %}
+    {% endfor %}
+
+    {% set maybeUrl = _self.getUntrimmedLinkUrl(link)|trim %}
+    {% set linkTypes = ['lightbox', 'contact', 'action'] %}
+    {% set isButton = maybeUrl is empty and link.type not in linkTypes %}
+
+    {% if isButton %}
+        <button type="{{ isSubmit ? "submit" : "button" }}" class="{{ cssClasses }}"{{ buttonId ? ' id="'~ buttonId ~'"' }} {{ disabled ? "disabled" : '' }} {{ attrs }}>
+    {% else %}
+        {{ _self.linkStart(link, cssClasses, '', false) }}
+    {% endif %}
+
+        <span class="button-atom__text"{{ dataContentEditablePropertyPath(contentEditablePath) }}>{{ text|default(esc_html__('Click Here', 'breakdance-elements')) }}</span>
+
+        {% if designProps.custom.icon.icon and designProps.style != 'text' %}
+            {% set iconSvgCode = designProps.custom.icon.icon.svgCode %}
+        {% endif %}
+
+        {% if designProps.style == 'text' and designProps.text.arrow.arrow %}
+            {{ _self.atomV1ButtonLinkIconHtml(designProps.text.arrow) }}
+        {% endif %}
+
+    {% if isButton %}
+        </button>
+    {% else %}
+        {{ _self.linkEnd() }}
+    {% endif %}
+{% endmacro %}
+
+{% macro atomV1ButtonHtml(buttonContentSection, className, designProps, contentEditablePath, buttonStyle) %}
+    {{ _self.atomV1ButtonHtmlManual(buttonContentSection.text, buttonContentSection.link, className, designProps, buttonStyle, '', false, contentEditablePath) }}
+{% endmacro %}
+
+
+

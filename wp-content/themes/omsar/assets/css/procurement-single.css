@@ -1,0 +1,292 @@
+/**
+ * Single Procurement Notice Template Styles
+ * 
+ * Styles for the single procurement notice page template
+ * Supports both RTL (Arabic) and LTR (English) layouts
+ * 
+ * @package OMSAR
+ */
+
+/* Main Container */
+.omsar-procurement-single {
+	max-width: 100%;
+	margin: 0 auto;
+	/* padding: 2rem 0; */
+}
+
+/* Header Section */
+.omsar-procurement-single-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+	gap: 1.5rem;
+	margin-bottom: 2rem;
+	flex-wrap: wrap;
+}
+
+.omsar-procurement-single-title {
+	font-size: 2rem;
+	font-weight: 700;
+	line-height: 1.3;
+	color: #000000;
+	margin: 0;
+	flex: 1;
+	min-width: 0; /* Allows text to wrap */
+}
+
+/* Status Badge */
+.omsar-procurement-status-badge {
+	display: inline-block;
+	padding: 0.5rem 1rem;
+	font-size: 0.875rem;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
+	border-radius: 20px;
+	white-space: nowrap;
+	flex-shrink: 0;
+}
+
+.omsar-procurement-status-badge.omsar-status-open {
+	color: #28a745;
+	background-color: transparent;
+	border: 1px solid #28a745;
+}
+
+.omsar-procurement-status-badge.omsar-status-closed {
+	color: #dc3545;
+	background-color: transparent;
+	border: 1px solid #dc3545;
+}
+
+.omsar-procurement-status-badge.omsar-status-cancelled {
+	color: #6c757d;
+	background-color: transparent;
+	border: 1px solid #6c757d;
+}
+
+/* Field Sections */
+.omsar-procurement-single-field {
+	margin-bottom: 0.8rem;
+	padding-bottom: 0.8rem;
+	/* border-bottom: 1px solid #e0e0e0; */
+}
+
+.omsar-procurement-single-field:last-of-type {
+	border-bottom: none;
+}
+
+.omsar-procurement-field-label {
+	display: block;
+	font-size: 1rem;
+	font-weight: 600;
+	color: #333;
+	margin-bottom: 0.5rem;
+}
+
+/* Fields Row Container (Reference No., Notice Type, Dates on same row) */
+.omsar-procurement-fields-row {
+	display: flex;
+	align-items: baseline;
+	gap: 2rem;
+	flex-wrap: wrap;
+	margin-bottom: 0.8rem;
+	padding-bottom: 0.8rem;
+	border-bottom: 1px solid #e0e0e0;
+}
+
+/* Inline fields (Reference No., Notice Type, Dates) */
+.omsar-procurement-field-inline {
+	display: flex;
+	align-items: baseline;
+	gap: 0.5rem;
+	flex-wrap: wrap;
+}
+
+.omsar-procurement-field-inline .omsar-procurement-field-label {
+	display: inline-block;
+	margin-bottom: 0;
+	flex-shrink: 0;
+}
+
+.omsar-procurement-field-inline .omsar-procurement-field-value {
+	display: inline-block;
+	margin-bottom: 0;
+}
+
+.omsar-procurement-field-value {
+	display: block;
+	font-size: 1rem;
+	color: #666;
+	line-height: 1.6;
+}
+
+/* Description Field */
+.omsar-procurement-description {
+	margin-top: 0.5rem;
+}
+
+.omsar-procurement-description p {
+	margin-bottom: 1rem;
+}
+
+.omsar-procurement-description p:last-child {
+	margin-bottom: 0;
+}
+
+/* Date Range */
+.omsar-procurement-date-range {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 0.35rem;
+}
+
+.omsar-procurement-date-row {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+}
+
+.omsar-procurement-date-label {
+	font-weight: 600;
+}
+
+.omsar-procurement-date-value {
+	font-weight: 400;
+}
+
+.omsar-procurement-date-range i {
+	font-size: 1.125rem;
+	color: #999;
+}
+
+/* Documents Section - now inside description */
+.omsar-procurement-documents {
+	display: flex;
+	flex-direction: column;
+	gap: 0.75rem;
+	margin-top: 1rem;
+}
+
+.omsar-procurement-document-link {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.5rem;
+	color: #1a3e7b;
+	text-decoration: none;
+	font-weight: 500;
+	padding: 0.5rem 0;
+	transition: color 0.3s ease;
+}
+
+.omsar-procurement-document-link:hover {
+	color: #7db3e8;
+	text-decoration: underline;
+}
+
+.omsar-procurement-document-link i {
+	font-size: 1.25rem;
+	color: #dc3545;
+}
+
+/* Apply Button */
+.omsar-procurement-single-actions {
+	margin-top: 2rem;
+	/* padding-top: 2rem; */
+	/* border-top: 2px solid #e0e0e0; */
+}
+
+.omsar-procurement-apply-button {
+	display: inline-block;
+	padding: 0.2rem 2rem;
+	font-size: 1rem;
+	font-weight: 700;
+	color: #ffffff;
+	background-color: #1a3e7b;
+	border-radius: 25px;
+	text-decoration: none;
+	text-align: center;
+	transition: all 0.3s ease;
+	border: none;
+	cursor: pointer;
+}
+
+/* .omsar-procurement-apply-button:hover {
+	background-color: #7db3e8;
+	color: #ffffff;
+	text-decoration: none;
+	transform: translateY(-2px);
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+} */
+
+.omsar-procurement-apply-button:active {
+	transform: translateY(0);
+}
+
+/* Legacy class (no longer used): keep harmless if present */
+.omsar-procurement-apply-button--disabled { opacity: 0.55; cursor: not-allowed; }
+
+/* Responsive Design */
+@media (max-width: 768px) {
+	.omsar-procurement-single {
+		padding: 1.5rem 0;
+	}
+	
+	.omsar-procurement-single-title {
+		font-size: 1.5rem;
+	}
+	
+	.omsar-procurement-single-header {
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 1rem;
+	}
+	
+	.omsar-procurement-status-badge {
+		align-self: flex-start;
+	}
+	
+	.omsar-procurement-fields-row {
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 1rem;
+	}
+	
+	.omsar-procurement-field-inline {
+		/* flex-direction: column;
+		align-items: flex-start; */
+		gap: 0.25rem;
+	}
+	
+	.omsar-procurement-field-inline .omsar-procurement-field-label {
+		margin-bottom: 0.25rem;
+	}
+	
+	.omsar-procurement-apply-button {
+		width: 100%;
+		padding: 0.875rem 1.5rem;
+	}
+}
+
+/* RTL Support */
+/* html[dir="rtl"] .omsar-procurement-single-header {
+	flex-direction: row-reverse;
+} */
+
+/* html[dir="rtl"] .omsar-procurement-date-range {
+	flex-direction: row-reverse;
+} */
+
+/* html[dir="rtl"] .omsar-procurement-document-link {
+	flex-direction: row-reverse;
+} */
+
+html[dir="rtl"] .omsar-procurement-single-actions {
+	text-align: right;
+}
+
+/* LTR Specific Adjustments */
+html[dir="ltr"] .omsar-procurement-single-actions {
+	text-align: left;
+}

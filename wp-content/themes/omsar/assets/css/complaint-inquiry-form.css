@@ -1,0 +1,641 @@
+/* Complaint / Inquiry Submission Form – Stepped wizard */
+.page-template-complaint-inquiry-submission-form .page-banner {
+    padding-bottom: 8px;
+}
+
+.omsar-complaint-section {
+    padding-top: 2rem;
+    padding-bottom: 2.5rem;
+}
+
+.omsar-complaint-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 1.75rem 1.5rem;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    min-height: 420px;
+}
+
+/* Stepper */
+.omsar-stepper {
+    margin-bottom: 1.5rem;
+}
+
+.omsar-stepper-list {
+    list-style: none;
+    display: flex;
+    padding: 0;
+    margin: 0;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    /* gap: 0.25rem; */
+}
+
+.omsar-stepper-item {
+    flex: 1;
+    position: relative;
+    text-align: center;
+    min-width: 0;
+}
+
+.omsar-stepper-item::before,
+.omsar-stepper-item::after {
+    content: "";
+    position: absolute;
+    top: 10px;
+    height: 2px;
+    background: #e7edf6;
+    width: 50%;
+}
+
+.omsar-stepper-item::before {
+    left: 0;
+}
+
+.omsar-stepper-item::after {
+    right: 0;
+}
+
+.omsar-stepper-item:first-child::before {
+    display: none;
+}
+
+.omsar-stepper-item:last-child::after {
+    display: none;
+}
+
+.omsar-stepper-item.omsar-stepper-item--hidden {
+    display: none !important;
+}
+
+.omsar-stepper-dot {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border-radius: 999px;
+    border: 2px solid #cdd9ee;
+    background: #fff;
+    position: relative;
+    z-index: 1;
+}
+
+.omsar-stepper-label {
+    display: block;
+    margin-top: 0.5rem;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: #7a869a;
+    line-height: 1.3;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.omsar-stepper-item.is-active .omsar-stepper-dot {
+    border-color: #192D50;
+    background: #192D50;
+    box-shadow: 0 0 0 4px rgba(25, 45, 80, 0.12);
+}
+
+.omsar-stepper-item.is-active .omsar-stepper-label {
+    color: #192D50;
+}
+
+.omsar-stepper-item.is-complete .omsar-stepper-dot {
+    border-color: #5693FF;
+    background: #5693FF;
+}
+
+.omsar-stepper-item.is-complete::before,
+.omsar-stepper-item.is-complete::after {
+    background: #5693FF;
+}
+
+.omsar-stepper-item.is-complete .omsar-stepper-label {
+    color: #5693FF;
+}
+
+/* Typography & spacing */
+.omsar-complaint-title {
+    font-weight: 600;
+    font-size: 1.5rem;
+    line-height: 1.35;
+    color: #192D50;
+    margin-bottom: 0.75rem;
+}
+
+.omsar-complaint-desc {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #333;
+    margin-bottom: 1.25rem;
+}
+
+.omsar-step-title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #192D50;
+    margin-bottom: 1rem;
+    line-height: 1.4;
+}
+
+.omsar-complaint-note {
+    font-size: 0.9375rem;
+    line-height: 1.5;
+    color: #555;
+    /* background: #f7f9fc;
+    border: 1px solid #e7edf6; */
+    /* border-radius: 10px; */
+    padding: 0.875rem 1rem;
+    margin-top: 0.75rem;
+}
+
+.omsar-complaint-note--step {
+    margin-bottom: 1.25rem;
+}
+
+/* Steps */
+.omsar-step {
+    margin-top: 0.5rem;
+    min-height: 320px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+/* Form layout */
+.omsar-form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem 1.25rem;
+    margin-bottom: 1rem;
+}
+
+.omsar-form-group {
+    margin-bottom: 1.25rem;
+}
+
+.omsar-form-group--indent {
+    margin-top: 0.5rem;
+    margin-left: 1.5rem;
+    margin-bottom: 0.75rem;
+}
+
+.omsar-complaint-card .form-label {
+    font-weight: 500;
+    font-size: 0.9375rem;
+    color: #1a1a1a;
+    margin-bottom: 0.375rem;
+    display: block;
+    line-height: 1.4;
+}
+
+.omsar-label-hint {
+    font-size: 0.875rem;
+    font-weight: 400;
+    color: #6c757d;
+}
+
+.omsar-required {
+    color: #dc3545;
+    font-weight: 600;
+    margin-left: 0.25rem;
+}
+
+.omsar-field-hint {
+    display: block;
+    font-size: 0.8125rem;
+    color: #6c757d;
+    margin-top: 0.375rem;
+    line-height: 1.4;
+}
+
+.omsar-complaint-card .form-control {
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    padding: 0.625rem 0.875rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #1a1a1a;
+    width: 100%;
+}
+
+.omsar-complaint-card .form-control::placeholder {
+    color: #6c757d;
+}
+
+.omsar-complaint-card .form-control:focus {
+    border-color: #192D50;
+    box-shadow: 0 0 0 0.2rem rgba(25, 45, 80, 0.12);
+    outline: 0;
+}
+
+.omsar-complaint-card textarea.form-control {
+    resize: vertical;
+    min-height: 120px;
+}
+
+/* Radio groups */
+.omsar-radio-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.25rem;
+}
+
+.omsar-radio-group--stacked {
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+/* Two-column layout for long option lists (e.g. Q1 institutions) */
+.omsar-radio-group--two-cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem 2rem;
+}
+
+@media (max-width: 767px) {
+    .omsar-radio-group--two-cols {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Q3 Matrix: desktop table – hide column label in cell (header shows it) */
+.omsar-q3-matrix-wrap .omsar-q3-matrix-table .omsar-matrix-cell-label {
+    display: none;
+}
+
+/* Q3 Matrix: desktop – whole cell clickable (label fills cell so click = radio) */
+.omsar-q3-matrix-wrap .omsar-q3-matrix-table tbody td.omsar-q3-cell {
+    position: relative;
+}
+
+.omsar-q3-matrix-wrap .omsar-q3-matrix-table tbody td.omsar-q3-cell .omsar-matrix-option {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    margin: 0;
+}
+
+/* Q3 Matrix: mobile – one question per row, all options stacked under each */
+@media (max-width: 767px) {
+    .omsar-q3-matrix-wrap .omsar-q3-matrix-table {
+        overflow: visible;
+    }
+
+    .omsar-q3-matrix-wrap .omsar-q3-matrix-table .table {
+        display: block;
+        border: none;
+    }
+
+    .omsar-q3-matrix-wrap .omsar-q3-matrix-table thead {
+        display: none;
+    }
+
+    .omsar-q3-matrix-wrap .omsar-q3-matrix-table tbody {
+        display: block;
+    }
+
+    .omsar-q3-matrix-wrap .omsar-q3-matrix-table tbody tr {
+        display: block;
+        border: 1px solid #dee2e6;
+        border-radius: 8px;
+        padding: 0.75rem 1rem;
+        margin-bottom: 1rem;
+        background: #fff;
+    }
+
+    .omsar-q3-matrix-wrap .omsar-q3-matrix-table tbody td {
+        display: block;
+        border: none;
+        padding: 0.35rem 0;
+    }
+
+    .omsar-q3-matrix-wrap .omsar-q3-matrix-table tbody td.omsar-q3-row-label {
+        font-weight: 600;
+        font-size: 0.9375rem;
+        margin-bottom: 0.25rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 1px solid #eee;
+        margin-bottom: 0.5rem;
+    }
+
+    .omsar-q3-matrix-wrap .omsar-q3-matrix-table tbody td.omsar-q3-cell {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    /* Override desktop absolute positioning; keep radio and label on same row (survey-form.css uses flex-direction: column) */
+    .omsar-q3-matrix-wrap .omsar-q3-matrix-table tbody td.omsar-q3-cell .omsar-matrix-option {
+        position: static;
+        inset: auto;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 0.5rem;
+        flex-wrap: nowrap;
+        margin: 0;
+        cursor: pointer;
+        min-height: auto;
+    }
+
+    .omsar-q3-matrix-wrap .omsar-q3-matrix-table .omsar-matrix-cell-label {
+        display: inline;
+        flex: 1 1 auto;
+        min-width: 0;
+        font-size: 0.9375rem;
+        line-height: 1.45;
+        text-align: right;
+    }
+
+    .omsar-q3-matrix-wrap .omsar-q3-matrix-table .omsar-matrix-option .form-check-input {
+        flex-shrink: 0;
+        margin: 0;
+        align-self: center;
+    }
+
+    html[dir="rtl"] .omsar-q3-matrix-wrap .omsar-q3-matrix-table tbody td.omsar-q3-cell {
+        padding-left: 0;
+        padding-right: 0;
+    }
+}
+
+.omsar-radio-group .form-check {
+    margin-bottom: 0;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    flex-wrap: nowrap;
+}
+
+.omsar-radio-group .form-check .form-check-input {
+    float: none;
+    margin-top: 0.2em;
+    margin-left: 0;
+    flex-shrink: 0;
+}
+
+.omsar-radio-group .form-check-label {
+    font-size: 0.9375rem;
+    line-height: 1.45;
+    color: #1a1a1a;
+    min-width: 0;
+    flex: 1 1 auto;
+}
+
+.omsar-complaint-card .form-check-input {
+    margin-top: 0.2em;
+}
+
+/* Actions */
+.omsar-complaint-actions {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: flex-end;
+    margin-top: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.omsar-btn {
+    background-color: #192D50;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 0.625rem 1.25rem;
+    font-weight: 500;
+    font-size: 0.9375rem;
+    line-height: 1.4;
+    cursor: pointer;
+}
+
+.omsar-btn:hover {
+    background-color: #142540;
+    color: #fff;
+}
+
+.omsar-btn.omsar-btn-secondary {
+    background: #e9eef7;
+    color: #192D50;
+}
+
+.omsar-btn.omsar-btn-secondary:hover {
+    background: #dce4f2;
+    color: #192D50;
+}
+
+.omsar-btn:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+}
+
+.omsar-btn.loading {
+    position: relative;
+    color: transparent;
+    pointer-events: none;
+}
+
+.omsar-btn.loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 18px;
+    height: 18px;
+    border: 2px solid #ffffff;
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: omsar-spin 0.6s linear infinite;
+}
+
+@keyframes omsar-spin {
+    to {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+/* Word count */
+.omsar-word-count {
+    font-size: 0.8125rem;
+    color: #6c757d;
+    text-align: right;
+    margin-top: 0.375rem;
+    line-height: 1.3;
+}
+
+/* Messages */
+.omsar-complaint-message {
+    margin-top: 1rem;
+    padding: 0.75rem 1rem;
+    border-radius: 10px;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    line-height: 1.45;
+    display: none;
+}
+
+.omsar-complaint-message-success {
+    display: block;
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.omsar-complaint-message-error {
+    display: block;
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+/* Validation */
+.omsar-complaint-card .form-control.is-invalid {
+    border-color: #dc3545;
+    box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.15);
+}
+
+.omsar-complaint-card .form-control.is-invalid:focus {
+    border-color: #dc3545;
+    box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+}
+
+.omsar-complaint-card .form-check-input.is-invalid {
+    border-color: #dc3545;
+}
+
+.omsar-complaint-card .form-check-input.is-invalid ~ .form-check-label {
+    color: #dc3545;
+}
+
+/* File input */
+.omsar-complaint-card input[type="file"].form-control {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.9375rem;
+}
+
+/* Responsive */
+@media (max-width: 991.98px) {
+    .omsar-form-row {
+        grid-template-columns: 1fr;
+    }
+
+    .omsar-form-group--indent {
+        margin-left: 0;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .omsar-complaint-section {
+        padding-top: 1.5rem;
+        padding-bottom: 1.5rem;
+    }
+
+    .omsar-complaint-card {
+        padding: 1.25rem 1rem;
+        min-height: 360px;
+    }
+
+    .omsar-complaint-title {
+        font-size: 1.25rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .omsar-complaint-desc {
+        font-size: 0.9375rem;
+        margin-bottom: 1rem;
+    }
+
+    .omsar-step-title {
+        font-size: 1.0625rem;
+        margin-bottom: 0.875rem;
+    }
+
+    .omsar-stepper-list {
+        gap: 0.125rem;
+    }
+
+    .omsar-stepper-label {
+        font-size: 0.6875rem;
+    }
+
+    .omsar-stepper-dot {
+        width: 16px;
+        height: 16px;
+    }
+
+    .omsar-stepper-item::before,
+    .omsar-stepper-item::after {
+        top: 8px;
+    }
+
+    .omsar-step {
+        min-height: 280px;
+    }
+
+    .omsar-complaint-actions {
+        justify-content: space-between;
+        margin-top: 1.25rem;
+        gap: 0.5rem;
+    }
+
+    .omsar-btn {
+        padding: 0.5rem 1rem;
+        font-size: 0.875rem;
+    }
+
+    .omsar-complaint-card .form-label {
+        font-size: 0.875rem;
+    }
+
+    .omsar-complaint-card .form-control {
+        font-size: 0.9375rem;
+        padding: 0.5rem 0.75rem;
+    }
+
+    .omsar-radio-group .form-check-label {
+        font-size: 0.875rem;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .omsar-stepper-label {
+        font-size: 0.625rem;
+    }
+}
+
+/* RTL */
+html[dir="rtl"] .form-check .form-check-input {
+    float: right !important;
+    margin-left: 0.5em !important;
+}
+
+/* Radio group: flex layout handles alignment in RTL; avoid float */
+html[dir="rtl"] .omsar-radio-group .form-check .form-check-input {
+    float: none !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+
+html[dir="rtl"] .omsar-stepper-item::after {
+    left: 0;
+    right: auto;
+}
+
+html[dir="rtl"] .omsar-stepper-item::before {
+    right: 0;
+    left: auto;
+}
+
+html[dir="rtl"] .omsar-form-group--indent {
+    margin-left: 0;
+    margin-right: 1.5rem;
+}
+
+@media (max-width: 991.98px) {
+    html[dir="rtl"] .omsar-form-group--indent {
+        margin-right: 0;
+    }
+}

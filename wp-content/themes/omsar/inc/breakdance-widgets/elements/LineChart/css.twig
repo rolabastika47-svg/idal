@@ -1,0 +1,49 @@
+{% set title_align = design.title.alignment ?? 'left' %}
+
+%%SELECTOR%% .omsar-line-chart-title {
+  color: {{ design.title.color ?? '#000000' }};
+  {{ macros.typography(design.title.typography, globalSettings) }}
+  {% if title_align == 'left' %}
+  text-align: start;
+  {% elseif title_align == 'right' %}
+  text-align: end;
+  {% else %}
+  text-align: center;
+  {% endif %}
+  {{ macros.spacing_margin_all(design.title.margin) }}
+}
+
+%%SELECTOR%% .omsar-line-chart-container {
+  {% if design.container.chart_height.style is defined %}
+  height: {{ design.container.chart_height.style }};
+  {% else %}
+  height: 400px;
+  {% endif %}
+}
+
+%%SELECTOR%% .omsar-line-chart-container canvas {
+  max-height: 100%;
+}
+
+%%SELECTOR%% .omsar-line-chart-wrapper {
+  {% if design.advanced.chart_width.style is defined %}
+  width: {{ design.advanced.chart_width.style }};
+  {% else %}
+  width: 100%;
+  {% endif %}
+  background-color: {{ design.container.background_color ?? '#ffffff' }};
+  {{ macros.spacing_padding_all(design.container.padding) }}
+  {{ macros.borders(design.container.borders) }}
+  {% if design.container.border_radius.style is defined %}
+  border-radius: {{ design.container.border_radius.style }};
+  {% else %}
+  border-radius: 8px;
+  {% endif %}
+  {{ macros.spacing_margin_all(design.advanced.margin) }}
+}
+
+html[dir="rtl"] %%SELECTOR%% .omsar-line-chart-title,
+%%SELECTOR%%[dir="rtl"] .omsar-line-chart-title,
+%%SELECTOR%%.omsar-bd-rtl .omsar-line-chart-title {
+  font-family: 'Almarai', sans-serif !important;
+}

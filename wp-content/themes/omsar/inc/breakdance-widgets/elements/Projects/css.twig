@@ -1,0 +1,108 @@
+{# Grid columns — design overrides content columns when set #}
+{% set grid_cols = design.style.grid_columns ?? content.content.columns ?? '3' %}
+%%SELECTOR%% .omsar-projects-grid {
+  grid-template-columns: repeat({{ grid_cols }}, 1fr);
+}
+
+{# Read More button #}
+%%SELECTOR%% .omsar-post-read-more {
+  background-color: {{ design.read_more.background_color ?? '#192D50' }};
+  color: {{ design.read_more.text_color ?? '#ffffff' }};
+  {{ macros.spacing_padding_all(design.read_more.padding) }}
+  {{ macros.borders(design.read_more.borders) }}
+  {{ macros.typography(design.read_more.typography, globalSettings) }}
+  {% if design.read_more.border_radius.style is defined %}
+  border-radius: {{ design.read_more.border_radius.style }};
+  {% endif %}
+  {% if design.read_more.transition_duration.style is defined %}
+  transition: all {{ design.read_more.transition_duration.style }};
+  {% endif %}
+}
+
+%%SELECTOR%% .omsar-post-read-more:hover {
+  background-color: {{ design.read_more.hover_background_color ?? '#1a3d6b' }};
+  color: {{ design.read_more.hover_text_color ?? '#ffffff' }};
+}
+
+{# Load More button #}
+%%SELECTOR%% .omsar-load-more-btn {
+  background-color: {{ design.load_more.background_color ?? '#5693ff' }};
+  color: {{ design.load_more.text_color ?? '#ffffff' }};
+  border-color: {{ design.load_more.border_color ?? 'transparent' }};
+  border-width: {{ design.load_more.border_width.style ?? '0px' }};
+  border-style: solid;
+  {{ macros.spacing_padding_all(design.load_more.padding) }}
+  {{ macros.typography(design.load_more.typography, globalSettings) }}
+  {% if design.load_more.border_radius.style is defined %}
+  border-radius: {{ design.load_more.border_radius.style }};
+  {% else %}
+  border-radius: 50px;
+  {% endif %}
+  {% if design.load_more.transition_duration.style is defined %}
+  transition: all {{ design.load_more.transition_duration.style }};
+  {% endif %}
+}
+
+%%SELECTOR%% .omsar-load-more-btn:hover:not(:disabled) {
+  background-color: {{ design.load_more.hover_background_color ?? '#4a7cff' }};
+  color: {{ design.load_more.hover_text_color ?? '#ffffff' }};
+  border-color: {{ design.load_more.hover_border_color ?? design.load_more.border_color ?? 'transparent' }};
+}
+
+%%SELECTOR%% .omsar-load-more-wrapper {
+  text-align: {{ design.load_more.wrapper_alignment ?? 'center' }};
+  {{ macros.spacing_margin_y(design.load_more.wrapper_margin) }}
+}
+
+{# Theme fonts — override Breakdance typography; RTL uses Almarai #}
+%%SELECTOR%% .omsar-post-content,
+%%SELECTOR%% .omsar-post-title,
+%%SELECTOR%% .omsar-post-title a,
+%%SELECTOR%% .omsar-post-excerpt,
+%%SELECTOR%% .omsar-post-badge,
+%%SELECTOR%% .omsar-post-read-more,
+%%SELECTOR%% .omsar-load-more-btn,
+%%SELECTOR%% .omsar-style4-filter-label,
+%%SELECTOR%% .omsar-posts-search-input,
+%%SELECTOR%% .omsar-style4-dropdown {
+  font-family: var(--font-main, 'Inter', sans-serif) !important;
+}
+
+html[dir="rtl"] %%SELECTOR%%,
+%%SELECTOR%%[dir="rtl"],
+%%SELECTOR%%.omsar-bd-rtl {
+  font-family: 'Almarai', sans-serif !important;
+}
+
+html[dir="rtl"] %%SELECTOR%% .omsar-post-content,
+html[dir="rtl"] %%SELECTOR%% .omsar-post-title,
+html[dir="rtl"] %%SELECTOR%% .omsar-post-title a,
+html[dir="rtl"] %%SELECTOR%% .omsar-post-excerpt,
+html[dir="rtl"] %%SELECTOR%% .omsar-post-badge,
+html[dir="rtl"] %%SELECTOR%% .omsar-post-read-more,
+html[dir="rtl"] %%SELECTOR%% .omsar-load-more-btn,
+html[dir="rtl"] %%SELECTOR%% .omsar-style4-filter-label,
+html[dir="rtl"] %%SELECTOR%% .omsar-posts-search-input,
+html[dir="rtl"] %%SELECTOR%% .omsar-style4-dropdown,
+%%SELECTOR%%[dir="rtl"] .omsar-post-content,
+%%SELECTOR%%[dir="rtl"] .omsar-post-title,
+%%SELECTOR%%[dir="rtl"] .omsar-post-title a,
+%%SELECTOR%%[dir="rtl"] .omsar-post-excerpt,
+%%SELECTOR%%[dir="rtl"] .omsar-post-badge,
+%%SELECTOR%%[dir="rtl"] .omsar-post-read-more,
+%%SELECTOR%%[dir="rtl"] .omsar-load-more-btn,
+%%SELECTOR%%[dir="rtl"] .omsar-style4-filter-label,
+%%SELECTOR%%[dir="rtl"] .omsar-posts-search-input,
+%%SELECTOR%%[dir="rtl"] .omsar-style4-dropdown,
+%%SELECTOR%%.omsar-bd-rtl .omsar-post-content,
+%%SELECTOR%%.omsar-bd-rtl .omsar-post-title,
+%%SELECTOR%%.omsar-bd-rtl .omsar-post-title a,
+%%SELECTOR%%.omsar-bd-rtl .omsar-post-excerpt,
+%%SELECTOR%%.omsar-bd-rtl .omsar-post-badge,
+%%SELECTOR%%.omsar-bd-rtl .omsar-post-read-more,
+%%SELECTOR%%.omsar-bd-rtl .omsar-load-more-btn,
+%%SELECTOR%%.omsar-bd-rtl .omsar-style4-filter-label,
+%%SELECTOR%%.omsar-bd-rtl .omsar-posts-search-input,
+%%SELECTOR%%.omsar-bd-rtl .omsar-style4-dropdown {
+  font-family: 'Almarai', sans-serif !important;
+}

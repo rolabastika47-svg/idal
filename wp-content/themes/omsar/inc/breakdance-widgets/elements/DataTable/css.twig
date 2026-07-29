@@ -1,0 +1,93 @@
+{% set title_align = design.title.alignment ?? 'left' %}
+{% set border_style = design.container.border_style ?? 'none' %}
+
+%%SELECTOR%% .omsar-table-title {
+  color: {{ design.title.color ?? '#000000' }};
+  {{ macros.typography(design.title.typography, globalSettings) }}
+  {% if title_align == 'left' %}
+  text-align: start;
+  {% elseif title_align == 'right' %}
+  text-align: end;
+  {% else %}
+  text-align: center;
+  {% endif %}
+  {{ macros.spacing_margin_all(design.title.margin) }}
+}
+
+%%SELECTOR%% .omsar-table thead th {
+  background-color: {{ design.header.background_color ?? '#f8f9fa' }};
+  color: {{ design.header.text_color ?? '#000000' }};
+  {{ macros.typography(design.header.typography, globalSettings) }}
+  {{ macros.spacing_padding_all(design.header.padding) }}
+}
+
+%%SELECTOR%% .omsar-table tbody td {
+  color: {{ design.body.text_color ?? '#000000' }};
+  {{ macros.typography(design.body.typography, globalSettings) }}
+  {{ macros.spacing_padding_all(design.body.padding) }}
+}
+
+%%SELECTOR%% .omsar-table tbody tr {
+  border-bottom-color: {{ design.body.row_border_color ?? '#e9ecef' }};
+  border-bottom-style: solid;
+  {% if design.body.row_border_width.style is defined %}
+  border-bottom-width: {{ design.body.row_border_width.style }};
+  {% else %}
+  border-bottom-width: 1px;
+  {% endif %}
+}
+
+%%SELECTOR%% .omsar-table-wrapper {
+  background-color: {{ design.container.background_color ?? '#ffffff' }};
+  {{ macros.spacing_padding_all(design.container.padding) }}
+  border-style: {{ border_style }};
+  {% if border_style != 'none' %}
+  border-color: {{ design.container.border_color ?? '#dddddd' }};
+  {{ macros.borders(design.container.borders) }}
+  {% endif %}
+  {% if design.container.border_radius.style is defined %}
+  border-radius: {{ design.container.border_radius.style }};
+  {% else %}
+  border-radius: 8px;
+  {% endif %}
+  {% if design.advanced.table_width.style is defined %}
+  width: {{ design.advanced.table_width.style }};
+  {% else %}
+  width: 100%;
+  {% endif %}
+  {{ macros.spacing_margin_all(design.advanced.margin) }}
+}
+
+%%SELECTOR%% .omsar-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+html[dir="rtl"] %%SELECTOR%% .omsar-table-title,
+%%SELECTOR%%[dir="rtl"] .omsar-table-title,
+%%SELECTOR%%.omsar-bd-rtl .omsar-table-title {
+  font-family: 'Almarai', sans-serif !important;
+  text-align: right;
+}
+
+html[dir="rtl"] %%SELECTOR%% .omsar-table thead th,
+html[dir="rtl"] %%SELECTOR%% .omsar-table tbody td,
+%%SELECTOR%%[dir="rtl"] .omsar-table thead th,
+%%SELECTOR%%[dir="rtl"] .omsar-table tbody td,
+%%SELECTOR%%.omsar-bd-rtl .omsar-table thead th,
+%%SELECTOR%%.omsar-bd-rtl .omsar-table tbody td {
+  font-family: 'Almarai', sans-serif !important;
+  text-align: right;
+}
+
+html[dir="rtl"] %%SELECTOR%% .omsar-table,
+%%SELECTOR%%[dir="rtl"] .omsar-table,
+%%SELECTOR%%.omsar-bd-rtl .omsar-table {
+  direction: rtl;
+}
+
+html[dir="rtl"] %%SELECTOR%% .omsar-table-empty-message,
+%%SELECTOR%%[dir="rtl"] .omsar-table-empty-message,
+%%SELECTOR%%.omsar-bd-rtl .omsar-table-empty-message {
+  text-align: right;
+}

@@ -1,0 +1,159 @@
+name: Update Translations
+
+on:
+  schedule:
+    # Run every Monday at 3:00 AM UTC
+    - cron: '0 3 * * 1'
+  workflow_dispatch: # Allow manual trigger
+
+env:
+  GLOTPRESS_URL: ${{ secrets.GLOTPRESS_URL || 'https://translate.breakdance.com/glotpress' }}
+  PROJECT_SLUG: ${{ secrets.PROJECT_SLUG || 'breakdance-elements' }}
+  LANGUAGES_PATH: 'languages'
+  MIN_TRANSLATION_PERCENTAGE: 85
+
+jobs:
+  update-translations:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Fetch translations data
+        id: fetch
+        run: |
+          # Fetch project data for completion percentages
+          PROJECTS_API_URL="${GLOTPRESS_URL}/api/projects/${PROJECT_SLUG}"
+          echo "Fetching completion percentages from: $PROJECTS_API_URL"
+          echo "Minimum translation percentage: ${MIN_TRANSLATION_PERCENTAGE}%"
+
+          projects_response=$(curl -s -f "$PROJECTS_API_URL")
+          if [ $? -ne 0 ]; then
+            echo "Failed to fetch project data"
+            exit 1
+          fi
+
+          echo "$projects_response" > projects.json
+          echo "Project data saved"
+          echo "Project data contents:"
+          jq . projects.json
+
+          # Fetch translations data for download URLs
+          TRANSLATIONS_API_URL="${GLOTPRESS_URL}/api/translations/${PROJECT_SLUG}"
+          echo "Fetching translation packages from: $TRANSLATIONS_API_URL"
+
+          translations_response=$(curl -s -f "$TRANSLATIONS_API_URL")
+          if [ $? -ne 0 ]; then
+            echo "Failed to fetch translations data"
+            exit 1
+          fi
+
+          echo "$translations_response" > translations.json
+          echo "Translations data saved"
+
+      - name: Download and extract translation packages
+        run: |
+          if [ ! -f projects.json ] || [ ! -f translations.json ]; then
+            echo "No translations data found"
+            exit 1
+          fi
+
+          # Create languages directory if it doesn't exist
+          mkdir -p "$LANGUAGES_PATH"
+
+          # Get list of locales that meet the minimum percentage from projects API
+          qualifying_locales=$(jq -r --argjson min_pct "$MIN_TRANSLATION_PERCENTAGE" '
+            .translation_sets[]? |
+            select(.percent_translated >= $min_pct) |
+            .wp_locale
+          ' projects.json)
+
+          if [ -z "$qualifying_locales" ]; then
+            echo "No translation packages found with >= ${MIN_TRANSLATION_PERCENTAGE}% completion"
+            rm projects.json translations.json
+            exit 0
+          fi
+
+          echo "Found locales meeting ${MIN_TRANSLATION_PERCENTAGE}% threshold:"
+
+          # Get completion info for logging
+          jq -r --argjson min_pct "$MIN_TRANSLATION_PERCENTAGE" '
+            .translation_sets[]? |
+            select(.percent_translated >= $min_pct) |
+            "\(.name) (\(.wp_locale)): \(.percent_translated)%"
+          ' projects.json
+          echo ""
+
+          # Download translation packages for qualifying locales
+          for locale in $qualifying_locales; do
+            # Get the package URL from translations API for this locale
+            package_url=$(jq -r --arg locale "$locale" '
+              .translations[]? |
+              select(.language == $locale) |
+              .package
+            ' translations.json)
+
+            # Get the completion percentage for logging
+            percent=$(jq -r --arg locale "$locale" '
+              .translation_sets[]? |
+              select(.wp_locale == $locale) |
+              .percent_translated
+            ' projects.json)
+
+            if [ -n "$package_url" ] && [ "$package_url" != "null" ]; then
+              echo "Downloading: $locale - ${percent}% complete"
+              echo "URL: $package_url"
+
+              # Download the zip file
+              # URL encode %% as %25%25 for the download URL
+              encoded_url=$(echo "$package_url" | sed 's/%%/%25%25/g')
+              # Extract filename and decode any URL-encoded characters
+              filename=$(basename "$package_url" | sed 's/%25/%/g')
+
+              echo "Encoded URL: $encoded_url"
+              echo "Filename: $filename"
+              curl -L -o "/tmp/$filename" "$encoded_url"
+
+              if [ $? -eq 0 ]; then
+                echo "Extracting: $filename"
+                # Extract to languages folder
+                unzip -o "/tmp/$filename" -d "$LANGUAGES_PATH"
+                rm "/tmp/$filename"
+              else
+                echo "Failed to download: $encoded_url"
+              fi
+            else
+              echo "Warning: No package URL found for locale: $locale. Skipping."
+            fi
+          done
+
+          rm projects.json translations.json
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: 'chore: update translations from GlotPress'
+          branch: translations/update-${{ github.run_number }}
+          delete-branch: true
+          title: 'Update translations from GlotPress'
+          body: |
+            This PR updates translation files from GlotPress.
+
+            **Changes:**
+            - Downloaded latest translation packages
+            - Updated language files in `${{ env.LANGUAGES_PATH }}`
+            - Only includes translations that are at least ${{ env.MIN_TRANSLATION_PERCENTAGE }}% complete
+
+            **Sources:**
+            - Completion data: `${{ env.GLOTPRESS_URL }}/api/projects/${{ env.PROJECT_SLUG }}`
+            - Translation packages: `${{ env.GLOTPRESS_URL }}/api/translations/${{ env.PROJECT_SLUG }}`
+
+            Auto-generated by [update-translations workflow](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})
+          labels: |
+            translations
+            automated
+

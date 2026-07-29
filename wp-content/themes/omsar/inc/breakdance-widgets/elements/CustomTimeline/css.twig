@@ -1,0 +1,57 @@
+{# Timeline line #}
+%%SELECTOR%% .omsar-timeline-line {
+  background-color: {{ design.line.color ?? '#d1d5db' }};
+  width: {{ design.line.width.style ?? '2px' }};
+}
+
+{# Markers #}
+%%SELECTOR%% .omsar-timeline-marker {
+  width: {{ design.markers.size.style ?? '16px' }};
+  height: {{ design.markers.size.style ?? '16px' }};
+  border-color: {{ design.markers.color ?? '#60a5fa' }};
+}
+
+%%SELECTOR%% .omsar-timeline-marker:not(.filled) {
+  border-width: {{ design.markers.border_width.style ?? '2px' }};
+  background-color: {{ design.markers.background ?? '#ffffff' }};
+}
+
+%%SELECTOR%% .omsar-timeline-marker.filled {
+  background-color: {{ design.markers.color ?? '#60a5fa' }};
+  border-color: {{ design.markers.color ?? '#60a5fa' }};
+}
+
+{# Title #}
+%%SELECTOR%% .omsar-timeline-item-title {
+  color: {{ design.title.color ?? '#1f2937' }};
+  margin-bottom: {{ design.spacing.content_spacing.style ?? '8px' }};
+  {{ macros.typography(design.title.typography, globalSettings) }}
+}
+
+{# Date #}
+%%SELECTOR%% .omsar-timeline-item-date {
+  color: {{ design.date.color ?? '#60a5fa' }};
+  margin-bottom: {{ design.spacing.content_spacing.style ?? '8px' }};
+  {{ macros.typography(design.date.typography, globalSettings) }}
+}
+
+{# Description #}
+%%SELECTOR%% .omsar-timeline-item-description {
+  color: {{ design.description.color ?? '#6b7280' }};
+  {{ macros.typography(design.description.typography, globalSettings) }}
+}
+
+{# Spacing #}
+%%SELECTOR%% .omsar-timeline-item:not(:last-child) {
+  margin-bottom: {{ design.spacing.item_spacing.style ?? '40px' }};
+}
+
+%%SELECTOR%% .omsar-timeline-item-content {
+  {{ macros.spacing_padding_all(design.spacing.content_padding) }}
+}
+
+{# Background #}
+%%SELECTOR%% .omsar-timeline-wrapper {
+  background-color: {{ design.background.background_color ?? '#ffffff' }};
+  {{ macros.spacing_padding_all(design.background.wrapper_padding) }}
+}

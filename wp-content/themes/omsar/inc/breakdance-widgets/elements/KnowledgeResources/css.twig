@@ -1,0 +1,127 @@
+{# Title — use logical start/end so Arabic RTL aligns correctly #}
+{% set title_typography = design.title.typography ?? design.title.title ?? null %}
+{% set title_margin = design.title.margin ?? design.title.title_margin ?? null %}
+{% set title_align = design.title.alignment ?? 'left' %}
+%%SELECTOR%% .omsar-kr-card-title {
+  color: {{ design.title.color ?? '#000000' }};
+  {% if title_align == 'right' %}
+  text-align: end;
+  {% elseif title_align == 'center' %}
+  text-align: center;
+  {% else %}
+  text-align: start;
+  {% endif %}
+  {{ macros.typography(title_typography, globalSettings) }}
+  {{ macros.spacing_margin_all(title_margin) }}
+}
+
+{# Card grid #}
+{% set columns = content.content.columns ?? '2' %}
+%%SELECTOR%% .omsar-kr-list.omsar-kr-grid {
+  gap: {{ design.card.grid_gap.style ?? '24px' }};
+  grid-template-columns: repeat({{ columns }}, 1fr);
+}
+
+%%SELECTOR%% .omsar-kr-card {
+  background-color: {{ design.card.background_color ?? '#ffffff' }};
+  border-radius: {{ design.card.border_radius.style ?? '8px' }};
+  {{ macros.borders(design.card.borders) }}
+}
+
+{# PDF download link title #}
+%%SELECTOR%% .omsar-kr-download-link {
+  color: {{ design.download_link.text_color ?? '#1a3e7b' }};
+  text-decoration: none;
+  transition: color 0.2s ease;
+  {{ macros.typography(design.download_link.typography, globalSettings) }}
+}
+
+%%SELECTOR%% .omsar-kr-download-link:hover {
+  color: {{ design.download_link.hover_text_color ?? '#7db3e8' }};
+  text-decoration: underline;
+}
+
+%%SELECTOR%% .omsar-kr-download-link i {
+  color: {{ design.download_link.icon_color ?? '#dc3545' }};
+}
+
+{# Load more #}
+%%SELECTOR%% .omsar-kr-load-more-wrapper .omsar-load-more-btn,
+%%SELECTOR%% .omsar-kr-load-more-btn {
+  background-color: {{ design.load_more.background_color ?? '#ffffff' }};
+  color: {{ design.load_more.text_color ?? '#4a5568' }};
+  border-color: {{ design.load_more.border_color ?? '#4a5568' }};
+  border-width: {{ design.load_more.border_width.style ?? '1px' }};
+  border-style: solid;
+  border-radius: {{ design.load_more.border_radius.style ?? '50px' }};
+  {{ macros.spacing_padding_all(design.load_more.padding) }}
+  {{ macros.typography(design.load_more.typography, globalSettings) }}
+}
+
+%%SELECTOR%% .omsar-kr-load-more-wrapper .omsar-load-more-btn:hover:not(:disabled),
+%%SELECTOR%% .omsar-kr-load-more-btn:hover:not(:disabled) {
+  background-color: {{ design.load_more.hover_background_color ?? '#f7fafc' }};
+  color: {{ design.load_more.hover_text_color ?? '#2d3748' }};
+  border-color: {{ design.load_more.hover_border_color ?? '#2d3748' }};
+}
+
+%%SELECTOR%% .omsar-kr-load-more-wrapper {
+  text-align: {{ design.load_more.wrapper_alignment ?? 'center' }};
+  {{ macros.spacing_margin_all(design.load_more.wrapper_margin) }}
+}
+
+{# Search — Content > Search Alignment (left / right) #}
+{% set search_align = content.content.search_align ?? 'left' %}
+{% set search_max_width = design.search.max_width.style ?? '400px' %}
+%%SELECTOR%% .omsar-kr-search-wrapper {
+  display: flex !important;
+  width: 100% !important;
+  margin-bottom: 24px;
+  {% if search_align == 'right' %}
+  justify-content: flex-end !important;
+  {% else %}
+  justify-content: flex-start !important;
+  {% endif %}
+  {{ macros.spacing_margin_all(design.search.wrapper_margin) }}
+}
+
+%%SELECTOR%% .omsar-kr-search-inner {
+  display: block;
+  flex: 0 0 auto;
+  width: min({{ search_max_width }}, 100%);
+  max-width: {{ search_max_width }};
+  min-width: 200px;
+  box-sizing: border-box;
+  {% if search_align == 'right' %}
+  margin-left: auto;
+  margin-right: 0;
+  {% else %}
+  margin-left: 0;
+  margin-right: auto;
+  {% endif %}
+  background-color: {{ design.search.background_color ?? '#f5f5f5' }};
+  border-color: {{ design.search.border_color ?? '#e2e8f0' }};
+  border-width: {{ design.search.border_width.style ?? '1px' }};
+  border-style: solid;
+  border-radius: {{ design.search.border_radius.style ?? '50px' }};
+}
+
+%%SELECTOR%% .omsar-kr-search-input {
+  color: {{ design.search.text_color ?? '#4a5568' }};
+  background-color: transparent;
+  {{ macros.spacing_padding_all(design.search.padding) }}
+  {{ macros.typography(design.search.typography, globalSettings) }}
+}
+
+%%SELECTOR%% .omsar-kr-search-input::placeholder {
+  color: {{ design.search.text_color ?? '#4a5568' }};
+  opacity: 0.8;
+}
+
+%%SELECTOR%% .omsar-kr-search-icon {
+  color: {{ design.search.icon_color ?? '#718096' }};
+}
+
+%%SELECTOR%% .omsar-kr-list.omsar-kr-grid {
+  margin-top: 0;
+}

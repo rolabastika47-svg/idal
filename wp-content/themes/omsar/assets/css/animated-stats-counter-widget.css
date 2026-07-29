@@ -1,0 +1,109 @@
+/**
+ * Animated Stats Counter Widget Styles
+ * 
+ * @package OMSAR
+ */
+
+.omsar-stats-counter-wrapper {
+	width: 100%;
+}
+
+.omsar-stats-counter-grid {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 20px;
+	width: 100%;
+	/* justify-content: center; */
+	align-items: stretch;
+}
+
+.omsar-stats-counter-item {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	background-color: #ffffff;
+	border-radius: 12px;
+	padding: 30px 24px;
+	transition: transform 0.3s ease, box-shadow 0.3s ease;
+	width: 240px;
+	flex: 0 0 auto;
+	border: 1px solid #e5e7eb;
+	box-shadow: none;
+}
+
+.omsar-stats-counter-item:hover {
+	transform: translateY(-5px);
+}
+
+.omsar-stats-icon {
+	width: 64px;
+	height: 64px;
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-bottom: 20px;
+	background: linear-gradient(135deg, #7c3aed, #6366f1);
+	overflow: hidden;
+	flex-shrink: 0;
+}
+
+.omsar-stats-icon img {
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
+	padding: 14px;
+}
+
+.omsar-stats-icon i {
+	font-size: 32px;
+	color: #ffffff;
+}
+
+.omsar-stats-number {
+	font-size: 40px;
+	font-weight: 700;
+	color: #1f2937;
+	line-height: 1.3;
+	margin-bottom: 12px;
+	word-break: break-word;
+}
+
+.omsar-stats-label {
+	font-size: 15px;
+	color: #374151;
+	line-height: 1.5;
+	font-weight: 400;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+	.omsar-stats-counter-item {
+		width: calc(50% - 10px);
+		min-width: 200px;
+	}
+}
+
+@media (max-width: 768px) {
+	.omsar-stats-counter-grid {
+		flex-direction: column;
+		align-items: center;
+	}
+
+	.omsar-stats-counter-item {
+		width: 100%;
+		max-width: 300px;
+		padding: 24px 20px;
+	}
+
+	.omsar-stats-number {
+		font-size: 36px;
+	}
+
+	.omsar-stats-label {
+		font-size: 14px;
+	}
+}
+

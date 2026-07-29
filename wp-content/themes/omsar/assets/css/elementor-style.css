@@ -1,0 +1,2143 @@
+/* ------------------------------------------ */
+/*         Statistics Cards Styles            */
+/* ------------------------------------------ */
+
+.dt-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    margin-top: 50px;
+}
+
+
+.dt-stat-card {
+    position: relative;
+    min-height: 200px;
+    border-radius: 20px;
+    overflow: hidden;
+    padding: 25px;
+    padding-bottom: 40px;
+    background-color: #ffffff;
+    background-repeat: no-repeat;
+    background-position: right bottom;
+    background-size: 234px 238px;
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.05);
+    border-inline-start: 1px solid rgba(0, 0, 0, 0.05);
+}
+.mission-vision-container .dt-stat-card {
+    min-height: 245px;
+}
+.dt-stat-card::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 150px;
+    height: 150px;
+    background-repeat: no-repeat;
+    background-position: right bottom;
+    background-size: 150px 150px;
+    opacity: 0.15;
+    z-index: 0;
+    pointer-events: none;
+}
+
+html[dir="rtl"] .dt-stat-card::before{ 
+    right: unset;
+    left: 0;
+}
+
+html[dir="rtl"] .dt-stat-card {
+    box-shadow: 5px 0 15px rgba(0, 0, 0, 0.05);
+    background-position: left bottom;
+}
+
+.dt-stat-card-1::before {
+    background-image: url('../images/e-services-implemented.svg');
+}
+
+.dt-stat-card-2::before {
+    background-image: url('../images/e-services-implemented.svg');
+}
+
+.dt-stat-card-3::before {
+    background-image: url('../images/public-servants-trained.svg');
+}
+
+.dt-stat-card-4::before {
+    background-image: url('../images/digits-transformation-projects.svg');
+    background-size: 130px 150px;
+    width: 130px;
+    height: 150px;
+}
+
+.dt-stat-card-1,
+.dt-stat-card-2,
+.dt-stat-card-3,
+.dt-stat-card-4 {
+    background-image: none;
+}
+
+.dt-stat-card .card-content {
+    position: relative;
+    z-index: 2;
+    min-width: 200px;
+    white-space: normal;
+    text-align: start;
+}
+
+.dt-stat-card .card-number {
+    line-height: 1.1;
+    letter-spacing: -0.005em;
+    margin-bottom: 20px;
+    /* Font size and color - editable via Elementor typography controls */
+    font-size: 35px;
+    color: #000000;
+    text-align: start;
+}
+
+.dt-stat-card .card-text {
+    line-height: 1.4;
+    letter-spacing: -0.005em;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    /* Font size and color - editable via Elementor typography controls */
+    font-size: 24px;
+    color: #000000;
+    width: 80%;
+    text-align: start;
+    margin-inline-end: auto;
+}
+
+/* Responsive - Statistics Cards */
+@media (max-width: 1600px) {
+    .dt-stat-card {
+        height: 165px;
+        min-height: 165px;
+    }
+    .mission-vision-container .dt-stat-card {
+        height: 215px;
+        min-height: 215px;
+    }
+}
+
+@media (max-width: 991.98px) {
+    .dt-stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+
+    .dt-stat-card {
+        height: 165px;
+    }
+
+
+    .dt-stat-card::before {
+        width: 110px;
+        height: 135px;
+        background-size: 110px 135px;
+    }
+
+    .dt-stat-card-4::before {
+        width: 110px;
+        height: 135px;
+        background-size: 110px 135px;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .dt-stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .dt-stat-card::before {
+        width: 110px;
+        height: 135px;
+        background-size: 110px 135px;
+    }
+
+    .dt-stat-card-4::before {
+        width: 110px;
+        height: 135px;
+        background-size: 110px 135px;
+    }
+
+    .mission-vision-container .dt-stat-card {
+        height: 330px;
+        min-height: 330px;
+    }
+    .mission-vision-container .dt-stat-card .card-text{
+        width: 100%;
+    }
+}
+
+/* ------------------------------------------ */
+/*      Posts by Taxonomy Widget Styles       */
+/* ------------------------------------------ */
+
+.omsar-posts-by-taxonomy-widget {
+    margin: 30px 0;
+    margin-top: 0;
+}
+
+/* Search Box */
+.omsar-posts-search-wrapper {
+    position: relative;
+    margin-bottom: 30px;
+    max-width: 400px;
+    display: inline-block;
+}
+
+.omsar-posts-search-label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #333;
+    font-size: 14px;
+}
+
+/* Inline search wrapper for Style 4 */
+.omsar-posts-search-wrapper-inline {
+    position: relative;
+    flex: 1;
+    min-width: 0;
+}
+
+.omsar-posts-search-wrapper-inline .omsar-posts-search-input {
+    width: 100%;
+    padding: 10px 40px 10px 16px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    font-size: 0.9375rem;
+    transition: border-color 0.3s ease;
+    box-sizing: border-box;
+}
+
+.omsar-posts-search-wrapper-inline .omsar-posts-search-input:focus {
+    outline: none;
+    border-color: #0073aa;
+}
+
+.omsar-posts-search-wrapper-inline .omsar-search-icon {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #6c757d;
+    pointer-events: none;
+    font-size: 1rem;
+}
+
+.omsar-posts-search-wrapper.omsar-search-align-center {
+    display: block !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    text-align: center !important;
+}
+
+.omsar-posts-search-wrapper.omsar-search-align-right {
+    display: block !important;
+    margin-left: auto !important;
+    margin-right: 0 !important;
+    text-align: right !important;
+}
+
+.omsar-posts-search-wrapper.omsar-search-align-left {
+    display: inline-block !important;
+    margin-left: 0 !important;
+    margin-right: auto !important;
+    text-align: left !important;
+}
+
+.omsar-posts-search-input {
+    width: 100%;
+    padding: 12px 45px 12px 20px;
+    border: 2px solid #e0e2e6;
+    border-radius: 50px;
+    background: #ffffff;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+.omsar-posts-search-input:focus {
+    outline: none;
+    border-color: #5693ff;
+    box-shadow: 0 0 0 3px rgba(86, 147, 255, 0.1);
+}
+
+.omsar-search-icon {
+    position: absolute;
+    right: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+
+.omsar-no-results {
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.omsar-no-results p {
+    margin: 0;
+}
+
+/* Tabs Navigation */
+.omsar-taxonomy-tabs-nav {
+    margin-bottom: 50px;
+    background: transparent;
+    padding: 0;
+    overflow: visible;
+}
+
+.omsar-taxonomy-tabs {
+    border-bottom: none;
+    flex-wrap: wrap;
+    overflow-x: auto;
+    overflow-y: visible;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;  /* IE and Edge */
+    margin: 0;
+    padding: 4px 0;
+    background: transparent;
+    gap: 12px;
+    display: flex;
+    align-items: center;
+    min-height: 56px;
+}
+
+.omsar-taxonomy-tabs::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+}
+
+.omsar-taxonomy-tabs .nav-item {
+    margin-bottom: 0;
+    white-space: nowrap;
+    margin-right: 0;
+}
+
+.omsar-taxonomy-tabs .nav-link {
+    padding: 14px 28px;
+    border: none;
+    background: #e0e2e6;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    text-decoration: none;
+    box-shadow: none;
+    min-height: 48px;
+    line-height: 1.5;
+    box-sizing: border-box;
+}
+
+.omsar-taxonomy-tabs .nav-link:hover:not(.active) {
+    background: #d0d2d6;
+    transform: translateY(-2px);
+    box-shadow: none;
+}
+
+.omsar-taxonomy-tabs .nav-link.active {
+    background: #5693ff;
+    box-shadow: none;
+    transform: translateY(-2px);
+}
+
+.omsar-taxonomy-tabs .nav-link.active:hover {
+    background: #4a7cff;
+    box-shadow: none;
+}
+
+/* Tabs Content */
+.omsar-taxonomy-tabs-content {
+    margin-top: 30px;
+}
+
+.omsar-taxonomy-tabs-content .tab-pane {
+    animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Posts Grid */
+.omsar-posts-grid {
+    display: grid;
+    gap: 30px;
+    margin-top: 20px;
+}
+@media (min-width: 768px) and (max-width: 1024px) {
+    .omsar-posts-grid.style4 {
+        gap: 10px;
+    }
+  }
+  
+
+/* Default grid columns for Style 1 and Style 3 */
+.omsar-posts-grid.style1,
+.omsar-posts-grid.style3 {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+/* Post Card - Base Styles */
+.omsar-post-card {
+    background: #ffffff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.omsar-post-card:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    transform: translateY(-4px);
+}
+
+/* Clickable Cards */
+.omsar-post-card-clickable {
+    cursor: pointer;
+}
+
+.omsar-post-card-clickable:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    transform: translateY(-4px);
+}
+
+.omsar-post-card-clickable .omsar-post-title a,
+.omsar-post-card-clickable .omsar-post-image a {
+    text-decoration: none;
+    color: inherit;
+}
+
+
+/* Style 1 - Grid (Image Top) - Default */
+.omsar-post-card-style1 {
+    flex-direction: column;
+}
+
+.omsar-post-card-style1 .omsar-post-image {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    background: #f5f5f5;
+}
+
+.omsar-post-card-style1 .omsar-post-content {
+    padding: 20px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Style 2 - Horizontal (Image Left) */
+.omsar-posts-grid.style2 {
+    display: grid;
+    gap: 20px;
+    /* grid-template-columns will be set by Elementor control via inline styles with !important */
+}
+
+.omsar-post-card-style2 {
+    flex-direction: row;
+    align-items: stretch;
+}
+
+.omsar-post-card-style2 .omsar-post-image {
+    width: 30%;
+    min-width: 30%;
+    max-width: 30%;
+    height: auto;
+    overflow: hidden;
+    background: #f5f5f5;
+    flex-shrink: 0;
+}
+
+.omsar-post-card-style2 .omsar-post-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    min-height: 200px;
+}
+
+.omsar-post-card-style2 .omsar-post-content {
+    width: 70%;
+    padding: 20px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Style 2 - Reduced Font Sizes */
+.omsar-post-card-style2 .omsar-post-title {
+    font-size: 20px;
+}
+
+.omsar-post-card-style2 .omsar-post-excerpt {
+    font-size: 13px;
+}
+
+.omsar-post-card-style2 .omsar-post-pdfs {
+    font-size: 12px;
+}
+
+.omsar-post-card-style2 .omsar-post-pdfs strong {
+    font-size: 12px;
+}
+
+.omsar-post-card-style2 .pdf-list {
+    font-size: 12px;
+}
+
+/* Style 3 - Content Above Image */
+.omsar-post-card-style3 {
+    flex-direction: column;
+}
+
+.omsar-post-card-style3 .omsar-post-content {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    order: 1;
+}
+
+.omsar-post-card-style3 .omsar-post-image {
+    width: 100%;
+    height: 250px;
+    overflow: hidden;
+    background: #f5f5f5;
+    order: 2;
+}
+
+/* Style 4 - Related Posts Style */
+.omsar-posts-grid.style4 {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+/* Clickable Card Styles */
+.omsar-card-clickable {
+    cursor: pointer;
+}
+
+.omsar-card-clickable .omsar-post-title a,
+.omsar-card-clickable .omsar-post-read-more {
+    pointer-events: none;
+}
+
+.omsar-post-card-style4 {
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background-size: cover;
+    background-position: center bottom;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: flex-end;
+    /* min-height: 280px; 
+    height: auto;  */
+}
+
+@media (max-width: 767px) {
+   .omsar-post-card-style4 {
+    min-height: 210px; /* Keep minimum height on mobile */
+   }
+}
+
+
+.omsar-post-card-style4::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(173, 216, 230, 0.4) 0%, rgba(255, 255, 255, 0.95) 100%);
+    z-index: 1;
+    opacity: 0.8;
+}
+
+.omsar-post-card-style4:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+}
+
+.omsar-post-card-style4:hover::before {
+    opacity: 0.9;
+}
+
+.omsar-post-card-style4 .omsar-post-content {
+    position: relative;
+    z-index: 2;
+    padding: 30px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    flex-grow: 1; /* Allow content to expand */
+    min-height: 0; /* Allow flex item to shrink if needed */
+}
+
+.omsar-post-card-style4 .omsar-post-title {
+    margin: 0;
+    font-size: 17px;
+    font-weight: 700;
+    line-height: 1.3;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    color: #1a1a1a;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.omsar-post-card-style4 .omsar-post-title a {
+    text-decoration: none;
+    color: #1a1a1a;
+    transition: color 0.3s ease;
+}
+
+.omsar-post-card-style4 .omsar-post-title a:hover {
+    color: #0073aa;
+}
+
+
+.omsar-post-badge {
+    display: inline-block;
+    padding: 3px 15px;
+    border: 1px solid #1a1a1a;
+    border-radius: 20px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    line-height: 1.4;
+    color: #1a1a1a;
+    background: transparent;
+    align-self: flex-start;
+    margin-bottom: 5px;
+}
+
+.omsar-post-excerpt {
+    margin: 0;
+    color: #1a1a1a;
+    font-size: 14px;
+    line-height: 1.6;
+    flex: 1;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+}
+
+.omsar-post-read-more {
+    display: inline-block;
+    padding: 12px 24px;
+    background-color: #1a1a1a;
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    line-height: 1.4;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    align-self: flex-start;
+    margin-top: 5px;
+}
+
+.omsar-post-read-more:hover {
+    background-color: #0073aa;
+    transform: translateY(-2px);
+    color: #ffffff;
+}
+
+/* Style 4 Projects - Read More Button Design */
+.omsar-post-card-style4 .omsar-post-read-more {
+    background-color: #192D50;
+    border-radius: 50px;
+    padding: 10px 24px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #ffffff;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    border: none;
+    align-self: flex-start;
+    margin-top: 10px;
+}
+
+.omsar-post-card-style4 .omsar-post-read-more:hover {
+    background-color: #1a3d6b;
+    transform: translateY(-2px);
+    color: #ffffff;
+}
+
+/* Style 5 - Modern Card with Categories */
+.omsar-posts-grid.style5 {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+.omsar-post-card-style5 {
+    flex-direction: column;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    background: #ffffff;
+}
+
+.omsar-post-card-style5:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    transform: translateY(-4px);
+}
+
+.omsar-post-card-style5 .omsar-post-image-header {
+    position: relative;
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+}
+
+.omsar-post-card-style5 .omsar-post-image-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+    /* background: linear-gradient(90deg, #8b5cf6 0%, #a78bfa 100%); */
+    opacity: 0.6;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+/* .omsar-post-card-style5:nth-child(3n+1) .omsar-post-image-header::before {
+    background: linear-gradient(90deg, #8b5cf6 0%, #a78bfa 100%);
+}
+
+.omsar-post-card-style5:nth-child(3n+2) .omsar-post-image-header::before {
+    background: linear-gradient(90deg, #ec4899 0%, #f472b6 100%);
+}
+
+.omsar-post-card-style5:nth-child(3n+3) .omsar-post-image-header::before {
+    background: linear-gradient(90deg, #3b82f6 0%, #60a5fa 100%);
+} */
+
+.omsar-post-card-style5 .omsar-post-image-header img {
+    width: 100%;
+    height: 100%;
+    /* object-fit is controlled by Elementor widget setting */
+    transition: transform 0.3s ease;
+    position: relative;
+    z-index: 0;
+}
+
+.omsar-post-card-style5 .omsar-post-image-header a {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+/* Style 5: Content Overlay on Image */
+.omsar-post-card-style5-overlay {
+    position: relative;
+    width: 100%;
+    min-height: 400px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+}
+
+.omsar-post-card-style5-overlay::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.3) 50%, rgba(0, 0, 0, 0.7) 100%);
+    z-index: 1;
+}
+
+.omsar-post-card-style5-overlay-content {
+    position: relative;
+    z-index: 2;
+    padding: 30px;
+    width: 100%;
+    color: #ffffff;
+}
+
+.omsar-post-card-style5-overlay-content .omsar-post-categories {
+    margin-bottom: 12px;
+}
+
+.omsar-post-card-style5-overlay-content .omsar-post-category-tag {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+    padding: 4px 12px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    margin-right: 8px;
+    display: inline-block;
+}
+
+.omsar-post-card-style5-overlay-content .omsar-post-title {
+    margin: 0 0 12px 0;
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 1.3;
+    color: #ffffff;
+}
+
+.omsar-post-card-style5-overlay-content .omsar-post-title a {
+    color: #ffffff;
+    text-decoration: none;
+    transition: opacity 0.3s ease;
+}
+
+.omsar-post-card-style5-overlay-content .omsar-post-title a:hover {
+    opacity: 0.9;
+}
+
+.omsar-post-card-style5-overlay-content .omsar-post-excerpt {
+    margin: 0 0 16px 0;
+    font-size: 15px;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.95);
+}
+
+.omsar-post-card-style5-overlay-content .omsar-post-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.omsar-post-card-style5-overlay-content .omsar-post-date,
+.omsar-post-card-style5-overlay-content .omsar-post-author {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* Make overlay cards clickable */
+.omsar-post-card-clickable.omsar-post-card-style5 .omsar-post-card-style5-overlay {
+    cursor: pointer;
+}
+
+.omsar-post-card-style5:hover .omsar-post-image-header img {
+    transform: scale(1.05);
+}
+
+.omsar-post-card-style5 .omsar-post-content {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.omsar-post-card-style5 .omsar-post-categories {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 4px;
+}
+
+.omsar-post-card-style5 .omsar-post-category-tag {
+    display: inline-block;
+    padding: 4px 12px;
+    background-color: #e5e7eb;
+    color: #6b7280;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    line-height: 1.4;
+}
+
+.omsar-post-card-style5 .omsar-post-title {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1.3;
+    color: #1f2937;
+}
+
+.omsar-post-card-style5 .omsar-post-title a {
+    color: #1f2937;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+/* .omsar-post-card-style5 .omsar-post-title a:hover {
+    color: #3b82f6;
+} */
+
+.omsar-post-card-style5 .omsar-post-excerpt {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #6b7280;
+    margin-top: 4px;
+}
+
+.omsar-post-card-style5 .omsar-post-meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 8px;
+    font-size: 13px;
+    color: #9ca3af;
+}
+
+.omsar-post-card-style5 .omsar-post-date {
+    margin: 0;
+}
+
+.omsar-post-card-style5 .omsar-post-author {
+    margin: 0;
+}
+
+/* Style 5: Side Layout (Image Left, Content Right) */
+.omsar-post-card-style5:has(.omsar-post-image-side) {
+    flex-direction: row;
+    align-items: stretch;
+    min-height: auto;
+}
+
+.omsar-post-card-style5 .omsar-post-image-side {
+    flex: 0 0 150px;
+    width: 150px;
+    min-width: 150px;
+    align-self: stretch;
+    overflow: hidden;
+    border-radius: 12px 0 0 12px;
+    display: flex;
+    align-items: stretch;
+}
+
+.omsar-post-card-style5 .omsar-post-image-side img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.omsar-post-card-style5 .omsar-post-image-side a {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    align-items: stretch;
+}
+
+.omsar-post-card-style5 .omsar-post-content-side {
+    flex: 1;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    min-width: 0;
+    overflow: visible;
+}
+
+.omsar-post-card-style5 .omsar-post-content-side .omsar-post-categories {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 4px;
+}
+
+.omsar-post-card-style5 .omsar-post-content-side .omsar-post-category-tag {
+    display: inline-block;
+    padding: 4px 12px;
+    background-color: #e5e7eb;
+    color: #6b7280;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    line-height: 1.4;
+}
+
+.omsar-post-card-style5 .omsar-post-content-side .omsar-post-title {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1.3;
+    color: #1f2937;
+}
+
+.omsar-post-card-style5 .omsar-post-content-side .omsar-post-title a {
+    color: #1f2937;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.omsar-post-card-style5 .omsar-post-content-side .omsar-post-date-side {
+    margin: 0;
+    font-size: 14px;
+    color: #6b7280;
+    margin-top: 4px;
+}
+
+.omsar-post-card-style5 .omsar-post-content-side .omsar-post-excerpt {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #6b7280;
+    margin-top: 4px;
+    overflow: visible;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+/* Grid adjustment for side layout */
+.omsar-posts-grid.style5:has(.omsar-post-card-style5:has(.omsar-post-image-side)) {
+    grid-template-columns: 1fr;
+}
+
+/* Common Image Styles */
+.omsar-post-image {
+    width: 100%;
+    overflow: hidden;
+    background: #f5f5f5;
+}
+
+.omsar-post-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.omsar-post-card:hover .omsar-post-image img {
+    transform: scale(1.05);
+}
+
+/* Common Content Styles */
+.omsar-post-content {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.omsar-post-title {
+    line-height: 1.4;
+    margin-bottom: 12px;
+}
+
+.omsar-post-title a {
+    text-decoration: none;
+    transition: color 0.3s ease;
+    color: inherit;
+}
+
+.omsar-post-title a:hover {
+    text-decoration: none;
+}
+
+.omsar-post-date {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 15px;
+}
+
+
+.omsar-post-pdfs {
+    margin-top: auto;
+    padding-top: 15px;
+    border-top: 1px solid #eee;
+}
+
+.omsar-post-pdfs strong {
+    display: block;
+    margin-bottom: 8px;
+}
+
+.pdf-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.pdf-list li {
+    margin-bottom: 5px;
+}
+
+.pdf-list a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.pdf-list a:hover {
+    text-decoration: underline;
+}
+
+.pdf-list i {
+    margin-right: 8px;
+}
+
+.omsar-no-posts {
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.omsar-no-posts p {
+    margin: 0;
+}
+
+/* Load More Button */
+.omsar-load-more-wrapper {
+    text-align: center;
+    margin-top: 40px;
+    padding: 20px 0;
+}
+
+.omsar-load-more-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 3px 18px;
+    background: #5693ff;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.omsar-load-more-btn:hover {
+    background: #4a7cff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(86, 147, 255, 0.3);
+}
+
+.omsar-load-more-btn:active {
+    transform: translateY(0);
+}
+
+.omsar-load-more-btn:disabled,
+.omsar-load-more-btn.loading {
+    opacity: 0.6;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.omsar-load-more-btn.loading::after {
+    content: '';
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border: 2px solid #000000;
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: spin 0.6s linear infinite;
+    margin-left: 8px;
+    vertical-align: middle;
+    align-self: center;
+    flex-shrink: 0;
+    /* Align spinner with text baseline/cap height */
+    margin-top: 12px;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.omsar-load-more-count {
+    opacity: 0.9;
+}
+
+/* Responsive - Posts by Taxonomy Widget */
+@media (max-width: 991.98px) {
+    .omsar-taxonomy-tabs-nav {
+        margin-bottom: 35px;
+    }
+
+    .omsar-taxonomy-tabs {
+        gap: 10px;
+    }
+
+    .omsar-posts-grid.style1,
+    .omsar-posts-grid.style3,
+    .omsar-posts-grid.style5 {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+    
+    /* Style 4: Keep 3 columns on tablets (iPad Air, iPad Mini, etc.) */
+    /* Only change to 1 column on mobile (handled in mobile media query below) */
+    
+    .omsar-post-card-style4 .omsar-post-content {
+        padding: 25px;
+    }
+    
+    /* Style 5 Side Layout - Stack on tablets */
+    .omsar-post-card-style5:has(.omsar-post-image-side) {
+        flex-direction: column;
+    }
+    
+    .omsar-post-card-style5 .omsar-post-image-side {
+        flex: 1 1 auto;
+        width: 100%;
+        min-width: 100%;
+        border-radius: 12px 12px 0 0;
+        height: 200px;
+    }
+    
+    .omsar-post-card-style5 .omsar-post-content-side {
+        padding: 20px;
+    }
+    
+    /* .omsar-posts-grid.style2 - Allow Elementor control to set columns */
+
+    .omsar-taxonomy-tabs .nav-link {
+        padding: 12px 22px;
+        min-height: 44px;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .omsar-taxonomy-tabs-nav {
+        margin-bottom: 30px;
+    }
+
+    .omsar-taxonomy-tabs {
+        gap: 8px;
+        flex-wrap: wrap;
+    }
+
+    .omsar-posts-grid.style1,
+    .omsar-posts-grid.style2,
+    .omsar-posts-grid.style3,
+    .omsar-posts-grid.style4,
+    .omsar-posts-grid.style5,
+    .elementor-widget .omsar-posts-grid.style4,
+    [class*="elementor-element"] .omsar-posts-grid.style4 {
+        grid-template-columns: 1fr !important;
+        gap: 20px;
+    }
+    
+    .omsar-post-card-style5 .omsar-post-content {
+        padding: 20px;
+    }
+    
+    .omsar-post-card-style5 .omsar-post-image-header {
+        height: 180px;
+    }
+    
+    .omsar-post-card-style5 .omsar-post-title {
+        font-size: 18px;
+    }
+    
+    .omsar-post-card-style5 .omsar-post-excerpt {
+        font-size: 13px;
+    }
+    
+    .omsar-post-card-style5 .omsar-post-meta {
+        font-size: 12px;
+        flex-wrap: wrap;
+    }
+    
+    /* Style 5 Side Layout - Stack on mobile */
+    .omsar-post-card-style5:has(.omsar-post-image-side) {
+        flex-direction: column;
+    }
+    
+    .omsar-post-card-style5 .omsar-post-image-side {
+        flex: 1 1 auto;
+        width: 100%;
+        min-width: 100%;
+        border-radius: 12px 12px 0 0;
+        height: 180px;
+    }
+    
+    .omsar-post-card-style5 .omsar-post-content-side {
+        padding: 20px;
+    }
+    
+    /* Override Elementor-specific selectors with higher specificity for mobile */
+    [class*="elementor-"] [class*="elementor-element"][class*="elementor-element-"] .omsar-posts-grid.style2,
+    [class*="elementor-"] [class*="elementor-element"] [class*="elementor-element"][class*="elementor-element-"] .omsar-posts-grid.style2 {
+        grid-template-columns: 1fr !important;
+    }
+    
+    .omsar-post-card-style4 .omsar-post-content {
+        padding: 20px;
+        gap: 12px;
+    }
+    
+    .omsar-post-card-style4 .omsar-post-title {
+        font-size: 1.375rem;
+        /* padding-right: 80px; */
+    }
+    
+    .omsar-post-excerpt {
+        font-size: 0.9375rem;
+    }
+    
+    .omsar-post-read-more {
+        padding: 10px 20px;
+        font-size: 0.875rem;
+    }
+
+    .omsar-taxonomy-tabs .nav-link {
+        padding: 11px 18px;
+        min-height: 42px;
+    }
+
+    .omsar-post-image {
+        height: 200px;
+    }
+}
+
+/* Style 4 Filters */
+.omsar-style4-filters {
+    margin-bottom: 30px;
+    padding: 0;
+}
+
+.omsar-style4-filters-container {
+    margin-bottom: 30px;
+    padding: 0;
+}
+
+.omsar-style4-filters-row {
+    display: flex;
+    align-items: flex-end;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.omsar-style4-filter-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: 0 0 25%;
+    min-width: 200px;
+    max-width: 25%;
+}
+
+.omsar-style4-filter-item.omsar-search-filter-item {
+    flex: 0 0 25%;
+    min-width: 200px;
+    max-width: 25%;
+}
+
+.omsar-style4-filter-label {
+    font-weight: 700;
+    color: #1a1a1a;
+    font-size: 0.9375rem;
+    white-space: nowrap;
+    margin: 0;
+    flex-shrink: 0;
+}
+
+.omsar-style4-search-input-wrapper {
+    position: relative;
+    flex: 1;
+    min-width: 0;
+    display: none !important; /* Force hide Style 4 search - use general search instead */
+}
+
+.omsar-style4-filter-item:has(.omsar-style4-search-input-wrapper) {
+    display: none !important; /* Hide the entire filter item if it contains Style 4 search */
+}
+
+.omsar-style4-search-input {
+    display: none !important; /* Force hide Style 4 search - use general search instead */
+    padding: 10px 40px 10px 16px;
+    width: 100%;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    font-size: 0.9375rem;
+    transition: border-color 0.3s ease;
+}
+
+.omsar-style4-search-input:focus {
+    outline: none;
+    border-color: #0073aa;
+}
+
+.omsar-style4-search-icon {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #6c757d;
+    pointer-events: none;
+    font-size: 1rem;
+}
+
+.omsar-style4-dropdown-input-wrapper {
+    position: relative;
+    flex: 1;
+    min-width: 0;
+}
+
+.omsar-style4-dropdown {
+    padding: 10px 40px 10px 16px;
+    width: 100%;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    font-size: 0.9375rem;
+    background-color: #fff;
+    background-image: none !important;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    cursor: pointer;
+    transition: border-color 0.3s ease;
+}
+
+.omsar-style4-dropdown.form-select {
+    background-image: none !important;
+    background-position: unset !important;
+    padding-right: 40px;
+}
+
+.omsar-style4-dropdown:focus {
+    outline: none;
+    border-color: #0073aa;
+}
+
+.omsar-style4-dropdown-icon {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #6c757d;
+    pointer-events: none;
+    font-size: 0.875rem;
+}
+
+.omsar-style4-no-results {
+    text-align: center;
+    padding: 40px 20px;
+    color: #6c757d;
+}
+
+.omsar-style4-no-results p {
+    margin: 0;
+    font-size: 1.1rem;
+}
+
+.omsar-style4-results-count {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 10px 0;
+    font-size: 0.9375rem;
+    color: #1a1a1a;
+}
+
+.omsar-style4-results-count .omsar-results-count-text {
+    font-weight: 500;
+}
+
+.omsar-style4-results-count .omsar-results-count-number {
+    font-weight: 700;
+    color: #000000;
+}
+
+@media (max-width: 1024px) {
+    .omsar-style4-filter-item {
+        flex: 0 0 calc(50% - 10px);
+        min-width: calc(50% - 10px);
+        max-width: calc(50% - 10px);
+    }
+    
+    .omsar-style4-filter-item.omsar-search-filter-item {
+        flex: 0 0 calc(50% - 10px);
+        min-width: calc(50% - 10px);
+        max-width: calc(50% - 10px);
+    }
+}
+
+@media (max-width: 767.98px) {
+    .omsar-style4-filters-row {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .omsar-style4-filter-item {
+        flex: 1 1 100% !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+        min-width: 100% !important;
+    }
+    
+    .omsar-style4-filter-item.omsar-search-filter-item {
+        flex: 1 1 100% !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 100% !important;
+    }
+    
+    .omsar-style4-filter-label {
+        width: 100%;
+        margin-bottom: 4px;
+    }
+    
+    .omsar-posts-search-wrapper-inline,
+    .omsar-style4-search-input-wrapper,
+    .omsar-style4-dropdown-input-wrapper {
+        width: 100%;
+    }
+    
+    .omsar-posts-search-wrapper-inline .omsar-posts-search-input {
+        width: 100%;
+    }
+    
+    .omsar-style4-dropdown {
+        width: 100%;
+    }
+}
+
+/* ------------------------------------------ */
+/*         Recruitments Widget Styles         */
+/* ------------------------------------------ */
+
+.omsar-recruitments-widget {
+    width: 100%;
+}
+
+.omsar-recruitments-widget[dir="rtl"] {
+    direction: rtl;
+}
+
+.omsar-recruitments-widget[dir="rtl"] .omsar-recruitments-filters {
+    direction: rtl;
+}
+
+/* Recruitments Filter Tabs (Open, Upcoming, Closed — style only) */
+.omsar-recruitments-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 30px;
+    align-items: center;
+}
+
+.omsar-recruitment-filter-label {
+    font-weight: 600;
+    color: #374151;
+    font-size: 14px;
+    margin: 0;
+}
+
+.omsar-recruitment-status-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+}
+
+.omsar-recruitment-status-tab {
+    /* Base styles — Elementor Filter Tabs Style controls override these */
+    cursor: pointer;
+    transition: all 0.3s ease;
+    outline: none;
+    /* padding: 10px 24px; */
+    border: 2px solid #192D50;
+    background-color: transparent;
+    background-image: none !important;
+    color: #192D50;
+    border-radius: 24px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.omsar-recruitment-status-tab.active {
+    color: #ffffff;
+    background-color: #7db3e8;
+    border-color: #7db3e8;
+}
+
+.omsar-recruitments-grid.loading {
+    opacity: 0.6;
+    pointer-events: none;
+    position: relative;
+}
+
+.omsar-recruitments-grid.loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40px;
+    height: 40px;
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #7db3e8;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+@media (max-width: 767.98px) {
+    .omsar-recruitments-filters {
+        gap: 8px;
+        margin-bottom: 20px;
+    }
+    
+    .omsar-recruitment-filter-label {
+        font-size: 13px;
+        width: 100%;
+    }
+    
+    .omsar-recruitment-status-tabs {
+        gap: 8px;
+    }
+    
+    .omsar-recruitment-status-tab {
+        padding: 8px 16px;
+        font-size: 13px;
+    }
+}
+
+.omsar-recruitments-grid {
+    display: grid;
+    gap: 24px;
+    width: 100%;
+}
+
+.omsar-recruitment-item {
+    width: 100%;
+}
+
+/* Empty state styling - spans full width and centers content */
+.omsar-recruitment-empty-state {
+    grid-column: 1 / -1;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* padding: 60px 20px; */
+    text-align: center;
+}
+
+.omsar-recruitment-empty-message {
+    margin: 0;
+    text-align: center;
+    max-width: 800px;
+}
+
+.omsar-recruitment-card {
+    position: relative;
+    border: none;
+    border-radius: 12px;
+    padding: 32px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.3s ease;
+}
+
+.omsar-recruitment-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    /* background: linear-gradient(135deg, rgba(173, 216, 230, 0.4) 0%, rgba(255, 255, 255, 0.95) 100%); */
+    z-index: 1;
+    opacity: 0.8;
+}
+.omsar-recruitment-card.has-overlay::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 12px;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.omsar-recruitment-card.has-overlay .omsar-recruitment-content {
+    position: relative;
+    z-index: 2;
+}
+
+.omsar-recruitment-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+/* Content */
+.omsar-recruitment-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    z-index: 2;
+}
+
+.omsar-recruitment-title {
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 1.3;
+    color: #7db3e8;
+    margin-bottom: 12px;
+    margin-top: 0;
+    letter-spacing: -0.02em;
+}
+
+/* Header (Title + Status badge aligned on same row) */
+.omsar-recruitment-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+    /* margin-bottom: 12px; */
+}
+
+.omsar-recruitment-header .omsar-recruitment-title {
+    margin-bottom: 0;
+    flex: 1 1 auto;
+}
+
+.omsar-recruitment-header .omsar-recruitment-badge {
+    flex: 0 0 auto;
+    white-space: nowrap;
+}
+
+/* Badge */
+.omsar-recruitment-badge {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: none;
+    letter-spacing: 0;
+    /* background-color: #ffffff; */
+    color: #7db3e8;
+    border: 1px solid black;
+    /* margin-bottom: 20px; */
+    width: fit-content;
+}
+
+.rtl-card .omsar-recruitment-content {
+    text-align: right;
+}
+
+.rtl-card .omsar-recruitment-header {
+    justify-content: flex-start;
+    gap: 12px;
+}
+
+.rtl-card .omsar-recruitment-header .omsar-recruitment-badge {
+    order: -1;
+    flex: 0 0 auto;
+    margin-right: 0;
+    margin-left: 0;
+}
+
+.rtl-card .omsar-recruitment-header .omsar-recruitment-title {
+    flex: 1 1 auto;
+    text-align: right;
+}
+
+.rtl-card .omsar-recruitment-badge {
+    margin-right: 0;
+}
+
+/* Details */
+.omsar-recruitment-details {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.omsar-recruitment-details p {
+    margin: 0;
+}
+
+.omsar-recruitment-entity,
+.omsar-recruitment-dates {
+    font-size: 13px;
+    line-height: 1.8;
+    margin-bottom: 8px;
+    color: #7db3e8;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.omsar-recruitment-dates {
+    margin-bottom: 0;
+}
+
+.omsar-recruitment-details .detail-value {
+    font-weight: 500;
+    color: #7db3e8;
+    font-size: inherit;
+}
+
+.omsar-recruitment-details i {
+    color: #010101;
+    font-size: 13px;
+    min-width: 16px;
+}
+
+/* RTL/Arabic: entity and date aligned right; icon on the right, text on the left */
+/* .rtl-card .omsar-recruitment-details {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+} */
+
+.rtl-card .omsar-recruitment-entity,
+.rtl-card .omsar-recruitment-dates {
+    flex-direction: row;
+    justify-content: flex-start;
+    direction: rtl;
+    text-align: right;
+}
+
+.rtl-card .omsar-recruitment-details .detail-value {
+    text-align: right;
+}
+
+/* Actions */
+.omsar-recruitment-actions {
+    padding-top: 0;
+    border-top: none;
+    margin-top: auto;
+    align-self: flex-start;
+}
+
+.rtl-card .omsar-recruitment-actions {
+    align-self: flex-start;
+}
+
+.omsar-recruitment-apply-btn {
+    display: inline-block;
+    padding: 2px 10px 2px 10px;    
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.9375rem;
+    transition: all 0.3s ease;
+    text-align: center;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.omsar-recruitment-apply-btn:hover {
+    background-color: #f5f5f5;
+    color: #000000;
+    text-decoration: none;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.omsar-recruitment-apply-btn:active {
+    transform: translateY(0);
+}
+
+/* Recruitments Load More */
+.omsar-recruitment-load-more-wrapper {
+    text-align: center;
+    margin-top: 24px;
+    margin-bottom: 16px;
+}
+
+.omsar-recruitment-load-more-btn {
+    cursor: pointer;
+    transition: all 0.3s ease;
+    outline: none;
+    padding: 10px 24px;
+    border: 2px solid #7db3e8;
+    background-color: transparent;
+    color: #7db3e8;
+    border-radius: 24px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.omsar-recruitment-load-more-btn:hover:not(:disabled) {
+    color: #ffffff;
+    background-color: #7db3e8;
+    border-color: #7db3e8;
+}
+
+.omsar-recruitment-load-more-btn.loading,
+.omsar-recruitment-load-more-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+/* Responsive Design */
+@media (max-width: 991.98px) {
+    .omsar-recruitment-card {
+        padding: 28px;
+    }
+
+    .omsar-recruitment-title {
+        font-size: 1.5rem;
+    }
+
+    .omsar-recruitment-apply-btn {
+        padding: 10px 28px;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .omsar-recruitments-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    .omsar-recruitment-card {
+        padding: 24px;
+    }
+
+    .omsar-recruitment-title {
+        font-size: 1.375rem;
+        margin-bottom: 10px;
+    }
+
+    .omsar-recruitment-badge {
+        padding: 5px 14px;
+        font-size: 0.7rem;
+        margin-bottom: 16px;
+    }
+
+    .omsar-recruitment-entity,
+    .omsar-recruitment-dates {
+        font-size: 13px;
+        margin-bottom: 6px;
+    }
+
+    .omsar-recruitment-details .detail-value {
+        font-size: inherit;
+    }
+
+    .omsar-recruitment-details i {
+        font-size: 13px;
+    }
+
+    .omsar-recruitment-apply-btn {
+        padding: 10px 24px;
+        font-size: 0.875rem;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .omsar-recruitment-card {
+        padding: 20px;
+    }
+
+    .omsar-recruitment-title {
+        font-size: 1.25rem;
+        margin-bottom: 8px;
+    }
+
+    .omsar-recruitment-badge {
+        padding: 4px 12px;
+        font-size: 0.65rem;
+        margin-bottom: 14px;
+    }
+
+    .omsar-recruitment-entity,
+    .omsar-recruitment-dates {
+        font-size: 13px;
+        margin-bottom: 5px;
+    }
+
+    .omsar-recruitment-details .detail-value {
+        font-size: inherit;
+    }
+
+    .omsar-recruitment-details i {
+        font-size: 13px;
+    }
+
+    .omsar-recruitment-apply-btn {
+        padding: 10px 20px;
+        font-size: 0.8125rem;
+    }
+}
+
+/* ------------------------------------------ */
+/*         Call to Action Widget Styles       */
+/* ------------------------------------------ */
+
+.omsar-cta-banner {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+    min-height: 150px;
+    overflow: hidden;
+}
+
+.omsar-cta-banner::before {
+    z-index: 0;
+}
+
+.omsar-cta-content {
+    position: relative;
+    z-index: 1;
+    flex: 1;
+}
+
+.omsar-cta-heading {
+    margin: 0;
+    padding: 0;
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 1.2;
+    margin-bottom: 10px;
+}
+
+.omsar-cta-subheading {
+    margin: 0;
+    padding: 0;
+    color: #ffffff;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+.omsar-cta-button {
+    position: relative;
+    z-index: 1;
+    display: inline-block;
+    text-decoration: none;
+    text-align: center;
+    white-space: nowrap;
+    cursor: pointer;
+    border: none;
+    background-color: #ffffff;
+    color: #FF6B9D;
+    font-weight: 500;
+    font-size: 16px;
+    padding: 12px 30px;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+}
+
+.omsar-cta-button:hover {
+    text-decoration: none;
+    transform: translateY(-2px);
+}
+
+.omsar-cta-button:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(255, 107, 157, 0.3);
+}
+
+/* Responsive - Call to Action */
+@media (max-width: 991.98px) {
+    .omsar-cta-banner {
+        flex-direction: column;
+        text-align: center;
+        gap: 20px;
+    }
+
+    .omsar-cta-content {
+        width: 100%;
+    }
+
+    .omsar-cta-heading {
+        font-size: 28px;
+    }
+
+    .omsar-cta-subheading {
+        font-size: 15px;
+    }
+
+    .omsar-cta-button {
+        width: 100%;
+        max-width: 300px;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .omsar-cta-banner {
+        padding: 30px 25px !important;
+    }
+
+    .omsar-cta-heading {
+        font-size: 24px;
+        margin-bottom: 8px;
+    }
+
+    .omsar-cta-subheading {
+        font-size: 14px;
+    }
+
+    .omsar-cta-button {
+        padding: 10px 25px;
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .omsar-cta-banner {
+        padding: 25px 20px !important;
+        gap: 15px;
+    }
+
+    .omsar-cta-heading {
+        font-size: 20px;
+    }
+
+    .omsar-cta-subheading {
+        font-size: 13px;
+    }
+
+    .omsar-cta-button {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+}
+
+.pdf-list .document-link .bi-file-earmark-pdf::before{
+    font-size: 1.125rem;
+    color: #dc3545;
+}
+
+.pdf-list .document-link{
+    gap: 0.5rem;
+    color: #1a3e7b;
+    text-decoration: none;
+}
+.pdf-list .document-link:hover {
+	color: #7db3e8;
+	text-decoration: underline;
+}

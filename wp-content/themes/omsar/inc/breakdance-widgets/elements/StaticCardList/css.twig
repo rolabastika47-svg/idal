@@ -1,0 +1,40 @@
+{# Card layout #}
+%%SELECTOR%% .omsar-static-card-list {
+  gap: {{ design.card.gap.style ?? '30px' }};
+}
+
+%%SELECTOR%% .omsar-static-card-list-item {
+  border-radius: {{ design.card.border_radius.style ?? '12px' }};
+  min-height: {{ design.card.min_height.style ?? '400px' }};
+  {{ macros.spacing_padding_all(design.card.padding) }}
+  {{ macros.borders(design.card.borders) }}
+}
+
+{# Title #}
+%%SELECTOR%% .omsar-static-card-list-item-title {
+  color: {{ design.title.color ?? '#1f2937' }};
+  margin-bottom: {{ design.title.margin_bottom.style ?? '15px' }};
+  {{ macros.typography(design.title.typography, globalSettings) }}
+}
+
+{# Description #}
+%%SELECTOR%% .omsar-static-card-list-item-description {
+  color: {{ design.description.color ?? '#6b7280' }};
+  margin-bottom: {{ design.description.margin_bottom.style ?? '0px' }};
+  {{ macros.typography(design.description.typography, globalSettings) }}
+}
+
+{# Category (Style 2) #}
+%%SELECTOR%% .omsar-static-card-list-item-category {
+  margin-bottom: {{ design.category.margin_bottom.style ?? '10px' }};
+  {{ macros.typography(design.category.typography, globalSettings) }}
+}
+
+{# Button (Style 2) #}
+%%SELECTOR%% .omsar-static-card-list-item-button {
+  color: {{ design.button.text_color ?? '#ffffff' }};
+  background-color: {{ design.button.background_color ?? 'transparent' }};
+  border-radius: {{ design.button.border_radius.style ?? '0px' }};
+  {{ macros.typography(design.button.typography, globalSettings) }}
+  {{ macros.spacing_padding_all(design.button.padding) }}
+}

@@ -1,0 +1,466 @@
+/**
+ * Custom Timeline Widget Styles
+ * 
+ * @package OMSAR
+ */
+
+.omsar-timeline-wrapper {
+	position: relative;
+	width: 100%;
+}
+
+.omsar-timeline-container {
+	position: relative;
+	width: 100%;
+}
+
+.omsar-timeline-line {
+	position: absolute;
+	left: 0;
+	top: 0;
+	bottom: auto;
+	width: 2px;
+	background-color: #d1d5db;
+	z-index: 1;
+	height: auto;
+}
+
+.omsar-timeline-items {
+	position: relative;
+	z-index: 2;
+}
+
+.omsar-timeline-item {
+	position: relative;
+	display: flex;
+	align-items: flex-start;
+	margin-bottom: 40px;
+}
+
+.omsar-timeline-item:last-child {
+	margin-bottom: 0;
+}
+
+.omsar-timeline-marker {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 16px;
+	height: 16px;
+	border-radius: 50%;
+	border: 2px solid #60a5fa;
+	background-color: #ffffff;
+	z-index: 3;
+	transform: translateX(-50%);
+	flex-shrink: 0;
+}
+
+.omsar-timeline-marker.filled {
+	background-color: #60a5fa;
+	border-color: #60a5fa;
+}
+
+.omsar-timeline-item-content {
+	flex: 1;
+	margin-left: 30px;
+}
+
+/* Alternating Layout */
+.omsar-timeline-alternating .omsar-timeline-container {
+	position: relative;
+}
+
+.omsar-timeline-alternating .omsar-timeline-line {
+	left: 50%;
+	transform: translateX(-50%);
+}
+
+.omsar-timeline-alternating .omsar-timeline-items {
+	display: flex;
+	flex-direction: column;
+}
+
+.omsar-timeline-alternating .omsar-timeline-item {
+	width: 50%;
+	position: relative;
+	display: flex;
+	align-items: flex-start;
+}
+
+/* Odd items - Left side */
+.omsar-timeline-alternating .omsar-timeline-item:nth-child(odd) {
+	flex-direction: row;
+	justify-content: flex-end;
+	padding-right: 40px;
+}
+
+.omsar-timeline-alternating .omsar-timeline-item:nth-child(odd) .omsar-timeline-marker {
+	position: absolute;
+	right: 0;
+	left: auto;
+	transform: translateX(50%);
+	z-index: 3;
+}
+
+/* RTL: odd timeline items */
+html[dir="rtl"] .omsar-timeline-alternating .omsar-timeline-item:nth-child(odd) .omsar-timeline-marker {
+	right: auto;
+	left: 0;
+	transform: translateX(-50%);
+}
+
+.omsar-timeline-alternating .omsar-timeline-item:nth-child(odd) .omsar-timeline-item-content {
+	margin-left: 0;
+	margin-right: 30px;
+	text-align: right;
+	flex: 1;
+}
+
+/* Even items - Right side */
+.omsar-timeline-alternating .omsar-timeline-item:nth-child(even) {
+	flex-direction: row-reverse;
+	margin-left: auto;
+	padding-left: 40px;
+	justify-content: flex-start;
+}
+
+.omsar-timeline-alternating .omsar-timeline-item:nth-child(even) .omsar-timeline-marker {
+	position: absolute;
+	left: 0;
+	right: auto;
+	transform: translateX(-50%);
+	z-index: 3;
+}
+
+.omsar-timeline-alternating .omsar-timeline-item:nth-child(even) .omsar-timeline-item-content {
+	margin-right: 0;
+	margin-left: 30px;
+	text-align: left;
+	flex: 1;
+}
+
+/* RTL: even timeline items */
+html[dir="rtl"] .omsar-timeline-alternating .omsar-timeline-item:nth-child(even) .omsar-timeline-marker {
+	right: 0;
+	left: auto;
+	transform: translateX(50%);
+}
+
+html[dir="rtl"] .omsar-timeline-alternating .omsar-timeline-item:nth-child(even) .omsar-timeline-item-content {
+	margin-left: 0;
+	margin-right: 30px;
+	text-align: right;
+}
+
+/* Alternating Right/Left Layout (starts with right) */
+.omsar-timeline-alternating_right_left .omsar-timeline-container {
+	position: relative;
+}
+
+.omsar-timeline-alternating_right_left .omsar-timeline-line {
+	left: 50%;
+	transform: translateX(-50%);
+}
+
+.omsar-timeline-alternating_right_left .omsar-timeline-items {
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+	position: relative;
+}
+
+.omsar-timeline-alternating_right_left .omsar-timeline-item {
+	width: 50%;
+	position: relative;
+	display: flex;
+	align-items: flex-start;
+}
+
+/* Odd items - Right side */
+.omsar-timeline-alternating_right_left .omsar-timeline-item:nth-child(odd) {
+	flex-direction: row-reverse;
+	margin-left: auto;
+	padding-left: 0;
+	justify-content: flex-start;
+}
+
+.omsar-timeline-alternating_right_left .omsar-timeline-item:nth-child(odd) .omsar-timeline-marker {
+	position: absolute !important;
+	left: 0 !important;
+	right: auto !important;
+	transform: translateX(-50%) !important;
+	z-index: 3;
+	top: 0;
+	margin-left: 0;
+	margin-right: auto;
+}
+
+/* RTL: odd timeline items */
+html[dir="rtl"] .omsar-timeline-alternating_right_left .omsar-timeline-item:nth-child(odd) .omsar-timeline-marker {
+	left: 0;
+	right: auto;
+	transform: translateX(50%);
+}
+
+.omsar-timeline-alternating_right_left .omsar-timeline-item:nth-child(odd) .omsar-timeline-item-content {
+	margin-right: 0;
+	margin-left: 70px;
+	text-align: left;
+	flex: 1;
+}
+
+/* Even items - Left side */
+.omsar-timeline-alternating_right_left .omsar-timeline-item:nth-child(even) {
+	flex-direction: row;
+	justify-content: flex-end;
+	padding-right: 0;
+	margin-left: 0;
+	margin-right: auto;
+	align-self: flex-start;
+}
+
+.omsar-timeline-alternating_right_left .omsar-timeline-item:nth-child(even) .omsar-timeline-marker {
+	position: absolute;
+	right: 0;
+	left: auto;
+	transform: translateX(50%);
+	z-index: 3;
+	top: 0;
+}
+
+/* RTL: even timeline items */
+html[dir="rtl"] .omsar-timeline-alternating_right_left .omsar-timeline-item:nth-child(even) .omsar-timeline-marker {
+	left: auto;
+	right: 0;
+	transform: translateX(50%);
+}
+
+.omsar-timeline-alternating_right_left .omsar-timeline-item:nth-child(even) .omsar-timeline-item-content {
+	margin-left: 0;
+	margin-right: 70px;
+	text-align: right;
+	flex: 1;
+}
+
+html[dir="rtl"] .omsar-timeline-alternating_right_left .omsar-timeline-item:nth-child(even) .omsar-timeline-item-content {
+	margin-left: 0;
+	margin-right: 30px;
+	text-align: right;
+}
+
+/* Same Side Layout - Right */
+.omsar-timeline-same_side.omsar-timeline-right .omsar-timeline-line {
+	left: 0;
+}
+
+.omsar-timeline-same_side.omsar-timeline-right .omsar-timeline-item {
+	width: 100%;
+	flex-direction: row;
+}
+
+.omsar-timeline-same_side.omsar-timeline-right .omsar-timeline-marker {
+	left: 0;
+	transform: translateX(-50%);
+}
+
+.omsar-timeline-same_side.omsar-timeline-right .omsar-timeline-item-content {
+	margin-left: 30px;
+	text-align: left;
+}
+
+/* Same Side Layout - Left */
+.omsar-timeline-same_side.omsar-timeline-left .omsar-timeline-line {
+	right: 0;
+	left: auto;
+}
+
+.omsar-timeline-same_side.omsar-timeline-left .omsar-timeline-item {
+	width: 100%;
+	flex-direction: row-reverse;
+}
+
+.omsar-timeline-same_side.omsar-timeline-left .omsar-timeline-marker {
+	right: 0;
+	left: auto;
+	transform: translateX(50%);
+}
+
+.omsar-timeline-same_side.omsar-timeline-left .omsar-timeline-item-content {
+	margin-right: 30px;
+	margin-left: 0;
+	text-align: right;
+}
+
+/* Text Styles */
+.omsar-timeline-item-date {
+	margin-bottom: 8px;
+	font-size: 14px;
+	color: #60a5fa;
+}
+
+.omsar-timeline-item-title {
+	margin-bottom: 8px;
+	font-size: 18px;
+	font-weight: 600;
+	color: #1f2937;
+	line-height: 1.4;
+}
+
+.omsar-timeline-item-description {
+	font-size: 14px;
+	color: #6b7280;
+	line-height: 1.6;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+	/* On mobile, switch alternating layout to same side */
+	.omsar-timeline-alternating .omsar-timeline-line {
+		left: 0;
+		transform: none;
+	}
+
+	.omsar-timeline-alternating .omsar-timeline-item {
+		width: 100% !important;
+		flex-direction: row !important;
+		margin-left: 0 !important;
+		margin-right: 0 !important;
+		padding-left: 0 !important;
+		padding-right: 0 !important;
+		justify-content: flex-start !important;
+	}
+
+	.omsar-timeline-alternating .omsar-timeline-item:nth-child(odd),
+	.omsar-timeline-alternating .omsar-timeline-item:nth-child(even) {
+		flex-direction: row !important;
+		margin-left: 0 !important;
+		padding-left: 0 !important;
+		padding-right: 0 !important;
+		justify-content: flex-start !important;
+	}
+
+	.omsar-timeline-alternating .omsar-timeline-item .omsar-timeline-marker,
+	.omsar-timeline-alternating .omsar-timeline-item:nth-child(odd) .omsar-timeline-marker,
+	.omsar-timeline-alternating .omsar-timeline-item:nth-child(even) .omsar-timeline-marker {
+		left: 0 !important;
+		right: auto !important;
+		transform: translateX(-50%) !important;
+	}
+
+	.omsar-timeline-alternating .omsar-timeline-item .omsar-timeline-item-content,
+	.omsar-timeline-alternating .omsar-timeline-item:nth-child(odd) .omsar-timeline-item-content,
+	.omsar-timeline-alternating .omsar-timeline-item:nth-child(even) .omsar-timeline-item-content {
+		margin-left: 30px !important;
+		margin-right: 0 !important;
+		text-align: left !important;
+	}
+
+	/* On mobile, switch alternating right/left layout to same side */
+	.omsar-timeline-alternating_right_left .omsar-timeline-line {
+		left: 0;
+		transform: none;
+	}
+
+	.omsar-timeline-alternating_right_left .omsar-timeline-item {
+		width: 100% !important;
+		flex-direction: row !important;
+		margin-left: 0 !important;
+		margin-right: 0 !important;
+		padding-left: 0 !important;
+		padding-right: 0 !important;
+		justify-content: flex-start !important;
+	}
+
+	.omsar-timeline-alternating_right_left .omsar-timeline-item:nth-child(odd),
+	.omsar-timeline-alternating_right_left .omsar-timeline-item:nth-child(even) {
+		flex-direction: row !important;
+		margin-left: 0 !important;
+		padding-left: 0 !important;
+		padding-right: 0 !important;
+		justify-content: flex-start !important;
+	}
+
+	.omsar-timeline-alternating_right_left .omsar-timeline-item .omsar-timeline-marker,
+	.omsar-timeline-alternating_right_left .omsar-timeline-item:nth-child(odd) .omsar-timeline-marker,
+	.omsar-timeline-alternating_right_left .omsar-timeline-item:nth-child(even) .omsar-timeline-marker {
+		left: 0 !important;
+		right: auto !important;
+		transform: translateX(-50%) !important;
+	}
+
+	.omsar-timeline-alternating_right_left .omsar-timeline-item .omsar-timeline-item-content,
+	.omsar-timeline-alternating_right_left .omsar-timeline-item:nth-child(odd) .omsar-timeline-item-content,
+	.omsar-timeline-alternating_right_left .omsar-timeline-item:nth-child(even) .omsar-timeline-item-content {
+		margin-left: 30px !important;
+		margin-right: 0 !important;
+		text-align: left !important;
+	}
+}
+
+/* RTL Support for Arabic - Same Side Layout */
+html[dir="rtl"] .omsar-timeline-same_side.omsar-timeline-right,
+body[dir="rtl"] .omsar-timeline-same_side.omsar-timeline-right,
+.omsar-timeline-rtl.omsar-timeline-same_side.omsar-timeline-right {
+	direction: rtl;
+}
+
+html[dir="rtl"] .omsar-timeline-same_side.omsar-timeline-right .omsar-timeline-line,
+body[dir="rtl"] .omsar-timeline-same_side.omsar-timeline-right .omsar-timeline-line,
+.omsar-timeline-rtl.omsar-timeline-same_side.omsar-timeline-right .omsar-timeline-line {
+	left: auto;
+	right: 0;
+}
+
+html[dir="rtl"] .omsar-timeline-same_side.omsar-timeline-right .omsar-timeline-item,
+body[dir="rtl"] .omsar-timeline-same_side.omsar-timeline-right .omsar-timeline-item,
+.omsar-timeline-rtl.omsar-timeline-same_side.omsar-timeline-right .omsar-timeline-item {
+	flex-direction: row-reverse;
+}
+
+html[dir="rtl"] .omsar-timeline-same_side.omsar-timeline-right .omsar-timeline-marker,
+body[dir="rtl"] .omsar-timeline-same_side.omsar-timeline-right .omsar-timeline-marker,
+.omsar-timeline-rtl.omsar-timeline-same_side.omsar-timeline-right .omsar-timeline-marker {
+	left: auto;
+	right: 0;
+	transform: translateX(50%);
+}
+
+html[dir="rtl"] .omsar-timeline-same_side.omsar-timeline-right .omsar-timeline-item-content,
+body[dir="rtl"] .omsar-timeline-same_side.omsar-timeline-right .omsar-timeline-item-content,
+.omsar-timeline-rtl.omsar-timeline-same_side.omsar-timeline-right .omsar-timeline-item-content {
+	margin-left: 0;
+	margin-right: 30px;
+	text-align: right;
+	direction: rtl;
+}
+
+/* RTL Support - General text alignment */
+html[dir="rtl"] .omsar-timeline-item-content,
+body[dir="rtl"] .omsar-timeline-item-content,
+.omsar-timeline-rtl .omsar-timeline-item-content {
+	direction: rtl;
+}
+
+html[dir="rtl"] .omsar-timeline-same_side.omsar-timeline-right .omsar-timeline-item-title,
+body[dir="rtl"] .omsar-timeline-same_side.omsar-timeline-right .omsar-timeline-item-title,
+html[dir="rtl"] .omsar-timeline-same_side.omsar-timeline-right .omsar-timeline-item-date,
+body[dir="rtl"] .omsar-timeline-same_side.omsar-timeline-right .omsar-timeline-item-date,
+html[dir="rtl"] .omsar-timeline-same_side.omsar-timeline-right .omsar-timeline-item-description,
+body[dir="rtl"] .omsar-timeline-same_side.omsar-timeline-right .omsar-timeline-item-description,
+.omsar-timeline-rtl.omsar-timeline-same_side.omsar-timeline-right .omsar-timeline-item-title,
+.omsar-timeline-rtl.omsar-timeline-same_side.omsar-timeline-right .omsar-timeline-item-date,
+.omsar-timeline-rtl.omsar-timeline-same_side.omsar-timeline-right .omsar-timeline-item-description {
+	text-align: right;
+	direction: rtl;
+}
+
+/* RTL Responsive - Mobile */
+@media (max-width: 768px) {
+	html[dir="rtl"] .omsar-timeline-same_side.omsar-timeline-right .omsar-timeline-item-content,
+	body[dir="rtl"] .omsar-timeline-same_side.omsar-timeline-right .omsar-timeline-item-content,
+	.omsar-timeline-rtl.omsar-timeline-same_side.omsar-timeline-right .omsar-timeline-item-content {
+		margin-right: 30px;
+		margin-left: 0;
+		text-align: right;
+	}
+}

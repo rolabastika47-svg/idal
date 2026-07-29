@@ -1,0 +1,183 @@
+{# Card gradient overlay #}
+%%SELECTOR%% .omsar-recruitment-card::before {
+  background: linear-gradient(
+    {{ design.card.card_gradient_angle.number ?? 135 }}deg,
+    {{ design.card.card_gradient_color_from ?? 'rgba(173, 216, 230, 0.25)' }} 0%,
+    {{ design.card.card_gradient_color_to ?? 'rgba(255, 255, 255, 0.95)' }} 100%
+  );
+  opacity: {{ design.card.card_gradient_overlay_opacity.number ?? 0.8 }};
+  border-radius: {{ design.card.card_overlay_border_radius.number ?? 12 }}px;
+}
+
+%%SELECTOR%% .omsar-recruitment-card {
+  {{ macros.spacing_padding_all(design.card.padding) }}
+  {{ macros.borders(design.card.borders) }}
+  {% if design.card.card_border_radius.number is defined %}
+  border-radius: {{ design.card.card_border_radius.style }};
+  {% endif %}
+  background-size: {{ design.card.card_background_image_size ?? 'cover' }};
+  background-position: {{ design.card.card_background_image_position ?? 'center center' }};
+  background-repeat: {{ design.card.card_background_image_repeat ?? 'no-repeat' }};
+}
+
+{% if design.card.card_background_type == 'color' %}
+%%SELECTOR%% .omsar-recruitment-card {
+  background-color: {{ design.card.card_background_color ?? 'transparent' }};
+}
+{% endif %}
+
+{% if design.card.card_background_overlay %}
+%%SELECTOR%% .omsar-recruitment-card.has-overlay::after {
+  background-color: {{ design.card.card_background_overlay_color ?? 'rgba(0, 0, 0, 0.3)' }};
+}
+{% endif %}
+
+%%SELECTOR%% .omsar-recruitments-grid {
+  gap: {{ design.card.grid_gap.style ?? '24px' }};
+}
+
+{# Filter tabs #}
+%%SELECTOR%% .omsar-recruitment-status-tab {
+  color: {{ design.filters.text_color ?? '#192D50' }};
+  background-color: {{ design.filters.background_color ?? 'transparent' }};
+  border-style: solid;
+  border-width: {{ design.filters.border_width.style ?? '2px' }};
+  border-color: {{ design.filters.border_color ?? '#192D50' }};
+  border-radius: {{ design.filters.border_radius.style ?? '24px' }};
+  {{ macros.spacing_padding_all(design.filters.padding) }}
+  {{ macros.typography(design.filters.typography, globalSettings) }}
+}
+
+%%SELECTOR%% .omsar-recruitment-status-tabs {
+  gap: {{ design.filters.gap.style ?? '12px' }};
+}
+
+%%SELECTOR%% .omsar-recruitment-status-tab:hover:not(.active) {
+  color: {{ design.filters.hover_text_color ?? '#ffffff' }};
+  background-color: {{ design.filters.hover_background_color ?? '#7db3e8' }};
+  {% if design.filters.hover_border_color %}
+  border-color: {{ design.filters.hover_border_color }};
+  {% endif %}
+}
+
+%%SELECTOR%% .omsar-recruitment-status-tab.active {
+  color: {{ design.filters.active_text_color ?? '#ffffff' }};
+  background-color: {{ design.filters.active_background_color ?? '#192D50' }};
+  border-color: {{ design.filters.active_border_color ?? '#192D50' }};
+}
+
+{# Title #}
+%%SELECTOR%% .omsar-recruitment-title {
+  color: {{ design.title.color ?? '#192D50' }};
+  {{ macros.typography(design.title.typography, globalSettings) }}
+}
+
+{# Details #}
+%%SELECTOR%% .omsar-recruitment-entity,
+%%SELECTOR%% .omsar-recruitment-dates,
+%%SELECTOR%% .omsar-recruitment-details .detail-value {
+  color: {{ design.details.text_color ?? '#7db3e8' }};
+  {{ macros.typography(design.details.typography, globalSettings) }}
+}
+
+%%SELECTOR%% .omsar-recruitment-details i {
+  color: {{ design.details.icon_color ?? '#010101' }};
+}
+
+{# Status badges #}
+%%SELECTOR%% .omsar-recruitment-badge {
+  border-radius: {{ design.badges.border_radius.style ?? '30px' }};
+  border-width: 1px;
+  border-style: solid;
+  {{ macros.typography(design.badges.typography, globalSettings) }}
+}
+
+%%SELECTOR%% .omsar-recruitment-badge.status-open {
+  color: {{ design.badges.open_text_color ?? '#059669' }};
+  border-color: {{ design.badges.open_border_color ?? '#059669' }};
+  background-color: {{ design.badges.open_background_color ?? 'transparent' }};
+}
+
+%%SELECTOR%% .omsar-recruitment-badge.status-closed {
+  color: {{ design.badges.closed_text_color ?? '#dc3545' }};
+  border-color: {{ design.badges.closed_border_color ?? '#dc3545' }};
+  background-color: {{ design.badges.closed_background_color ?? 'transparent' }};
+}
+
+%%SELECTOR%% .omsar-recruitment-badge.status-upcoming {
+  color: {{ design.badges.upcoming_text_color ?? '#d97706' }};
+  border-color: {{ design.badges.upcoming_border_color ?? '#d97706' }};
+  background-color: {{ design.badges.upcoming_background_color ?? 'transparent' }};
+}
+
+{# Apply / Notify button — matches Elementor Apply Button Style controls #}
+%%SELECTOR%% .omsar-recruitment-apply-btn {
+  background-color: {{ design.apply_button.background_color ?? '#ffffff' }};
+  color: {{ design.apply_button.text_color ?? '#000000' }};
+  border-color: {{ design.apply_button.border_color ?? 'transparent' }};
+  border-width: {{ design.apply_button.border_width.style ?? '0px' }};
+  border-style: solid;
+  border-radius: {{ design.apply_button.border_radius.style ?? '24px' }};
+  {{ macros.spacing_padding_all(design.apply_button.padding) }}
+  {{ macros.typography(design.apply_button.typography, globalSettings) }}
+}
+
+{# Load more button #}
+%%SELECTOR%% .omsar-recruitment-load-more-btn {
+  background-color: {{ design.load_more.background_color ?? 'transparent' }};
+  color: {{ design.load_more.text_color ?? '#7db3e8' }};
+  border-color: {{ design.load_more.border_color ?? '#7db3e8' }};
+  border-width: {{ design.load_more.border_width.style ?? '2px' }};
+  border-style: solid;
+  border-radius: {{ design.load_more.border_radius.style ?? '24px' }};
+  {{ macros.spacing_padding_all(design.load_more.padding) }}
+  {{ macros.typography(design.load_more.typography, globalSettings) }}
+}
+
+%%SELECTOR%% .omsar-recruitment-load-more-btn:hover:not(:disabled) {
+  background-color: {{ design.load_more.hover_background_color ?? '#7db3e8' }};
+  color: {{ design.load_more.hover_text_color ?? '#ffffff' }};
+  border-color: {{ design.load_more.hover_border_color ?? '#7db3e8' }};
+}
+
+%%SELECTOR%% .omsar-recruitment-load-more-wrapper {
+  text-align: {{ design.load_more.wrapper_alignment ?? 'center' }};
+  {{ macros.spacing_margin_y(design.load_more.wrapper_margin) }}
+}
+
+{# Theme fonts — override Breakdance typography font-family #}
+%%SELECTOR%% .omsar-recruitment-filter-label,
+%%SELECTOR%% .omsar-recruitment-status-tab,
+%%SELECTOR%% .omsar-recruitment-title,
+%%SELECTOR%% .omsar-recruitment-badge,
+%%SELECTOR%% .omsar-recruitment-entity,
+%%SELECTOR%% .omsar-recruitment-dates,
+%%SELECTOR%% .omsar-recruitment-details .detail-value,
+%%SELECTOR%% .omsar-recruitment-apply-btn,
+%%SELECTOR%% .omsar-recruitment-load-more-btn,
+%%SELECTOR%% .omsar-recruitment-empty-message {
+  font-family: var(--font-main, 'Inter', sans-serif) !important;
+}
+
+%%SELECTOR%%[dir="rtl"] .omsar-recruitment-filter-label,
+%%SELECTOR%%[dir="rtl"] .omsar-recruitment-status-tab,
+%%SELECTOR%%[dir="rtl"] .omsar-recruitment-title,
+%%SELECTOR%%[dir="rtl"] .omsar-recruitment-badge,
+%%SELECTOR%%[dir="rtl"] .omsar-recruitment-entity,
+%%SELECTOR%%[dir="rtl"] .omsar-recruitment-dates,
+%%SELECTOR%%[dir="rtl"] .omsar-recruitment-details .detail-value,
+%%SELECTOR%%[dir="rtl"] .omsar-recruitment-apply-btn,
+%%SELECTOR%%[dir="rtl"] .omsar-recruitment-load-more-btn,
+%%SELECTOR%%[dir="rtl"] .omsar-recruitment-empty-message,
+%%SELECTOR%%.omsar-bd-rtl .omsar-recruitment-filter-label,
+%%SELECTOR%%.omsar-bd-rtl .omsar-recruitment-status-tab,
+%%SELECTOR%%.omsar-bd-rtl .omsar-recruitment-title,
+%%SELECTOR%%.omsar-bd-rtl .omsar-recruitment-badge,
+%%SELECTOR%%.omsar-bd-rtl .omsar-recruitment-entity,
+%%SELECTOR%%.omsar-bd-rtl .omsar-recruitment-dates,
+%%SELECTOR%%.omsar-bd-rtl .omsar-recruitment-details .detail-value,
+%%SELECTOR%%.omsar-bd-rtl .omsar-recruitment-apply-btn,
+%%SELECTOR%%.omsar-bd-rtl .omsar-recruitment-load-more-btn,
+%%SELECTOR%%.omsar-bd-rtl .omsar-recruitment-empty-message {
+  font-family: 'Almarai', sans-serif !important;
+}

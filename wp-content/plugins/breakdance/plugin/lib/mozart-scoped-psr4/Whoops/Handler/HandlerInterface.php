@@ -1,0 +1,36 @@
+<?php
+/**
+ * Breakdance\Lib\Vendor\Whoops - php errors for cool kids
+ * @author Filipe Dobreira <http://github.com/filp>
+ */
+
+namespace Breakdance\Lib\Vendor\Whoops\Handler;
+
+use Breakdance\Lib\Vendor\Whoops\Exception\Inspector;
+use Breakdance\Lib\Vendor\Whoops\RunInterface;
+
+interface HandlerInterface
+{
+    /**
+     * @return int|null A handler may return nothing, or a Handler::HANDLE_* constant
+     */
+    public function handle();
+
+    /**
+     * @param  RunInterface  $run
+     * @return void
+     */
+    public function setRun(RunInterface $run);
+
+    /**
+     * @param  \Throwable $exception
+     * @return void
+     */
+    public function setException($exception);
+
+    /**
+     * @param  Inspector $inspector
+     * @return void
+     */
+    public function setInspector(Inspector $inspector);
+}

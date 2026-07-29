@@ -1,0 +1,362 @@
+/* OMSAR Breakdance - Recruitment notify modal */
+/* Recruitment Notify Me Modal Styles */
+.omsar-bd-recruitment-notify-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    pointer-events: none;
+}
+
+.omsar-bd-recruitment-notify-modal.active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+.omsar-bd-recruitment-notify-modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(2px);
+}
+
+.omsar-bd-recruitment-notify-modal-content {
+    position: relative;
+    background: #ffffff;
+    border-radius: 12px;
+    max-width: 500px;
+    width: 90%;
+    max-height: calc(100vh - 40px);
+    overflow-y: auto;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    transform: scale(0.9) translateY(20px);
+    transition: transform 0.3s ease;
+    z-index: 1;
+}
+
+.omsar-bd-recruitment-notify-modal.active .omsar-bd-recruitment-notify-modal-content {
+    transform: scale(1) translateY(0);
+}
+
+.omsar-bd-recruitment-notify-modal-close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: transparent;
+    border: none;
+    font-size: 28px;
+    line-height: 1;
+    color: #666;
+    cursor: pointer;
+    padding: 0;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+    z-index: 10;
+}
+
+.omsar-bd-recruitment-notify-modal-close:hover,
+.omsar-bd-recruitment-notify-modal-close:focus {
+    background-color: #f0f0f0;
+    color: #333;
+    outline: none;
+}
+
+.omsar-bd-recruitment-notify-modal-close span {
+    display: block;
+    line-height: 1;
+}
+
+.omsar-bd-recruitment-notify-modal-body {
+    padding: 30px;
+}
+
+.omsar-bd-recruitment-notify-modal-title {
+    margin: 0 0 20px 0;
+    font-size: 24px;
+    font-weight: 600;
+    color: #333;
+}
+
+.omsar-bd-recruitment-notify-modal-message {
+    margin: 0 0 25px 0;
+    font-size: 16px;
+    line-height: 1.6;
+    color: #666;
+}
+
+.omsar-bd-recruitment-notify-modal-message small {
+    display: block;
+    margin-top: 8px;
+    font-size: 14px;
+    color: #999;
+}
+
+.omsar-bd-recruitment-notify-form-group {
+    margin-bottom: 20px;
+}
+
+.omsar-bd-recruitment-notify-label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+}
+
+.omsar-bd-recruitment-notify-input {
+    width: 100%;
+    padding: 12px 15px;
+    font-size: 16px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    box-sizing: border-box;
+}
+
+.omsar-bd-recruitment-notify-input:focus {
+    outline: none;
+    border-color: #192D50;
+    box-shadow: 0 0 0 3px rgba(86, 147, 255, 0.1);
+}
+
+.omsar-bd-recruitment-notify-input.error {
+    border-color: #e74c3c;
+}
+
+.omsar-bd-recruitment-notify-input.error:focus {
+    box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.1);
+}
+
+.omsar-bd-recruitment-notify-error {
+    display: block;
+    margin-top: 8px;
+    font-size: 14px;
+    color: #e74c3c;
+    min-height: 20px;
+}
+
+.omsar-bd-recruitment-notify-form-actions {
+    margin-top: 25px;
+}
+
+.omsar-bd-recruitment-notify-submit-btn {
+    width: 100%;
+    padding: 14px 24px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #ffffff;
+    background-color: #192D50;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.omsar-bd-recruitment-notify-submit-btn:hover:not(:disabled) {
+    background-color: #192D50;
+}
+
+.omsar-bd-recruitment-notify-submit-btn:active:not(:disabled) {
+    transform: translateY(1px);
+}
+
+.omsar-bd-recruitment-notify-submit-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.omsar-bd-recruitment-notify-submit-loader {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.omsar-bd-recruitment-notify-submit-loader .spinner {
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top-color: #ffffff;
+    border-radius: 50%;
+    animation: omsar-bd-spin 0.8s linear infinite;
+}
+
+@keyframes omsar-bd-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.omsar-bd-recruitment-notify-success {
+    margin-top: 0;
+    margin-bottom: 0;
+    padding: 20px;
+    background-color: #d4edda;
+    border: 1px solid #c3e6cb;
+    border-radius: 8px;
+    color: #155724;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+/* RTL Support */
+.omsar-bd-recruitment-notify-modal[dir="rtl"],
+html[dir="rtl"] .omsar-bd-recruitment-notify-modal {
+    direction: rtl;
+    text-align: right;
+}
+
+.omsar-bd-recruitment-notify-modal[dir="rtl"] .omsar-bd-recruitment-notify-modal-body,
+html[dir="rtl"] .omsar-bd-recruitment-notify-modal .omsar-bd-recruitment-notify-modal-body {
+    text-align: right;
+}
+
+.omsar-bd-recruitment-notify-modal[dir="rtl"] .omsar-bd-recruitment-notify-modal-title,
+html[dir="rtl"] .omsar-bd-recruitment-notify-modal .omsar-bd-recruitment-notify-modal-title {
+    text-align: right;
+    padding-left: 40px;
+    padding-right: 0;
+}
+
+.omsar-bd-recruitment-notify-modal[dir="rtl"] .omsar-bd-recruitment-notify-modal-message,
+html[dir="rtl"] .omsar-bd-recruitment-notify-modal .omsar-bd-recruitment-notify-modal-message {
+    text-align: right;
+}
+
+.omsar-bd-recruitment-notify-modal[dir="rtl"] .omsar-bd-recruitment-notify-label,
+html[dir="rtl"] .omsar-bd-recruitment-notify-modal .omsar-bd-recruitment-notify-label {
+    text-align: right;
+}
+
+.omsar-bd-recruitment-notify-modal[dir="rtl"] .omsar-bd-recruitment-notify-input,
+html[dir="rtl"] .omsar-bd-recruitment-notify-modal .omsar-bd-recruitment-notify-input {
+    direction: rtl;
+    text-align: right;
+}
+
+.omsar-bd-recruitment-notify-modal[dir="rtl"] .omsar-bd-recruitment-notify-error,
+html[dir="rtl"] .omsar-bd-recruitment-notify-modal .omsar-bd-recruitment-notify-error {
+    text-align: right;
+}
+
+.omsar-bd-recruitment-notify-modal[dir="rtl"] .omsar-bd-recruitment-notify-success,
+html[dir="rtl"] .omsar-bd-recruitment-notify-modal .omsar-bd-recruitment-notify-success {
+    text-align: right;
+}
+
+.omsar-bd-recruitment-notify-modal[dir="rtl"] .omsar-bd-recruitment-notify-modal-close,
+html[dir="rtl"] .omsar-bd-recruitment-notify-modal .omsar-bd-recruitment-notify-modal-close,
+[dir="rtl"] .omsar-bd-recruitment-notify-modal-close {
+    right: auto;
+    left: 15px;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .omsar-bd-recruitment-notify-modal-content {
+        width: 95%;
+        max-height: calc(100vh - 20px);
+    }
+
+    .omsar-bd-recruitment-notify-modal-body {
+        padding: 20px;
+    }
+
+    .omsar-bd-recruitment-notify-modal-title {
+        font-size: 20px;
+        margin-bottom: 15px;
+    }
+
+    .omsar-bd-recruitment-notify-modal-message {
+        font-size: 15px;
+        margin-bottom: 20px;
+    }
+
+    .omsar-bd-recruitment-notify-submit-btn {
+        padding: 12px 20px;
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .omsar-bd-recruitment-notify-modal-body {
+        padding: 15px;
+    }
+
+    .omsar-bd-recruitment-notify-modal-title {
+        font-size: 18px;
+        padding-right: 30px;
+    }
+
+    .omsar-bd-recruitment-notify-modal[dir="rtl"] .omsar-bd-recruitment-notify-modal-title,
+    html[dir="rtl"] .omsar-bd-recruitment-notify-modal .omsar-bd-recruitment-notify-modal-title {
+        padding-right: 0;
+        padding-left: 36px;
+    }
+
+    .omsar-bd-recruitment-notify-modal-close {
+        top: 10px;
+        right: 10px;
+    }
+
+    .omsar-bd-recruitment-notify-modal[dir="rtl"] .omsar-bd-recruitment-notify-modal-close,
+    html[dir="rtl"] .omsar-bd-recruitment-notify-modal .omsar-bd-recruitment-notify-modal-close,
+    [dir="rtl"] .omsar-bd-recruitment-notify-modal-close {
+        left: 10px;
+        right: auto;
+    }
+}
+
+/* Theme fonts — LTR: Inter, RTL: Almarai */
+.omsar-bd-recruitment-notify-modal-title,
+.omsar-bd-recruitment-notify-modal-message,
+.omsar-bd-recruitment-notify-label,
+.omsar-bd-recruitment-notify-input,
+.omsar-bd-recruitment-notify-error,
+.omsar-bd-recruitment-notify-submit-btn,
+.omsar-bd-recruitment-notify-success {
+    font-family: var(--font-main, 'Inter', sans-serif) !important;
+}
+
+.omsar-bd-recruitment-notify-modal[dir="rtl"] .omsar-bd-recruitment-notify-modal-title,
+.omsar-bd-recruitment-notify-modal[dir="rtl"] .omsar-bd-recruitment-notify-modal-message,
+.omsar-bd-recruitment-notify-modal[dir="rtl"] .omsar-bd-recruitment-notify-label,
+.omsar-bd-recruitment-notify-modal[dir="rtl"] .omsar-bd-recruitment-notify-input,
+.omsar-bd-recruitment-notify-modal[dir="rtl"] .omsar-bd-recruitment-notify-error,
+.omsar-bd-recruitment-notify-modal[dir="rtl"] .omsar-bd-recruitment-notify-submit-btn,
+.omsar-bd-recruitment-notify-modal[dir="rtl"] .omsar-bd-recruitment-notify-success,
+html[dir="rtl"] .omsar-bd-recruitment-notify-modal-title,
+html[dir="rtl"] .omsar-bd-recruitment-notify-modal-message,
+html[dir="rtl"] .omsar-bd-recruitment-notify-label,
+html[dir="rtl"] .omsar-bd-recruitment-notify-input,
+html[dir="rtl"] .omsar-bd-recruitment-notify-error,
+html[dir="rtl"] .omsar-bd-recruitment-notify-submit-btn,
+html[dir="rtl"] .omsar-bd-recruitment-notify-success {
+    font-family: 'Almarai', sans-serif !important;
+}
+
+/* Prevent body scroll when modal is open */
+body.omsar-bd-modal-open {
+    overflow: hidden;
+}

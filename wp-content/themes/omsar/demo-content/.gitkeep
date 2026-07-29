@@ -1,0 +1,7 @@
+# Place demo content files here
+# Required files:
+# - demo-content.xml (WordPress export)
+# - widgets.wie (Widget Importer & Exporter)
+# - customizer.dat (Customizer export)
+# Optional:
+# - preview.jpg (Demo preview image)

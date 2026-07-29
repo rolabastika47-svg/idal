@@ -1,0 +1,288 @@
+/* ------------------------------------------ */
+/*              Page Banner Section           */
+/* ------------------------------------------ */
+.page-banner {
+    /* margin-top: 48px; */
+    /* Account for fixed navbar */
+    /* padding-top: 40px; */
+    padding-bottom: 25px;
+}
+.page-banner .container{
+    margin-top: 30px;
+}
+
+/* Breadcrumb spacing area */
+.breadcrumb-space {
+    min-height: 16px;
+    margin-top: 20px;
+    margin-bottom: 12px;
+}
+
+/* Breadcrumb Navigation */
+.breadcrumb-nav {
+    margin-bottom: 0;
+}
+
+.breadcrumb-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.breadcrumb-list a {
+    color: #666;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.breadcrumb-list a:hover {
+    color: #000;
+    text-decoration: none;
+}
+
+.breadcrumb-separator {
+    color: #999;
+    margin: 0 8px;
+}
+
+.breadcrumb-current {
+    color: #000;
+    font-weight: 500;
+}
+
+/* Back button (under breadcrumb) */
+.back-button-space {
+    margin-top: 12px;
+    margin-bottom: 8px;
+}
+
+.omsar-back-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    /* padding: 10px 18px; */
+    color: #000000;
+    text-decoration: none;
+    /* font-size: 14px; */
+    font-weight: 500;
+}
+
+/* .omsar-back-button:hover {
+    background: #e8eef5;
+    color: #0d1f3c;
+    border-color: #c5d4e8;
+    text-decoration: none;
+    box-shadow: 0 2px 6px rgba(25, 45, 80, 0.08);
+}
+
+.omsar-back-button:focus {
+    outline: 2px solid #192D50;
+    outline-offset: 2px;
+} */
+
+.omsar-back-button-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    background: #fff;
+    border: 1px solid #000000;
+    border-radius: 50%;
+    flex-shrink: 0;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.omsar-back-button-icon svg {
+    display: block;
+}
+
+[dir="rtl"] .omsar-back-button-icon svg {
+    transform: scaleX(-1);
+}
+
+/* Elementor page breadcrumb wrapper */
+.elementor-breadcrumb-wrapper {
+    background: transparent;
+}
+
+.elementor-breadcrumb-wrapper .container {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Page Title */
+.page-banner-title {
+    font-weight: 700;
+    font-size: 32px;
+    color: #000000;
+    margin-bottom: 8px;
+    line-height: 1.2;
+}
+
+/* Page Subtitle */
+.page-banner-subtitle {
+    font-weight: 400;
+    font-size: 18px;
+    color: #000000;
+    margin-bottom: 0;
+    line-height: 1.5;
+}
+
+/* Banner Meta (Government, Assignment Period) */
+.page-banner-meta {
+    margin-top: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.banner-meta-item {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.5rem;
+}
+
+.banner-meta-label {
+    font-family: var(--font-main, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif);
+    font-weight: 600;
+    font-size: 0.875rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #666666;
+    min-width: 180px;
+}
+
+.banner-meta-value {
+    font-family: var(--font-main, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif);
+    font-weight: 600;
+    font-size: 1rem;
+    color: #192D50;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 991.98px) {
+    .page-banner {
+        padding-top: 20px;
+        padding-bottom: 16px;
+    }
+    
+    .page-banner .container {
+        margin-top: 24px;
+    }
+
+    .page-banner-title {
+        font-size: 36px;
+    }
+
+    .page-banner-subtitle {
+        font-size: 16px;
+    }
+
+    .page-banner-meta {
+        margin-top: 16px;
+        gap: 0.75rem;
+    }
+
+    .banner-meta-item {
+        flex-direction: column;
+        gap: 0.25rem;
+    }
+
+    .banner-meta-label {
+        min-width: auto;
+        font-size: 0.75rem;
+    }
+
+    .banner-meta-value {
+        font-size: 0.9rem;
+    }
+
+    .breadcrumb-space {
+        min-height: 12px;
+        margin-top: 16px;
+        margin-bottom: 12px;
+    }
+
+    .back-button-space {
+        margin-top: 10px;
+        margin-bottom: 6px;
+    }
+
+    .omsar-back-button {
+        padding: 8px 14px;
+        font-size: 13px;
+    }
+
+    .omsar-back-button-icon {
+        width: 20px;
+        height: 20px;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .page-banner {
+        padding-top: 16px;
+        padding-bottom: 12px;
+    }
+    
+    .page-banner .container {
+        margin-top: 20px;
+    }
+
+    .page-banner-title {
+        font-size: 28px;
+    }
+
+    .page-banner-subtitle {
+        font-size: 14px;
+    }
+
+    .page-banner-meta {
+        margin-top: 12px;
+        gap: 0.625rem;
+    }
+
+    .banner-meta-label {
+        font-size: 0.7rem;
+        min-width: auto;
+    }
+
+    .banner-meta-value {
+        font-size: 0.85rem;
+    }
+
+    .breadcrumb-space {
+        min-height: 10px;
+        margin-top: 12px;
+        margin-bottom: 10px;
+    }
+
+    .back-button-space {
+        margin-top: 8px;
+        margin-bottom: 4px;
+    }
+
+    .omsar-back-button {
+        padding: 8px 12px;
+        font-size: 13px;
+        gap: 8px;
+    }
+
+    .omsar-back-button-icon {
+        width: 18px;
+        height: 18px;
+    }
+
+    .omsar-back-button-icon svg {
+        width: 18px;
+        height: 18px;
+    }
+}
+

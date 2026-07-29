@@ -1,0 +1,154 @@
+/*
+Theme Name: OMSAR
+
+Description: A custom WordPress theme for OMSAR.
+Version: 1.0
+Text Domain: omsar
+*/
+.badge-minister {
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+}
+
+/* .e-services-card:hover {
+    background:
+        var(--card-bg) no-repeat right bottom ,
+        #ffffff;
+
+} */
+
+.e-services-card {
+    background:
+        var(--card-bg) no-repeat right bottom,#ffffff;
+    background-size: 160px 160px;
+
+}
+.e-services-card:hover {
+    background:
+        var(--card-bg) no-repeat right bottom ,
+        linear-gradient(180deg, #E0F2FF 0%, #6EA8FE 100%);
+
+    background-size: 200px 180px, auto;
+}
+
+
+/* .project-subtitle{
+    margin-bottom: 0px;
+} */
+
+.badge.bg-primary{
+    background-color:#192D50 !important ;
+}
+
+
+.e-con.e-con-boxed > .e-con-inner {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.bi.bi-calendar3::before{
+    color: black !important;
+}
+
+.bi.bi-alarm::before{
+    color: black !important;
+
+}
+
+.bi.bi-calendar2-x::before,
+.bi.bi-calendar2-check::before
+{
+    color: black !important;
+
+}
+
+.latest-projects-section .bi.bi-calendar3::before{
+    color: rgb(255, 255, 255) !important;
+}
+
+.post-thumbnail img {
+    border-radius: 5%;
+}
+
+/* #primary{
+    padding-top: 20px;
+} */
+
+.static-height{
+    min-height: 450px;
+}
+
+.omsar-complaint-message{
+    display: none;
+    margin-top: 24px;
+    padding: 18px 20px;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    font-weight: 500;
+    line-height: 1.4;
+}
+.omsar-complaint-message:before{
+    display: inline-block;
+    margin-right: 10px;
+    font-weight: 700;
+}
+.omsar-complaint-message-success{
+    display: block;
+    background: #e8f7f0;
+    border-color: #b5e3c9;
+    color: #0f5132;
+}
+.omsar-complaint-message-success:before{
+    content: "✓";
+    color: #198754;
+}
+.omsar-complaint-message-error{
+    display: block;
+    background: #fdecec;
+    border-color: #f5c2c7;
+    color: #842029;
+}
+.omsar-complaint-message-error:before{
+    content: "!";
+    color: #dc3545;
+}
+
+
+.project-subtitle.status-upcoming{
+    background-color: #FFFFFFB3;
+    color: #1D4ED8;
+    border-color: #1D4ED8;
+}
+
+.project-subtitle.status-open{
+    background-color: #FFFFFFB3;
+    color: #1E7F4F;
+    border-color: #1E7F4F;
+}
+
+.project-subtitle.status-closed{
+    background-color: #FFFFFFB3;
+    color: #B91C1C;
+    border-color: #B91C1C;
+}
+
+/* hide recaptcha */
+.grecaptcha-badge {
+    visibility: hidden !important;
+}
+
+@media (max-width: 768px) {
+
+    .impact-card {
+        height: auto !important;
+        min-height: unset !important;
+    }
+
+    .card-text {
+        white-space: normal !important;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+    }
+
+}

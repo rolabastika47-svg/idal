@@ -1,0 +1,641 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Investment Overview | IDAL</title>
+  <style>
+    :root {
+      --ink: #050505;
+      --soft-ink: #26313d;
+      --muted: #66717e;
+      --line: #e6ebef;
+      --surface: #ffffff;
+      --wash: #f5f7f9;
+      --cyan: #07b7dc;
+      --blue: #064bff;
+      --green: #0fd789;
+      --deep: #071827;
+      --radius: 8px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--wash);
+      font-family: Arial, Helvetica, sans-serif;
+      letter-spacing: 0;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .shell {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 318px minmax(0, 1fr);
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+      background: #fff;
+      border-right: 1px solid var(--line);
+      padding: 28px 22px;
+    }
+
+    .mini-logo img {
+      width: 176px;
+      display: block;
+      margin-bottom: 24px;
+    }
+
+    .nav-label {
+      color: var(--cyan);
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      margin: 0 0 12px;
+    }
+
+    .side-nav,
+    .side-nav ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .side-nav > li {
+      border-top: 1px solid var(--line);
+    }
+
+    .side-nav > li:last-child {
+      border-bottom: 1px solid var(--line);
+    }
+
+    .side-nav a {
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      color: #1d2834;
+      font-size: 14px;
+      font-weight: 700;
+      padding: 9px 10px;
+      border-radius: var(--radius);
+    }
+
+    .side-nav a:hover,
+    .side-nav .active > a {
+      color: #007f9b;
+      background: #edf9fb;
+    }
+
+    .side-nav .active > a {
+      box-shadow: inset 4px 0 0 var(--cyan);
+    }
+
+    .side-nav ul {
+      padding: 0 0 12px 18px;
+      border-left: 1px solid var(--line);
+      margin-left: 14px;
+    }
+
+    .side-nav ul a {
+      min-height: 30px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 600;
+      padding: 6px 8px;
+    }
+
+    .count {
+      min-width: 24px;
+      height: 24px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      background: #f0f4f7;
+      color: #7a8794;
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .side-actions {
+      display: grid;
+      gap: 10px;
+      margin-top: 26px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      border-radius: 999px;
+      padding: 0 18px;
+      background: #000;
+      color: #fff;
+      font-size: 13px;
+      font-weight: 800;
+      border: 1px solid #000;
+    }
+
+    .button.secondary {
+      color: #007f9b;
+      background: #fff;
+      border-color: #bfe7ef;
+    }
+
+    main { min-width: 0; }
+
+    .brand-stage {
+      min-height: 560px;
+      background: #fff;
+      display: grid;
+      grid-template-rows: auto 1fr;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 22px;
+      min-height: 72px;
+      padding: 0 52px;
+      color: #2d3742;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .topbar span {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 8px 12px;
+    }
+
+    .brand-lockup {
+      display: grid;
+      align-content: center;
+      padding: 56px 7vw 76px;
+    }
+
+    .brand-lockup img {
+      width: min(100%, 1060px);
+      display: block;
+    }
+
+    .brand-summary {
+      width: min(100%, 1060px);
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(280px, .95fr);
+      gap: 54px;
+      margin-top: 46px;
+      align-items: end;
+    }
+
+    .eyebrow {
+      color: var(--cyan);
+      font-size: 11px;
+      line-height: 1;
+      font-weight: 900;
+      text-transform: uppercase;
+      margin: 0 0 14px;
+    }
+
+    h1 {
+      margin: 0;
+      max-width: 720px;
+      color: #000;
+      font-size: clamp(48px, 6vw, 92px);
+      line-height: .94;
+      font-weight: 800;
+    }
+
+    h1 span,
+    .accent { color: var(--cyan); }
+
+    .intro-copy {
+      color: var(--soft-ink);
+      font-size: 18px;
+      line-height: 1.7;
+      margin: 0;
+    }
+
+    .content {
+      padding: 52px;
+      background: #f7f9fb;
+    }
+
+    .section-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .module,
+    .panel,
+    .stat {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+    }
+
+    .module {
+      min-height: 292px;
+      display: grid;
+      grid-template-rows: 132px 1fr;
+      overflow: hidden;
+    }
+
+    .module-mark {
+      display: flex;
+      align-items: flex-end;
+      padding: 22px;
+      color: #fff;
+      background:
+        linear-gradient(135deg, rgba(15, 215, 137, .95), rgba(7, 183, 220, .85) 48%, rgba(6, 75, 255, .94)),
+        #0788ba;
+    }
+
+    .module:nth-child(2) .module-mark {
+      background:
+        linear-gradient(135deg, rgba(6, 75, 255, .96), rgba(7, 24, 39, .88)),
+        #0a2440;
+    }
+
+    .module:nth-child(3) .module-mark {
+      background:
+        linear-gradient(135deg, rgba(7, 24, 39, .97), rgba(15, 215, 137, .72)),
+        #071827;
+    }
+
+    .module-mark strong {
+      font-size: 58px;
+      line-height: .85;
+    }
+
+    .module-body {
+      padding: 24px;
+    }
+
+    .label {
+      color: var(--cyan);
+      font-size: 10px;
+      font-weight: 900;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .module h2,
+    .panel h2 {
+      margin: 0;
+      font-size: 24px;
+      line-height: 1.12;
+    }
+
+    .module p,
+    .panel p {
+      margin: 12px 0 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.65;
+    }
+
+    .panel {
+      margin-top: 28px;
+      padding: 34px;
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(280px, .8fr);
+      gap: 32px;
+      align-items: start;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .stat {
+      min-height: 112px;
+      padding: 20px;
+    }
+
+    .stat strong {
+      display: block;
+      color: #000;
+      font-size: 34px;
+      line-height: 1;
+      margin-bottom: 9px;
+    }
+
+    .stat span {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .sector-list {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .sector-list a {
+      min-height: 96px;
+      display: grid;
+      align-content: center;
+      gap: 6px;
+      padding: 18px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+    }
+
+    .sector-list strong {
+      font-size: 13px;
+      text-transform: uppercase;
+    }
+
+    .sector-list span {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .pathway {
+      counter-reset: steps;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin: 24px 0 0;
+      padding: 0;
+    }
+
+    .pathway li {
+      min-height: 138px;
+      list-style: none;
+      counter-increment: steps;
+      padding: 20px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+    }
+
+    .pathway li::before {
+      content: "0" counter(steps);
+      display: block;
+      color: var(--cyan);
+      font-size: 12px;
+      font-weight: 900;
+      margin-bottom: 12px;
+    }
+
+    .pathway strong {
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .pathway span {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .cta {
+      margin-top: 28px;
+      padding: 62px 34px;
+      color: #fff;
+      text-align: center;
+      border-radius: var(--radius);
+      background:
+        linear-gradient(135deg, rgba(7, 24, 39, .94), rgba(7, 24, 39, .72)),
+        url("assets/idal-investment-hero.svg") center / cover no-repeat;
+    }
+
+    .cta h2 {
+      max-width: 720px;
+      margin: 0 auto;
+      font-size: 38px;
+      line-height: 1.08;
+    }
+
+    .cta h2 span { color: #23d8f3; }
+
+    .cta p {
+      max-width: 600px;
+      margin: 16px auto 0;
+      color: rgba(255, 255, 255, .78);
+      line-height: 1.7;
+    }
+
+    .cta .button {
+      margin-top: 24px;
+      background: #fff;
+      color: #000;
+      border-color: #fff;
+    }
+
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      padding-top: 28px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    @media (max-width: 1180px) {
+      .shell { grid-template-columns: 280px minmax(0, 1fr); }
+      .brand-summary,
+      .split { grid-template-columns: 1fr; }
+      .section-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .sector-list,
+      .pathway { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 860px) {
+      .shell { display: block; }
+      .sidebar {
+        position: relative;
+        height: auto;
+      }
+      .brand-stage { min-height: auto; }
+      .topbar {
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        padding: 18px 22px;
+      }
+      .brand-lockup { padding: 38px 22px 56px; }
+      .brand-summary { gap: 26px; margin-top: 32px; }
+      .content { padding: 28px 18px; }
+      .section-grid,
+      .sector-list,
+      .pathway,
+      .stats { grid-template-columns: 1fr; }
+      .panel { padding: 24px; }
+      .footer { display: grid; }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <aside class="sidebar" aria-label="Main navigation">
+      <a class="mini-logo" href="investment-overview.html">
+        <img src="assets/idal-logo.svg" alt="IDAL - Investment Development Authority of Lebanon">
+      </a>
+
+      <p class="nav-label">Main Navigation</p>
+      <nav>
+        <ul class="side-nav">
+          <li class="active">
+            <a href="#overview">Investment <span class="count">1</span></a>
+            <ul>
+              <li><a href="#overview">Overview</a></li>
+              <li><a href="#about">About Us</a></li>
+              <li><a href="#lebanon">Lebanon at a Glance</a></li>
+              <li><a href="#business">Doing Business</a></li>
+              <li><a href="#sectors">Sector in Focus</a></li>
+              <li><a href="#info">Information Center</a></li>
+              <li><a href="#contact">Contact Us</a></li>
+            </ul>
+          </li>
+          <li><a href="#about">About Us <span class="count">4</span></a></li>
+          <li><a href="#lebanon">Lebanon at a Glance <span class="count">3</span></a></li>
+          <li><a href="#business">Doing Business <span class="count">10</span></a></li>
+          <li><a href="#sectors">Sector in Focus <span class="count">9</span></a></li>
+          <li><a href="#info">Information Center <span class="count">6</span></a></li>
+          <li><a href="#contact">Contact Us <span class="count">2</span></a></li>
+        </ul>
+      </nav>
+
+      <div class="side-actions">
+        <a class="button" href="#contact">Contact IDAL</a>
+        <a class="button secondary" href="#business">Explore Incentives</a>
+      </div>
+    </aside>
+
+    <main>
+      <section class="brand-stage" id="overview">
+        <div class="topbar" aria-label="Utility navigation">
+          <a href="#info">News</a>
+          <a href="#contact">Contact</a>
+          <span>EN</span>
+        </div>
+
+        <div class="brand-lockup">
+          <img src="assets/idal-logo.svg" alt="IDAL - Investment Development Authority of Lebanon">
+          <div class="brand-summary">
+            <div>
+              <p class="eyebrow">Investment Overview</p>
+              <h1>Leading investment toward a <span>forward Lebanon.</span></h1>
+            </div>
+            <p class="intro-copy">A clear entry point for investors to understand Lebanon, explore priority sectors, navigate setup requirements and connect with IDAL services.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="content">
+        <div class="section-grid">
+          <article class="module" id="about">
+            <div class="module-mark"><strong>01</strong></div>
+            <div class="module-body">
+              <div class="label">About IDAL</div>
+              <h2>Who we are</h2>
+              <p>Mission, vision, services, supported investments, achievements, yearly statistics and organizational structure.</p>
+            </div>
+          </article>
+          <article class="module" id="lebanon">
+            <div class="module-mark"><strong>02</strong></div>
+            <div class="module-body">
+              <div class="label">Lebanon at a Glance</div>
+              <h2>Figures, FDI and regions</h2>
+              <p>Economic performance, trade performance, foreign investment data and governorate investment profiles.</p>
+            </div>
+          </article>
+          <article class="module" id="business">
+            <div class="module-mark"><strong>03</strong></div>
+            <div class="module-body">
+              <div class="label">Doing Business</div>
+              <h2>Plan, set up and operate</h2>
+              <p>Business setup, licenses, financing, incentives, tax, accounting, employment and legal framework guidance.</p>
+            </div>
+          </article>
+        </div>
+
+        <section class="panel split">
+          <div>
+            <div class="label">Page Structure</div>
+            <h2>A left-side navigation system with a focused overview page.</h2>
+            <p>The page follows the structure you referenced: persistent section navigation on the left, a strong brand area at the top and clean content blocks for scanning the Investment sitemap.</p>
+            <p>The visual language is intentionally close to the logo reference: white space, black editorial typography and restrained cyan, green and blue accents.</p>
+          </div>
+          <div class="stats">
+            <div class="stat"><strong>8</strong><span>Governorates covered</span></div>
+            <div class="stat"><strong>9</strong><span>Priority sectors</span></div>
+            <div class="stat"><strong>3</strong><span>Main IDAL services</span></div>
+            <div class="stat"><strong>10</strong><span>Doing-business topics</span></div>
+          </div>
+        </section>
+
+        <section class="panel" id="sectors">
+          <div class="label">Sector in Focus</div>
+          <h2>Five sectors. One forward vision.</h2>
+          <p>Sector cards can become gateways to dedicated pages with dashboards, publications, opportunities and incentive details.</p>
+          <div class="sector-list">
+            <a href="#"><strong>Agro</strong><span>Agriculture</span></a>
+            <a href="#"><strong>Industry</strong><span>Manufacturing</span></a>
+            <a href="#"><strong>Tourism</strong><span>Hospitality</span></a>
+            <a href="#"><strong>Tech</strong><span>ICT and technology</span></a>
+            <a href="#"><strong>Media</strong><span>Creative economy</span></a>
+          </div>
+        </section>
+
+        <section class="panel">
+          <div class="label">Investor Pathway</div>
+          <h2>From first look to market entry.</h2>
+          <ol class="pathway">
+            <li><strong>Discover Lebanon</strong><span>Review figures, FDI data, trade performance and regional opportunity profiles.</span></li>
+            <li><strong>Choose a sector</strong><span>Compare priority sectors and identify the right market fit.</span></li>
+            <li><strong>Plan the business</strong><span>Understand setup, licenses, financing, tax, employment and legal requirements.</span></li>
+            <li><strong>Connect with IDAL</strong><span>Request support for incentives, matchmaking and investment facilitation.</span></li>
+          </ol>
+        </section>
+
+        <section class="panel split" id="info">
+          <div>
+            <div class="label">Information Center</div>
+            <h2>Research, news and publications.</h2>
+            <p>Publications, news and events, press releases, newsletter, media gallery and IDAL frequently asked questions are grouped as an investor knowledge hub.</p>
+          </div>
+          <div class="stat"><strong>FAQ</strong><span>Doing Business questions remain near setup content, while IDAL questions live in the Information Center.</span></div>
+        </section>
+
+        <section class="cta" id="contact">
+          <h2>Ready to lead the way to a <span>forward Lebanon?</span></h2>
+          <p>Talk to IDAL about investment opportunities, incentives, sector intelligence and partner connections.</p>
+          <a class="button" href="mailto:info@idal.com.lb">Contact IDAL</a>
+        </section>
+
+        <footer class="footer">
+          <span>IDAL - Investment Development Authority of Lebanon</span>
+          <span>Investment overview concept page</span>
+        </footer>
+      </section>
+    </main>
+  </div>
+</body>
+</html>
