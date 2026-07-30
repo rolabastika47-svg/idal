@@ -18,7 +18,7 @@ get_header();
                     <div class="idal-hero-content">
                         <h1 class="hero-title">
                             <span class="hero-title-blue">Invest in Lebanon.</span>
-                            <span class="hero-title-green">Connect to the World.</span>
+                            <span class="hero-title-green">Export to the World.</span>
                         </h1>
 
                         <p class="hero-description">
