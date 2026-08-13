@@ -14,6 +14,8 @@ $current_lang = function_exists('pll_current_language')
 $is_arabic_idal_page = (
     $current_lang === 'ar'
     || is_page(26862)
+    || is_page(26916)
+    || is_page_template('page-home-arabic.php')
 );
 
 $footer_pattern_style = '';
@@ -78,7 +80,11 @@ if (!empty($style_parts)) {
 */
 ?>
 
-<?php if (is_front_page() || is_page(array(26733, 26862))) : ?>
+<?php if (
+    is_front_page()
+    || is_page(array(26733, 26862, 26916))
+    || is_page_template('page-home-arabic.php')
+) : ?>
 
 
 <style>
