@@ -78,7 +78,7 @@ if (!empty($style_parts)) {
 */
 ?>
 
-<?php if (is_page(array(26733, 26862))) : ?>
+<?php if (is_front_page() || is_page(array(26733, 26862))) : ?>
 
 
 <style>
