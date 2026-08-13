@@ -140,6 +140,85 @@ $logo_url = $logo_id
     )
     : '';
 
+
+// ==========================================================
+// LANGUAGE-SPECIFIC CORE PAGE URLS
+// ==========================================================
+
+$home_en_id  = 6;
+$home_ar_id  = 26916;
+
+$about_en_id = 26733;
+$about_ar_id = 26862;
+
+$home_page_url = $current_lang === 'ar'
+    ? get_permalink($home_ar_id)
+    : get_permalink($home_en_id);
+
+$about_page_url = $current_lang === 'ar'
+    ? get_permalink($about_ar_id)
+    : get_permalink($about_en_id);
+
+
+// Helper used by the navigation menu.
+// It forces Home / About Us to stay in the current language.
+$idal_get_language_safe_menu_url = function ($item) use (
+    $home_page_url,
+    $about_page_url,
+    $home_en_id,
+    $home_ar_id,
+    $about_en_id,
+    $about_ar_id
+) {
+
+    $title = isset($item->title)
+        ? trim(wp_strip_all_tags($item->title))
+        : '';
+
+    $object_id = isset($item->object_id)
+        ? (int) $item->object_id
+        : 0;
+
+
+    // HOME
+    if (
+        in_array(
+            $title,
+            array('Home', 'الرئيسية', 'الصفحة الرئيسية'),
+            true
+        )
+        || in_array(
+            $object_id,
+            array($home_en_id, $home_ar_id),
+            true
+        )
+    ) {
+        return $home_page_url;
+    }
+
+
+    // ABOUT US
+    if (
+        in_array(
+            $title,
+            array('About Us', 'About', 'من نحن'),
+            true
+        )
+        || in_array(
+            $object_id,
+            array($about_en_id, $about_ar_id),
+            true
+        )
+    ) {
+        return $about_page_url;
+    }
+
+
+    return isset($item->url)
+        ? $item->url
+        : '#';
+};
+
 ?>
 
 
@@ -194,7 +273,7 @@ if (
              LOGO
         =================================================== -->
 
-        <a href="<?php echo esc_url(home_url('/')); ?>">
+        <a href="<?php echo esc_url($home_page_url); ?>">
 
             <?php if ($logo_url) : ?>
 
@@ -380,12 +459,12 @@ if (
              */
 
 
-            if ($current_page_id == 26733) {
+            if ($current_page_id == $home_en_id) {
 
-                // English About Us -> Arabic About Us
+                // English Home -> Arabic Home
 
                 $other_lang_url =
-                    get_permalink(26862);
+                    get_permalink($home_ar_id);
 
                 $other_lang_slug =
                     'ar';
@@ -393,12 +472,38 @@ if (
             }
 
 
-            elseif ($current_page_id == 26862) {
+            elseif ($current_page_id == $home_ar_id) {
+
+                // Arabic Home -> English Home
+
+                $other_lang_url =
+                    get_permalink($home_en_id);
+
+                $other_lang_slug =
+                    'en';
+
+            }
+
+
+            elseif ($current_page_id == $about_en_id) {
+
+                // English About Us -> Arabic About Us
+
+                $other_lang_url =
+                    get_permalink($about_ar_id);
+
+                $other_lang_slug =
+                    'ar';
+
+            }
+
+
+            elseif ($current_page_id == $about_ar_id) {
 
                 // Arabic About Us -> English About Us
 
                 $other_lang_url =
-                    get_permalink(26733);
+                    get_permalink($about_en_id);
 
                 $other_lang_slug =
                     'en';
@@ -954,7 +1059,7 @@ if (
                                                 class="dropdown-item"
                                                 href="'
                                             . esc_url(
-                                                $child->url
+                                                $idal_get_language_safe_menu_url($child)
                                             )
                                             . '"
                                             >';
@@ -1011,7 +1116,7 @@ if (
                                         . '"
                                             href="'
                                         . esc_url(
-                                            $item->url
+                                            $idal_get_language_safe_menu_url($item)
                                         )
                                         . '"
                                         >';
