@@ -82,7 +82,7 @@ if (!empty($style_parts)) {
 
 <?php if (
     is_front_page()
-    || is_page(array(26733, 26862, 26916))
+    || is_page(array(26733, 26862, 26916, 26920))
     || is_page_template('page-home-arabic.php')
 ) : ?>
 
@@ -232,6 +232,12 @@ if (!empty($style_parts)) {
     transform: translateY(-3px);
 
     color: #ffffff !important;
+}
+
+.idal-about-social svg {
+    width: 21px;
+    height: 21px;
+    fill: currentColor;
 }
 
 
@@ -537,7 +543,7 @@ if (!empty($style_parts)) {
                     aria-label="IDAL on LinkedIn"
                     title="LinkedIn"
                 >
-                    in
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.11 1 2.5 1s2.48 1.12 2.48 2.5ZM.34 8h4.32v14H.34V8ZM7.5 8h4.14v1.91h.06c.58-1.09 1.99-2.24 4.1-2.24 4.38 0 5.2 2.89 5.2 6.64V22h-4.32v-6.82c0-1.63-.03-3.72-2.27-3.72-2.27 0-2.62 1.77-2.62 3.6V22H7.5V8Z"/></svg>
                 </a>
 
 
@@ -551,7 +557,7 @@ if (!empty($style_parts)) {
                     aria-label="IDAL on Instagram"
                     title="Instagram"
                 >
-                    ig
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7Zm11.5 1.5a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6Z"/></svg>
                 </a>
 
 
@@ -565,7 +571,7 @@ if (!empty($style_parts)) {
                     aria-label="IDAL on X"
                     title="X"
                 >
-                    x
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.24 2H21l-6.03 6.9L22 22h-5.5l-4.3-5.63L7.28 22H4.5l6.4-7.32L4 2h5.64l3.89 5.14L18.24 2Zm-.97 17.7h1.53L8.8 4.18H7.16L17.27 19.7Z"/></svg>
                 </a>
 
 
@@ -579,7 +585,7 @@ if (!empty($style_parts)) {
                     aria-label="IDAL on Facebook"
                     title="Facebook"
                 >
-                    f
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 22v-9h3l.45-3.5H13.5V7.26c0-1.01.28-1.7 1.74-1.7H17V2.43C16.7 2.39 15.67 2.3 14.46 2.3c-2.52 0-4.25 1.54-4.25 4.37V9.5H7.36V13h2.85v9h3.29Z"/></svg>
                 </a>
 
 
@@ -1314,6 +1320,20 @@ if (is_front_page()) {
 wp_footer();
 
 ?>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const toggle = document.querySelector(".about-sidebar-toggle");
+    const sidebar = document.querySelector(".about-sidebar");
+
+    if (toggle && sidebar) {
+        toggle.addEventListener("click", function (e) {
+            e.preventDefault();
+            sidebar.classList.toggle("about-sidebar-hidden");
+        });
+    }
+});
+</script>
 
 
 <script
