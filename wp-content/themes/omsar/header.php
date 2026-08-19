@@ -148,8 +148,8 @@ $logo_url = $logo_id
 $home_en_id  = 6;
 $home_ar_id  = 26916;
 
-$about_en_id = 26733;
-$about_ar_id = 26862;
+$about_en_id = 26920;
+$about_ar_id = 26953;
 
 $home_page_url = $current_lang === 'ar'
     ? get_permalink($home_ar_id)
