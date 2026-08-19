@@ -13,6 +13,7 @@ $current_lang = function_exists('pll_current_language')
 // Force the new Arabic About Us page to behave as Arabic.
 $is_arabic_idal_page = (
     $current_lang === 'ar'
+    || is_page(77)
     || is_page(26862)
     || is_page(26916)
     || is_page(26953)
@@ -84,7 +85,7 @@ if (!empty($style_parts)) {
 
 <?php if (
     is_front_page()
-    || is_page(array(26733, 26862, 26916, 26920, 26953, 26961))
+    || is_page(array(77, 26733, 26862, 26916, 26920, 26953, 26961))
     || is_page_template('page-home-arabic.php')
 ) : ?>
 
