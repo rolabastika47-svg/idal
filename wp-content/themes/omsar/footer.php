@@ -73,17 +73,18 @@ if (!empty($style_parts)) {
 <?php
 /*
 |--------------------------------------------------------------------------
-| IDAL ABOUT US FOOTER
+| IDAL ABOUT US / INVESTMENT FOOTER
 |--------------------------------------------------------------------------
-| English About Us: 26733
-| Arabic About Us:  26862
+| English About Us: 26733 / 26920
+| Arabic About Us:  26862 / 26953
+| English Investment: 26961
 |--------------------------------------------------------------------------
 */
 ?>
 
 <?php if (
     is_front_page()
-    || is_page(array(26733, 26862, 26916, 26920, 26953))
+    || is_page(array(26733, 26862, 26916, 26920, 26953, 26961))
     || is_page_template('page-home-arabic.php')
 ) : ?>
 
