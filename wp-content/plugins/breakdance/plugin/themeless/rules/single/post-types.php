@@ -53,25 +53,25 @@ function registerSinglePostTypeRules()
                 'defaultPriority' => TEMPLATE_PRIORITY_SPECIFIC_SINGLE,
             ]
         );
-
-        \Breakdance\Themeless\registerTemplateType(
-            'Single',
-            [
-                'slug' => 'front-page',
-                'label' => __('Front Page', 'breakdance'),
-
-                'callback' => function (): bool {
-                    return is_front_page();
-                },
-                'templatePreviewableItems' => function () {
-                    $frontPage = (string) get_option('page_on_front');
-                    if ($frontPage === "0") {
-                        return false;
-                    }
-                    return get_posts_as_template_previewable_items(['post__in' => [$frontPage]]);
-                },
-                'defaultPriority' => TEMPLATE_PRIORITY_SPECIFIC_SINGLE,
-            ]
-        );
     }
+
+    \Breakdance\Themeless\registerTemplateType(
+        'Single',
+        [
+            'slug' => 'front-page',
+            'label' => __('Front Page', 'breakdance'),
+
+            'callback' => function (): bool {
+                return is_front_page();
+            },
+            'templatePreviewableItems' => function () {
+                $frontPage = (string) get_option('page_on_front');
+                if ($frontPage === "0") {
+                    return false;
+                }
+                return get_posts_as_template_previewable_items(['post__in' => [$frontPage]]);
+            },
+            'defaultPriority' => TEMPLATE_PRIORITY_SPECIFIC_SINGLE,
+        ]
+    );
 }

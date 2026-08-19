@@ -75,7 +75,7 @@ class MenuCustomDropdown extends \Breakdance\Elements\Element
 
     static function defaultChildren()
     {
-        return [['slug' => 'EssentialElements\Heading', 'defaultProperties' => ['content' => ['content' => ['text' => 'This is a heading.']]]], ['slug' => 'EssentialElements\Image', 'defaultProperties' => ['content' => ['content' => ['size' => 'full', 'caption_type' => 'none', 'caption_position' => 'below-image', 'link_type' => 'none', 'loading' => 'lazy']]]]];
+        return [['slug' => 'EssentialElements\Heading', 'defaultProperties' => ['content' => ['content' => ['text' => 'This is a heading.']]], 'children' => []], ['slug' => 'EssentialElements\Image2', 'defaultProperties' => ['content' => ['image' => ['from' => 'media_library', 'lazy_load' => true, 'alt' => 'from_media_library']]], 'children' => []]];
     }
 
     static function cssTemplate()
@@ -97,6 +97,7 @@ class MenuCustomDropdown extends \Breakdance\Elements\Element
         false,
         false,
         [],
+        
       ), getPresetSection(
       "EssentialElements\\spacing_padding_all",
       "Padding",
@@ -115,11 +116,13 @@ class MenuCustomDropdown extends \Breakdance\Elements\Element
         true,
         false,
         [],
+        
       )],
         ['type' => 'section', 'layout' => 'inline', 'sectionOptions' => ['type' => 'popout']],
         false,
         false,
         [],
+        
       ), getPresetSection(
       "EssentialElements\\simpleLayout",
       "Layout",
@@ -141,6 +144,7 @@ class MenuCustomDropdown extends \Breakdance\Elements\Element
         false,
         false,
         [],
+        
       ), c(
         "warning",
         "Warning",
@@ -149,11 +153,13 @@ class MenuCustomDropdown extends \Breakdance\Elements\Element
         false,
         false,
         [],
+        
       )],
         ['type' => 'section'],
         false,
         false,
         [],
+        
       )];
     }
 
@@ -170,6 +176,7 @@ class MenuCustomDropdown extends \Breakdance\Elements\Element
         false,
         false,
         [],
+        ['accepts' => 'string']
       ), c(
         "link",
         "Link",
@@ -178,6 +185,7 @@ class MenuCustomDropdown extends \Breakdance\Elements\Element
         false,
         false,
         [],
+        
       ), c(
         "alert",
         "Alert",
@@ -186,11 +194,13 @@ class MenuCustomDropdown extends \Breakdance\Elements\Element
         false,
         false,
         [],
+        
       )],
         ['type' => 'section', 'layout' => 'vertical'],
         false,
         false,
         [],
+        
       )];
     }
 
@@ -247,7 +257,7 @@ if (
 
     static function nestingRule()
     {
-        return ["type" => "container", "restrictedToBeADirectChildOf" => ['EssentialElements\MenuBuilder'],  ];
+        return ['type' => 'container', 'restrictedToBeADirectChildOf' => ['EssentialElements\MenuBuilder']];
     }
 
     static function spacingBars()
@@ -265,6 +275,12 @@ if (
         return false;
     }
 
+    static function availableIn()
+    {
+        return ['breakdance'];
+    }
+
+
     static function order()
     {
         return 0;
@@ -272,7 +288,7 @@ if (
 
     static function dynamicPropertyPaths()
     {
-        return [['accepts' => 'string', 'path' => 'content.content.text']];
+        return false;
     }
 
     static function additionalClasses()

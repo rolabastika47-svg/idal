@@ -138,15 +138,15 @@ function TYPOGRAPHY_SECTION()
                                 'type' => 'dropdown',
                                 'items' =>
                                 [
-                                    array('text' => '100', 'value' => '100'),
-                                    array('text' => '200', 'value' => '200'),
-                                    array('text' => '300', 'value' => '300'),
-                                    array('text' => '400', 'value' => '400'),
-                                    array('text' => '500', 'value' => '500'),
-                                    array('text' => '600', 'value' => '600'),
-                                    array('text' => '700', 'value' => '700'),
-                                    array('text' => '800', 'value' => '800'),
-                                    array('text' => '900', 'value' => '900'),
+                                    ['text' => '100', 'value' => '100'],
+                                    ['text' => '200', 'value' => '200'],
+                                    ['text' => '300', 'value' => '300'],
+                                    ['text' => '400', 'value' => '400'],
+                                    ['text' => '500', 'value' => '500'],
+                                    ['text' => '600', 'value' => '600'],
+                                    ['text' => '700', 'value' => '700'],
+                                    ['text' => '800', 'value' => '800'],
+                                    ['text' => '900', 'value' => '900'],
                                 ],
                             ]),
                             controlSection('decoration', __('Decoration', 'breakdance'), [
@@ -203,7 +203,7 @@ function TYPOGRAPHY_SECTION()
  */
 function TYPOGRAPHY_TEMPLATE()
 {
-    return (string) file_get_contents(dirname(__FILE__) . '/typography.css.twig') . "\n" . GLOBAL_TYPOGRAPHY_TEMPLATE();
+    return (string) file_get_contents(__DIR__ . '/typography.css.twig') . "\n" . GLOBAL_TYPOGRAPHY_TEMPLATE();
 }
 
 /**
@@ -211,7 +211,7 @@ function TYPOGRAPHY_TEMPLATE()
  */
 function GLOBAL_TYPOGRAPHY_TEMPLATE()
 {
-    return (string) file_get_contents(dirname(__FILE__) . '/global-typography.css.twig');
+    return (string) file_get_contents(__DIR__ . '/global-typography.css.twig');
 }
 
 /**

@@ -8,7 +8,15 @@ namespace Breakdance\Admin;
  */
 function get_builder_loader_url($post_id)
 {
-    $url = home_url();
+    if (
+        defined('BREAKDANCE_VITE_USE_WP_PROXY')
+        && BREAKDANCE_VITE_USE_WP_PROXY
+        && defined('BREAKDANCE_VITE_DEV_SERVER')
+    ) {
+        $url = untrailingslashit((string) BREAKDANCE_VITE_DEV_SERVER) . '/builder';
+    } else {
+        $url = home_url();
+    }
 
     $breakdance_or_oxygen = BREAKDANCE_MODE === 'oxygen' ? 'oxygen' : 'breakdance';
 

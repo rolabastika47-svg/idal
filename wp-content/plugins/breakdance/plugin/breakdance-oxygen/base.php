@@ -12,4 +12,5 @@ require_once __DIR__ . '/design-library.php';
 require_once __DIR__ . '/selectors.php';
 require_once __DIR__ . '/codebox.php';
 require_once __DIR__ . '/actions-filters.php';
+require_once __DIR__ . '/components.php';
 require_once __DIR__ . '/elements.php';

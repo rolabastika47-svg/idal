@@ -72,7 +72,7 @@ function get_term_permalink($termId)
  * @param array|string $deprecated
  * @return \WP_Term[]|int[]|string[]|string
  */
-function safe_get_terms( $args = array(), $deprecated = '' ){
+function safe_get_terms( $args = [], $deprecated = '' ){
     $terms = get_terms($args, $deprecated);
 
     if (is_wp_error($terms)) {

@@ -2,8 +2,8 @@
 
 namespace Breakdance\Forms\Submission;
 
-use Breakdance\Forms\Actions\ActionProvider;
 use function Breakdance\BreakdanceOxygen\Strings\__bdox;
+use function Breakdance\Forms\Actions\getAction;
 use function Breakdance\Forms\getSecureFileUrl;
 use function Breakdance\Forms\getIdFromField;
 use function Breakdance\Forms\getSubmissionPanelFieldHandler;
@@ -376,7 +376,6 @@ function renderActionsMetaBox()
      * @var array<string, array{type: "error"|"success"|"admin_error", message: string, executed_at: string, context: ActionContext[]}>
      */
     $actions = get_post_meta($post->ID, __bdox('_meta_prefix') . 'form_actions', true) ?: [];
-    $actionProvider = ActionProvider::getInstance();
 
 ?>
     <div class="breakdance-actions">
@@ -385,7 +384,7 @@ function renderActionsMetaBox()
         <?php } ?>
         <?php
         foreach ($actions as $slug => $action) {
-            $instance = $actionProvider->getActionBySlug((string) $slug);
+            $instance = getAction((string) $slug);
             $name     = $instance ? $instance->name() : $slug; // Fallback to slug if the action is undefined.
             $message  = getActionMessage($action);
 
@@ -709,7 +708,7 @@ function addFormFilter($postType)
             // to get the form name from the first submission
             $name = getFormNameFromLatestSubmissionSettings($result['postId'], $result['formId']);
         } else {
-            $name = $settings['form']['form_name'];
+            $name = $settings['form']['form_name'] ?? 'Form unknown';
         }
 
         $forms[$formKey] = $name;

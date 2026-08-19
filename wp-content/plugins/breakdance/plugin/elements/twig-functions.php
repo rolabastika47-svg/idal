@@ -197,14 +197,14 @@ function is_current_url($menu_item_url)
      */
     $_indexless_current = untrailingslashit( preg_replace( '/' . preg_quote( $wp_rewrite->index, '/' ) . '$/', '', $current_url ) );
 
-    $matches = array(
+    $matches = [
         $current_url,
         urldecode( $current_url ),
         $_indexless_current,
         urldecode( $_indexless_current ),
         $_root_relative_current,
         urldecode( $_root_relative_current ),
-    );
+    ];
 
     return $raw_item_url && in_array( $item_url, $matches, true );
 }

@@ -5,7 +5,7 @@ namespace Breakdance\Interactions;
 use function Breakdance\Elements\control;
 use function Breakdance\Elements\controlSection;
 
-add_filter('breakdance_element_controls', 'Breakdance\Interactions\addControls', 70, 2);
+add_filter('breakdance_universal_controls', 'Breakdance\Interactions\addControls', 70);
 
 /**
  * @param Control[] $controls

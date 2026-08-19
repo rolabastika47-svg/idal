@@ -26,5 +26,5 @@ function getDirectoryPathRelativeToPluginFolder($dir){
  * @return string
  */
 function normalizeDirectorySeparatorsInPath($path){
-    return str_replace(array('/', '\\'), DIRECTORY_SEPARATOR, $path);
+    return str_replace(['/', '\\'], DIRECTORY_SEPARATOR, $path);
 }

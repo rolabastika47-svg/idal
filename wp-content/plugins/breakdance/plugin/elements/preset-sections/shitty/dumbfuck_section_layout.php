@@ -15,16 +15,16 @@ add_action('init', function() {
                 'type' => 'dropdown',
                 'items' =>
                     [
-                        array('text' => __('Vertical', 'breakdance'), 'value' => 'vertical'),
-                        array('text' => __('Horizontal', 'breakdance'), 'value' => 'horizontal'),
+                        ['text' => __('Vertical', 'breakdance'), 'value' => 'vertical'],
+                        ['text' => __('Horizontal', 'breakdance'), 'value' => 'horizontal'],
                     ],
             ]),
             responsiveControl("alignment_for_horizontal_layout", __("Alignment", 'breakdance'), [
                 'type' => 'dropdown',
                 'items' =>
                     [
-                        array('text' => __('Space Around', 'breakdance'), 'value' => 'space-around'),
-                        array('text' => __('Space Between', 'breakdance'), 'value' => 'space-between'),
+                        ['text' => __('Space Around', 'breakdance'), 'value' => 'space-around'],
+                        ['text' => __('Space Between', 'breakdance'), 'value' => 'space-between'],
                     ],
                 'condition' => [
                     'path' => 'design.dumbfuck_section_layout.stack_content', // TODO
@@ -36,9 +36,9 @@ add_action('init', function() {
                 'type' => 'dropdown',
                 'items' =>
                     [
-                        array('text' => __('Left', 'breakdance'), 'value' => 'flex-start'),
-                        array('text' => __('Center', 'breakdance'), 'value' => 'center'),
-                        array('text' => __('Right', 'breakdance'), 'value' => 'flex-end'),
+                        ['text' => __('Left', 'breakdance'), 'value' => 'flex-start'],
+                        ['text' => __('Center', 'breakdance'), 'value' => 'center'],
+                        ['text' => __('Right', 'breakdance'), 'value' => 'flex-end'],
                     ],
                 'condition' => [
                     'path' => 'design.dumbfuck_section_layout.stack_content', // TODO

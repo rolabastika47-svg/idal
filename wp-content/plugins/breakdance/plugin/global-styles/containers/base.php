@@ -27,5 +27,5 @@ function CONTAINERS_SECTION()
  */
 function CONTAINERS_TEMPLATE()
 {
-    return (string) file_get_contents(dirname(__FILE__) . '/containers.css.twig');
+    return (string) file_get_contents(__DIR__ . '/containers.css.twig');
 }

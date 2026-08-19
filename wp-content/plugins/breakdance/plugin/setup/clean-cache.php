@@ -7,8 +7,10 @@ use function Breakdance\Data\set_global_option;
 use function Breakdance\Render\clearAllCssCachesAndDeleteCachedFiles;
 use function Breakdance\Render\generateCacheForGlobalSettings;
 
-// We can't use "upgrader_process_complete" because a user may just replace the plugin folder with a new one
-add_action('breakdance_loaded', "\Breakdance\Setup\cleanCacheWhenCacheCountChanges");
+// We can't use "upgrader_process_complete" because a user may just replace the plugin folder with a new one.
+// Must run after `init` (not on plugins_loaded via `breakdance_loaded`) because the cache generation path
+// translates built-in breakpoint labels, which would trigger the "textdomain loaded too early" warning.
+add_action('init', "\Breakdance\Setup\cleanCacheWhenCacheCountChanges", 1);
 
 function cleanCacheWhenCacheCountChanges()
 {

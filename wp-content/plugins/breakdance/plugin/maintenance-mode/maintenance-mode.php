@@ -65,10 +65,10 @@ function optionsGetter($key, $default = null)
     $dbOptions = getMaintenanceOptions();
 
     /** @var array */
-    $options = $dbOptions ? $dbOptions : [];
+    $options = $dbOptions ?: [];
 
     if (array_key_exists($key, $options)) {
-        return $options[$key] ? $options[$key] : $default;
+        return $options[$key] ?: $default;
     }
     return $default;
 }
@@ -175,7 +175,7 @@ function setUpURLParamsMaintenance()
     }
 
     // this cookie helps us recognize the user in the future
-    setcookie($urlParamKey, $urlParamValue, strtotime('+1 year'));
+    setcookie($urlParamKey, $urlParamValue, ['expires' => strtotime('+1 year')]);
 
     // redirect without URL Params
     $urlWithoutURLParams = remove_query_arg($urlParamKey);
@@ -339,7 +339,7 @@ function currentUserHasDismissedNotice()
 {
     /** @var array<array-key, mixed>|false */
     $options = \Breakdance\Data\get_global_option(BREAKDANCE_MAINTENANCE_MODE_NOTICE_DISMISSED);
-    $options = $options ? $options : [];
+    $options = $options ?: [];
 
     return in_array(get_current_user_id(), $options);
 }

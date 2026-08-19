@@ -2,7 +2,13 @@
     "name": "matthiasmullie/minify",
     "type": "library",
     "description": "CSS & JavaScript minifier, in PHP. Removes whitespace, strips comments, combines files (incl. @import statements and small assets in CSS files), and optimizes/shortens a few common programming patterns.",
-    "keywords": ["minify", "minifier", "css", "js", "javascript"],
+    "keywords": [
+        "minify",
+        "minifier",
+        "css",
+        "js",
+        "javascript"
+    ],
     "homepage": "http://www.minifier.org",
     "license": "MIT",
     "authors": [
@@ -34,5 +40,12 @@
     "bin": [
         "bin/minifycss",
         "bin/minifyjs"
-    ]
+    ],
+    "config": {
+        "audit": {
+            "ignore": [
+                "PKSA-z3gr-8qht-p93v"
+            ]
+        }
+    }
 }

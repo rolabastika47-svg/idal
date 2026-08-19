@@ -1,0 +1,16 @@
+%%SELECTOR%% {
+ width: {{ design.size.width.style }};
+ {{ macros.spacing_margin_y(design.spacing) }}
+}
+
+%%SELECTOR%% .marquee-text {
+ font-family: {{ process_font(design.marquee.typography.font_family) }};
+ font-size: {{ design.marquee.typography.size.style }}; 
+ fill: {{ design.marquee.typography.color }};
+ font-weight: {{ design.marquee.typography.font_weight }};
+ stroke: {{ design.marquee.typography.stroke_color }};
+ stroke-width: {{ design.marquee.typography.stroke_width }}
+}
+
+
+

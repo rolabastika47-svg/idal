@@ -25,7 +25,7 @@ class TemplateContentArea extends \Breakdance\Elements\Element
 
     static function tagOptions()
     {
-        return ['section', 'div', 'footer', 'header', 'nav', 'aside', 'article', 'details', 'summary', 'figure'];
+        return ['main', 'section', 'div', 'footer', 'header', 'nav', 'aside', 'article', 'details', 'summary', 'figure'];
     }
 
     static function tagControlPath()
@@ -70,7 +70,7 @@ class TemplateContentArea extends \Breakdance\Elements\Element
 
     static function defaultProperties()
     {
-        return false;
+        return ['settings' => ['advanced' => ['tag' => 'div']]];
     }
 
     static function defaultChildren()

@@ -172,6 +172,11 @@ function setDesignSets($providers)
 {
     $providers = array_unique(array_map('esc_url', wp_parse_list($providers)));
     \Breakdance\Data\set_global_option('design_sets', $providers);
+
+    // Refresh the cached design providers so the Design Library immediately
+    // reflects newly added or removed custom design sets instead of waiting
+    // for the daily cron job to rebuild the cache.
+    refreshDesignProvidersCache();
 }
 
 /**
@@ -188,6 +193,36 @@ function getRegisteredDesignSets()
  * @return array{name: string, url: string, type?: string, isLocal?: boolean}[]
  */
 function getDesignProviders()
+{
+    $cache_key = 'breakdance_design_providers';
+
+    /**
+     * @var array{name: string, url: string, type?: string, isLocal?: boolean}[]|false
+     */
+    $cache = get_transient($cache_key);
+
+    if ($cache !== false) {
+        /** @var array{name: string, url: string, type?: string, isLocal?: boolean}[] */
+        return $cache;
+    }
+
+    $providers = fetchDesignProviders();
+
+    // Cache for 25 hours to ensure a small overlap with the cron job (runs every 24 hours)
+    /**
+     * @psalm-suppress UndefinedConstant
+     * @psalm-suppress MixedArgument
+     */
+    set_transient($cache_key, $providers, 25 * HOUR_IN_SECONDS);
+
+    return $providers;
+}
+
+/**
+ * Fetches design providers without using cache
+ * @return array{name: string, url: string, type?: string, isLocal?: boolean}[]
+ */
+function fetchDesignProviders()
 {
     $localSite = [
         [
@@ -262,6 +297,22 @@ function getDesignProviders()
 
     /** @var array{name: string, url: string, type?: string, isLocal?: boolean}[] */
     return bdox_run_filters('breakdance_design_library_providers', $allProviders);
+}
+
+/**
+ * Refreshes the design providers cache
+ * @return void
+ */
+function refreshDesignProvidersCache()
+{
+    $cache_key = 'breakdance_design_providers';
+    $providers = fetchDesignProviders();
+
+    /**
+     * @psalm-suppress UndefinedConstant
+     * @psalm-suppress MixedArgument
+     */
+    set_transient($cache_key, $providers, 25 * HOUR_IN_SECONDS);
 }
 
 /**

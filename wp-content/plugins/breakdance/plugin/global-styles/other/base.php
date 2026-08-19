@@ -98,7 +98,7 @@ function SKIP_LINK_CSS()
  */
 function OTHER_DEFAULT_CSS()
 {
-    $other = (string) file_get_contents(dirname(__FILE__) . '/other-default-css.css.twig');
+    $other = (string) file_get_contents(__DIR__ . '/other-default-css.css.twig');
     $skipLink = SKIP_LINK_CSS();
     return $other . $skipLink;
 }
@@ -108,5 +108,5 @@ function OTHER_DEFAULT_CSS()
  */
 function GLOBAL_CSS_VARS()
 {
-    return (string) file_get_contents(dirname(__FILE__) . '/global-css-vars.css.twig');
+    return (string) file_get_contents(__DIR__ . '/global-css-vars.css.twig');
 }

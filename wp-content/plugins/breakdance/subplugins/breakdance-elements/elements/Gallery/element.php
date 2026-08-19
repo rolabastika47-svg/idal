@@ -97,7 +97,7 @@ class Gallery extends \Breakdance\Elements\Element
         true,
         false,
         [],
-
+        
       ), c(
         "type",
         "Type",
@@ -106,7 +106,7 @@ class Gallery extends \Breakdance\Elements\Element
         false,
         false,
         [],
-
+        
       ), c(
         "row_height",
         "Row Height",
@@ -115,7 +115,7 @@ class Gallery extends \Breakdance\Elements\Element
         true,
         false,
         [],
-
+        
       ), c(
         "aspect_ratio",
         "Aspect Ratio",
@@ -124,7 +124,7 @@ class Gallery extends \Breakdance\Elements\Element
         false,
         false,
         [],
-
+        
       ), c(
         "custom_height",
         "Custom Height",
@@ -133,7 +133,7 @@ class Gallery extends \Breakdance\Elements\Element
         false,
         false,
         [],
-
+        
       ), c(
         "columns",
         "Columns",
@@ -142,7 +142,7 @@ class Gallery extends \Breakdance\Elements\Element
         true,
         false,
         [],
-
+        
       ), c(
         "gap",
         "Gap",
@@ -151,7 +151,7 @@ class Gallery extends \Breakdance\Elements\Element
         true,
         false,
         [],
-
+        
       ), c(
         "vertical_at",
         "Vertical At",
@@ -160,7 +160,7 @@ class Gallery extends \Breakdance\Elements\Element
         false,
         false,
         [],
-
+        
       ), getPresetSection(
       "EssentialElements\\AtomV1SwiperSettings",
       "Slider",
@@ -177,7 +177,7 @@ class Gallery extends \Breakdance\Elements\Element
         false,
         false,
         [],
-
+        
       ), c(
         "vertical_align",
         "Vertical Align",
@@ -186,7 +186,7 @@ class Gallery extends \Breakdance\Elements\Element
         false,
         false,
         [],
-
+        
       ), c(
         "width",
         "Width",
@@ -195,7 +195,7 @@ class Gallery extends \Breakdance\Elements\Element
         true,
         false,
         [],
-
+        
       ), c(
         "height",
         "Height",
@@ -204,19 +204,19 @@ class Gallery extends \Breakdance\Elements\Element
         true,
         false,
         [],
-
+        
       )],
         ['type' => 'section', 'layout' => 'inline', 'sectionOptions' => ['type' => 'popout'], 'condition' => ['path' => 'design.layout.type', 'operand' => 'equals', 'value' => 'slider']],
         false,
         false,
         [],
-
+        
       )],
         ['type' => 'section'],
         false,
         false,
         [],
-
+        
       ), c(
         "images",
         "Images",
@@ -228,7 +228,7 @@ class Gallery extends \Breakdance\Elements\Element
         false,
         true,
         [],
-
+        
       ), c(
         "opacity",
         "Opacity",
@@ -237,7 +237,7 @@ class Gallery extends \Breakdance\Elements\Element
         false,
         true,
         [],
-
+        
       ), getPresetSection(
       "EssentialElements\\filter",
       "Filters",
@@ -256,7 +256,7 @@ class Gallery extends \Breakdance\Elements\Element
         false,
         true,
         [],
-
+        
       ), c(
         "hover_animation",
         "Hover Animation",
@@ -265,7 +265,7 @@ class Gallery extends \Breakdance\Elements\Element
         false,
         false,
         [],
-
+        
       ), c(
         "duration",
         "Duration",
@@ -274,13 +274,13 @@ class Gallery extends \Breakdance\Elements\Element
         false,
         false,
         [],
-
+        
       )],
         ['type' => 'section'],
         false,
         false,
         [],
-
+        
       ), c(
         "captions",
         "Captions",
@@ -292,7 +292,7 @@ class Gallery extends \Breakdance\Elements\Element
         false,
         false,
         [],
-
+        
       ), c(
         "animation",
         "Animation",
@@ -301,7 +301,7 @@ class Gallery extends \Breakdance\Elements\Element
         false,
         false,
         [],
-
+        
       ), c(
         "duration",
         "Duration",
@@ -310,7 +310,7 @@ class Gallery extends \Breakdance\Elements\Element
         false,
         false,
         [],
-
+        
       ), c(
         "position",
         "Position",
@@ -319,7 +319,7 @@ class Gallery extends \Breakdance\Elements\Element
         false,
         false,
         [],
-
+        
       ), c(
         "background",
         "Background",
@@ -328,7 +328,7 @@ class Gallery extends \Breakdance\Elements\Element
         false,
         false,
         [],
-
+        
       ), getPresetSection(
       "EssentialElements\\typography",
       "Typography",
@@ -347,13 +347,13 @@ class Gallery extends \Breakdance\Elements\Element
         false,
         false,
         [],
-
+        
       )],
         ['type' => 'section'],
         false,
         false,
         [],
-
+        
       ), getPresetSection(
       "EssentialElements\\lightbox_design",
       "Lightbox",
@@ -380,7 +380,7 @@ class Gallery extends \Breakdance\Elements\Element
         true,
         false,
         [],
-
+        
       ), c(
         "margin_bottom",
         "Margin Bottom",
@@ -389,13 +389,13 @@ class Gallery extends \Breakdance\Elements\Element
         true,
         false,
         [],
-
+        
       )],
         ['type' => 'section'],
         false,
         false,
         [],
-
+        
       )];
     }
 
@@ -412,7 +412,7 @@ class Gallery extends \Breakdance\Elements\Element
         false,
         false,
         [],
-
+        
       ), c(
         "images",
         "Images",
@@ -424,7 +424,7 @@ class Gallery extends \Breakdance\Elements\Element
         false,
         false,
         [],
-
+        
       ), c(
         "image",
         "Image",
@@ -490,7 +490,7 @@ class Gallery extends \Breakdance\Elements\Element
         false,
         false,
         [],
-
+        
       ), c(
         "image",
         "Image",
@@ -541,13 +541,13 @@ class Gallery extends \Breakdance\Elements\Element
         false,
         false,
         [],
-
+        
       )],
         ['type' => 'repeater', 'layout' => 'vertical', 'repeaterOptions' => ['titleTemplate' => '{title}', 'defaultTitle' => 'Gallery', 'buttonName' => 'Add Gallery', 'defaultNewValue' => ['title' => 'Untitled']], 'condition' => ['path' => 'content.content.type', 'operand' => 'equals', 'value' => 'multiple']],
         false,
         false,
         [],
-
+        
       ), c(
         "filter_bar",
         "Filter Bar",
@@ -559,7 +559,7 @@ class Gallery extends \Breakdance\Elements\Element
         false,
         false,
         [],
-
+        
       ), c(
         "all_label",
         "All Label",
@@ -568,13 +568,13 @@ class Gallery extends \Breakdance\Elements\Element
         false,
         false,
         [],
-
+        
       )],
         ['type' => 'section', 'layout' => 'vertical', 'sectionOptions' => ['type' => 'popout'], 'condition' => ['path' => 'content.content.type', 'operand' => 'equals', 'value' => 'multiple']],
         false,
         false,
         [],
-
+        
       ), c(
         "link",
         "Link",
@@ -583,7 +583,7 @@ class Gallery extends \Breakdance\Elements\Element
         false,
         false,
         [],
-
+        
       ), c(
         "new_tab",
         "New Tab",
@@ -592,7 +592,7 @@ class Gallery extends \Breakdance\Elements\Element
         false,
         false,
         [],
-
+        
       ), c(
         "image_size",
         "Image Size",
@@ -601,7 +601,7 @@ class Gallery extends \Breakdance\Elements\Element
         false,
         false,
         [],
-
+        
       ), c(
         "lazy_load",
         "Lazy Load",
@@ -610,7 +610,7 @@ class Gallery extends \Breakdance\Elements\Element
         false,
         false,
         [],
-
+        
       ), c(
         "advanced",
         "Advanced",
@@ -622,19 +622,19 @@ class Gallery extends \Breakdance\Elements\Element
         false,
         false,
         [],
-
+        
       )],
         ['type' => 'section', 'layout' => 'vertical', 'sectionOptions' => ['type' => 'popout']],
         false,
         false,
         [],
-
+        
       )],
         ['type' => 'section', 'layout' => 'vertical'],
         false,
         false,
         [],
-
+        
       )];
     }
 
@@ -645,7 +645,7 @@ class Gallery extends \Breakdance\Elements\Element
 
     static function dependencies()
     {
-        return ['0' =>  ['title' => 'Slider','scripts' => ['%%BREAKDANCE_ELEMENTS_PLUGIN_URL%%dependencies-files/swiper@8/swiper-bundle.min.js','%%BREAKDANCE_ELEMENTS_PLUGIN_URL%%dependencies-files/breakdance-swiper/breakdance-swiper.js'],'styles' => ['%%BREAKDANCE_ELEMENTS_PLUGIN_URL%%dependencies-files/swiper@8/swiper-bundle.min.css','%%BREAKDANCE_ELEMENTS_PLUGIN_URL%%dependencies-files/swiper@8/breakdance-swiper-preset-defaults.css'],'inlineScripts' => ['window.BreakdanceSwiper().update({
+        return ['0' =>  ['title' => 'Slider','scripts' => ['%%BREAKDANCE_ELEMENTS_PLUGIN_URL%%dependencies-files/swiper@12/swiper-bundle.min.js','%%BREAKDANCE_ELEMENTS_PLUGIN_URL%%dependencies-files/breakdance-swiper/breakdance-swiper.js'],'styles' => ['%%BREAKDANCE_ELEMENTS_PLUGIN_URL%%dependencies-files/swiper@12/swiper-bundle.min.css','%%BREAKDANCE_ELEMENTS_PLUGIN_URL%%dependencies-files/swiper@12/breakdance-swiper-preset-defaults.css'],'inlineScripts' => ['window.BreakdanceSwiper().update({
   id: \'%%UNIQUESLUG%%\', selector:\'%%SELECTOR%%\',
   settings:{{ design.layout.slider.settings|json_encode }},
   paginationSettings:{{ design.layout.slider.pagination|json_encode }},

@@ -24,7 +24,7 @@ function add_launcher_as_block_template()
         return;
     }
 
-    if (!in_array($pagenow, array( 'post.php', 'post-new.php' ))) {
+    if (!in_array($pagenow, [ 'post.php', 'post-new.php' ])) {
         return;
     }
 

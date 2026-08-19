@@ -53,7 +53,7 @@ function tab()
     }
 
     $bloatOptions = (array) get_global_option('breakdance_settings_bloat_eliminator');
-    $bloatOptions = $bloatOptions ? $bloatOptions : [];
+    $bloatOptions = $bloatOptions ?: [];
 
     require_once __DIR__ . '/bloat-eliminator-template.php';
 }

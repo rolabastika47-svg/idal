@@ -56,6 +56,13 @@ function outputSkipLink()
  */
 function maybeWrapInMainTag($content, $postId = null, $repeaterItemNodeId = null)
 {
+    /**
+     * @psalm-suppress TooManyArguments
+     */
+    if (!bdox_run_filters('breakdance_render_wrap_in_main_tag', true, $postId, $repeaterItemNodeId)) {
+        return $content;
+    }
+
     $skipLinkId = BREAKDANCE_MODE === 'oxygen' ? 'oxy-main' : 'bde-main';
 
     if (is_theme_disabled() || is_zero_theme_enabled()) {

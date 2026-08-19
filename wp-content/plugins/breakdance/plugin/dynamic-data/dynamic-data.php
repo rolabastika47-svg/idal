@@ -48,7 +48,10 @@ class DynamicDataController
      */
     public function registerField(Field $field)
     {
-        $this->fields[] = $field;
+        // Only register field if BREAKDANCE_MODE is in the field's availableFor array
+        if (in_array(BREAKDANCE_MODE, $field->availableFor(), true)) {
+            $this->fields[] = $field;
+        }
     }
 
     /**

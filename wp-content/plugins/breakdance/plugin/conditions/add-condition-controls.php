@@ -5,7 +5,7 @@ namespace Breakdance\Conditions;
 use function Breakdance\Elements\control;
 use function Breakdance\Elements\controlSection;
 
-add_filter('breakdance_element_controls', '\Breakdance\Conditions\addConditionControls', 69);
+add_filter('breakdance_universal_controls', '\Breakdance\Conditions\addConditionControls', 69);
 
 /**
  *
@@ -15,10 +15,7 @@ add_filter('breakdance_element_controls', '\Breakdance\Conditions\addConditionCo
 function addConditionControls($controls)
 {
 
-    /**
-     * @psalm-suppress MixedArrayAssignment
-     */
-    $controls['settingsSections'][] = controlSection('conditions', __('Conditions', 'breakdance'), [
+    $conditions = [
         control(
             'conditions',
             __('Only Show Element If', 'breakdance'),
@@ -38,7 +35,26 @@ function addConditionControls($controls)
                 'layout' => 'vertical'
             ]
         ),
-    ]);
+    ];
+
+    if (BREAKDANCE_MODE === 'oxygen') {
+        array_unshift($conditions, control(
+            'visible',
+            __('Visible', 'breakdance'),
+            [
+                'type' => 'toggle',
+                'layout' => 'inline',
+                'toggleOptions' => [
+                    'defaultValue' => true
+                ]
+            ]
+        ));
+    }
+
+    /**
+     * @psalm-suppress MixedArrayAssignment
+     */
+    $controls['settingsSections'][] = controlSection('conditions', __('Conditions', 'breakdance'), $conditions);
 
     return $controls;
 }

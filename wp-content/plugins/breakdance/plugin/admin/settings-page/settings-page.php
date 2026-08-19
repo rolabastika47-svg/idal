@@ -62,7 +62,7 @@ function tab_html($activeTabSlug = null)
     <nav class="breakdance-admin__nav">'
         .
         implode(
-            array_map(
+            '', array_map(
                 function ($tab) use ($activeTabSlug, $admin_page_settings_slug) {
 
                     $activeClass = $tab['slug'] === $activeTabSlug ? 'is-active' : '';

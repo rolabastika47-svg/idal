@@ -22,7 +22,7 @@ add_action('breakdance_loaded', function () {
             'args' => [
                 'tree' => FILTER_UNSAFE_RAW,
                 'templateSettings' => FILTER_UNSAFE_RAW,
-                'singularityMeta' => FILTER_UNSAFE_RAW,
+                'futureLayerMeta' => FILTER_UNSAFE_RAW,
                 'globalSettings' => FILTER_UNSAFE_RAW,
                 'classes' => FILTER_UNSAFE_RAW,
                 'oxySelectors' => FILTER_UNSAFE_RAW,
@@ -33,7 +33,7 @@ add_action('breakdance_loaded', function () {
             ],
             'optional_args' => [
                 'templateSettings',
-                'singularityMeta',
+                'futureLayerMeta',
                 'globalSettings',
                 'classes',
                 'oxySelectors',
@@ -48,7 +48,7 @@ add_action('breakdance_loaded', function () {
 /**
  * @param string $tree
  * @param string $templateSettings
- * @param string $singularityMeta
+ * @param string $futureLayerMeta
  * @param string $newGlobalSettings
  * @param string $classes
  * @param string $oxySelectors
@@ -58,7 +58,7 @@ add_action('breakdance_loaded', function () {
  * @param int $id
  * @return void|array
  */
-function save_document($tree, $templateSettings, $singularityMeta, $newGlobalSettings, $classes, $oxySelectors, $presets, $variables, $ai, $id)
+function save_document($tree, $templateSettings, $futureLayerMeta, $newGlobalSettings, $classes, $oxySelectors, $presets, $variables, $ai, $id)
 {
     set_meta(
         $id,
@@ -70,8 +70,8 @@ function save_document($tree, $templateSettings, $singularityMeta, $newGlobalSet
 
     set_meta(
         $id,
-        __bdox('_meta_prefix') . 'singularity_meta',
-        $singularityMeta
+        __bdox('_meta_prefix') . 'futurelayer_meta',
+        $futureLayerMeta
     );
 
     if ($templateSettings) {

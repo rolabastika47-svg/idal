@@ -5,14 +5,14 @@ namespace Breakdance\Elements\UniversalControls;
 use function Breakdance\Elements\control;
 use function Breakdance\Elements\controlSection;
 
-add_filter('breakdance_element_controls', '\Breakdance\Elements\UniversalControls\addHideByBreakpointControls', 69, 2);
+add_filter('breakdance_universal_controls', '\Breakdance\Elements\UniversalControls\addHideByBreakpointControls', 69);
 
 /**
  * @param mixed $controls
  * @param mixed $element
  * @return mixed
  */
-function addHideByBreakpointControls($controls, $element)
+function addHideByBreakpointControls($controls)
 {
     if (BREAKDANCE_MODE === 'oxygen') {
         return $controls;
@@ -42,7 +42,7 @@ function addHideByBreakpointControls($controls, $element)
     return $controls;
 }
 
-add_filter('breakdance_element_css_template', '\Breakdance\Elements\UniversalControls\addHideByBreakpointCssTemplate', 100, 1);
+add_filter('breakdance_universal_css_template', '\Breakdance\Elements\UniversalControls\addHideByBreakpointCssTemplate', 100, 1);
 
 /**
  * @param string $cssTemplate
@@ -50,7 +50,7 @@ add_filter('breakdance_element_css_template', '\Breakdance\Elements\UniversalCon
  */
 function addHideByBreakpointCssTemplate($cssTemplate)
 {
-    return $cssTemplate . "\n\n" . (string) file_get_contents(dirname(__FILE__) . "/hide-by-breakpoint.twig");
+    return $cssTemplate . "\n\n" . (string) file_get_contents(__DIR__ . "/hide-by-breakpoint.twig");
 }
 
 \Breakdance\PluginsAPI\PluginsController::getInstance()->registerTwigFunction(

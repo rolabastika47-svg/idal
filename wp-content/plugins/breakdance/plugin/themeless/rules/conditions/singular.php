@@ -62,9 +62,16 @@ function registerConditionsSingularRules()
                 /**
                  * @param string $operand
                  * @param string[] $value
+                 * @param string $ruleDynamic
+                 * @param string $context
                  * @return bool
                  */
-                    function ($operand, $value) {
+                    function ($operand, $value, $ruleDynamic, $context = null) {
+                        // Prevent this condition from applying in templating mode on non-singular pages
+                        if ($context === 'templating' && $operand === OPERAND_IS_NOT && !is_singular()) {
+                            return true;
+                        }
+
                         global $post;
 
                         if (!$post) return false;

@@ -29,10 +29,9 @@ function addControls($controls)
     return $controls;
 }
 
-add_filter('breakdance_element_controls', 'Breakdance\Variables\addControls', 69, 2);
+add_filter('breakdance_universal_controls', 'Breakdance\Variables\addControls', 69);
 
-
-add_filter('breakdance_element_css_template', '\Breakdance\Variables\addCssTemplate', 100, 1);
+add_filter('breakdance_universal_css_template', '\Breakdance\Variables\addCssTemplate', 100, 1);
 
 /**
  * @return string
@@ -67,4 +66,4 @@ function elementPropertyPathsToWhitelist($props)
     ]);
 }
 
-add_filter('breakdance_element_property_paths_to_whitelist_in_flat_props', '\Breakdance\Variables\elementPropertyPathsToWhitelist', 10, 1);
+add_filter('breakdance_universal_property_paths_to_whitelist_in_flat_props', '\Breakdance\Variables\elementPropertyPathsToWhitelist', 10, 1);

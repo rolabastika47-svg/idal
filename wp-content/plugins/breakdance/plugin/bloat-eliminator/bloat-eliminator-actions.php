@@ -12,7 +12,7 @@ add_action('init', 'Breakdance\BloatEliminator\bloatEliminator', 99);
 function bloatEliminator()
 {
     $options = (array) get_global_option('breakdance_settings_bloat_eliminator');
-    $options = $options ? $options : [];
+    $options = $options ?: [];
 
     if (in_array('rsd-links', $options)) {
         remove_action('wp_head', 'rsd_link');

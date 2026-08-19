@@ -286,20 +286,19 @@ function display_setup_wizard()
                         </td>
                     </tr>
                     <tr>
-                        <th scope="row">Partner Discounts</th>
+                        <th scope="row"><?php esc_html_e('Partner Discounts', 'breakdance'); ?></th>
                         <td>
                             <fieldset>
                                 <label for="hide_partner_discounts">
                                     <input type="checkbox" id="hide_partner_discounts" name="hide_partner_discounts" value="true" <?= $hide_partner_discounts ? 'checked' : '' ?> />
-                                    Hide the Partner Discounts page from the admin menu
+                                    <?php esc_html_e('Hide the Partner Discounts page from the admin menu', 'breakdance'); ?>
                                 </label>
                                 <p class="description">
-                                    You can re-enable the Partner Discounts page later from <code>Breakdance &rarr; Settings &rarr; Privacy</code>.
+                                    <?php esc_html_e('You can re-enable the Partner Discounts page later from Breakdance &rarr; Settings &rarr; Privacy.', 'breakdance'); ?>
                                 </p>
                             </fieldset>
                         </td>
                     </tr>
-
                 </tbody>
             </table>
             <p class="submit">

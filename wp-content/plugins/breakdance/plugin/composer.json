@@ -1,6 +1,7 @@
 {
   "require-dev": {
-    "spatie/ray": "^1.28"
+    "spatie/ray": "^1.44",
+    "rector/rector": "^2.1"
   },
   "scripts": {
     "psalm": "../psalm/psalm --no-file-cache --no-reflection-cache --root=../plugin/",
@@ -38,8 +39,8 @@
       "classmap_prefix": "BREAKDANCE_Vendor_",
       "delete_vendor_directories": true,
       "excluded_packages": [
-        "coenjacobs/mozart", "orhanerday/open-ai"
-
+        "coenjacobs/mozart",
+        "orhanerday/open-ai"
       ]
     }
   },
@@ -51,7 +52,7 @@
   "repositories": [
     {
       "type": "vcs",
-      "url": "https://github.com/soflyy/Twig.git"
+      "url": "git@github.com:soflyy/Twig.git"
     }
   ]
 }

@@ -12,20 +12,27 @@ use Breakdance\Render\ScriptAndStyleHolder;
  * @param  ElementDependenciesAndConditions  $dependencies
  * @param  string|null  $previewImageUrl
  * @param  string|null  $category
+ * @param  BreakdanceFontVariants|null  $variants
  *
  * @return BreakdanceFont
  */
-function font($slug, $cssName, $label, $fallbackString, $dependencies, $previewImageUrl = null, $category = null)
+function font($slug, $cssName, $label, $fallbackString, $dependencies, $previewImageUrl = null, $category = null, $variants = null)
 {
-    return [
+    $font = [
         'slug' => $slug,
         'cssName' => $cssName,
         'label' => $label,
         'fallbackString' => $fallbackString,
         'dependencies' => $dependencies,
         'previewImageUrl' => $previewImageUrl,
-        'category' => $category
+        'category' => $category,
     ];
+
+    if ($variants) {
+        $font['variants'] = $variants;
+    }
+
+    return $font;
 }
 
 /*
@@ -42,16 +49,17 @@ font-family: 'Some-Font-Family' to actually work
  * @param  ElementDependencyWithoutConditions  $dependencies
  * @param  string|null  $previewImageUrl
  * @param  string|null  $category
+ * @param  BreakdanceFontVariants|null  $variants
  *
  * @deprecated Use "breakdance_register_fonts" filter instead.
  *
  * @return void
  */
-function registerFont($slug, $cssName, $label, $fallbackString, $dependencies, $previewImageUrl = null, $category = null)
+function registerFont($slug, $cssName, $label, $fallbackString, $dependencies, $previewImageUrl = null, $category = null, $variants = null)
 {
     /** @psalm-suppress MissingClosureReturnType */
     $fn = static fn(FontsController $fontsController) =>
-    $fontsController->registerFont($slug, $cssName, $label, $fallbackString, $dependencies, $previewImageUrl, $category);
+    $fontsController->registerFont($slug, $cssName, $label, $fallbackString, $dependencies, $previewImageUrl, $category, $variants);
 
     if (did_action('breakdance_register_fonts')) {
         $fn(FontsController::getInstance());
@@ -71,15 +79,16 @@ function registerFont($slug, $cssName, $label, $fallbackString, $dependencies, $
  * @param  ElementDependencyWithoutConditions  $dependencies
  * @param  string|null  $previewImageUrl
  * @param  string|null  $category
+ * @param  BreakdanceFontVariants|null  $variants
  * @deprecated Use "breakdance_register_fonts" filter instead.
  *
  * @return void
  */
-function registerFontAtTheStart($slug, $cssName, $label, $fallbackString, $dependencies, $previewImageUrl = null, $category = null)
+function registerFontAtTheStart($slug, $cssName, $label, $fallbackString, $dependencies, $previewImageUrl = null, $category = null, $variants = null)
 {
     /** @psalm-suppress MissingClosureReturnType */
     $fn = static fn(FontsController $fontsController) =>
-    $fontsController->registerFontAtTheStart($slug, $cssName, $label, $fallbackString, $dependencies, $previewImageUrl, $category);
+    $fontsController->registerFontAtTheStart($slug, $cssName, $label, $fallbackString, $dependencies, $previewImageUrl, $category, $variants);
 
     if (did_action('breakdance_register_fonts')) {
         $fn(FontsController::getInstance());
@@ -120,13 +129,14 @@ class FontsController
      * @param string $cssName
      * @param string $label
      * @param string $fallbackString
+     * @param ElementDependencyWithoutConditions $dependencies
      * @param string|null $previewImageUrl
      * @param string|null $category
-     * @param ElementDependencyWithoutConditions $dependencies
+     * @param BreakdanceFontVariants|null $variants
      *
      * @return void
      */
-    public function registerFont($slug, $cssName, $label, $fallbackString, $dependencies, $previewImageUrl = null, $category = null)
+    public function registerFont($slug, $cssName, $label, $fallbackString, $dependencies, $previewImageUrl = null, $category = null, $variants = null)
     {
         $font = font(
             $slug,
@@ -135,7 +145,8 @@ class FontsController
             $fallbackString,
             $dependencies,
             $previewImageUrl,
-            $category
+            $category,
+            $variants
         );
 
         /**
@@ -156,10 +167,11 @@ class FontsController
      * @param ElementDependencyWithoutConditions $dependencies
      * @param string|null $previewImageUrl
      * @param string|null $category
+     * @param BreakdanceFontVariants|null $variants
      *
      * @return void
      */
-    public function registerFontAtTheStart($slug, $cssName, $label, $fallbackString, $dependencies, $previewImageUrl = null, $category = null)
+    public function registerFontAtTheStart($slug, $cssName, $label, $fallbackString, $dependencies, $previewImageUrl = null, $category = null, $variants = null)
     {
         $this->fonts = [
             $slug => font(
@@ -170,6 +182,7 @@ class FontsController
                 $dependencies,
                 $previewImageUrl,
                 $category,
+                $variants,
             )
         ] + $this->fonts;
     }

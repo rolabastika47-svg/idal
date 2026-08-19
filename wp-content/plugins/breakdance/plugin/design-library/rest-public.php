@@ -16,7 +16,8 @@ use function Breakdance\Themeless\getTemplatesAsWPPosts;
 use function Breakdance\Themeless\getTemplateSettingsFromDatabase;
 
 /**
- * NOTE: Always check `isDesignLibraryEnabled()` before doing anything to secure the endpoints
+ * NOTE: Always check `checkDesignLibraryAccess()` before doing anything to secure the endpoints.
+ * This verifies both that the design library is enabled AND that a valid password is provided (if required).
  */
 add_action('breakdance_loaded', function () {
     \Breakdance\AJAX\register_handler(
@@ -204,8 +205,9 @@ function getLocalDesignSetData()
  */
 function getIdsOfPagesAndPostsToExport()
 {
-    if (!isDesignLibraryEnabled()) {
-        return getDesignLibraryNotEnabledError();
+    $accessError = checkDesignLibraryAccess();
+    if ($accessError !== null) {
+        return $accessError;
     }
 
     /** @var int[] $postIds */
@@ -224,8 +226,9 @@ function getIdsOfPagesAndPostsToExport()
  */
 function getHomepageId()
 {
-    if (!isDesignLibraryEnabled()) {
-        return getDesignLibraryNotEnabledError();
+    $accessError = checkDesignLibraryAccess();
+    if ($accessError !== null) {
+        return $accessError;
     }
 
     return ['id' => (string)get_option('page_on_front')];
@@ -236,8 +239,9 @@ function getHomepageId()
  */
 function getIdsOfTemplatesToExport()
 {
-    if (!isDesignLibraryEnabled()) {
-        return getDesignLibraryNotEnabledError();
+    $accessError = checkDesignLibraryAccess();
+    if ($accessError !== null) {
+        return $accessError;
     }
 
     $fieldIdOnly = ['fields' => 'ids'];
@@ -268,8 +272,9 @@ function getIdsOfTemplatesToExport()
  */
 function getGlobalSettingsForDesignLibrary()
 {
-    if (!isDesignLibraryEnabled()) {
-        return getDesignLibraryNotEnabledError();
+    $accessError = checkDesignLibraryAccess();
+    if ($accessError !== null) {
+        return $accessError;
     }
 
     if (!doesDesignLibraryRelyOnGlobalSettings()) {
@@ -284,8 +289,9 @@ function getGlobalSettingsForDesignLibrary()
  */
 function getDesignPresetsForDesignLibrary()
 {
-    if (!isDesignLibraryEnabled()) {
-        return getDesignLibraryNotEnabledError();
+    $accessError = checkDesignLibraryAccess();
+    if ($accessError !== null) {
+        return $accessError;
     }
 
     if (!doesDesignLibraryRelyOnDesignPresets()) {
@@ -300,8 +306,9 @@ function getDesignPresetsForDesignLibrary()
  */
 function getVariablesForDesignLibrary()
 {
-    if (!isDesignLibraryEnabled()) {
-        return getDesignLibraryNotEnabledError();
+    $accessError = checkDesignLibraryAccess();
+    if ($accessError !== null) {
+        return $accessError;
     }
 
     return [
@@ -315,8 +322,9 @@ function getVariablesForDesignLibrary()
  */
 function getOxySelectorsForDesignLibrary()
 {
-    if (!isDesignLibraryEnabled()) {
-        return getDesignLibraryNotEnabledError();
+    $accessError = checkDesignLibraryAccess();
+    if ($accessError !== null) {
+        return $accessError;
     }
 
     return [
@@ -331,8 +339,9 @@ function getOxySelectorsForDesignLibrary()
  */
 function getBreakdancePostData($id)
 {
-    if (!isDesignLibraryEnabled()) {
-        return getDesignLibraryNotEnabledError();
+    $accessError = checkDesignLibraryAccess();
+    if ($accessError !== null) {
+        return $accessError;
     }
 
     $post = get_post($id);
@@ -341,6 +350,11 @@ function getBreakdancePostData($id)
 
     /** @var \WP_Post $post */
     $post = $post;
+
+    // Only expose published posts through the public API
+    if ($post->post_status !== 'publish') {
+        return ['error' => "Couldn't load post with ID of " . $id];
+    }
 
     // only send the crucial info to create a duplicate of the post
     // NOTE this won't include meta data like fields
@@ -366,22 +380,28 @@ function getBreakdancePostData($id)
  */
 function getTemplateData($id)
 {
-    if (!isDesignLibraryEnabled()) {
-        return getDesignLibraryNotEnabledError();
+    $accessError = checkDesignLibraryAccess();
+    if ($accessError !== null) {
+        return $accessError;
     }
 
     $template = get_post($id);
 
     if (!$template) return ['error' => 'Wrong template id: ' . $id];
 
+    /** @var \WP_Post $template */
+    $template = $template;
+
+    // Only expose published templates through the public API
+    if ($template->post_status !== 'publish') {
+        return ['error' => 'Wrong template id: ' . $id];
+    }
+
     $settings = getTemplateSettingsFromDatabase($id);
 
     if ($settings['fallback'] ?? false) {
         return ['isFallback' => true];
     }
-
-    /** @var \WP_Post $template */
-    $template = $template;
 
     return [
         'title' => $template->post_title,
@@ -412,4 +432,33 @@ function checkPasswordEndpoint($password)
 function getDesignLibraryNotEnabledError()
 {
     return ['error' => "The design library isn't enabled on this site"];
+}
+
+/**
+ * @return array{error: string}
+ */
+function getInvalidPasswordError()
+{
+    return ['error' => "Invalid password for this design set"];
+}
+
+/**
+ * Check if the design library is accessible (enabled and password valid if required)
+ * @return array{error: string}|null Returns null if accessible, error array if not
+ */
+function checkDesignLibraryAccess()
+{
+    if (!isDesignLibraryEnabled()) {
+        return getDesignLibraryNotEnabledError();
+    }
+
+    if (isPasswordProtected()) {
+        $password = getPasswordFromRequest();
+
+        if (!checkPassword($password)) {
+            return getInvalidPasswordError();
+        }
+    }
+
+    return null;
 }

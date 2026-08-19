@@ -212,7 +212,7 @@ function validateDownload($file, $postId, $formId, $fieldId, $hash)
     $submissionUploadDirectory = trailingslashit(trailingslashit($uploadDir['basedir']) . getSubmissionDirectory($formId));
     $downloadFilePath = $submissionUploadDirectory . $file;
     $realDownloadFilePath = realpath($downloadFilePath);
-    if (!$realDownloadFilePath || strpos($realDownloadFilePath, $submissionUploadDirectory) === false) {
+    if (!$realDownloadFilePath || strpos($realDownloadFilePath, (string) $submissionUploadDirectory) === false) {
         return false;
     }
 

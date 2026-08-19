@@ -32,6 +32,10 @@
                 word-spacing: var(--{{ preset }}-word-spacing);
             {% endif %}
 
+            {% if presetTypographyValues.advanced.fontWidth %}
+                font-stretch: var(--{{ preset }}-font-width);
+            {% endif %}
+
             {% if presetTypographyValues.advanced.decoration.line %}
                 text-decoration-line: var(--{{ preset }}-text-decoration-line);
             {% endif %}
@@ -76,6 +80,7 @@
   --{{ presetId }}-line-height: {{ values.advanced.lineHeight.style|default(values.lineHeight.style) }};
   --{{ presetId }}-letter-spacing: {{ values.advanced.letterSpacing.style }};
   --{{ presetId }}-word-spacing: {{ values.advanced.wordSpacing.style }};
+  --{{ presetId }}-font-width: {{ values.advanced.fontWidth is defined ? values.advanced.fontWidth ~ '%' : '' }};
   --{{ presetId }}-text-decoration-color: {{ values.advanced.decoration.color }};
   --{{ presetId }}-text-decoration-style: {{ values.advanced.decoration.style }};
   --{{ presetId }}-text-decoration-line: {{ values.advanced.decoration.line | join(' ')  }};
@@ -96,6 +101,7 @@
   font-style: {{ custom.advanced.fontStyle }};
   letter-spacing: {{ custom.advanced.letterSpacing.style }};
   word-spacing: {{ custom.advanced.wordSpacing.style }};
+  font-stretch: {{ custom.advanced.fontWidth is defined ? custom.advanced.fontWidth ~ '%' }};
   text-decoration-color: {{ custom.advanced.decoration.color }};
   text-decoration-style: {{ custom.advanced.decoration.style }};
   text-decoration-line: {{ custom.advanced.decoration.line | join(' ') }};
@@ -115,6 +121,7 @@
   font-style: {{ custom.advanced.fontStyle_hover }};
   letter-spacing: {{ custom.advanced.letterSpacing_hover.style }};
   word-spacing: {{ custom.advanced.wordSpacing_hover.style }};
+  font-stretch: {{ custom.advanced.fontWidth_hover is defined ? custom.advanced.fontWidth_hover ~ '%' : '' }};
   text-decoration-color: {{ custom.advanced.decoration.color_hover }};
   text-decoration-style: {{ custom.advanced.decoration.style_hover }};
   text-decoration-line: {{ custom.advanced.decoration.line_hover | join(' ') }};

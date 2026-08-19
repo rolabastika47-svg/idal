@@ -1,16 +1,14 @@
 <?php
 
-use function Breakdance\Admin\get_env;
-
 require_once __DIR__ . "/../loader/loader-utils.php";
 
-$envtype = get_env();
+$useViteDevServer = shouldUseViteDevServer();
 
-if ($envtype !== 'local') {
-    $manifest = getProductionManifest(__DIR__ . '/../../builder/dist', plugin_dir_url(__BREAKDANCE_PLUGIN_FILE__) . 'builder/dist');
+if (!$useViteDevServer) {
+    $manifest = getProductionManifest();
 }
 
-if ($envtype === 'local') {
+if ($useViteDevServer) {
     echo getDevelopmentHeadLinks('settings-tools-regenerate-cache');
 } else {
     echo getProductionHeadLinks($manifest, 'settings-tools-regenerate-cache');
@@ -24,7 +22,7 @@ $window_dot_breakdance_object_data->ajaxnonce = \Breakdance\AJAX\get_nonce_for_a
 $window_dot_breakdance_object_data->subscriptionMode = \Breakdance\Subscription\getSubscriptionMode();
 $window_dot_breakdance_object_data->builderMode = BREAKDANCE_MODE;
 $window_dot_breakdance_object_data->bdoxTranslations = \Breakdance\BreakdanceOxygen\Strings\getBdoxTranslationsForBuilder();
-$window_dot_breakdance_object_data->builderDistUrl = plugin_dir_url(__BREAKDANCE_PLUGIN_FILE__) . 'builder/dist';
+$window_dot_breakdance_object_data->builderDistUrl = breakdanceBuilderDistUrl();
 
 ?>
 
@@ -44,7 +42,7 @@ $window_dot_breakdance_object_data->builderDistUrl = plugin_dir_url(__BREAKDANCE
         src="<?php echo BREAKDANCE_PLUGIN_URL; ?>plugin/lib/iframe-resizer@4/iframeResizer.contentWindow.min.js"></script>
 
     <?php
-    if ($envtype === 'local') {
+    if ($useViteDevServer) {
         echo getDevelopmentFooterScripts('settings-tools-regenerate-cache');
     } else {
         echo getProductionFooterScripts($manifest, 'settings-tools-regenerate-cache');

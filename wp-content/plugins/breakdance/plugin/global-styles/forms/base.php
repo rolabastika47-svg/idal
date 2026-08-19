@@ -18,5 +18,5 @@ function FORMS_SECTION()
  */
 function FORMS_TEMPLATE()
 {
-    return (string) file_get_contents(dirname(__FILE__) . '/global-forms.css.twig');
+    return (string) file_get_contents(__DIR__ . '/global-forms.css.twig');
 }

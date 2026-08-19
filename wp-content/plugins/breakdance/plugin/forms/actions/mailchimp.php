@@ -47,7 +47,7 @@ class MailChimp extends ApiAction {
     {
         \Breakdance\AJAX\register_handler(
             'breakdance_fetch_mailchimp_lists',
-            ['Breakdance\Forms\Actions\MailChimp', 'getLists'],
+            [\Breakdance\Forms\Actions\MailChimp::class, 'getLists'],
             'edit',
             false,
             [
@@ -63,7 +63,7 @@ class MailChimp extends ApiAction {
 
         \Breakdance\AJAX\register_handler(
             'breakdance_fetch_mailchimp_fields',
-            ['Breakdance\Forms\Actions\MailChimp', 'getFields'],
+            [\Breakdance\Forms\Actions\MailChimp::class, 'getFields'],
             'edit',
             false,
             [
@@ -79,7 +79,7 @@ class MailChimp extends ApiAction {
 
         \Breakdance\AJAX\register_handler(
             'breakdance_fetch_mailchimp_interest_categories',
-            ['Breakdance\Forms\Actions\MailChimp', 'getInterestCategories'],
+            [\Breakdance\Forms\Actions\MailChimp::class, 'getInterestCategories'],
             'edit',
             false,
             [
@@ -95,7 +95,7 @@ class MailChimp extends ApiAction {
 
         \Breakdance\AJAX\register_handler(
             'breakdance_fetch_mailchimp_interests',
-            ['Breakdance\Forms\Actions\MailChimp', 'getInterestsForCategory'],
+            [\Breakdance\Forms\Actions\MailChimp::class, 'getInterestsForCategory'],
             'edit',
             false,
             [
@@ -474,7 +474,7 @@ class MailChimp extends ApiAction {
         /**
          * @var array{categories: MailChimpInterestCategory[], error: string} $response
          */
-        $response = (new self($apiKey))->request("lists/{$listId}/interest-categories");
+        $response = (new self($apiKey))->request("lists/{$listId}/interest-categories?count=1000");
 
         if (array_key_exists('error', $response) || !array_key_exists('categories', $response)) {
             return [];

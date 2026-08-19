@@ -17,9 +17,6 @@ if ($mode === 'maintenance') {
 
 $isThemelessOrZeroTheme = is_theme_disabled() || is_zero_theme_enabled();
 
-$renderedPage = $page !== 'none' ? render($page) : '';
-$renderedPage = is_string($renderedPage) ? $renderedPage : '';
-
 remove_theme_support('title-tag');
 ?>
 <!doctype html>
@@ -43,7 +40,7 @@ $breakdance_or_oxygen_body_class = (string) BREAKDANCE_MODE;
 <body <?php body_class($isThemelessOrZeroTheme ? [$breakdance_or_oxygen_body_class] : []);?>>
 <?php wp_body_open();?>
     <?php if ($page !== 'none') : ?>
-        <?php echo $renderedPage; ?>
+        <?php echo render($page); ?>
     <?php else : ?>
         <p><?php esc_html_e('Down for maintenance.', 'breakdance'); ?></p>
     <?php endif; ?>

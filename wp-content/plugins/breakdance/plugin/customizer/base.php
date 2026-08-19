@@ -48,15 +48,15 @@ add_action('customize_register', function (WP_Customize_Manager $wp_customize) {
         }
     }
 
-    $wp_customize->add_section('breakdance_global_styles', array(
+    $wp_customize->add_section('breakdance_global_styles', [
         'title' => __bdox('plugin_name') . ' Global Styles',
         'priority' => 10000,
         'description_hidden' => true,
-    ));
+    ]);
 
-    $wp_customize->add_setting('breakdance_global_styles__browse', array(
+    $wp_customize->add_setting('breakdance_global_styles__browse', [
         'default' => null,
-    ));
+    ]);
     $wp_customize->add_control(
         new BreakdanceCustomizeBrowseModeButtonControl($wp_customize, 'breakdance_global_styles__browse', [
             'section' => 'breakdance_global_styles',

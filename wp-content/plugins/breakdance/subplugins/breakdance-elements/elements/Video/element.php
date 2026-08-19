@@ -208,6 +208,7 @@ class Video extends \Breakdance\Elements\Element
         false,
         false,
         [],
+        ['accepts' => 'image_url', 'proOnly' => false]
       ), c(
         "autoplay",
         "Autoplay",

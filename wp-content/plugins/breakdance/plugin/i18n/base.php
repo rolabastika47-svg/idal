@@ -4,7 +4,8 @@ namespace Breakdance\I18n;
 
 require_once __DIR__ . '/elements.php';
 
-add_action( 'plugins_loaded', 'Breakdance\I18n\registerPlugin' );
+// WordPress 6.7+ requires text domains to load on init or later (not plugins_loaded).
+add_action( 'init', 'Breakdance\I18n\registerPlugin', 0 );
 
 /**
  * Load our plugin text domain. This will load translations for PHP code.

@@ -64,7 +64,7 @@ add_action('breakdance_loaded', function () {
  */
 function save_element($php, $html, $css, $defaultCss, $directoryPath, $bypassPsalm)
 {
-    $bypassPsalm = $bypassPsalm ?? 'no';
+    $bypassPsalm ??= 'no';
 
     /**
      * @var string

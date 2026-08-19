@@ -12,7 +12,7 @@ namespace Breakdance\Licensing;
 class EDD_SL_Plugin_Updater {
 
     private $api_url              = '';
-    private $api_data             = array();
+    private $api_data             = [];
     private $plugin_file          = '';
     private $name                 = '';
     private $slug                 = '';
@@ -70,10 +70,10 @@ class EDD_SL_Plugin_Updater {
      */
     public function init() {
 
-        add_filter( 'pre_set_site_transient_update_plugins', array( $this, 'check_update' ) );
-        add_filter( 'plugins_api', array( $this, 'plugins_api_filter' ), 10, 3 );
-        add_action( 'after_plugin_row', array( $this, 'show_update_notification' ), 10, 2 );
-        add_action( 'admin_init', array( $this, 'show_changelog' ) );
+        add_filter( 'pre_set_site_transient_update_plugins', [ $this, 'check_update' ] );
+        add_filter( 'plugins_api', [ $this, 'plugins_api_filter' ], 10, 3 );
+        add_action( 'after_plugin_row', [ $this, 'show_update_notification' ], 10, 2 );
+        add_action( 'admin_init', [ $this, 'show_changelog' ] );
 
     }
 
@@ -129,10 +129,10 @@ class EDD_SL_Plugin_Updater {
         if ( false === $version_info ) {
             $version_info = $this->api_request(
                 'plugin_latest_version',
-                array(
+                [
                     'slug' => $this->slug,
                     'beta' => $this->beta,
-                )
+                ]
             );
             if ( ! $version_info ) {
                 return false;
@@ -198,22 +198,22 @@ class EDD_SL_Plugin_Updater {
         $changelog_link = '';
         if ( ! empty( $update_cache->response[ $this->name ]->sections->changelog ) ) {
             $changelog_link = add_query_arg(
-                array(
+                [
                     'edd_sl_action' => 'view_plugin_changelog',
                     'plugin'        => urlencode( $this->name ),
                     'slug'          => urlencode( $this->slug ),
                     'TB_iframe'     => 'true',
                     'width'         => 77,
                     'height'        => 911,
-                ),
+                ],
                 self_admin_url( 'index.php' )
             );
         }
         $update_link = add_query_arg(
-            array(
+            [
                 'action' => 'upgrade-plugin',
                 'plugin' => urlencode( $this->name ),
-            ),
+            ],
             self_admin_url( 'update.php' )
         );
 
@@ -295,15 +295,15 @@ class EDD_SL_Plugin_Updater {
 
         }
 
-        $to_send = array(
+        $to_send = [
             'slug'   => $this->slug,
             'is_ssl' => is_ssl(),
-            'fields' => array(
-                'banners' => array(),
+            'fields' => [
+                'banners' => [],
                 'reviews' => false,
-                'icons'   => array(),
-            ),
-        );
+                'icons'   => [],
+            ],
+        ];
 
         // Get the transient where we store the api request for this plugin for 24 hours
         $edd_api_request_transient = $this->get_cached_version_info();
@@ -364,9 +364,9 @@ class EDD_SL_Plugin_Updater {
      */
     private function convert_object_to_array( $data ) {
         if ( ! is_array( $data ) && ! is_object( $data ) ) {
-            return array();
+            return [];
         }
-        $new_data = array();
+        $new_data = [];
         foreach ( $data as $key => $value ) {
             $new_data[ $key ] = is_object( $value ) ? $this->convert_object_to_array( $value ) : $value;
         }
@@ -481,7 +481,7 @@ class EDD_SL_Plugin_Updater {
         }
 
         if ( ! current_user_can( 'update_plugins' ) ) {
-            wp_die( esc_html__( 'You do not have permission to install plugin updates', 'easy-digital-downloads' ), esc_html__( 'Error', 'easy-digital-downloads' ), array( 'response' => 403 ) );
+            wp_die( esc_html__( 'You do not have permission to install plugin updates', 'easy-digital-downloads' ), esc_html__( 'Error', 'easy-digital-downloads' ), [ 'response' => 403 ] );
         }
 
         $version_info = $this->get_repo_api_data();
@@ -501,19 +501,19 @@ class EDD_SL_Plugin_Updater {
      * @return array|false
      */
     private function get_version_from_remote() {
-        $api_params = array(
+        $api_params = [
             'edd_action'  => 'get_version',
             'license'     => ! empty( $this->api_data['license'] ) ? $this->api_data['license'] : '',
-            'item_name'   => isset( $this->api_data['item_name'] ) ? $this->api_data['item_name'] : false,
-            'item_id'     => isset( $this->api_data['item_id'] ) ? $this->api_data['item_id'] : false,
-            'version'     => isset( $this->api_data['version'] ) ? $this->api_data['version'] : false,
+            'item_name'   => $this->api_data['item_name'] ?? false,
+            'item_id'     => $this->api_data['item_id'] ?? false,
+            'version'     => $this->api_data['version'] ?? false,
             'slug'        => $this->slug,
             'author'      => $this->api_data['author'],
             'url'         => home_url(),
             'beta'        => $this->beta,
             'php_version' => phpversion(),
             'wp_version'  => get_bloginfo( 'version' ),
-        );
+        ];
 
         /**
          * Filters the parameters sent in the API request.
@@ -526,11 +526,11 @@ class EDD_SL_Plugin_Updater {
 
         $request = wp_remote_post(
             $this->api_url,
-            array(
+            [
                 'timeout'   => 15,
                 'sslverify' => $this->verify_ssl(),
                 'body'      => $api_params,
-            )
+            ]
         );
 
 
@@ -606,10 +606,10 @@ class EDD_SL_Plugin_Updater {
             $cache_key = $this->get_cache_key();
         }
 
-        $data = array(
+        $data = [
             'timeout' => strtotime( '+3 hours', time() ),
             'value'   => wp_json_encode( $value ),
-        );
+        ];
 
         update_option( $cache_key, $data, 'no' );
 

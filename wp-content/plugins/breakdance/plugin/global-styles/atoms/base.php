@@ -7,5 +7,5 @@ namespace Breakdance\GlobalSettings;
  */
 function ATOMS_TEMPLATE()
 {
-    return (string) file_get_contents(dirname(__FILE__) . '/../../elements/atom-default-css/atom-default-css.css.twig');
+    return (string) file_get_contents(__DIR__ . '/../../elements/atom-default-css/atom-default-css.css.twig');
 }

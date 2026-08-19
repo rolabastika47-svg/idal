@@ -99,7 +99,7 @@ function get_divider_shapes($path = __DIR__)
 {
 
     // Shape Divider variables
-    $shape_files = array_diff(scandir($path . '/shape-dividers'), array(".", ".."));
+    $shape_files = array_diff(scandir($path . '/shape-dividers'), [".", ".."]);
 
     $svgs = [['text' => __('Custom', 'breakdance'), 'value' => 'custom']];
 

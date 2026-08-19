@@ -77,6 +77,14 @@ abstract class Field
     }
 
     /**
+     * @return string[]
+     */
+    public function availableFor()
+    {
+        return ["breakdance", "oxygen"];
+    }
+
+    /**
      * @return bool
      */
     public function proOnly()

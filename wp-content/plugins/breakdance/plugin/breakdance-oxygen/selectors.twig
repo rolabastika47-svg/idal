@@ -136,6 +136,7 @@
   color: {{ typography.color }};
   font-family: {{ process_font(typography.font_family) }};
   font-weight: {{ typography.font_weight }};
+  font-stretch: {{ typography.font_width is defined ? typography.font_width ~ '%' }};
   font-size: {{ typography.font_size.style }};
   line-height: {{ typography.line_height.style }};
   text-align: {{ typography.text_align }};

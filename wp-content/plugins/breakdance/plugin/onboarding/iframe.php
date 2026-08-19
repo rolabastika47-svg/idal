@@ -5,16 +5,15 @@
  */
 
 
-use function Breakdance\Admin\get_env;
 use function Breakdance\I18n\getLanguageAttribute;
 
 require_once __DIR__ . "/../loader/loader-utils.php";
 
 $ajaxurl = admin_url('admin-ajax.php');
-$envtype = get_env();
+$useViteDevServer = shouldUseViteDevServer();
 
-if ($envtype !== 'local') {
-    $manifest = getProductionManifest(__DIR__ . '/../../builder/dist', plugin_dir_url(__BREAKDANCE_PLUGIN_FILE__) . 'builder/dist');
+if (!$useViteDevServer) {
+    $manifest = getProductionManifest();
 }
 
 $window_dot_breakdance_object_data = new stdClass();
@@ -36,7 +35,7 @@ $window_dot_breakdance_object_data->subscriptionMode = \Breakdance\Subscription\
 
     <?php
 
-    if ($envtype === 'local') {
+    if ($useViteDevServer) {
         echo getDevelopmentHeadLinks('onboarding-app');
     } else {
         echo getProductionHeadLinks($manifest, 'onboarding-app');
@@ -53,7 +52,7 @@ $window_dot_breakdance_object_data->subscriptionMode = \Breakdance\Subscription\
     <div id="onboarding-app"></div>
 
     <?php
-    if ($envtype === 'local') {
+    if ($useViteDevServer) {
         echo getDevelopmentFooterScripts('onboarding-app');
     } else {
         echo getProductionFooterScripts($manifest, 'onboarding-app');

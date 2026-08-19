@@ -15,7 +15,10 @@ function shouldShowNode($shouldShow, $node)
     /** @var boolean $nodeIsADraft */
     $nodeIsADraft = $node['data']['properties']['settings']['advanced']['draft'] ?? false;
 
-    if ($nodeIsADraft){
+    /** @var bool|string $visible */
+    $visible = $node['data']['properties']['settings']['conditions']['visible'] ?? true;
+
+    if ($nodeIsADraft || $visible === false) {
         return false;
     }
 

@@ -6,15 +6,15 @@ namespace Breakdance\Elements;
 
 use function Breakdance\Elements\PresetSections\requirePresetsAndGetData;
 
-function get_elements_for_builder()
+function get_elements_for_builder($onlyTheseElements = [])
 {
     // Element controls will get the presets, so we must require them first.
     requirePresetsAndGetData();
 
-    $elements = get_element_classnames();
-    $visibleElements = bdox_run_filters('breakdance_builder_elements', $elements);
+    $elementClassnames = $onlyTheseElements ?: get_element_classnames();
+    $visibleElements = bdox_run_filters('breakdance_builder_elements', $elementClassnames);
 
-    $allElements = array_map(function ($elementClassName) use ($visibleElements) {
+    $elementDefinitions = array_map(function ($elementClassName) use ($visibleElements) {
         // It's okay to instantiate this as it'll be garbage collected.
         $element = new $elementClassName(); // TODO - why are we instantiating a class with only static methods.
         $dynamicPropertyPaths = \Breakdance\Elements\FilteredGets\dynamicPropertyPaths($element);
@@ -22,7 +22,7 @@ function get_elements_for_builder()
 
         $addPanelRules = \Breakdance\Elements\FilteredGets\addPanelRules($elementClassName, $visibleElements);
 
-        return array(
+        return [
             'name' => \Breakdance\Elements\FilteredGets\name($element),
             'className' => $element::className(),
             'uiIcon' => $element::uiIcon(),
@@ -55,11 +55,11 @@ function get_elements_for_builder()
             'projectManagement' => $element::projectManagement(),
             'propertyPathsToWhitelistInFlatProps' => \Breakdance\Elements\FilteredGets\propertyPathsToWhitelistInFlatProps($element),
             'propertyPathsToSsrElementWhenValueChanges' => $element::propertyPathsToSsrElementWhenValueChanges(),
-        );
-    }, $elements);
+        ];
+    }, $elementClassnames);
 
     $availableElements = array_filter(
-        $allElements,
+        $elementDefinitions,
         fn($element) => in_array(BREAKDANCE_MODE, $element['availableIn'])
     );
 

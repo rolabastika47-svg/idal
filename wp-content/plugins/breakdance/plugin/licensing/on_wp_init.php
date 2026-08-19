@@ -30,14 +30,14 @@ add_action('init', function () {
         (new EDD_SL_Plugin_Updater(
             EddApi::get_edd_store_url(),
             path_join(dirname(__FILE__, 3), 'plugin.php'),
-            array(
+            [
                 'version' => $version,
                 'license' => $plugin_updater_settings['license_key'],
                 'item_id' => $plugin_updater_settings['edd_item_id'],
                 'author' => 'Soflyy',
                 // set to true if you wish customers to receive update notifications of beta releases
                 'beta' => get_option_receive_beta_updates(),
-            )
+            ]
         ));
     }
 });

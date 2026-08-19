@@ -7,6 +7,7 @@ namespace Breakdance\Render;
 use Breakdance\GlobalDefaultStylesheets\GlobalDefaultStylesheetsController;
 
 use function Breakdance\BrowseMode\isRequestFromBrowserIframe;
+use function Breakdance\GoogleFontsPlugin\buildGoogleFontUrl;
 use function Breakdance\isRequestFromBuilderIframe;
 use function Breakdance\Util\Timing\finish;
 use function Breakdance\Util\Timing\start;
@@ -332,15 +333,13 @@ function renderHtmlFromScriptAndStyleHolder(ScriptAndStyleHolder $holder)
     // Google Font dependencies are stored separately as an array of font family names so
     // that we can retrieve all the selected font families in a single CSS file request
     if (array_key_exists('googleFonts', $holder->dependencies)) {
-        $fontFamilies = array_map(static function ($fontFamily) {
-            // request all available weights and styles
-            return sprintf('family=%s:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900', $fontFamily);
-        }, array_unique($holder->dependencies['googleFonts']));
-        if (!empty($fontFamilies)) {
-            $googleFontUrl = 'https://fonts.googleapis.com/css2?' . implode('&', $fontFamilies) . '&display=swap';
+        $googleFontUrl = buildGoogleFontUrl($holder->dependencies['googleFonts']);
+
+        if ($googleFontUrl) {
             if (!array_key_exists('styles', $holder->dependencies)) {
                 $holder->dependencies['styles'] = [];
             }
+
             $holder->dependencies['styles'][] = $googleFontUrl;
         }
     }

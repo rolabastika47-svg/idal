@@ -34,7 +34,7 @@ function onSubmit()
     }
 
     if (array_key_exists('impersonate', $_POST)) {
-        setcookie('breakdance_impersonate', '1', strtotime('+1 hour'));
+        setcookie('breakdance_impersonate', '1', ['expires' => strtotime('+1 hour')]);
     }
 }
 
@@ -49,7 +49,7 @@ function permissionsDropdown($permissions, $role, $currentValue = '')
 {
     $disabled = isSuperAdminRole($role) || isFreeMode() ? 'disabled' : '';
 
-    $options = implode(array_map(function ($permission) use ($currentValue) {
+    $options = implode('', array_map(function ($permission) use ($currentValue) {
         $selected = $currentValue === $permission['slug'] ? 'selected' : '';
         return "<option value='{$permission['slug']}' {$selected}>{$permission['name']}</option>";
     }, $permissions));

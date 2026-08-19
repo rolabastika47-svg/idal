@@ -71,15 +71,17 @@ function insertPost($postTitle, $postType, $aiSettings)
         set_meta($postId, __bdox('_meta_prefix') . 'template_settings', json_encode($settings));
     }
 
-    /**
-     * @psalm-suppress MixedArgument
-     * @psalm-suppress MixedAssignment
-     * @psalm-suppress PossiblyFalseArgument
-     */
-    $aiSettings = json_decode($aiSettings, true);
-
     if ($aiSettings) {
-        set_meta($postId, __bdox('_meta_prefix') . 'ai_settings', $aiSettings);
+        /**
+         * @psalm-suppress MixedArgument
+         * @psalm-suppress MixedAssignment
+         * @psalm-suppress PossiblyFalseArgument
+         */
+        $aiSettings = json_decode($aiSettings, true);
+
+        if ($aiSettings) {
+            set_meta($postId, __bdox('_meta_prefix') . 'ai_settings', $aiSettings);
+        }
     }
     return ['postId' => $postId];
 }

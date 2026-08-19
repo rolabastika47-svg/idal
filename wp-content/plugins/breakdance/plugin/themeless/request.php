@@ -246,7 +246,8 @@ function doesRuleApply($rule)
         $maybeCondition['callback'],
         $rule['operand'] ?? '',
         getCleanValueFromRuleValue($rule['value'] ?? null),
-        $rule['ruleDynamic'] ?? ''
+        $rule['ruleDynamic'] ?? '',
+        'templating'
     );
 
     /**
@@ -338,11 +339,7 @@ function getCleanValueFromRuleValue($ruleValue)
                 return $value;
             }
 
-            if (isset($value['value'])) {
-                return $value['value'];
-            }
-
-            return '';
+            return $value['value'] ?? '';
         }, $ruleValue);
     }
 

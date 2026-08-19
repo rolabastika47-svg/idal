@@ -85,7 +85,7 @@ function COLORS_SECTION()
  */
 function COLORS_TEMPLATE()
 {
-    return (string) file_get_contents(dirname(__FILE__) . '/colors.css.twig');
+    return (string) file_get_contents(__DIR__ . '/colors.css.twig');
 }
 
 // Output global gradients as SVG.

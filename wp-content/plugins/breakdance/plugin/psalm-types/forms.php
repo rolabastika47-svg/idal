@@ -22,8 +22,8 @@
  *  autocomplete_disabled?: boolean,
  *  tabindex?: string,
  *  conditional?:bool,
- *  condition?: array {
- *    field?: string|array {
+ *  condition?: array{
+ *    field?: string|array{
  *      type:string,
  *      label:string,
  *      advanced: array{
@@ -60,7 +60,7 @@
  *
  * @psalm-type FormData = FormFieldWithValue[]
  *
- * @psalm-type DropdownData = array{text: string, value: string};
+ * @psalm-type DropdownData = array{text: string, value: string}
  *
  * @psalm-type FormRequestContext = array{context: array{api_key_input: ApiKeyInput }}
  *
@@ -82,7 +82,7 @@
  * @psalm-type FormFileGroup = array<string, FormFile[]>
  *
  * @psalm-type FormExtra = array{
- * files: FormFile[],
+ * files: FormFileGroup,
  * uploads: NormalizedUploadedFiles,
  * fields: FormUserSubmittedContents,
  * formId: int,
@@ -102,20 +102,21 @@
  * from: string,
  * from_name: string,
  * reply_to: string,
- * attach_files: boolean
+ * attach_files: boolean,
+ * send_email_conditionally?: boolean
  * }
  *
- * @psalm-type ActionConditions = array<int, array{
+ * @psalm-type FormCondition = array{
  *   condition: array{
  *     field?: string,
  *     operand?: string,
  *     value?: string
  *   }
- * }>
+ * }
  *
  * @psalm-type ActionData = array{
  *   run_action_conditionally: boolean,
- *   conditions: ActionConditions
+ *   conditions: FormCondition[]
  * }
  *
  * @psalm-type FormSettings = array{
@@ -139,7 +140,7 @@
  *   },
  *   honeypot_enabled: boolean,
  *   conditional?:bool,
- *   condition: array {
+ *   condition: array{
  *     field?: string,
  *     operand?: string,
  *     value?: string
@@ -178,7 +179,7 @@
  *     fields: array | null
  *    },
  *    audience: string,
- *    interests: array {
+ *    interests: array{
  *      groups: array{interest:string}[]
  *    },
  *   },
@@ -265,7 +266,7 @@
  * @psalm-type FormError = array{
  * type: "error" | "user-error",
  * message: string,
- * executed_at: string
+ * executed_at?: string
  * }
  *
  * @psalm-type FormSuccess = array{
@@ -312,7 +313,7 @@
  * @psalm-type MailChimpInterestCategory = array{list_id: string, id: string, title: string, type:string}
  *
  * @psalm-type ConvertKitList = array{uid: string, name: string}
- * @psalm-type ConvertKitField = array{id: number, key: string, name: string, label: string}
+ * @psalm-type ConvertKitField = array{id: int, key: string, name: string, label: string}
  *
  * @psalm-type ActionContext = array{
  * section: string,
@@ -325,7 +326,7 @@
  * response?: mixed,
  * id?: int,
  * context?: ActionContext[],
- * conditions?: ActionConditions
+ * conditions?: FormCondition[]
  * }
  *
  * @psalm-type ActionSuccess = array{
@@ -334,7 +335,7 @@
  * response?: mixed,
  * id?: int,
  * context?: ActionContext[],
- * conditions?: ActionConditions
+ * conditions?: FormCondition[]
  * }
  *
  * @psalm-type _FILES = array{
@@ -354,5 +355,6 @@
  *  subdir: string,
  *  error: string
  * }
+ *
  *
  */

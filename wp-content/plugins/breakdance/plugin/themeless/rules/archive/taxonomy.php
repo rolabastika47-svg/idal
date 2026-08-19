@@ -49,7 +49,7 @@ function registerArchiveTaxonomyRules()
                  */
                     function ($term) {
                         return [
-                            'text' => $term->name ? $term->name : $term->slug,
+                            'text' => $term->name ?: $term->slug,
                             'value' => json_encode(term_to_simplified_term($term)),
                         ];
                     },

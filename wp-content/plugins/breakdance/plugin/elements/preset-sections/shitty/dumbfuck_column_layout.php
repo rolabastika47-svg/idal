@@ -15,18 +15,18 @@ add_action('init', function() {
                 'type' => 'dropdown',
                 'items' =>
                     [
-                        array('text' => __('Left', 'breakdance'), 'value' => 'flex-start'),
-                        array('text' => __('Center', 'breakdance'), 'value' => 'center'),
-                        array('text' => __('Right', 'breakdance'), 'value' => 'flex-end'),
+                        ['text' => __('Left', 'breakdance'), 'value' => 'flex-start'],
+                        ['text' => __('Center', 'breakdance'), 'value' => 'center'],
+                        ['text' => __('Right', 'breakdance'), 'value' => 'flex-end'],
                     ],
             ]),
             responsiveControl("vertical_alignment", __("Vertical Alignment", 'breakdance'), [
                 'type' => 'dropdown',
                 'items' =>
                     [
-                        array('text' => __('top', 'breakdance'), 'value' => 'flex-start'),
-                        array('text' => __('center', 'breakdance'), 'value' => 'center'),
-                        array('text' => __('bottom', 'breakdance'), 'value' => 'flex-end'),
+                        ['text' => __('top', 'breakdance'), 'value' => 'flex-start'],
+                        ['text' => __('center', 'breakdance'), 'value' => 'center'],
+                        ['text' => __('bottom', 'breakdance'), 'value' => 'flex-end'],
                     ],
             ]),
         ]),

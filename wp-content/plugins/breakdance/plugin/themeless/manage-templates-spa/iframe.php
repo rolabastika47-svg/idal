@@ -5,16 +5,15 @@
  */
 
 
-use function Breakdance\Admin\get_env;
 use function Breakdance\I18n\getLanguageAttribute;
 
 require_once __DIR__ . "/../../loader/loader-utils.php";
 
 $ajaxurl = admin_url('admin-ajax.php');
-$envtype = get_env();
+$useViteDevServer = shouldUseViteDevServer();
 
-if ($envtype !== 'local') {
-    $manifest = getProductionManifest(__DIR__ . '/../../../builder/dist', plugin_dir_url(__BREAKDANCE_PLUGIN_FILE__) . 'builder/dist');
+if (!$useViteDevServer) {
+    $manifest = getProductionManifest();
 }
 
 $window_dot_breakdance_object_data = new stdClass();
@@ -23,7 +22,7 @@ $window_dot_breakdance_object_data->ajaxnonce = \Breakdance\AJAX\get_nonce_for_a
 $window_dot_breakdance_object_data->subscriptionMode = \Breakdance\Subscription\getSubscriptionMode();
 $window_dot_breakdance_object_data->builderMode = BREAKDANCE_MODE;
 $window_dot_breakdance_object_data->bdoxTranslations = \Breakdance\BreakdanceOxygen\Strings\getBdoxTranslationsForBuilder();
-$window_dot_breakdance_object_data->builderDistUrl = plugin_dir_url(__BREAKDANCE_PLUGIN_FILE__) . 'builder/dist';
+$window_dot_breakdance_object_data->builderDistUrl = breakdanceBuilderDistUrl();
 
 ?>
 <!DOCTYPE html>
@@ -39,7 +38,7 @@ $window_dot_breakdance_object_data->builderDistUrl = plugin_dir_url(__BREAKDANCE
 
     <?php
 
-    if ($envtype === 'local') {
+    if ($useViteDevServer) {
         echo getDevelopmentHeadLinks('manage-templates');
     } else {
         echo getProductionHeadLinks($manifest, 'manage-templates');
@@ -51,7 +50,7 @@ $window_dot_breakdance_object_data->builderDistUrl = plugin_dir_url(__BREAKDANCE
     <div id="manage-templates-wrapper"></div>
 
     <?php
-    if ($envtype === 'local') {
+    if ($useViteDevServer) {
         echo getDevelopmentFooterScripts('manage-templates');
     } else {
         echo getProductionFooterScripts($manifest, 'manage-templates');
