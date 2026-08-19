@@ -1,9 +1,12 @@
 <?php
+
 /**
  * @var array $propertiesData
  */
 
 $templateToRenderId = \Breakdance\Themeless\ThemelessController::getInstance()->popHierarchy();
+
+add_filter('breakdance_render_wrap_in_main_tag', '__return_false');
 
 if ($templateToRenderId) {
     echo (string) \Breakdance\Render\render($templateToRenderId);
@@ -14,4 +17,4 @@ if ($templateToRenderId) {
     }
 }
 
-?>
+remove_filter('breakdance_render_wrap_in_main_tag', '__return_false');

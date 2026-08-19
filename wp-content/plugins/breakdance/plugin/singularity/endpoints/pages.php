@@ -28,6 +28,7 @@ add_action('breakdance_loaded', function () {
  */
 function getPages($postType)
 {
+    // Get ALL pages (flat structure, no hierarchy)
     $pages = performant_get_posts([
         'post_type' => $postType,
         'post_status' => 'any',
@@ -54,39 +55,56 @@ function formatPage($post)
      * @psalm-suppress MixedArgument
      * @psalm-suppress PossiblyFalseArgument
      */
-    $singularityMeta = json_decode(\Breakdance\Data\get_meta($post->ID, __bdox('_meta_prefix') . 'singularity_meta'));
+    $futureLayerMeta = json_decode(\Breakdance\Data\get_meta($post->ID, __bdox('_meta_prefix') . 'futurelayer_meta'));
 
-    $menuInfo = getPageMenuInfo($post->ID);
-
-    return [
+    // Flat structure - just include parentId instead of recursively loading children
+    $formatted = [
         'id' => $post->ID,
         'title' => $post->post_title,
         'postType' => $post->post_type,
         'relativeUrl' => getRelativeUrlForPage($post->ID),
-        'singularityMeta' => $singularityMeta ? $singularityMeta : false,
+        'futureLayerMeta' => $futureLayerMeta ?: false,
         'generatingInBackground' => false,
-        'isInMainMenu' => $menuInfo['isInMainMenu'],
-        'menuOrder' => $menuInfo['menuOrder']
+        'parentId' => $post->post_parent ? $post->post_parent : null
     ];
-}
 
+    return $formatted;
+}
 
 add_action('breakdance_loaded', function () {
     \Breakdance\AJAX\register_handler(
-        'breakdance_singularity_delete_all_pages_headers_and_footers',
-        '\Breakdance\Singularity\Endpoints\deleteAllPagesHeadersAndFooters',
+        'breakdance_singularity_get_page',
+        '\Breakdance\Singularity\Endpoints\getPage',
         'edit',
         true,
         [
-            'args' => [],
+            'args' => [
+                'id' => FILTER_SANITIZE_NUMBER_INT
+            ],
         ]
     );
 });
 
 /**
+ * @param int $id
+ * @return array{data: mixed}
+ */
+function getPage($id)
+{
+    $post = get_post($id);
+
+    if (!$post) {
+        return ['error' => 'Page not found'];
+    }
+
+    return ['data' => formatPage($post)];
+}
+
+
+/**
  * @return array
  */
-function deleteAllPagesHeadersAndFooters()
+function deleteAllPagesHeadersAndFootersAndClearMenu()
 {
 
     $failedToDeleteSomething = false;
@@ -106,12 +124,10 @@ function deleteAllPagesHeadersAndFooters()
         }
     }
 
-    $pages = get_posts([
-        'post_type' => 'page',
-        'post_status' => 'any',
-        'posts_per_page' => -1,
-        'fields' => 'ids',
-    ]);
+    $menuId = \Breakdance\Singularity\Endpoints\getSingularityDefaultMenuOrCreateIfItDoesNotExist();
+    if ($menuId) {
+        \Breakdance\Singularity\Endpoints\clear_all_menu_items($menuId);
+    }
 
     if ($failedToDeleteSomething) {
         return ['error' => __("Failed to delete all.", 'breakdance')];
@@ -144,13 +160,57 @@ add_action('breakdance_loaded', function () {
  */
 function deletePage($pageId)
 {
+    // Move child pages to top-level before trashing the parent
+    $children = get_posts([
+        'post_type' => 'page',
+        'post_parent' => $pageId,
+        'post_status' => 'any',
+        'posts_per_page' => -1,
+        'fields' => 'ids',
+    ]);
+
+    foreach ($children as $childId) {
+        wp_update_post([
+            'ID' => $childId,
+            'post_parent' => 0,
+        ]);
+    }
+
     $trashed = wp_trash_post($pageId);
     if (!$trashed) {
         /* translators: %s: page ID */
         return ['error' => sprintf(__('Failed to delete %s.', 'breakdance'), $pageId)];
     }
+
     /* translators: %s: page ID */
     return ['success' => sprintf(__('Deleted %s successfully.', 'breakdance'), $pageId)];
+}
+
+/**
+ * Recursively remove a page from the menu structure
+ * @param array $menu
+ * @param int $pageId
+ * @return array
+ */
+function removePageFromMenu($menu, $pageId)
+{
+    $result = [];
+
+    foreach ($menu as $item) {
+        // Skip the item if it matches the page to delete
+        if ($item['id'] === $pageId) {
+            continue;
+        }
+
+        // Recursively process children
+        if (isset($item['children']) && is_array($item['children'])) {
+            $item['children'] = removePageFromMenu($item['children'], $pageId);
+        }
+
+        $result[] = $item;
+    }
+
+    return $result;
 }
 
 
@@ -163,7 +223,7 @@ add_action('breakdance_loaded', function () {
         [
             'args' => [
                 'title' => FILTER_UNSAFE_RAW,
-                'singularityMeta' => FILTER_UNSAFE_RAW,
+                'futureLayerMeta' => FILTER_UNSAFE_RAW,
                 'post_type' => FILTER_UNSAFE_RAW,
             ],
         ]
@@ -172,11 +232,11 @@ add_action('breakdance_loaded', function () {
 
 /**
  * @param string $title
- * @param string $singularityMeta
+ * @param string $futureLayerMeta
  * @param string $post_type
  * @return array
  */
-function addPage($title, $singularityMeta, $post_type)
+function addPage($title, $futureLayerMeta, $post_type)
 {
     $pageId = wp_insert_post(
         [
@@ -191,7 +251,7 @@ function addPage($title, $singularityMeta, $post_type)
         return ['error' => __("Failed to create page.", 'breakdance')];
     }
 
-    set_meta($pageId, __bdox('_meta_prefix') . 'singularity_meta', $singularityMeta);
+    set_meta($pageId, __bdox('_meta_prefix') . 'futurelayer_meta', $futureLayerMeta);
 
     return ['success' => "Created " . $post_type . " successfully.", 'id' => $pageId, 'relativeUrl' => getRelativeUrlForPage($pageId)];
 }
@@ -208,11 +268,12 @@ add_action('breakdance_loaded', function () {
                 'title' => FILTER_UNSAFE_RAW,
                 'postType' => FILTER_UNSAFE_RAW,
                 'tree' => FILTER_UNSAFE_RAW,
-                'singularityMeta' => FILTER_UNSAFE_RAW,
+                'futureLayerMeta' => FILTER_UNSAFE_RAW,
                 'templateSettings' => FILTER_UNSAFE_RAW,
                 'id' => FILTER_SANITIZE_NUMBER_INT,
+                'shouldSetAsHomepage' => FILTER_UNSAFE_RAW,
             ],
-            'optional_args' => ['tree', 'singularityMeta', 'templateSettings', 'id'],
+            'optional_args' => ['tree', 'futureLayerMeta', 'templateSettings', 'id', 'shouldSetAsHomepage'],
         ]
     );
 });
@@ -223,12 +284,13 @@ add_action('breakdance_loaded', function () {
  * @param string $title
  * @param string $postType
  * @param string $tree
- * @param string $singularityMeta
+ * @param string $futureLayerMeta
  * @param string $templateSettings
  * @param int $id
+ * @param bool $shouldSetAsHomepage
  * @return array
  */
-function addOrUpdatePage($title, $postType, $tree, $singularityMeta, $templateSettings, $id)
+function addOrUpdatePage($title, $postType, $tree, $futureLayerMeta, $templateSettings, $id, $shouldSetAsHomepage)
 {
 
     $post_data = [
@@ -239,6 +301,13 @@ function addOrUpdatePage($title, $postType, $tree, $singularityMeta, $templateSe
 
     if ($id && get_post($id)) {
         $post_data['ID'] = $id;
+
+        // Explicitly preserve post_parent when updating, if you dont, WP will lose it.
+        // i suspect this applies to other fields to
+        $existing_post = get_post($id);
+        if ($existing_post) {
+            $post_data['post_parent'] = $existing_post->post_parent;
+        }
     }
 
     $id = wp_insert_post($post_data, true);
@@ -257,11 +326,11 @@ function addOrUpdatePage($title, $postType, $tree, $singularityMeta, $templateSe
         );
     }
 
-    if ($singularityMeta) {
+    if ($futureLayerMeta) {
         set_meta(
             $id,
-            __bdox('_meta_prefix') . 'singularity_meta',
-            $singularityMeta
+            __bdox('_meta_prefix') . 'futurelayer_meta',
+            $futureLayerMeta
         );
     }
 
@@ -273,6 +342,10 @@ function addOrUpdatePage($title, $postType, $tree, $singularityMeta, $templateSe
         );
     }
 
+    if ($shouldSetAsHomepage) {
+        \Breakdance\Singularity\Endpoints\setPageToFrontpage($id);
+    }
+
     return ['success' => "Created " . $postType . " successfully.", 'id' => $id, 'relativeUrl' => getRelativeUrlForPage($id)];
 }
 
@@ -280,72 +353,160 @@ function addOrUpdatePage($title, $postType, $tree, $singularityMeta, $templateSe
 
 
 
-// update page
+
+
+
+
+
+
+
 add_action('breakdance_loaded', function () {
     \Breakdance\AJAX\register_handler(
-        'breakdance_singularity_update_page',
-        '\Breakdance\Singularity\Endpoints\updatePage',
+        'breakdance_singularity_create_pages_from_hierarchical_sitemap',
+        '\Breakdance\Singularity\Endpoints\createPagesFromHierarchicalSitemap',
         'edit',
         true,
         [
             'args' => [
-                'id' => FILTER_UNSAFE_RAW,
-                'title' => FILTER_UNSAFE_RAW,
+                'sitemap' => FILTER_UNSAFE_RAW,
             ],
         ]
     );
 });
+
 /**
- * @param int $id
- * @param string $title
+ * @param string $sitemap
  * @return array
  */
-function updatePage($id, $title)
+function createPagesFromHierarchicalSitemap($sitemap)
 {
-    $updatedPageId = wp_update_post(
+
+    $sitemapData = json_decode($sitemap, true);
+
+    if (!$sitemapData || !is_array($sitemapData)) {
+        return ['error' => 'Invalid sitemap data'];
+    }
+
+    handleInitialSetupAndCleanup();
+
+    $topLevelPageIds = [];
+
+    foreach ($sitemapData as $pageData) {
+        $pageId = createPageRecursively($pageData, 0);
+        if (is_wp_error($pageId)) {
+            return ['error' => 'Failed to create pages'];
+        }
+        $topLevelPageIds[] = $pageId;
+    }
+
+    // Fetch and format ALL pages (not just top-level)
+    $allPages = get_posts([
+        'post_type' => 'page',
+        'post_status' => 'any',
+        'posts_per_page' => -1,
+    ]);
+
+    $formattedPages = array_map(
+        '\Breakdance\Singularity\Endpoints\formatPage',
+        $allPages
+    );
+
+    return ['data' => $formattedPages];
+}
+
+/**
+ * @param array $pageData
+ * @param int $parentId
+ * @return int|\WP_Error
+ */
+function createPageRecursively($pageData, $parentId)
+{
+    $title = $pageData['title'] ?? '';
+
+    if (empty($title)) {
+        return new \WP_Error('missing_title', 'Page title is required');
+    }
+
+    // Create the page
+    $pageId = wp_insert_post(
         [
-            'ID' => $id,
+            'post_type' => 'page',
             'post_title' => $title,
+            'post_status' => 'publish',
+            'post_parent' => $parentId,
         ],
         true
     );
 
-    if (is_wp_error($updatedPageId)) {
-        return ['error' => "Failed to update page."];
+    if (is_wp_error($pageId)) {
+        return $pageId;
     }
 
-    return ['success' => "Updated " . $id . " successfully."];
+    // Save futureLayerMeta if present (already JSON string)
+    if (isset($pageData['futureLayerMeta']) && $pageData['futureLayerMeta'] !== false) {
+        set_meta(
+            $pageId,
+            __bdox('_meta_prefix') . 'futurelayer_meta',
+            $pageData['futureLayerMeta']
+        );
+    }
+
+    // Process children if they exist
+    if (isset($pageData['children']) && is_array($pageData['children'])) {
+        foreach ($pageData['children'] as $childData) {
+            $childId = createPageRecursively($childData, $pageId);
+            if (is_wp_error($childId)) {
+                return $childId;
+            }
+        }
+    }
+
+    return $pageId;
+}
+
+/**
+ * @param $post_id int
+ */
+function getRelativeUrlForPage($post_id)
+{
+
+    // LLM generated...
+
+    $permalink = get_permalink($post_id);
+
+    if (! $permalink) {
+        return '';
+    }
+
+    $parsed_url = wp_parse_url($permalink);
+
+    $relative_url = isset($parsed_url['path']) ? $parsed_url['path'] : '/';
+
+    if (!empty($parsed_url['query'])) {
+        $relative_url .= '?' . $parsed_url['query'];
+    }
+
+    if (!empty($parsed_url['fragment'])) {
+        $relative_url .= '#' . $parsed_url['fragment'];
+    }
+
+    return $relative_url;
 }
 
 
-
-
-
-
-add_action('breakdance_loaded', function () {
-    \Breakdance\AJAX\register_handler(
-        'breakdance_singularity_update_singularity_meta',
-        '\Breakdance\Singularity\Endpoints\updateSingularityMeta',
-        'edit',
-        true,
-        [
-            'args' => [
-                'id' => FILTER_UNSAFE_RAW,
-                'singularityMeta' => FILTER_UNSAFE_RAW,
-            ],
-        ]
-    );
-});
-
 /**
- * @param int $id
- * @param string $singularityMeta
- * @return array
+ * @param number $pageId
  */
-function updateSingularityMeta($id, $singularityMeta)
+function setPageToFrontpage($pageId)
 {
+    update_option('show_on_front', 'page');
+    update_option('page_on_front', $pageId);
+}
 
-    set_meta($id, __bdox('_meta_prefix') . 'singularity_meta', $singularityMeta);
 
-    return ['success' => "Updated " . $id . " successfully."];
+function handleInitialSetupAndCleanup()
+{
+    \Breakdance\Data\set_global_option('isFutureLayer', 'yes');
+    /** @psalm-suppress UndefinedFunction */
+    deleteAllPagesHeadersAndFootersAndClearMenu();
 }

@@ -47,6 +47,11 @@ class DependencyCache
  */
 function generateCacheForPost($postId)
 {
+    // Don't generate cache for revisions, this will cause a lot of issues.
+    if (wp_is_post_revision($postId)) {
+        return [];
+    }
+
     DependencyCache::getInstance()->whereToCache = "post";
 
     $cssNamespace = 'post-' . ((string) $postId);

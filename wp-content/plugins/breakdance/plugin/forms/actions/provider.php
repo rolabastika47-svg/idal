@@ -152,3 +152,11 @@ class ActionProvider
 function registerAction(Action $action) {
     ActionProvider::getInstance()->actions[] = $action;
 }
+
+/**
+ * @param string $slug
+ * @return Action|null
+ */
+function getAction($slug) {
+    return ActionProvider::getInstance()->getActionBySlug($slug);
+}

@@ -18,8 +18,7 @@ function getFlattenedPropertiesByBreakpoint(
     $allBreakpointIds,
     $baseBreakpointId,
     $whitelistedPropertyPaths
-)
-{
+) {
     return _getFlattenedPropertiesByBreakpoint(
         $breakpointId,
         $properties,
@@ -52,8 +51,7 @@ function _getFlattenedPropertiesByBreakpoint(
     $baseBreakpointId,
     $whitelistedPropertyPaths,
     $parentPath
-)
-{
+) {
     // A difference with the TS version is that in PHP, properties are always arrays
     if (is_array($properties)) {
         $accumulator = [];
@@ -66,8 +64,12 @@ function _getFlattenedPropertiesByBreakpoint(
                 return $property;
             }
 
-
             if (in_array($key, $allBreakpointIds, true)) {
+                continue;
+            }
+
+            // This is a deleted breakpoint, we don't need to flatten it since it's not used anymore
+            if (is_string($key) && str_starts_with($key, "custom_breakpoint_")) {
                 continue;
             }
 
@@ -118,7 +120,7 @@ function _getFlattenedPropertiesByBreakpoint(
 
     $isCurrentPathWhitelisted =
         $parentPath &&
-        array_filter($whitelistedPropertyPaths, function($propertyPath) use ($parentPath) {
+        array_filter($whitelistedPropertyPaths, function ($propertyPath) use ($parentPath) {
             /** @var bool */
             return str_starts_with($parentPath, $propertyPath);
         });
@@ -127,4 +129,3 @@ function _getFlattenedPropertiesByBreakpoint(
         ? $properties
         : null;
 }
-

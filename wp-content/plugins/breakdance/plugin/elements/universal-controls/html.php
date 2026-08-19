@@ -48,35 +48,35 @@ function getAttributesHtmlControl()
 
 
 /**
- * @param \Breakdance\Elements\Element $element
- * @return Control|null
+ * @return Control
  */
-function getTagHtmlControl($element)
+function getTagHtmlControl()
 {
-
-    if (!$element::tagControlPath() && count($element::tagOptions())) {
-        $dropdownItemsOfTagOptions = array_map(
-            /**
-             * @param string $tag
-             * @return array{text: string, value: string}
-             */
-            function ($tag) {
-                return [
-                    'text' => $tag,
-                    'value' => $tag,
-                ];
-            },
-            $element::tagOptions()
-        );
-
-        return control(
-            'tag',
-            __('Tag', 'breakdance'),
-            ['type' => 'dropdown', 'items' => $dropdownItemsOfTagOptions]
-        );
-    }
-
-    return null;
+    return control(
+        'tag',
+        __('Tag', 'breakdance'),
+        [
+            'type' => 'dropdown',
+            'dropdownOptions' => [
+                'populate' => [
+                    'path' => '$element.htmlTag.options',
+                ]
+            ],
+            'condition' => [
+                [
+                    [
+                        'path' => '$element.htmlTag.options',
+                        'operand' => 'is set',
+                    ],
+                    [
+                        'path' => '$element.htmlTag.pathToControl',
+                        'operand' => 'equals',
+                        'value' => false
+                    ]
+                ]
+            ]
+        ]
+    );
 }
 
 /**

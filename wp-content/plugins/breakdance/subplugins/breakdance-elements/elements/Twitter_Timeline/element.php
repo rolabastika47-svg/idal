@@ -93,10 +93,11 @@ class TwitterTimeline extends \Breakdance\Elements\Element
         "theme",
         "Theme",
         [],
-        ['type' => 'dropdown', 'layout' => 'inline', 'items' => ['0' => ['value' => 'light', 'text' => 'Light'], '1' => ['text' => 'Dark', 'value' => 'dark']]],
+        ['type' => 'dropdown', 'layout' => 'inline', 'items' => [['value' => 'light', 'text' => 'Light'], ['text' => 'Dark', 'value' => 'dark']]],
         false,
         false,
         [],
+        
       ), c(
         "no_background",
         "No Background",
@@ -105,6 +106,7 @@ class TwitterTimeline extends \Breakdance\Elements\Element
         false,
         false,
         [],
+        
       ), c(
         "no_header",
         "No Header",
@@ -113,6 +115,7 @@ class TwitterTimeline extends \Breakdance\Elements\Element
         false,
         false,
         [],
+        
       ), c(
         "no_footer",
         "No Footer",
@@ -121,6 +124,7 @@ class TwitterTimeline extends \Breakdance\Elements\Element
         false,
         false,
         [],
+        
       ), c(
         "no_border",
         "No Border",
@@ -129,6 +133,7 @@ class TwitterTimeline extends \Breakdance\Elements\Element
         false,
         false,
         [],
+        
       ), c(
         "no_scrollbar",
         "No Scrollbar",
@@ -137,11 +142,13 @@ class TwitterTimeline extends \Breakdance\Elements\Element
         false,
         false,
         [],
+        
       )],
         ['type' => 'section'],
         false,
         false,
         [],
+        
       ), c(
         "size",
         "Size",
@@ -149,23 +156,26 @@ class TwitterTimeline extends \Breakdance\Elements\Element
         "width",
         "Width",
         [],
-        ['type' => 'unit', 'layout' => 'inline', 'unitOptions' => ['types' => ['0' => 'px'], 'defaultType' => 'px'], 'rangeOptions' => ['step' => 1, 'min' => 180, 'max' => 2000]],
+        ['type' => 'unit', 'layout' => 'inline', 'unitOptions' => ['types' => ['px'], 'defaultType' => 'px'], 'rangeOptions' => ['step' => 1, 'min' => 180, 'max' => 2000]],
         false,
         false,
         [],
+        
       ), c(
         "height",
         "Height",
         [],
-        ['type' => 'unit', 'layout' => 'inline', 'unitOptions' => ['types' => ['0' => 'px']], 'rangeOptions' => ['step' => 1, 'min' => 300, 'max' => 1600]],
+        ['type' => 'unit', 'layout' => 'inline', 'unitOptions' => ['types' => ['px']], 'rangeOptions' => ['step' => 1, 'min' => 300, 'max' => 1600]],
         false,
         false,
         [],
+        
       )],
         ['type' => 'section'],
         false,
         false,
         [],
+        
       ), getPresetSection(
       "EssentialElements\\spacing_margin_y",
       "Spacing",
@@ -187,6 +197,7 @@ class TwitterTimeline extends \Breakdance\Elements\Element
         false,
         false,
         [],
+        ['accepts' => 'string']
       ), c(
         "limit_tweets",
         "Limit Tweets",
@@ -195,6 +206,7 @@ class TwitterTimeline extends \Breakdance\Elements\Element
         false,
         false,
         [],
+        
       ), c(
         "tweet_count",
         "Tweet Count",
@@ -203,11 +215,13 @@ class TwitterTimeline extends \Breakdance\Elements\Element
         false,
         false,
         [],
+        
       )],
         ['type' => 'section', 'layout' => 'vertical'],
         false,
         false,
         [],
+        
       )];
     }
 
@@ -228,7 +242,7 @@ class TwitterTimeline extends \Breakdance\Elements\Element
 
     static function addPanelRules()
     {
-        return false;
+        return ['alwaysHide' => true];
     }
 
     static public function actions()
@@ -264,12 +278,12 @@ class TwitterTimeline extends \Breakdance\Elements\Element
 
     static function nestingRule()
     {
-        return ["type" => "final",   ];
+        return ['type' => 'final'];
     }
 
     static function spacingBars()
     {
-        return ['0' => ['location' => 'outside-top', 'cssProperty' => 'margin-top', 'affectedPropertyPath' => 'design.spacing.margin_top.%%BREAKPOINT%%'], '1' => ['location' => 'outside-bottom', 'cssProperty' => 'margin-bottom', 'affectedPropertyPath' => 'design.spacing.margin_bottom.%%BREAKPOINT%%']];
+        return [['location' => 'outside-top', 'cssProperty' => 'margin-top', 'affectedPropertyPath' => 'design.spacing.margin_top.%%BREAKPOINT%%'], ['location' => 'outside-bottom', 'cssProperty' => 'margin-bottom', 'affectedPropertyPath' => 'design.spacing.margin_bottom.%%BREAKPOINT%%']];
     }
 
     static function attributes()
@@ -303,6 +317,12 @@ dark
         return false;
     }
 
+    static function availableIn()
+    {
+        return ['breakdance'];
+    }
+
+
     static function order()
     {
         return 15500;
@@ -310,7 +330,7 @@ dark
 
     static function dynamicPropertyPaths()
     {
-        return ['0' => ['accepts' => 'string', 'path' => 'content.timeline.username']];
+        return false;
     }
 
     static function additionalClasses()

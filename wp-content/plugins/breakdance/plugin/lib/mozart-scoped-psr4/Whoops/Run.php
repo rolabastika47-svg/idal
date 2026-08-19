@@ -9,10 +9,13 @@ namespace Breakdance\Lib\Vendor\Whoops;
 use InvalidArgumentException;
 use Throwable;
 use Breakdance\Lib\Vendor\Whoops\Exception\ErrorException;
-use Breakdance\Lib\Vendor\Whoops\Exception\Inspector;
 use Breakdance\Lib\Vendor\Whoops\Handler\CallbackHandler;
 use Breakdance\Lib\Vendor\Whoops\Handler\Handler;
 use Breakdance\Lib\Vendor\Whoops\Handler\HandlerInterface;
+use Breakdance\Lib\Vendor\Whoops\Inspector\CallableInspectorFactory;
+use Breakdance\Lib\Vendor\Whoops\Inspector\InspectorFactory;
+use Breakdance\Lib\Vendor\Whoops\Inspector\InspectorFactoryInterface;
+use Breakdance\Lib\Vendor\Whoops\Inspector\InspectorInterface;
 use Breakdance\Lib\Vendor\Whoops\Util\Misc;
 use Breakdance\Lib\Vendor\Whoops\Util\SystemFacade;
 
@@ -66,9 +69,27 @@ final class Run implements RunInterface
      */
     private $canThrowExceptions = true;
 
-    public function __construct(SystemFacade $system = null)
+    /**
+     * The inspector factory to create inspectors.
+     *
+     * @var InspectorFactoryInterface
+     */
+    private $inspectorFactory;
+
+    /**
+     * @var array<callable>
+     */
+    private $frameFilters = [];
+
+    public function __construct(?SystemFacade $system = null)
     {
         $this->system = $system ?: new SystemFacade;
+        $this->inspectorFactory = new InspectorFactory();
+    }
+
+    public function __destruct()
+    {
+        $this->unregister();
     }
 
     /**
@@ -165,6 +186,17 @@ final class Run implements RunInterface
         return $this;
     }
 
+    public function getFrameFilters()
+    {
+        return $this->frameFilters;
+    }
+
+    public function clearFrameFilters()
+    {
+        $this->frameFilters = [];
+        return $this;
+    }
+
     /**
      * Registers this instance as an error handler.
      *
@@ -179,6 +211,7 @@ final class Run implements RunInterface
             class_exists("\\Breakdance\Lib\Vendor\Whoops\\Exception\\FrameCollection");
             class_exists("\\Breakdance\Lib\Vendor\Whoops\\Exception\\Frame");
             class_exists("\\Breakdance\Lib\Vendor\Whoops\\Exception\\Inspector");
+            class_exists("\\Breakdance\Lib\Vendor\Whoops\\Inspector\\InspectorFactory");
 
             $this->system->setErrorHandler([$this, self::ERROR_HANDLER]);
             $this->system->setExceptionHandler([$this, self::EXCEPTION_HANDLER]);
@@ -474,6 +507,11 @@ final class Run implements RunInterface
         // to the exception handler. Pass that information along.
         $this->canThrowExceptions = false;
 
+        // If we are not currently registered, we should not do anything
+        if (!$this->isRegistered) {
+            return;
+        }
+
         $error = $this->system->getLastError();
         if ($error && Misc::isLevelFatal($error['type'])) {
             // If there was a fatal error,
@@ -488,14 +526,38 @@ final class Run implements RunInterface
         }
     }
 
+
+    /**
+     * @param InspectorFactoryInterface $factory
+     *
+     * @return void
+     */
+    public function setInspectorFactory(InspectorFactoryInterface $factory)
+    {
+        $this->inspectorFactory = $factory;
+    }
+
+    public function addFrameFilter($filterCallback)
+    {
+        if (!is_callable($filterCallback)) {
+            throw new \InvalidArgumentException(sprintf(
+                "A frame filter must be of type callable, %s type given.",
+                gettype($filterCallback)
+            ));
+        }
+
+        $this->frameFilters[] = $filterCallback;
+        return $this;
+    }
+
     /**
      * @param Throwable $exception
      *
-     * @return Inspector
+     * @return InspectorInterface
      */
     private function getInspector($exception)
     {
-        return new Inspector($exception);
+        return $this->inspectorFactory->create($exception);
     }
 
     /**

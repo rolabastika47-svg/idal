@@ -65,9 +65,5 @@ function camel($value)
     /** @var string[] $camelCache */
     static $camelCache = [];
 
-    if (isset($camelCache[$value])) {
-        return $camelCache[$value];
-    }
-
-    return $camelCache[$value] = lcfirst(studly($value));
+    return $camelCache[$value] ?? $camelCache[$value] = lcfirst(studly($value));
 }

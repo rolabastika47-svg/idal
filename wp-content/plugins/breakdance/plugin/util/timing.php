@@ -8,7 +8,7 @@ namespace Breakdance\Util\Timing;
  * @param string|null $desc
  * @return array{start: float, name: string, desc: string|null}
  */
-function start(string $name, string $desc = null)
+function start(string $name, ?string $desc = null)
 {
     return [
         'start' => microtime(true),

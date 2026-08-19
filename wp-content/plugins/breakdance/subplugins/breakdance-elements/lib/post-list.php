@@ -54,7 +54,7 @@ function renderPost($actionData, $postTag, $attrs, $propertiesData)
 
     // button
     $buttonDisable = (bool)($postProps['button']['disable'] ?? false);
-    $buttonText = (string)($postProps['button']['button_text'] ?? 'Read more');
+    $buttonText = (string)($postProps['button']['button_text'] ?? __('Read more', 'breakdance-elements'));
     $buttonAriaLabel = (string)($postProps['button']['aria_label'] ?? __('Read more about %s', 'breakdance-elements'));
     $buttonAriaLabel = str_contains($buttonAriaLabel, '%s') ? sprintf($buttonAriaLabel, get_the_title()) : $buttonAriaLabel;
 

@@ -32,4 +32,7 @@ function updateDesignLibraryCron() {
 
         getDesignSetRemoteData($url, true);
     }
+
+    // Refresh the design providers cache
+    refreshDesignProvidersCache();
 }

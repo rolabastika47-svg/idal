@@ -31,9 +31,9 @@ function log($userId, $eventType, $eventProperties = [])
 
     $args = [
         'method'      => 'POST',
-        'headers'     => array(
+        'headers'     => [
             'Content-Type' => 'application/json',
-        ),
+        ],
         'body'        => $body,
         'data_format' => 'body',
     ];

@@ -5,6 +5,7 @@ namespace Breakdance\Forms\Actions;
 use function Breakdance\Elements\control;
 use function Breakdance\Elements\controlSection;
 use function Breakdance\Elements\repeaterControl;
+use function Breakdance\Forms\evaluateConditions;
 
 class Email extends Action
 {
@@ -181,6 +182,44 @@ class Email extends Action
                             ],
                         ]
                     ]),
+                    control('send_email_conditionally', 'Send Email Conditionally', [
+                        'type' => 'toggle'
+                    ]),
+                    repeaterControl(
+                        'conditions',
+                        'Conditions',
+                        [
+                            control('condition', 'Condition', [
+                                'type' => 'conditional_form_field',
+                                'layout' => 'vertical',
+                                'noLabel' => true,
+                                'dropdownOptions' => [
+                                    'populate' => [
+                                        'path' => 'content.form.fields',
+                                        'text' => 'label',
+                                        'value' => 'advanced.id',
+                                        'condition' => [
+                                            'path' => 'advanced.id',
+                                            'operand' => 'not equals',
+                                            'value' => 'advanced.id',
+                                        ],
+                                    ],
+                                ],
+                            ]),
+                        ],
+                        [
+                            'repeaterOptions' => [
+                                'titleTemplate' => '',
+                                'defaultTitle' => 'Condition',
+                                'buttonName' => 'Add Condition',
+                            ],
+                            'condition' => [
+                                'path' => '%%CURRENTPATH%%.send_email_conditionally',
+                                'operand' => 'equals',
+                                'value' => true,
+                            ]
+                        ]
+                    )
                 ],
                 [
                     'repeaterOptions' => [
@@ -206,26 +245,27 @@ class Email extends Action
      */
     public function run($form, $settings, $extra)
     {
-        add_action(
-            'wp_mail_failed',
-            /**
-             * @param \WP_Error $wp_error
-             */
-            function ($wp_error) {
-                $this->addContext('Errors', [
-                    'message' => $wp_error->get_error_message(),
-                    'data' => $wp_error->get_error_data()
-                ]);
-            }
-        );
+        $this->trackWpMailErrors();
+
+        /** @var FormEmail[] $emails */
+        $emails = $settings['actions']['email']['emails'] ?? [];
+
+        [$filteredEmails, $skipped, $skippedCount] = $this->filterEmailsByConditions($emails, $form);
+
         $emailsSent = array_map(
             function ($email) use ($extra, $form) {
                 return $this->submit($email, $form, $extra['files']);
             },
-            $settings['actions']['email']['emails']
+            $filteredEmails
         );
 
         $anyEmailFailed = in_array(false, $emailsSent, true);
+
+        if ($skippedCount > 0) {
+            $this->addContext('Info', [
+                'Skipped Emails (conditions not met)' => join(', ', $skipped)
+            ]);
+        }
 
         if ($anyEmailFailed) {
             // It's "unknown" because wp_mail doesn't return any errors, only a boolean
@@ -258,7 +298,7 @@ class Email extends Action
      * Sends an email
      * @param FormEmail $email
      * @param FormData $form
-     * @param FormFile[] $files
+     * @param FormFileGroup $files
      * @return bool
      */
     public function submit($email, $form, $files = [])
@@ -335,13 +375,13 @@ class Email extends Action
     }
 
     /**
-     * @param FormFile[] $files
+     * @param FormFileGroup $files
      * @return array
      */
     function getAttachments($files)
     {
         // Flatten files array
-        /** @var FormFile[] $attachments */
+        /** @var FormFileGroup $flattenedFiles */
         $attachments = array_merge([], ...array_values($files));
 
         return array_map(
@@ -381,5 +421,49 @@ class Email extends Action
         $emails = array_map('trim', $emails);
         $emails = array_filter($emails, 'is_email');
         return array_values($emails);
+    }
+
+    /**
+     * @param FormEmail[] $emails
+     * @param FormData $form
+     * @return array{0: FormEmail[], 1: string[], 2: int}
+     */
+    function filterEmailsByConditions($emails, $form)
+    {
+        $result = [];
+        $skippedCount = 0;
+        $skipped = [];
+
+        foreach ($emails as $email) {
+            $sendIf = $email['send_email_conditionally'] ?? false;
+            /** @var FormCondition[] $conditions */
+            $conditions = $email['conditions'] ?? [];
+
+            if ($sendIf && !empty($conditions) && !evaluateConditions($conditions, $form)) {
+                $skippedCount++;
+                $skipped[] = $email['subject'] ?? 'No subject';
+                continue;
+            }
+
+            $result[] = $email;
+        }
+
+        return [$result, $skipped, $skippedCount];
+    }
+
+    function trackWpMailErrors()
+    {
+        add_action(
+            'wp_mail_failed',
+            /**
+             * @param \WP_Error $wp_error
+             */
+            function ($wp_error) {
+                $this->addContext('Errors', [
+                    'message' => $wp_error->get_error_message(),
+                    'data' => $wp_error->get_error_data()
+                ]);
+            }
+        );
     }
 }

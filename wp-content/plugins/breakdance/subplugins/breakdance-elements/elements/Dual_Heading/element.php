@@ -5,6 +5,7 @@ namespace EssentialElements;
 use function Breakdance\Elements\c;
 use function Breakdance\Elements\PresetSections\getPresetSection;
 
+
 \Breakdance\ElementStudio\registerElementForEditing(
     "EssentialElements\\DualHeading",
     \Breakdance\Util\getdirectoryPathRelativeToPluginFolder(__DIR__)
@@ -69,7 +70,7 @@ class DualHeading extends \Breakdance\Elements\Element
 
     static function defaultProperties()
     {
-        return ['content' => ['content' => ['words' => ['0' => ['text' => 'This is'], '1' => ['text' => 'amazing!', 'secondary_style' => true]]]], 'design' => ['secondary' => ['annotate' => true]]];
+        return ['content' => ['content' => ['words' => [['text' => 'This is'], ['text' => 'amazing!', 'secondary_style' => true]], 'tag' => 'h2']], 'design' => ['secondary' => ['annotate' => true]]];
     }
 
     static function defaultChildren()
@@ -86,327 +87,364 @@ class DualHeading extends \Breakdance\Elements\Element
     static function designControls()
     {
         return [c(
-            "size",
-            "Size",
-            [c(
-                "width",
-                "Width",
-                [],
-                ['type' => 'unit', 'layout' => 'inline', 'unitOptions' => ['types' => ['0' => 'px', '1' => 'em', '2' => 'rem', '3' => '%', '4' => 'vw', '5' => 'calc', '6' => 'custom']]],
-                true,
-                false,
-                [],
-            )],
-            ['type' => 'section'],
-            false,
-            false,
-            [],
-        ), getPresetSection(
-            "EssentialElements\\typography_with_effects_and_align",
-            "Both",
-            "both",
-            ['type' => 'popout']
-        ), c(
-            "primary",
-            "Primary",
-            [getPresetSection(
-                "EssentialElements\\typography_with_effects",
-                "Typography",
-                "typography",
-                ['type' => 'popout']
-            ), c(
-                "annotate",
-                "Annotate",
-                [],
-                ['type' => 'toggle', 'layout' => 'inline'],
-                false,
-                false,
-                [],
-            ), c(
-                "effect",
-                "Effect",
-                [c(
-                    "type",
-                    "Type",
-                    [],
-                    ['type' => 'dropdown', 'layout' => 'inline', 'items' => ['0' => ['text' => 'underline', 'label' => 'Label', 'value' => 'underline'], '1' => ['text' => 'box', 'value' => 'box'], '2' => ['text' => 'circle', 'value' => 'circle'], '3' => ['text' => 'strike-through', 'value' => 'strike-through'], '4' => ['text' => 'crossed-off', 'value' => 'crossed-off'], '5' => ['text' => 'bracket', 'value' => 'bracket']]],
-                    false,
-                    false,
-                    [],
-                ), c(
-                    "color",
-                    "Color",
-                    [],
-                    ['type' => 'color', 'layout' => 'inline'],
-                    false,
-                    false,
-                    [],
-                ), c(
-                    "duration",
-                    "Duration",
-                    [],
-                    ['type' => 'number', 'layout' => 'inline'],
-                    false,
-                    false,
-                    [],
-                ), c(
-                    "stroke_width",
-                    "Stroke Width",
-                    [],
-                    ['type' => 'number', 'layout' => 'inline'],
-                    false,
-                    false,
-                    [],
-                ), c(
-                    "multiline",
-                    "Multiline",
-                    [],
-                    ['type' => 'toggle', 'layout' => 'inline'],
-                    false,
-                    false,
-                    [],
-                ), c(
-                    "iterations",
-                    "Iterations",
-                    [],
-                    ['type' => 'number', 'layout' => 'inline'],
-                    false,
-                    false,
-                    [],
-                ), c(
-                    "rtl",
-                    "RTL",
-                    [],
-                    ['type' => 'toggle', 'layout' => 'inline'],
-                    false,
-                    false,
-                    [],
-                ), c(
-                    "brackets",
-                    "Brackets",
-                    [c(
-                        "left",
-                        "Left",
-                        [],
-                        ['type' => 'toggle', 'layout' => 'inline'],
-                        false,
-                        false,
-                        [],
-                    ), c(
-                        "right",
-                        "Right",
-                        [],
-                        ['type' => 'toggle', 'layout' => 'inline'],
-                        false,
-                        false,
-                        [],
-                    ), c(
-                        "top",
-                        "Top",
-                        [],
-                        ['type' => 'toggle', 'layout' => 'inline'],
-                        false,
-                        false,
-                        [],
-                    ), c(
-                        "bottom",
-                        "Bottom",
-                        [],
-                        ['type' => 'toggle', 'layout' => 'inline'],
-                        false,
-                        false,
-                        [],
-                    )],
-                    ['type' => 'section', 'layout' => 'inline', 'condition' => ['path' => 'design.primary.effect.type', 'operand' => 'equals', 'value' => 'bracket']],
-                    false,
-                    false,
-                    [],
-                )],
-                ['type' => 'section', 'sectionOptions' => ['type' => 'popout'], 'condition' => ['path' => 'design.primary.annotate', 'operand' => 'is set', 'value' => '']],
-                false,
-                false,
-                [],
-            )],
-            ['type' => 'section'],
-            false,
-            false,
-            [],
-        ), c(
-            "secondary",
-            "Secondary",
-            [getPresetSection(
-                "EssentialElements\\typography_with_effects",
-                "Typography",
-                "typography",
-                ['type' => 'popout']
-            ), c(
-                "annotate",
-                "Annotate",
-                [],
-                ['type' => 'toggle', 'layout' => 'inline'],
-                false,
-                false,
-                [],
-            ), c(
-                "effect",
-                "Effect",
-                [c(
-                    "type",
-                    "Type",
-                    [],
-                    ['type' => 'dropdown', 'layout' => 'inline', 'items' => ['0' => ['text' => 'underline', 'label' => 'Label', 'value' => 'underline'], '1' => ['text' => 'box', 'value' => 'box'], '2' => ['text' => 'circle', 'value' => 'circle'], '3' => ['text' => 'strike-through', 'value' => 'strike-through'], '4' => ['text' => 'crossed-off', 'value' => 'crossed-off'], '5' => ['text' => 'bracket', 'value' => 'bracket']]],
-                    false,
-                    false,
-                    [],
-                ), c(
-                    "color",
-                    "Color",
-                    [],
-                    ['type' => 'color', 'layout' => 'inline'],
-                    false,
-                    false,
-                    [],
-                ), c(
-                    "duration",
-                    "Duration",
-                    [],
-                    ['type' => 'number', 'layout' => 'inline'],
-                    false,
-                    false,
-                    [],
-                ), c(
-                    "stroke_width",
-                    "Stroke Width",
-                    [],
-                    ['type' => 'number', 'layout' => 'inline'],
-                    false,
-                    false,
-                    [],
-                ), c(
-                    "multiline",
-                    "Multiline",
-                    [],
-                    ['type' => 'toggle', 'layout' => 'inline'],
-                    false,
-                    false,
-                    [],
-                ), c(
-                    "iterations",
-                    "Iterations",
-                    [],
-                    ['type' => 'number', 'layout' => 'inline'],
-                    false,
-                    false,
-                    [],
-                ), c(
-                    "rtl",
-                    "RTL",
-                    [],
-                    ['type' => 'toggle', 'layout' => 'inline'],
-                    false,
-                    false,
-                    [],
-                ), c(
-                    "brackets",
-                    "Brackets",
-                    [c(
-                        "left",
-                        "Left",
-                        [],
-                        ['type' => 'toggle', 'layout' => 'inline'],
-                        false,
-                        false,
-                        [],
-                    ), c(
-                        "right",
-                        "Right",
-                        [],
-                        ['type' => 'toggle', 'layout' => 'inline'],
-                        false,
-                        false,
-                        [],
-                    ), c(
-                        "top",
-                        "Top",
-                        [],
-                        ['type' => 'toggle', 'layout' => 'inline'],
-                        false,
-                        false,
-                        [],
-                    ), c(
-                        "bottom",
-                        "Bottom",
-                        [],
-                        ['type' => 'toggle', 'layout' => 'inline'],
-                        false,
-                        false,
-                        [],
-                    )],
-                    ['type' => 'section', 'layout' => 'inline', 'condition' => ['path' => 'design.secondary.effect.type', 'operand' => 'equals', 'value' => 'bracket']],
-                    false,
-                    false,
-                    [],
-                )],
-                ['type' => 'section', 'sectionOptions' => ['type' => 'popout'], 'condition' => ['path' => 'design.secondary.annotate', 'operand' => 'is set', 'value' => '']],
-                false,
-                false,
-                [],
-            )],
-            ['type' => 'section'],
-            false,
-            false,
-            [],
-        ), getPresetSection(
-            "EssentialElements\\spacing_margin_y",
-            "Spacing",
-            "spacing",
-            ['type' => 'popout']
-        )];
+        "size",
+        "Size",
+        [c(
+        "width",
+        "Width",
+        [],
+        ['type' => 'unit', 'layout' => 'inline', 'unitOptions' => ['types' => ['px', 'em', 'rem', '%', 'vw', 'calc', 'custom']]],
+        true,
+        false,
+        [],
+        
+      )],
+        ['type' => 'section'],
+        false,
+        false,
+        [],
+        
+      ), getPresetSection(
+      "EssentialElements\\typography_with_effects_and_align",
+      "Both",
+      "both",
+       ['type' => 'popout']
+     ), c(
+        "primary",
+        "Primary",
+        [getPresetSection(
+      "EssentialElements\\typography_with_effects",
+      "Typography",
+      "typography",
+       ['type' => 'popout']
+     ), c(
+        "annotate",
+        "Annotate",
+        [],
+        ['type' => 'toggle', 'layout' => 'inline'],
+        false,
+        false,
+        [],
+        
+      ), c(
+        "effect",
+        "Effect",
+        [c(
+        "type",
+        "Type",
+        [],
+        ['type' => 'dropdown', 'layout' => 'inline', 'items' => [['text' => 'underline', 'label' => 'Label', 'value' => 'underline'], ['text' => 'box', 'value' => 'box'], ['text' => 'circle', 'value' => 'circle'], ['text' => 'strike-through', 'value' => 'strike-through'], ['text' => 'crossed-off', 'value' => 'crossed-off'], ['text' => 'bracket', 'value' => 'bracket']]],
+        false,
+        false,
+        [],
+        
+      ), c(
+        "color",
+        "Color",
+        [],
+        ['type' => 'color', 'layout' => 'inline'],
+        false,
+        false,
+        [],
+        
+      ), c(
+        "duration",
+        "Duration",
+        [],
+        ['type' => 'number', 'layout' => 'inline'],
+        false,
+        false,
+        [],
+        
+      ), c(
+        "stroke_width",
+        "Stroke Width",
+        [],
+        ['type' => 'number', 'layout' => 'inline'],
+        false,
+        false,
+        [],
+        
+      ), c(
+        "multiline",
+        "Multiline",
+        [],
+        ['type' => 'toggle', 'layout' => 'inline'],
+        false,
+        false,
+        [],
+        
+      ), c(
+        "iterations",
+        "Iterations",
+        [],
+        ['type' => 'number', 'layout' => 'inline'],
+        false,
+        false,
+        [],
+        
+      ), c(
+        "rtl",
+        "RTL",
+        [],
+        ['type' => 'toggle', 'layout' => 'inline'],
+        false,
+        false,
+        [],
+        
+      ), c(
+        "brackets",
+        "Brackets",
+        [c(
+        "left",
+        "Left",
+        [],
+        ['type' => 'toggle', 'layout' => 'inline'],
+        false,
+        false,
+        [],
+        
+      ), c(
+        "right",
+        "Right",
+        [],
+        ['type' => 'toggle', 'layout' => 'inline'],
+        false,
+        false,
+        [],
+        
+      ), c(
+        "top",
+        "Top",
+        [],
+        ['type' => 'toggle', 'layout' => 'inline'],
+        false,
+        false,
+        [],
+        
+      ), c(
+        "bottom",
+        "Bottom",
+        [],
+        ['type' => 'toggle', 'layout' => 'inline'],
+        false,
+        false,
+        [],
+        
+      )],
+        ['type' => 'section', 'layout' => 'inline', 'condition' => ['path' => 'design.primary.effect.type', 'operand' => 'equals', 'value' => 'bracket']],
+        false,
+        false,
+        [],
+        
+      )],
+        ['type' => 'section', 'sectionOptions' => ['type' => 'popout'], 'condition' => ['path' => 'design.primary.annotate', 'operand' => 'is set', 'value' => '']],
+        false,
+        false,
+        [],
+        
+      )],
+        ['type' => 'section'],
+        false,
+        false,
+        [],
+        
+      ), c(
+        "secondary",
+        "Secondary",
+        [getPresetSection(
+      "EssentialElements\\typography_with_effects",
+      "Typography",
+      "typography",
+       ['type' => 'popout']
+     ), c(
+        "annotate",
+        "Annotate",
+        [],
+        ['type' => 'toggle', 'layout' => 'inline'],
+        false,
+        false,
+        [],
+        
+      ), c(
+        "effect",
+        "Effect",
+        [c(
+        "type",
+        "Type",
+        [],
+        ['type' => 'dropdown', 'layout' => 'inline', 'items' => [['text' => 'underline', 'label' => 'Label', 'value' => 'underline'], ['text' => 'box', 'value' => 'box'], ['text' => 'circle', 'value' => 'circle'], ['text' => 'strike-through', 'value' => 'strike-through'], ['text' => 'crossed-off', 'value' => 'crossed-off'], ['text' => 'bracket', 'value' => 'bracket']]],
+        false,
+        false,
+        [],
+        
+      ), c(
+        "color",
+        "Color",
+        [],
+        ['type' => 'color', 'layout' => 'inline'],
+        false,
+        false,
+        [],
+        
+      ), c(
+        "duration",
+        "Duration",
+        [],
+        ['type' => 'number', 'layout' => 'inline'],
+        false,
+        false,
+        [],
+        
+      ), c(
+        "stroke_width",
+        "Stroke Width",
+        [],
+        ['type' => 'number', 'layout' => 'inline'],
+        false,
+        false,
+        [],
+        
+      ), c(
+        "multiline",
+        "Multiline",
+        [],
+        ['type' => 'toggle', 'layout' => 'inline'],
+        false,
+        false,
+        [],
+        
+      ), c(
+        "iterations",
+        "Iterations",
+        [],
+        ['type' => 'number', 'layout' => 'inline'],
+        false,
+        false,
+        [],
+        
+      ), c(
+        "rtl",
+        "RTL",
+        [],
+        ['type' => 'toggle', 'layout' => 'inline'],
+        false,
+        false,
+        [],
+        
+      ), c(
+        "brackets",
+        "Brackets",
+        [c(
+        "left",
+        "Left",
+        [],
+        ['type' => 'toggle', 'layout' => 'inline'],
+        false,
+        false,
+        [],
+        
+      ), c(
+        "right",
+        "Right",
+        [],
+        ['type' => 'toggle', 'layout' => 'inline'],
+        false,
+        false,
+        [],
+        
+      ), c(
+        "top",
+        "Top",
+        [],
+        ['type' => 'toggle', 'layout' => 'inline'],
+        false,
+        false,
+        [],
+        
+      ), c(
+        "bottom",
+        "Bottom",
+        [],
+        ['type' => 'toggle', 'layout' => 'inline'],
+        false,
+        false,
+        [],
+        
+      )],
+        ['type' => 'section', 'layout' => 'inline', 'condition' => ['path' => 'design.secondary.effect.type', 'operand' => 'equals', 'value' => 'bracket']],
+        false,
+        false,
+        [],
+        
+      )],
+        ['type' => 'section', 'sectionOptions' => ['type' => 'popout'], 'condition' => ['path' => 'design.secondary.annotate', 'operand' => 'is set', 'value' => '']],
+        false,
+        false,
+        [],
+        
+      )],
+        ['type' => 'section'],
+        false,
+        false,
+        [],
+        
+      ), getPresetSection(
+      "EssentialElements\\spacing_margin_y",
+      "Spacing",
+      "spacing",
+       ['type' => 'popout']
+     )];
     }
 
     static function contentControls()
     {
         return [c(
-            "content",
-            "Content",
-            [c(
-                "words",
-                "Words",
-                [c(
-                    "text",
-                    "Text",
-                    [],
-                    ['type' => 'text', 'layout' => 'vertical'],
-                    false,
-                    false,
-                    [],
-                ), c(
-                    "secondary_style",
-                    "Secondary Style",
-                    [],
-                    ['type' => 'toggle', 'layout' => 'inline'],
-                    false,
-                    false,
-                    [],
-                )],
-                ['type' => 'repeater', 'layout' => 'vertical', 'repeaterOptions' => ['titleTemplate' => '{text}', 'defaultTitle' => '', 'buttonName' => 'Add Words']],
-                false,
-                false,
-                [],
-            ), c(
-                "tag",
-                "Tag",
-                [],
-                ['type' => 'dropdown', 'layout' => 'inline', 'items' => ['0' => ['text' => 'h1', 'value' => 'h1'], '1' => ['text' => 'h2', 'value' => 'h2'], '2' => ['text' => 'h3', 'value' => 'h3'], '3' => ['text' => 'h4', 'value' => 'h4'], '4' => ['text' => 'h5', 'value' => 'h5'], '5' => ['text' => 'h6', 'value' => 'h6']]],
-                false,
-                false,
-                [],
-            )],
-            ['type' => 'section', 'layout' => 'vertical'],
-            false,
-            false,
-            [],
-        )];
+        "content",
+        "Content",
+        [c(
+        "words",
+        "Words",
+        [c(
+        "text",
+        "Text",
+        [],
+        ['type' => 'text', 'layout' => 'vertical'],
+        false,
+        false,
+        [],
+        ['accepts' => 'string']
+      ), c(
+        "secondary_style",
+        "Secondary Style",
+        [],
+        ['type' => 'toggle', 'layout' => 'inline'],
+        false,
+        false,
+        [],
+        
+      )],
+        ['type' => 'repeater', 'layout' => 'vertical', 'repeaterOptions' => ['titleTemplate' => '{text}', 'defaultTitle' => '', 'buttonName' => 'Add Words']],
+        false,
+        false,
+        [],
+        
+      ), c(
+        "tag",
+        "Tag",
+        [],
+        ['type' => 'dropdown', 'layout' => 'inline', 'items' => [['text' => 'h1', 'value' => 'h1'], ['text' => 'h2', 'value' => 'h2'], ['text' => 'h3', 'value' => 'h3'], ['text' => 'h4', 'value' => 'h4'], ['text' => 'h5', 'value' => 'h5'], ['text' => 'h6', 'value' => 'h6'], ['text' => 'p', 'value' => 'p'], ['text' => 'span', 'value' => 'span']], 'placeholder' => 'h1'],
+        false,
+        false,
+        [],
+        
+      )],
+        ['type' => 'section', 'layout' => 'vertical'],
+        false,
+        false,
+        [],
+        
+      )];
     }
 
     static function settingsControls()
@@ -416,16 +454,16 @@ class DualHeading extends \Breakdance\Elements\Element
 
     static function dependencies()
     {
-        return ['0' => ['scripts' => ['%%BREAKDANCE_ELEMENTS_PLUGIN_URL%%dependencies-files/rough-notation@0.5/rough-notation.iife.js', '%%BREAKDANCE_ELEMENTS_PLUGIN_URL%%dependencies-files/breakdance-dual-heading@1/dual-heading.js'], 'frontendCondition' => '{% if design.primary.annotate
+        return ['0' =>  ['scripts' => ['%%BREAKDANCE_ELEMENTS_PLUGIN_URL%%dependencies-files/rough-notation@0.5/rough-notation.iife.js','%%BREAKDANCE_ELEMENTS_PLUGIN_URL%%dependencies-files/breakdance-dual-heading@1/dual-heading.js'],'frontendCondition' => '{% if design.primary.annotate
   or design.secondary.annotate %}
   return true;
 {% else %}
   return false;
-{% endif %}', 'title' => 'Rough Notation lib + Breakdance dual heading '], '1' => ['frontendCondition' => '{% if design.primary.annotate or design.secondary.annotate %}
+{% endif %}','title' => 'Rough Notation lib + Breakdance dual heading ',],'1' =>  ['frontendCondition' => '{% if design.primary.annotate or design.secondary.annotate %}
   return true;
 {% else %}
   return false;
-{% endif %}', 'inlineScripts' => ['new BreakdanceDualHeading(\'%%SELECTOR%%\',  { content: {{ content.content|escape|json_encode }}, primary: {{ design.primary.effect|json_encode }}, secondary: {{ design.secondary.effect|json_encode }}  })'], 'builderCondition' => 'return false;', 'title' => 'Init in the frontend']];
+{% endif %}','inlineScripts' => ['new BreakdanceDualHeading(\'%%SELECTOR%%\',  { content: {{ content.content|escape|json_encode }}, primary: {{ design.primary.effect|json_encode }}, secondary: {{ design.secondary.effect|json_encode }}  })'],'builderCondition' => 'return false;','title' => 'Init in the frontend',],];
     }
 
     static function settings()
@@ -442,7 +480,7 @@ class DualHeading extends \Breakdance\Elements\Element
     {
         return [
 
-            'onMountedElement' => [['script' => '
+'onMountedElement' => [['script' => '
 
 (function() {
             if (!window.breakdanceDualHeadingInstances) window.breakdanceDualHeadingInstances = {};
@@ -456,9 +494,9 @@ class DualHeading extends \Breakdance\Elements\Element
         }());
 
 ',
-            ]],
+],],
 
-            'onPropertyChange' => [['script' => '(function() {
+'onPropertyChange' => [['script' => '(function() {
 
             if (!window.breakdanceDualHeadingInstances) window.breakdanceDualHeadingInstances = {};
 
@@ -471,17 +509,17 @@ class DualHeading extends \Breakdance\Elements\Element
         }());
 
 ',
-            ]]];
+],],];
     }
 
     static function nestingRule()
     {
-        return ["type" => "final"];
+        return ['type' => 'final'];
     }
 
     static function spacingBars()
     {
-        return ['0' => ['location' => 'outside-top', 'cssProperty' => 'margin-top', 'affectedPropertyPath' => 'design.spacing.margin_top.%%BREAKPOINT%%'], '1' => ['location' => 'outside-bottom', 'cssProperty' => 'margin-bottom', 'affectedPropertyPath' => 'design.spacing.margin_bottom.%%BREAKPOINT%%']];
+        return [['location' => 'outside-top', 'cssProperty' => 'margin-top', 'affectedPropertyPath' => 'design.spacing.margin_top.%%BREAKPOINT%%'], ['location' => 'outside-bottom', 'cssProperty' => 'margin-bottom', 'affectedPropertyPath' => 'design.spacing.margin_bottom.%%BREAKPOINT%%']];
     }
 
     static function attributes()
@@ -494,6 +532,12 @@ class DualHeading extends \Breakdance\Elements\Element
         return false;
     }
 
+    static function availableIn()
+    {
+        return ['breakdance'];
+    }
+
+
     static function order()
     {
         return 1250;
@@ -501,7 +545,7 @@ class DualHeading extends \Breakdance\Elements\Element
 
     static function dynamicPropertyPaths()
     {
-        return ['0' => ['accepts' => 'string', 'path' => 'content.content.words[].text']];
+        return false;
     }
 
     static function additionalClasses()

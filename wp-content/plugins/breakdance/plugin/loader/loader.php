@@ -1,6 +1,5 @@
 <?php
 
-use function Breakdance\Admin\get_env;
 use function Breakdance\BreakdanceOxygen\Strings\__bdox;
 use function Breakdance\I18n\getLanguageAttribute;
 
@@ -10,10 +9,10 @@ $mode = (string) ($_GET['mode'] ?? 'builder');
 require_once __DIR__ . "/loader-utils.php";
 
 $ajaxurl = admin_url('admin-ajax.php');
-$envtype = get_env();
+$useViteDevServer = shouldUseViteDevServer();
 
-if ($envtype !== 'local') {
-    $manifest = getProductionManifest(__DIR__ . '/../../builder/dist', plugin_dir_url(__BREAKDANCE_PLUGIN_FILE__) . 'builder/dist');
+if (!$useViteDevServer) {
+    $manifest = getProductionManifest();
 }
 
 $window_dot_breakdance_object_data = new stdClass();
@@ -24,15 +23,15 @@ $window_dot_breakdance_object_data->builderMode = BREAKDANCE_MODE;
 $window_dot_breakdance_object_data->bdoxTranslations = \Breakdance\BreakdanceOxygen\Strings\getBdoxTranslationsForBuilder();
 $window_dot_breakdance_object_data->restUrl = get_rest_url('', 'breakdance/v1');
 $window_dot_breakdance_object_data->restNonce = wp_create_nonce('wp_rest');
-$window_dot_breakdance_object_data->builderDistUrl = plugin_dir_url(__BREAKDANCE_PLUGIN_FILE__) . 'builder/dist';
+$window_dot_breakdance_object_data->builderDistUrl = breakdanceBuilderDistUrl();
 
 if (isset($_GET['onboarding']) && $_GET['onboarding'] === 'true') {
     $window_dot_breakdance_object_data->isOnboarding = true;
 }
 
-if (isset($_GET['singularity']) && $_GET['singularity'] === 'step1') {
+if (isset($_GET['futurelayer']) && $_GET['futurelayer'] === 'step1') {
     $window_dot_breakdance_object_data->singularity = 'step1';
-} else if (isset($_GET['singularity']) && $_GET['singularity'] === 'step2') {
+} else if (isset($_GET['futurelayer']) && $_GET['futurelayer'] === 'step2') {
     $window_dot_breakdance_object_data->singularity = 'step2';
 }
 
@@ -65,9 +64,9 @@ if ($mode === 'builder') {
     <title><?php echo __bdox('plugin_name'); ?></title>
 
     <?php if (BREAKDANCE_MODE === 'oxygen') { ?>
-      <link rel="preconnect" href="https://fonts.googleapis.com">
-      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-      <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
     <?php } ?>
 
     <script>
@@ -75,7 +74,9 @@ if ($mode === 'builder') {
     </script>
 
     <?php
-    if ($envtype === 'local') {
+    do_action('breakdance_builder_head');
+
+    if ($useViteDevServer) {
         echo getDevelopmentHeadLinks('app');
     } else {
         echo getProductionHeadLinks($manifest, 'app');
@@ -87,7 +88,7 @@ if ($mode === 'builder') {
     <div id="app"></div>
     <?php
 
-    if ($envtype === 'local') {
+    if ($useViteDevServer) {
         echo getDevelopmentFooterScripts('app');
     } else {
         echo getProductionFooterScripts($manifest, 'app');
@@ -95,6 +96,9 @@ if ($mode === 'builder') {
     ?>
     <?php do_action('unofficial_i_am_kevin_geary_master_of_all_things_css_and_html'); ?>
 
+    <?php
+    do_action('breakdance_builder_footer');
+    ?>
 
 </body>
 

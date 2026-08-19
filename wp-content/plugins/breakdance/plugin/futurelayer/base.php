@@ -13,3 +13,11 @@ function isFutureLayer()
 {
     return \Breakdance\Data\get_global_option('isFutureLayer') === 'yes';
 }
+
+/**
+ * @return bool
+ */
+function isDebugMode()
+{
+    return \Breakdance\Data\get_global_option('breakdance_futurelayer_debug_mode') === 'yes';
+}

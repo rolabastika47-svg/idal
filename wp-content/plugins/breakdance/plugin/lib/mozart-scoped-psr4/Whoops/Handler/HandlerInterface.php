@@ -6,7 +6,7 @@
 
 namespace Breakdance\Lib\Vendor\Whoops\Handler;
 
-use Breakdance\Lib\Vendor\Whoops\Exception\Inspector;
+use Breakdance\Lib\Vendor\Whoops\Inspector\InspectorInterface;
 use Breakdance\Lib\Vendor\Whoops\RunInterface;
 
 interface HandlerInterface
@@ -29,8 +29,8 @@ interface HandlerInterface
     public function setException($exception);
 
     /**
-     * @param  Inspector $inspector
+     * @param  InspectorInterface $inspector
      * @return void
      */
-    public function setInspector(Inspector $inspector);
+    public function setInspector(InspectorInterface $inspector);
 }

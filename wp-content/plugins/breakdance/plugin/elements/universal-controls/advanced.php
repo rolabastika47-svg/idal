@@ -20,14 +20,11 @@ function cssControls() {
     ];
 }
 
-
 /**
- * @param \Breakdance\Elements\Element $element
  * @return Control[]
  */
-function htmlControls($element)
+function htmlControls()
 {
-
     $htmlControls = [];
 
     $htmlControls[] = getIdHtmlControl();
@@ -37,34 +34,29 @@ function htmlControls($element)
         return $htmlControls;
     }
 
-    /**
-     * @var Control|null $maybeTagControl
-     */
-    $maybeTagControl = getTagHtmlControl($element);
-
-    if ($maybeTagControl) {
-        $htmlControls[] = $maybeTagControl;
-    }
-
+    $htmlControls[] = getTagHtmlControl();
     return $htmlControls;
 }
 
 /**
- * @param \Breakdance\Elements\Element $element
  * @return Control[]
  */
-function draftForSections($element){
-    if(\Breakdance\Elements\isElementASection($element)){
-        return [
-            control(
-                "draft",
-                __('Draft', 'breakdance'),
-                ['type' => 'toggle', 'layout' => 'inline'],
-            )
-        ];
-    }
-
-    return [];
+function draftForSections() {
+    return [
+        control(
+            "draft",
+            __("Draft", "breakdance"),
+            [
+                'type' => 'toggle',
+                'layout' => 'inline',
+                'condition' => [
+                    'path' => '$element.slug',
+                    'operand' => 'equals',
+                    'value' => 'EssentialElements\\Section',
+                ]
+            ],
+        )
+    ];
 }
 
 /**
@@ -72,7 +64,6 @@ function draftForSections($element){
  */
 function wrapperStylesControls()
 {
-    // todo we don't need to call this 898 times we could call it once outside the function
     $modifiedClassControls = \Breakdance\ClassesSelectors\controls();
 
     array_pop($modifiedClassControls); // remove the custom CSS section. lol.
@@ -93,8 +84,6 @@ function wrapperStylesControls()
         'popout'
     );
 
-    // $section['enableHover'] = true; // lol can we enable hover on a section? nope.
-
     $section2 = controlSection(
         'wrapper_hover',
         __('Wrapper Hover', 'breakdance'),
@@ -107,41 +96,36 @@ function wrapperStylesControls()
 
 }
 
-
-add_filter('breakdance_element_controls', '\Breakdance\Elements\UniversalControls\addAdvancedControlsToElement', 69, 2);
+add_filter('breakdance_universal_controls', '\Breakdance\Elements\UniversalControls\addAdvancedControlsToElement', 69);
 
 /**
  * @param BuilderElementControls $controls
- * @param \Breakdance\Elements\Element $element
  * @return BuilderElementControls
  */
-function addAdvancedControlsToElement($controls, $element)
+function addAdvancedControlsToElement($controls)
 {
     $advancedControls = array_merge(
         cssControls(),
         wrapperStylesControls(),
-        htmlControls($element),
-        draftForSections($element)
+        htmlControls(),
+        draftForSections()
     );
 
     if (BREAKDANCE_MODE === 'oxygen') {
         $advancedControls = array_merge(
-            htmlControls($element)
+            htmlControls()
         );
     }
 
-    // todo - don't call this 80090 times. cache it
     $controls['settingsSections'][] = controlSection(
         'advanced',
         __('Advanced', 'breakdance'),
         $advancedControls
     );
     return $controls;
-
 }
 
-
-add_filter('breakdance_element_css_template', 'Breakdance\Elements\UniversalControls\template', 100, 1);
+add_filter('breakdance_universal_css_template', '\Breakdance\Elements\UniversalControls\template', 100, 1);
 
 /**
  * @param string $cssTemplate

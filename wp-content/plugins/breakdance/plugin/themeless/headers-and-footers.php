@@ -20,10 +20,10 @@ function override_block_theme_header_or_footer($pre_render, $parsed_block, $pare
         $slug = $parsed_block['attrs']['slug'];
 
         /** @var \WP_Block_Template[] $template_parts */
-        $template_parts = get_block_templates(array(
+        $template_parts = get_block_templates([
             'theme' => wp_get_theme()->get_stylesheet(),
             'slug__in' => [$slug]
-        ), 'wp_template_part');
+        ], 'wp_template_part');
 
         $template_part = reset($template_parts);
 
@@ -71,6 +71,17 @@ function getBlockFooterArea()
 }
 
 /**
+ * @return bool
+ */
+function is_block_templates_theme()
+{
+    $is_block_theme = function_exists('wp_is_block_theme') && wp_is_block_theme();
+    $supports_block_templates = current_theme_supports('block-templates');
+
+    return $is_block_theme || $supports_block_templates;
+}
+
+/**
  * @param string|false $renderedHeader
  * @return string|null
  */
@@ -78,7 +89,7 @@ function get_header_for_theme_simulator_having_breakdance_template_for_request($
 {
     if (is_theme_disabled()) {
         return (string) $renderedHeader;
-    } elseif (current_theme_supports('block-templates')) {
+    } elseif (is_block_templates_theme()) {
         return $renderedHeader === false ? getBlockHeaderArea() : $renderedHeader;
     }
 
@@ -93,7 +104,7 @@ function get_footer_for_theme_simulator_having_breakdance_template_for_request($
 {
     if (is_theme_disabled()) {
         return (string) $renderedFooter;
-    } elseif (current_theme_supports('block-templates')) {
+    } elseif (is_block_templates_theme()) {
         return $renderedFooter === false ? getBlockFooterArea() : $renderedFooter;
     }
 

@@ -44,7 +44,7 @@ add_action('activate_plugin', '\Breakdance\Render\deleteGlobalCssAndDependencies
 
 /**
  * @param mixed $upgrader_object
- * @param array{action: string, type: string, plugins: string[]} $options
+ * @param array{action: string, type: string, plugins?: string[]} $options
  * @since 1.3.0
  *
  * Note that this function will only work for any releases > 1.3.0
@@ -53,7 +53,7 @@ function handleUpgraderProcessComplete($upgrader_object, $options)
 {
     $current_plugin_path_name = plugin_basename(__FILE__);
 
-    if ($options['action'] == 'update' && $options['type'] == 'plugin') {
+    if ($options['action'] == 'update' && $options['type'] == 'plugin' && isset($options['plugins'])) {
         foreach ($options['plugins'] as $plugin) {
             if ($plugin == $current_plugin_path_name) {
                 handleVersionChange();

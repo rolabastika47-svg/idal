@@ -75,11 +75,10 @@ function getWpQueryArgumentsFromWpQueryControlProperties($wpQueryControlProperti
     ) {
         $metaQuery = getValidWpMetaQuery($wpCustomQuery['metaQuery'] ?? null);
 
-        /** @var int $current_page */
-        $current_page = $extraArgsToMerge['paged'] ?? 1;
+        /** @var int|null $current_page */
+        $current_page = $extraArgsToMerge['paged'] ?? null;
         $per_page = getPostsPerPage($wpCustomQuery['postsPerPage'] ?? 8, $wpCustomQuery['totalPosts'] ?? null);
         $offset_start = $wpCustomQuery['offset'] ?? 0;
-        $offset = ( $current_page - 1 ) * $per_page + $offset_start;
 
         $queryArguments = [
             'post_type' => $wpCustomQuery['postTypes'],
@@ -93,9 +92,17 @@ function getWpQueryArgumentsFromWpQueryControlProperties($wpQueryControlProperti
             'meta_query' => $metaQuery ?: [],
             'post__not_in' => $wpCustomQuery['ignoreCurrentPost'] === true && get_the_ID() ? [get_the_ID()] : null,
             'posts_per_page' => $per_page,
-            'paged' => $current_page,
-            'offset' => $offset,
         ];
+
+
+        if (is_int($current_page)) {
+            $offset = ( $current_page - 1 ) * $per_page + $offset_start;
+
+            $queryArguments['paged'] = $current_page;
+            $queryArguments['offset'] = $offset;
+        } elseif ($offset_start > 0) {
+            $queryArguments['offset'] = $offset_start;
+        }
 
         /** @var WordPressQueryVars $conditionArguments */
         $conditionArguments = [];
@@ -373,7 +380,7 @@ function getPostsPerPage($postsPerPage, $totalPosts){
  *
  * @return int
  */
-function getPage(){
+function getPage() {
     global $paged;
 
     if (is_int($paged)) return $paged;

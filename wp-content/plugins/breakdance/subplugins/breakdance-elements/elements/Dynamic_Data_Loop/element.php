@@ -102,7 +102,7 @@ class DynamicDataLoop extends \Breakdance\Elements\Element
         false,
         false,
         [],
-        
+
       ), getPresetSection(
       "EssentialElements\\borders",
       "Borders",
@@ -118,7 +118,7 @@ class DynamicDataLoop extends \Breakdance\Elements\Element
         false,
         false,
         [],
-        
+
       ), c(
         "container",
         "Container",
@@ -130,7 +130,7 @@ class DynamicDataLoop extends \Breakdance\Elements\Element
         false,
         false,
         [],
-        
+
       ), getPresetSection(
       "EssentialElements\\borders",
       "Borders",
@@ -146,7 +146,7 @@ class DynamicDataLoop extends \Breakdance\Elements\Element
         false,
         false,
         [],
-        
+
       ), getPresetSection(
       "EssentialElements\\spacing_margin_y",
       "Spacing",
@@ -168,7 +168,7 @@ class DynamicDataLoop extends \Breakdance\Elements\Element
         false,
         false,
         [],
-        
+
       ), c(
         "tag",
         "Tag",
@@ -177,7 +177,7 @@ class DynamicDataLoop extends \Breakdance\Elements\Element
         false,
         false,
         [],
-        
+
       ), c(
         "advanced",
         "Advanced",
@@ -192,7 +192,7 @@ class DynamicDataLoop extends \Breakdance\Elements\Element
         false,
         false,
         [],
-        
+
       ), c(
         "position",
         "Position",
@@ -201,7 +201,7 @@ class DynamicDataLoop extends \Breakdance\Elements\Element
         false,
         false,
         [],
-        
+
       ), c(
         "repeat",
         "Repeat",
@@ -210,7 +210,7 @@ class DynamicDataLoop extends \Breakdance\Elements\Element
         false,
         false,
         [],
-        
+
       ), c(
         "frequency",
         "Frequency",
@@ -219,13 +219,13 @@ class DynamicDataLoop extends \Breakdance\Elements\Element
         false,
         false,
         [],
-        
+
       )],
         ['type' => 'repeater', 'layout' => 'vertical'],
         false,
         false,
         [],
-        
+
       ), c(
         "static_items",
         "Static Items",
@@ -237,7 +237,7 @@ class DynamicDataLoop extends \Breakdance\Elements\Element
         false,
         false,
         [],
-        
+
       ), c(
         "position",
         "Position",
@@ -246,7 +246,7 @@ class DynamicDataLoop extends \Breakdance\Elements\Element
         false,
         false,
         [],
-        
+
       ), c(
         "repeat",
         "Repeat",
@@ -255,7 +255,7 @@ class DynamicDataLoop extends \Breakdance\Elements\Element
         false,
         false,
         [],
-        
+
       ), c(
         "frequency",
         "Frequency",
@@ -264,13 +264,13 @@ class DynamicDataLoop extends \Breakdance\Elements\Element
         false,
         false,
         [],
-        
+
       )],
         ['type' => 'repeater', 'layout' => 'vertical'],
         false,
         false,
         [],
-        
+
       ), c(
         "when_empty",
         "When Empty",
@@ -279,19 +279,19 @@ class DynamicDataLoop extends \Breakdance\Elements\Element
         false,
         false,
         [],
-        
+
       )],
         ['type' => 'section', 'layout' => 'vertical', 'sectionOptions' => ['type' => 'popout']],
         false,
         false,
         [],
-        
+
       )],
         ['type' => 'section', 'layout' => 'vertical'],
         false,
         false,
         [],
-        
+
       ), c(
         "field",
         "Field",
@@ -312,13 +312,13 @@ class DynamicDataLoop extends \Breakdance\Elements\Element
         false,
         false,
         [],
-        
+
       )],
         ['type' => 'section', 'layout' => 'vertical'],
         false,
         false,
         [],
-        
+
       )];
     }
 
@@ -329,7 +329,7 @@ class DynamicDataLoop extends \Breakdance\Elements\Element
 
     static function dependencies()
     {
-        return ['0' =>  ['title' => 'Posts','styles' => ['%%BREAKDANCE_ELEMENTS_PLUGIN_URL%%dependencies-files/breakdance-posts@1/posts.css'],],'1' =>  ['scripts' => ['%%BREAKDANCE_ELEMENTS_PLUGIN_URL%%dependencies-files/swiper@8/swiper-bundle.min.js','%%BREAKDANCE_ELEMENTS_PLUGIN_URL%%dependencies-files/breakdance-swiper/breakdance-swiper.js'],'styles' => ['%%BREAKDANCE_ELEMENTS_PLUGIN_URL%%dependencies-files/swiper@8/swiper-bundle.min.css','%%BREAKDANCE_ELEMENTS_PLUGIN_URL%%dependencies-files/swiper@8/breakdance-swiper-preset-defaults.css'],'builderCondition' => 'return {{ design.list.layout == \'slider\' }};','frontendCondition' => 'return {{ design.list.layout == \'slider\' }};','title' => 'Slider',],'2' =>  ['title' => 'Slider - Frontend','inlineScripts' => ['window.BreakdanceSwiper().update({
+        return ['0' =>  ['title' => 'Posts','styles' => ['%%BREAKDANCE_ELEMENTS_PLUGIN_URL%%dependencies-files/breakdance-posts@1/posts.css'],],'1' =>  ['scripts' => ['%%BREAKDANCE_ELEMENTS_PLUGIN_URL%%dependencies-files/swiper@12/swiper-bundle.min.js','%%BREAKDANCE_ELEMENTS_PLUGIN_URL%%dependencies-files/breakdance-swiper/breakdance-swiper.js'],'styles' => ['%%BREAKDANCE_ELEMENTS_PLUGIN_URL%%dependencies-files/swiper@12/swiper-bundle.min.css','%%BREAKDANCE_ELEMENTS_PLUGIN_URL%%dependencies-files/swiper@12/breakdance-swiper-preset-defaults.css'],'builderCondition' => 'return {{ design.list.layout == \'slider\' }};','frontendCondition' => 'return {{ design.list.layout == \'slider\' }};','title' => 'Slider',],'2' =>  ['title' => 'Slider - Frontend','inlineScripts' => ['window.BreakdanceSwiper().update({
   id: \'%%UNIQUESLUG%%\', selector:\'%%SELECTOR%%\',
   settings:{{ design.list.slider.settings|json_encode }},
   paginationSettings:{{ design.list.slider.pagination|json_encode }},
@@ -541,7 +541,7 @@ window.breakdanceTabsInstances[%%ID%%] = new BreakdanceTabs(\'%%SELECTOR%%\', { 
 
     static function propertyPathsToWhitelistInFlatProps()
     {
-        return ['design.list.one_item_at', 'design.list.layout', 'design.list.slider.settings.advanced.one_per_view_at', 'design.list.slider.settings.advanced.slides_per_group', 'design.list.slider.arrows.overlay', 'design.list.slider.arrows.disable', 'design.list.tabs.styles.responsive.show_as_dropdown', 'design.list.tabs.styles.responsive.visible_at'];
+        return ['design.list.one_item_at', 'design.list.layout', 'design.list.slider.settings.advanced.one_per_view_at', 'design.list.slider.settings.advanced.slides_per_group', 'design.list.slider.arrows.overlay', 'design.list.slider.arrows.disable', 'design.list.tabs.styles.responsive.show_as_dropdown', 'design.list.tabs.styles.responsive.visible_at', 'design.list.tabs.styles.horizontal_at'];
     }
 
     static function propertyPathsToSsrElementWhenValueChanges()

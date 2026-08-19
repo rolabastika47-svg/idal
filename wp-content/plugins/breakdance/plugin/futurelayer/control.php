@@ -5,7 +5,7 @@ namespace Breakdance\FutureLayer;
 use function Breakdance\Elements\control;
 use function Breakdance\Elements\controlSection;
 
-add_filter('breakdance_element_controls', 'Breakdance\FutureLayer\addControls', 70, 2);
+add_filter('breakdance_universal_controls', 'Breakdance\FutureLayer\addControls', 70);
 
 /**
  * @param Control[] $controls
@@ -51,7 +51,7 @@ function shouldShowFutureLayerControls()
 {
     $whitelistedDomains = getWhitelistedDomains();
     /** @var string */
-    $currentDomain = isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : '';
+    $currentDomain = $_SERVER['HTTP_HOST'] ?? '';
 
     return in_array($currentDomain, $whitelistedDomains, true);
 }

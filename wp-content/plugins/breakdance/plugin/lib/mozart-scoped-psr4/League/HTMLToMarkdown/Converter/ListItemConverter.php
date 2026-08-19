@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Breakdance\Lib\Vendor\League\HTMLToMarkdown\Converter;
 
+use Breakdance\Lib\Vendor\League\HTMLToMarkdown\Coerce;
 use Breakdance\Lib\Vendor\League\HTMLToMarkdown\Configuration;
 use Breakdance\Lib\Vendor\League\HTMLToMarkdown\ConfigurationAwareInterface;
 use Breakdance\Lib\Vendor\League\HTMLToMarkdown\ElementInterface;
@@ -38,8 +39,8 @@ class ListItemConverter implements ConverterInterface, ConfigurationAwareInterfa
         }
 
         if ($listType === 'ul') {
-            $listItemStyle          = $this->config->getOption('list_item_style', '-');
-            $listItemStyleAlternate = $this->config->getOption('list_item_style_alternate');
+            $listItemStyle          = Coerce::toString($this->config->getOption('list_item_style', '-'));
+            $listItemStyleAlternate = Coerce::toString($this->config->getOption('list_item_style_alternate', ''));
             if (! isset($this->listItemStyle)) {
                 $this->listItemStyle = $listItemStyleAlternate ?: $listItemStyle;
             }

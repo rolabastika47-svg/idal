@@ -42,8 +42,7 @@ class Date extends StringField
                     [['text' => __('Default', 'breakdance'), 'value' => '']],
                     \Breakdance\DynamicData\get_date_formats(),
                     [['text' => __('Custom', 'breakdance'), 'value' => 'Custom'], ['text' => __('Human', 'breakdance'), 'value' => 'Human']]
-                ),
-                [['text' => __('Custom', 'breakdance'), 'value' => 'Custom'], ['text' => __('Human', 'breakdance'), 'value' => 'Human']]
+                )
             ]),
             \Breakdance\Elements\control('custom_format', __('Custom Format', 'breakdance'), [
                 'type' => 'text',

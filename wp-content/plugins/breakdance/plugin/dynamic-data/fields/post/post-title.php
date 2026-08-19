@@ -31,9 +31,32 @@ class PostTitle extends StringField
     /**
      * @inheritDoc
      */
+    public function controls()
+    {
+        return [
+            \Breakdance\Elements\control('post', 'Search Post', [
+                'type' => 'post_chooser',
+                'layout' => 'vertical',
+                'postChooserOptions' => [
+                    'multiple' => false,
+                    'showThumbnails' => false,
+                    'postType' => 'any'
+                ]
+            ]),
+            \Breakdance\Elements\control('post', 'Post ID', [
+                'type' => 'number',
+                'layout' => 'vertical',
+            ]),
+        ];
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function handler($attributes): StringData
     {
-        return StringData::fromString(get_the_title());
+        $postId = !empty($attributes['post']) ? $attributes['post'] : 0;
+        return StringData::fromString(get_the_title($postId));
     }
 
     /**

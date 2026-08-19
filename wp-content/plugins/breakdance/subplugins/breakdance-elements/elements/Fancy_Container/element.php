@@ -225,7 +225,7 @@ window.BreakdanceSwiper().update({
   	autoplay: true
   }
 });
-{% endif %}'],'scripts' => ['%%BREAKDANCE_ELEMENTS_PLUGIN_URL%%dependencies-files/swiper@8/swiper-bundle.min.js','%%BREAKDANCE_ELEMENTS_PLUGIN_URL%%dependencies-files/breakdance-swiper/breakdance-swiper.js'],'inlineStyles' => ['',''],'styles' => ['%%BREAKDANCE_ELEMENTS_PLUGIN_URL%%dependencies-files/swiper@8/swiper-bundle.min.css'],'builderCondition' => '{% if design.background.type == \'slideshow\' %}
+{% endif %}'],'scripts' => ['%%BREAKDANCE_ELEMENTS_PLUGIN_URL%%dependencies-files/swiper@12/swiper-bundle.min.js','%%BREAKDANCE_ELEMENTS_PLUGIN_URL%%dependencies-files/breakdance-swiper/breakdance-swiper.js'],'inlineStyles' => ['',''],'styles' => ['%%BREAKDANCE_ELEMENTS_PLUGIN_URL%%dependencies-files/swiper@12/swiper-bundle.min.css'],'builderCondition' => '{% if design.background.type == \'slideshow\' %}
 return true;
 {% else%}
  return false;
@@ -234,7 +234,7 @@ return true;
 {% else%}
  return false;
 {% endif %}','title' => 'Slideshow',],'1' =>  ['scripts' => ['https://www.youtube.com/iframe_api','%%BREAKDANCE_ELEMENTS_PLUGIN_URL%%dependencies-files/breakdance-youtube@1/breakdance-youtube.js'],'inlineScripts' => ['window.YT.ready(() => {
-  
+
   const { matchMedia } = window.BreakdanceFrontend.utils;
   if ({{ design.background.video_settings.play_on_mobile ? \'false\' : \'true\' }} && matchMedia(\'breakpoint_phone_landscape\')) {
     return;
@@ -403,7 +403,7 @@ return true;
         privacy_mode: {{ design.background.video_settings.youtube_privacy_mode ?? \'false\' }},
       });
     });
-  {% endif %} 
+  {% endif %}
   {% if \'vimeo\' in design.background.video.embedUrl %}
     (function() {
       const element = document.querySelector(\'%%SELECTOR%% #vimeoEmbed%%ID%%\');

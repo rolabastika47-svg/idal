@@ -100,6 +100,14 @@ function resetGlobalBlockCounters() {
  */
 function renderGlobalBlock($blockId, $repeaterItemNodeId = null)
 {
+    if (wp_is_post_revision($blockId)) {
+        if ($_REQUEST['triggeringDocument'] ?? false) {
+            return sprintf('<div class="breakdance-empty-ssr-message">The Global Block (#%s) is a revision and cannot be rendered, please select a different Global Block.</div>', $blockId);
+        } else {
+            return (string) printf("<!-- Breakdance error: The current Global Block referenced is a revision and cannot be rendered. -->");
+        }
+    }
+
     $manager = BlockCounterManager::getInstance();
 
     $blockUniqueId = ($repeaterItemNodeId ? $repeaterItemNodeId . "-" : "") . $blockId;

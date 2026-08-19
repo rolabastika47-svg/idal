@@ -219,7 +219,7 @@ class Element
     {
         ob_start();
 
-        $reflection = new \ReflectionClass(get_called_class());
+        $reflection = new \ReflectionClass(static::class);
         /** @var ElementSettings|false $settings */
         $settings = $reflection->getMethod('settings')->invoke(null);
 

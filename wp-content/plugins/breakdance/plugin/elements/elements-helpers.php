@@ -12,7 +12,7 @@ function get_element_classnames()
     $elementClassnames = array_filter(
         get_declared_classes(),
         function ($class) {
-            if (is_subclass_of($class, 'Breakdance\Elements\Element')) {
+            if (is_subclass_of($class, \Breakdance\Elements\Element::class)) {
                 return true;
             }
         }
@@ -164,14 +164,14 @@ function controlSection($slug, $label, $children = [], $options = null, $type = 
      */
     $options['sectionOptions']['type'] = $type;
 
-    return array(
+    return [
         'slug' => $slug,
         'label' => $label,
         'children' => $children,
         'options' => $options,
         'enableMediaQueries' => false,
         'enableHover' => false,
-    );
+    ];
 }
 
 
@@ -196,7 +196,7 @@ function control(
     $keywords = [],
     $dynamic = null
 ) {
-    $control = array(
+    $control = [
         'slug' => $slug,
         'label' => $label,
         'children' => $children,
@@ -204,7 +204,7 @@ function control(
         'enableMediaQueries' => $enable_media_queries,
         'enableHover' => false,
         'keywords' => $keywords,
-    );
+    ];
 
     if ($dynamic) {
         $control['dynamic'] = $dynamic;

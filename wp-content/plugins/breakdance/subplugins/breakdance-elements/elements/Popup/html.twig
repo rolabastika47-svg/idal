@@ -10,7 +10,7 @@
     %%CHILDREN%%
   </div>
   {% if not content.popup.disable_close_button %}
-  	<div class="breakdance-popup-close-button{% if design.close_button.show_after %} hidden{% endif %} breakdance-popup-position-{{ design.close_button.position|default('top-right') }}" data-breakdance-popup-reference="%%POSTID%%" data-breakdance-popup-action="close">
+  	<div class="breakdance-popup-close-button{% if content.popup.show_close_button_after %} hidden{% endif %} breakdance-popup-position-{{ design.close_button.position|default('top-right') }}" data-breakdance-popup-reference="%%POSTID%%" data-breakdance-popup-action="close">
       <div class="breakdance-popup-close-icon">
         {% if design.close_button.custom_icon %}
           {{ design.close_button.custom_icon.svgCode }}

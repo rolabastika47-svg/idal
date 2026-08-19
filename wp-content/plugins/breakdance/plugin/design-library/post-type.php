@@ -4,7 +4,7 @@ namespace Breakdance\DesignLibrary;
 
 function registerPostType() {
     if (!isDesignLibraryEnabled()) return;
-    $labels = array(
+    $labels = [
         'name'                  => _x( 'Parts', 'Post type general name', 'breakdance' ),
         'singular_name'         => _x( 'Part', 'Post type singular name', 'breakdance' ),
         'menu_name'             => _x( 'Parts', 'Admin Menu text', 'breakdance' ),
@@ -29,7 +29,7 @@ function registerPostType() {
         'filter_items_list'     => _x( 'Filter parts list', 'Screen reader text for the filter links heading on the post type listing screen. Default “Filter posts list”/”Filter pages list”. Added in 4.4', 'breakdance' ),
         'items_list_navigation' => _x( 'Parts list navigation', 'Screen reader text for the pagination heading on the post type listing screen. Default “Posts list navigation”/”Pages list navigation”. Added in 4.4', 'breakdance' ),
         'items_list'            => _x( 'Parts list', 'Screen reader text for the items list heading on the post type listing screen. Default “Posts list”/”Pages list”. Added in 4.4', 'breakdance' ),
-    );
+    ];
 
     $args = [
         'labels'      => $labels,

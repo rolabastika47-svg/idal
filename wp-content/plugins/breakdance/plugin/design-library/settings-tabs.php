@@ -209,8 +209,12 @@ function tab()
                     </fieldset>
                     <p class="description">
                         <?php
-                            /* translators: %1$s: Plugin name (used twice in the sentence) */
-                            printf(esc_html__('Add custom Design Sets to your %1$s installation. By default, %1$s provides a list of official Design Sets, but you can use this field to add any custom design sets you want.', 'breakdance'), esc_html($bdoroxy));
+                            if (BREAKDANCE_MODE === 'oxygen') {
+                                printf(esc_html__('Add custom Design Sets to your Oxygen installation.', 'breakdance'));
+                            } else {
+                                /* translators: %1$s: Plugin name (used twice in the sentence) */
+                                printf(esc_html__('Add custom Design Sets to your %1$s installation. By default, %1$s provides a list of official Design Sets, but you can use this field to add any custom design sets you want.', 'breakdance'), esc_html($bdoroxy));
+                            }
                         ?>
                     </p>
                     <p><strong><?php esc_html_e('Insert one URL per line.', 'breakdance'); ?></strong></p>

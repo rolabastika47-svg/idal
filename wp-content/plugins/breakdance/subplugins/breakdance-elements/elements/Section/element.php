@@ -302,7 +302,7 @@ window.BreakdanceSwiper().update({
   	autoplay: true
   }
 });
-{% endif %}'],'scripts' => ['%%BREAKDANCE_ELEMENTS_PLUGIN_URL%%dependencies-files/swiper@8/swiper-bundle.min.js','%%BREAKDANCE_ELEMENTS_PLUGIN_URL%%dependencies-files/breakdance-swiper/breakdance-swiper.js'],'inlineStyles' => ['',''],'styles' => ['%%BREAKDANCE_ELEMENTS_PLUGIN_URL%%dependencies-files/swiper@8/swiper-bundle.min.css'],'builderCondition' => '{% if design.background.type == \'slideshow\' %}
+{% endif %}'],'scripts' => ['%%BREAKDANCE_ELEMENTS_PLUGIN_URL%%dependencies-files/swiper@12/swiper-bundle.min.js','%%BREAKDANCE_ELEMENTS_PLUGIN_URL%%dependencies-files/breakdance-swiper/breakdance-swiper.js'],'inlineStyles' => ['',''],'styles' => ['%%BREAKDANCE_ELEMENTS_PLUGIN_URL%%dependencies-files/swiper@12/swiper-bundle.min.css'],'builderCondition' => '{% if design.background.type == \'slideshow\' %}
 return true;
 {% else%}
  return false;
@@ -311,7 +311,7 @@ return true;
 {% else%}
  return false;
 {% endif %}','title' => 'Slideshow',],'1' =>  ['scripts' => ['https://www.youtube.com/iframe_api','%%BREAKDANCE_ELEMENTS_PLUGIN_URL%%dependencies-files/breakdance-youtube@1/breakdance-youtube.js'],'inlineScripts' => ['window.YT.ready(() => {
-  
+
   const { matchMedia } = window.BreakdanceFrontend.utils;
   if ({{ design.background.video_settings.play_on_mobile ? \'false\' : \'true\' }} && matchMedia(\'breakpoint_phone_landscape\')) {
     return;
@@ -325,14 +325,14 @@ return true;
     pause_when_out_of_view: {{ design.background.video_settings.pause_when_out_of_view == 1 ? \'true\' : \'false\' }},
     privacy_mode: {{ design.background.video_settings.youtube_privacy_mode ? \'true\' : \'false\' }},
   });
-});'],'frontendCondition' => '{% if design.background.type == \'video\' 
-  and \'youtube\' in design.background.video.embedUrl  
+});'],'frontendCondition' => '{% if design.background.type == \'video\'
+  and \'youtube\' in design.background.video.embedUrl
 %}
 return true;
 {% else%}
  return false;
-{% endif %}','title' => 'Youtube','builderCondition' => '{% if design.background.type == \'video\' 
-  and \'youtube\' in design.background.video.embedUrl  
+{% endif %}','title' => 'Youtube','builderCondition' => '{% if design.background.type == \'video\'
+  and \'youtube\' in design.background.video.embedUrl
 %}
 return true;
 {% else%}
@@ -347,14 +347,14 @@ return true;
       pause_when_out_of_view: {{ design.background.video_settings.pause_when_out_of_view == 1 ? \'true\' : \'false\' }},
     playsinline: {{ design.background.video_settings.play_on_mobile ? \'true\' : \'false\' }},
 });
-})();'],'frontendCondition' => '{% if design.background.type == \'video\' 
-  and \'vimeo\' in design.background.video.embedUrl  
+})();'],'frontendCondition' => '{% if design.background.type == \'video\'
+  and \'vimeo\' in design.background.video.embedUrl
 %}
 return true;
 {% else%}
  return false;
-{% endif %}','builderCondition' => '{% if design.background.type == \'video\' 
-  and \'vimeo\' in design.background.video.embedUrl  
+{% endif %}','builderCondition' => '{% if design.background.type == \'video\'
+  and \'vimeo\' in design.background.video.embedUrl
 %}
 return true;
 {% else%}
@@ -367,13 +367,13 @@ if (matchMedia(\'breakpoint_phone_landscape\') || matchMedia(\'breakpoint_phone_
   video.removeAttribute(\'autoplay\');
 }})();
 '],'frontendCondition' => '{% if design.background.type == \'video\'
-  and design.background.video.type == \'video\' 
+  and design.background.video.type == \'video\'
   and design.background.video_settings.play_on_mobile == 0 %}
 return true;
 {% else%}
  return false;
 {% endif %}','builderCondition' => '{% if design.background.type == \'video\'
-  and design.background.video.type == \'video\' 
+  and design.background.video.type == \'video\'
   and design.background.video_settings.play_on_mobile == 0 %}
 return true;
 {% else%}
@@ -391,13 +391,13 @@ let observer = new IntersectionObserver((entries, observer) => {
   });
 }, {threshold: 0.2});
 observer.observe(video) ;'],'builderCondition' => '{% if design.background.type == \'video\'
-  and design.background.video.type == \'video\' 
+  and design.background.video.type == \'video\'
   and design.background.video_settings.pause_when_out_of_view == 1 %}
 return true;
 {% else%}
  return false;
 {% endif %}','frontendCondition' => '{% if design.background.type == \'video\'
-  and design.background.video.type == \'video\' 
+  and design.background.video.type == \'video\'
   and design.background.video_settings.pause_when_out_of_view == 1 %}
 return true;
 {% else%}
@@ -500,7 +500,7 @@ window.BreakdanceSwiper().update({
         privacy_mode: {{ design.background.video_settings.youtube_privacy_mode ?? \'false\' }},
       });
     });
-  {% endif %} 
+  {% endif %}
   {% if \'vimeo\' in design.background.video.embedUrl %}
     (function() {
       const element = document.querySelector(\'%%SELECTOR%% #vimeoEmbed%%ID%%\');

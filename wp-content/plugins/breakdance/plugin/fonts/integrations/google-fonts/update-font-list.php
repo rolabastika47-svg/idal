@@ -132,5 +132,5 @@ function _out($message, $level = 'info', $newLine = true)
     $endcolour = "\e[0m";
     $end = $newLine ? " \n" : null;
 
-    echo $$level . $message . $endcolour . $end;
+    echo ${$level} . $message . $endcolour . $end;
 }

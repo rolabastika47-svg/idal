@@ -77,7 +77,7 @@ function get_author_archives_as_template_previewable_items($authors = false)
                 'type' => 'author archive',
             ];
         },
-        $authors ? $authors : get_authors($search)
+        $authors ?: get_authors($search)
     );
 }
 

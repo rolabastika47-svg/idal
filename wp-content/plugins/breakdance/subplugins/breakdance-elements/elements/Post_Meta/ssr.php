@@ -103,7 +103,7 @@ if ($post && !empty($metaData)) {
                 $term_links = array();
                 foreach (array_slice($terms, 0, $datataxocount) as $term) {
                     if (!empty($datalink)) {
-                        $term_links[] = '<span class="ee-postmeta-term"><a href="' . esc_attr(get_term_link($term->slug, $datataxo)) . '">' . __($term->name) . '</span></a>';
+                        $term_links[] = '<span class="ee-postmeta-term"><a href="' . esc_attr(get_term_link($term->slug, $datataxo)) . '">' . __($term->name) . '</a></span>';
                     } else {
                         $term_links[] = '<span class="ee-postmeta-term">' . __($term->name) . '</span>';
                     }

@@ -61,7 +61,7 @@ function tab()
                             <?php
 
                             echo implode(
-                                array_map(
+                                '', array_map(
                                     function ($postType) use ($selectedPostTypes) {
 
                                         $checked = in_array($postType, $selectedPostTypes) ? "checked" : "";

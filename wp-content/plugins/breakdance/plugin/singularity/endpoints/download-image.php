@@ -18,6 +18,7 @@ add_action('breakdance_loaded', function () {
                 'filename' => FILTER_UNSAFE_RAW,
                 'stock_photo_id' => FILTER_UNSAFE_RAW
             ],
+            'optional_args' => ['alt_text', 'caption', 'stock_photo_id'],
         ]
     );
 });
@@ -45,8 +46,8 @@ function downloadExternalImage($imageUrl, $altText, $caption, $filename, $stockP
             return [
                 'attachment_id' => $existing_attachment['ID'],
                 'url' => wp_get_attachment_url($existing_attachment['ID']),
-                'alt' => get_post_meta($existing_attachment['ID'], '_wp_attachment_image_alt', true) ?: $altText,
-                'caption' => $existing_attachment['post_excerpt'] ?: $caption
+                'alt' => get_post_meta($existing_attachment['ID'], '_wp_attachment_image_alt', true) ?: ($altText ?: ''),
+                'caption' => $existing_attachment['post_excerpt'] ?: ($caption ?: '')
             ];
         }
     }
@@ -113,8 +114,8 @@ function downloadExternalImage($imageUrl, $altText, $caption, $filename, $stockP
     return [
         'attachment_id' => $attachment_id,
         'url' => $attachment_url,
-        'alt' => $altText,
-        'caption' => $caption
+        'alt' => $altText ?: '',
+        'caption' => $caption ?: ''
     ];
 }
 

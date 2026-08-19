@@ -42,7 +42,14 @@ class ThemelessController
      */
     public function registerCondition($condition)
     {
-        /* todo: avoid duplicate slugs */
+        $slug = $condition['slug'] ?? null;
+        if ($slug !== null) {
+            foreach ($this->conditions as $existing) {
+                if (($existing['slug'] ?? null) === $slug) {
+                    return;
+                }
+            }
+        }
         $this->conditions[] = $condition;
     }
 
@@ -184,9 +191,7 @@ class ThemelessController
             $post = get_post($postId);
             if (!$post || $post->post_status === 'trash') {
                 echo missingTemplateError(
-                    $this->originalTemplateHierarchyForRequest
-                        ? $this->originalTemplateHierarchyForRequest
-                        : [],
+                    $this->originalTemplateHierarchyForRequest ?: [],
                     $postId,
                     $post && $post->post_status === 'trash'
                 );

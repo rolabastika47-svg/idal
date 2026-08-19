@@ -47,7 +47,6 @@ function BUTTON_PRESETS()
                 ],
                 [
                     'repeaterOptions' => [
-                        'noDuplicate' => true,
                         'titleTemplate' => '{name}',
                         'defaultTitle' => __('Preset', 'breakdance'),
                         'buttonName' => __('Add Preset', 'breakdance'),
@@ -55,6 +54,10 @@ function BUTTON_PRESETS()
                             'id' => '{uuid}',
                             /* translators: preset number */
                             'name' => sprintf(__('Preset %s', 'breakdance'), '{count}'),
+                        ],
+                        'duplicateNewValue' => [
+                            'id' => '{uuid}',
+                            'name' => 'Preset {count}',
                         ],
                         'deleteConfirm' => true,
                         'deleteText' => __('Are you sure you want to delete this preset?', 'breakdance'),
@@ -72,5 +75,5 @@ function BUTTON_PRESETS()
  */
 function BUTTONS_TEMPLATE()
 {
-    return (string) file_get_contents(dirname(__FILE__) . '/global-buttons.css.twig');
+    return (string) file_get_contents(__DIR__ . '/global-buttons.css.twig');
 }

@@ -31,7 +31,7 @@ add_action('breakdance_loaded', function () {
  */
 function getPosts($searchString, $postType)
 {
-    $postType = $postType ?? 'post';
+    $postType ??= 'post';
 
     $posts = performant_get_posts([
         's' => $searchString,

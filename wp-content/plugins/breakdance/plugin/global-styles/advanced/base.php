@@ -12,6 +12,7 @@ use function Breakdance\Elements\repeaterControl;
 function ADVANCED_SECTION()
 {
     $cssSection = repeaterControl("stylesheets", __("CSS", 'breakdance'), [
+        control('name', __('Name', 'breakdance'), ['type' => 'text', 'layout' => 'vertical']),
         control('code', __('CSS Code', 'breakdance'), ['codeOptions' => ['language' => 'css'], 'type' => 'code', 'layout' => 'vertical']),
     ], ['repeaterOptions' => [
         'titleTemplate' => '{name}',
@@ -20,6 +21,7 @@ function ADVANCED_SECTION()
     ]]);
 
     $jsSection = repeaterControl("scripts", __("Scripts", 'breakdance'), [
+        control('name', __('Name', 'breakdance'), ['type' => 'text', 'layout' => 'vertical']),
         control('code', __('JavaScript Code', 'breakdance'), ['codeOptions' => ['language' => 'javascript'], 'type' => 'code', 'layout' => 'vertical']),
     ], ['repeaterOptions' => [
         'titleTemplate' => '{name}',
@@ -40,5 +42,5 @@ function ADVANCED_SECTION()
  */
 function ADVANCED_TEMPLATE()
 {
-    return (string) file_get_contents(dirname(__FILE__) . '/advanced.css.twig');
+    return (string) file_get_contents(__DIR__ . '/advanced.css.twig');
 }

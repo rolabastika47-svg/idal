@@ -75,7 +75,7 @@ function include_elements()
 
     // explanation: https://github.com/soflyy/breakdance/pull/6755
     if ($oxygenDevelopmentEnvironment) {
-        require_once __DIR__ . "/../../build-tools/oxygen-utils.php";
+        require_once __DIR__ . "/../../../../build-tools/oxygen-utils.php";
     }
 
     foreach ($element_filenames as $filename) {

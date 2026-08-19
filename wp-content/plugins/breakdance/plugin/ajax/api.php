@@ -103,13 +103,12 @@ function register_handler($route, callable $callback, $minimum_permissions = 'ne
                 }
 
                 if (sizeof($erroneous_arg_names)) {
-                    $error_message = !is_breakdance_development_environment()
-                        ? esc_html__('Bad request', 'breakdance')
-                        : sprintf(
-                            /* translators: %s: Comma-separated list of missing parameter names */
-                            esc_html__('Required POST parameters are missing or invalid: "%s"', 'breakdance'),
-                            implode('", "', $erroneous_arg_names)
-                        );
+                    $error_message = sprintf(
+                        /* translators: %s: Comma-separated list of missing parameter names */
+                        esc_html__('Required POST parameters are missing or invalid: "%s"', 'breakdance'),
+                        implode('", "', $erroneous_arg_names)
+                    );
+
                     throw new BreakdanceAjaxHandlerException($error_message, 400);
                 }
 
@@ -282,7 +281,7 @@ class BreakdanceAjaxHandlerException extends \Exception
      * @param \Throwable|null $previous
      * @param string $description
      */
-    public function __construct($message = "", $code = 0, \Throwable $previous = null, $description = '')
+    public function __construct($message = "", $code = 0, ?\Throwable $previous = null, $description = '')
     {
         $this->statusDescription = $description;
         parent::__construct($message, $code, $previous);
@@ -298,8 +297,7 @@ class BreakdanceAjaxHandlerException extends \Exception
 }
 
 
-class BreakdanceAjaxHandlerCustomException extends BreakdanceAjaxHandlerException {
-}
+class BreakdanceAjaxHandlerCustomException extends BreakdanceAjaxHandlerException {}
 
 class HandlerNamesHolder
 {

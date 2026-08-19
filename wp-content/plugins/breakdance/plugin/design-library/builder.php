@@ -14,10 +14,10 @@ add_filter('breakdance_element_controls', 'Breakdance\DesignLibrary\addControls'
  */
 function addControls($controls, $element)
 {
+    if (!isDesignLibraryEnabled()) return $controls;
+
     $copyableElements = getCopyableElements();
     $isCopyable = in_array($element::slug(), $copyableElements);
-
-    if (!isDesignLibraryEnabled()) return $controls;
     if (!$isCopyable) return $controls;
 
     $controls['settingsSections'][] = controlSection(

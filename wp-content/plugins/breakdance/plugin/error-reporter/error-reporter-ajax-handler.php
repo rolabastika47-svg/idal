@@ -69,7 +69,7 @@ class AjaxHandler extends Handler
             $error = $this->getErrorResponseArray();
             $response = wp_json_encode(compact('error'), JSON_PRETTY_PRINT);
 
-            echo $response ? $response : json_encode((object) []);
+            echo $response ?: json_encode((object) []);
         }
 
         return Handler::QUIT;

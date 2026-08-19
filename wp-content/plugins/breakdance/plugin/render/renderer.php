@@ -26,6 +26,7 @@ use function Breakdance\Util\get_menu_page_url;
 use function Breakdance\Util\Timing\start;
 use function Breakdance\Util\Timing\finish;
 use function Breakdance\Variables\getVariables;
+use function Breakdance\BreakdanceOxygen\Selectors\shouldSelectorApply;
 
 
 /**
@@ -333,6 +334,7 @@ function cssForSelectors($selectors)
 function cssForPresets($presets, $globalSettings)
 {
     $breakpoints = \Breakdance\Config\Breakpoints\get_breakpoints();
+
     return array_reduce(
         $presets,
         /**
@@ -885,10 +887,10 @@ function htmlElement($args)
  * @param array $tags
  * @param PropertiesData $ssrParentProperties
  * @param int|null $repeaterItemNodeId
- * @param bool $disableWrapperHtmlTag
+ * @param bool $disableRootHtmlTag
  * @return string
  */
-function getHtml($node, $element, $props, $childHtml, $classNames, $tags, $ssrParentProperties = [], $repeaterItemNodeId = null, $disableWrapperHtmlTag = false)
+function getHtml($node, $element, $props, $childHtml, $classNames, $tags, $ssrParentProperties = [], $repeaterItemNodeId = null, $disableRootHtmlTag = false)
 {
 
     $tag = getHtmlTag($element, $props);
@@ -924,7 +926,7 @@ function getHtml($node, $element, $props, $childHtml, $classNames, $tags, $ssrPa
         'id' => $id,
     ];
 
-    if ($disableWrapperHtmlTag) {
+    if ($disableRootHtmlTag) {
         /**
          * @psalm-suppress InvalidCast
          */
@@ -1203,6 +1205,7 @@ function _render($nodes, $postId, $justDoHtmlAndSkipTheCss, $ssrParentProperties
 {
     static $breakpoints = null;
     static $variables = null;
+    static $universalCssTemplate = null;
 
     if ($breakpoints === null) {
         /** @var Breakpoint[] $breakpoints */
@@ -1212,6 +1215,11 @@ function _render($nodes, $postId, $justDoHtmlAndSkipTheCss, $ssrParentProperties
     if ($variables === null) {
         /** @var OxygenVariable[] $variables */
         $variables = \Breakdance\Variables\getVariables();
+    }
+
+    if ($universalCssTemplate === null) {
+        /** @var string $universalCssTemplate */
+        $universalCssTemplate = \Breakdance\Elements\UniversalControls\getUniversalCssTemplate();
     }
 
     $acc = BLANK_RENDERED_NODE_DATA;
@@ -1241,7 +1249,7 @@ function _render($nodes, $postId, $justDoHtmlAndSkipTheCss, $ssrParentProperties
 
         $element = getElementFromNodeType($node['data']['type']);
 
-        $cssTemplate = \Breakdance\Elements\FilteredGets\cssTemplate($element);
+        $cssTemplate = \Breakdance\Elements\FilteredGets\cssTemplate($element) . (string) $universalCssTemplate;
 
         // Skip element-specific CSS when a preset is applied,
         // but still include CSS required for the Settings tab to work correctly.
@@ -1251,7 +1259,10 @@ function _render($nodes, $postId, $justDoHtmlAndSkipTheCss, $ssrParentProperties
 
         $baseClassName = \Breakdance\Elements\getBaseClassNameForBuilderElement($element);
 
-        $propertyPathsToWhitelistInFlatProps = $element::propertyPathsToWhitelistInFlatProps();
+        $propertyPathsToWhitelistInFlatProps = array_merge(
+            $element::propertyPathsToWhitelistInFlatProps() ?: [],
+            \Breakdance\Elements\UniversalControls\getPropertyPathsToWhitelistInFlatProps()
+        );
 
         /** @var PropertiesData $propsIncludingGlobalSettings */
         $propsIncludingGlobalSettings = getElementProps($node);
@@ -1462,13 +1473,21 @@ function getElementExtraClassNames($node, $postId, $presetId, $repeaterItemNodeI
     // Oxygen classes
     $oxySelectorSelectors = getElementOxySelectors($node);
 
+    $oxySelectorClasses = array_values(
+        array_filter(
+            $oxySelectorSelectors,
+            fn($selector) => shouldSelectorApply($selector, $node)
+        )
+    );
+
+
     $oxySelectorClasses = array_map(
         /**
          * @param OxygenSelector $selector
          * @return string
          */
         fn($selector) => $selector['name'],
-        $oxySelectorSelectors
+        $oxySelectorClasses
     );
 
     $extraClassNames = array_merge($extraClassNames, $oxySelectorClasses);

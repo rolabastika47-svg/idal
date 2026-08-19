@@ -70,7 +70,7 @@ class Heading extends \Breakdance\Elements\Element
 
     static function defaultProperties()
     {
-        return ['content' => ['content' => ['text' => 'This is a heading.']]];
+        return ['content' => ['content' => ['text' => 'This is a heading.', 'tags' => 'h2']]];
     }
 
     static function defaultChildren()
@@ -86,12 +86,7 @@ class Heading extends \Breakdance\Elements\Element
 
     static function designControls()
     {
-        return [getPresetSection(
-      "EssentialElements\\typography_with_effects_and_align",
-      "Typography",
-      "typography",
-       ['type' => 'popout']
-     ), c(
+        return [c(
         "size",
         "Size",
         [c(
@@ -110,6 +105,11 @@ class Heading extends \Breakdance\Elements\Element
         [],
         
       ), getPresetSection(
+      "EssentialElements\\typography_with_effects_and_align",
+      "Typography",
+      "typography",
+       ['type' => 'popout']
+     ), getPresetSection(
       "EssentialElements\\spacing_margin_y",
       "Spacing",
       "spacing",
@@ -135,7 +135,7 @@ class Heading extends \Breakdance\Elements\Element
         "tags",
         "Tags",
         [],
-        ['type' => 'dropdown', 'layout' => 'inline', 'items' => [['text' => 'h1', 'value' => 'h1'], ['text' => 'h2', 'value' => 'h2'], ['text' => 'h3', 'value' => 'h3'], ['text' => 'h4', 'value' => 'h4'], ['text' => 'h5', 'value' => 'h5'], ['text' => 'h6', 'value' => 'h6']], 'disabledInFutureLayer' => true],
+        ['type' => 'dropdown', 'layout' => 'inline', 'items' => [['text' => 'h1', 'value' => 'h1'], ['text' => 'h2', 'value' => 'h2'], ['text' => 'h3', 'value' => 'h3'], ['text' => 'h4', 'value' => 'h4'], ['text' => 'h5', 'value' => 'h5'], ['text' => 'h6', 'value' => 'h6']], 'disabledInFutureLayer' => true, 'placeholder' => 'h1'],
         false,
         false,
         [],

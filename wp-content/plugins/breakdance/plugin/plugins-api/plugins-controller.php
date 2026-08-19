@@ -41,7 +41,7 @@ class PluginsController
 
         $this->registerBuilderPlugin($jsString);
 
-        $this->TwigFunctionsPHPSide[] = array('name' => $twigName, 'function' => $phpCallbackFunction);
+        $this->TwigFunctionsPHPSide[] = ['name' => $twigName, 'function' => $phpCallbackFunction];
     }
 
 }

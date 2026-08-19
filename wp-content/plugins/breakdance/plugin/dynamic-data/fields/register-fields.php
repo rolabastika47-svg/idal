@@ -82,6 +82,9 @@ $fields = [
     new UrlParameter(),
     new UtmTags(),
     new SearchQuery(),
+
+    /** Oxygen */
+    new OxyComponentField(),
 ];
 
 foreach ($fields as $field) {

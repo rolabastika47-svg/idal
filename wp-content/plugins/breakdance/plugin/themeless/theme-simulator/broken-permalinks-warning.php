@@ -73,7 +73,7 @@ namespace Breakdance\Themeless;
         </a>
       </li>
       <li><?php
-        esc_html_e('Click <em>Save Changes</em> at the bottom.', 'breakdance');
+        echo wp_kses(__('Click <em>Save Changes</em> at the bottom.', 'breakdance'), ['em' => []]);
       ?></li>
       <li><?php esc_html_e('Return to this screen and refresh.', 'breakdance'); ?></li>
     </ol>

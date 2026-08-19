@@ -4,9 +4,10 @@ namespace Breakdance\Forms;
 
 use Breakdance\Forms\Actions\Action;
 use Breakdance\Forms\Actions\ActionProvider;
-use function Breakdance\AJAX\get_nonce_key_for_ajax_requests;
-use function Breakdance\Forms\Render\getFieldAttributes;
 use const Breakdance\Filesystem\PHP_FILE_UPLOAD_ERROR_MESSAGES;
+use function Breakdance\AJAX\get_nonce_key_for_ajax_requests;
+use function Breakdance\Forms\Actions\getAction;
+use function Breakdance\Forms\Render\getFieldAttributes;
 
 /**
  * @param int $postId
@@ -19,151 +20,298 @@ function handleSubmission($postId, $formId, $fields)
     $settings = getFormSettings($postId, $formId);
 
     if (!$settings) {
-        return [
-            'type' => 'error',
-            'message' => __('An unexpected error occurred.', 'breakdance')
-        ];
+        return createErrorResponse(__('An unexpected error occurred.', 'breakdance'));
+    }
+
+    $metadata = extractSubmissionMetadata();
+    $hasFullAccess = checkUserHasFullAccess();
+    $messages = extractFormMessages($settings);
+
+    $securityCheck = validateSecurityMeasures($settings, $fields, $metadata['ip'], $hasFullAccess, $messages);
+    if ($securityCheck !== null) {
+        return $securityCheck;
     }
 
     $actions = getFormActions($settings);
-    $form    = getFormData($settings['form']['fields'], $fields);
-    $successMessage = $settings['form']['success_message'];
-    $errorMessage = $settings['form']['error_message'];
+    $fieldsAndValues = getFormData($settings['form']['fields'], $fields);
+    $uploads = extractUploadedFiles();
 
-    // Metadata
-    $ip        = (string) ($_SERVER['REMOTE_ADDR'] ?? null);
-    $referer   = wp_get_referer();
-    $userAgent = (string) ($_SERVER['HTTP_USER_AGENT'] ?? null);
-    $userId = get_current_user_id();
-
-    // User access
-    $breakdancePermissions = \Breakdance\Permissions\getUserPermission();
-    $hasFullAccess = $breakdancePermissions && $breakdancePermissions['slug'] === 'full';
-
-    // Validate honeypot field
-    $csrfEnabled = $settings['advanced']['csrf_enabled'] ?? false;
-
-    if ($csrfEnabled) {
-        if (!array_key_exists('csrfToken', $fields) || !is_string($fields['csrfToken']) || !wp_verify_nonce($fields['csrfToken'], get_nonce_key_for_ajax_requests())) {
-            return [
-                'type' => 'error',
-                'message' => $hasFullAccess ? __('Invalid CSRF token', 'breakdance') : $errorMessage
-            ];
-        }
-        unset($fields['csrfToken']);
-    }
-
-    // reCAPTCHA v3 challenge
-    $recaptchaEnabled = $settings['advanced']['recaptcha']['enabled'] ?? false;
-    if ($recaptchaEnabled) {
-        $token   = (string) ($_POST['recaptcha_token'] ?? null);
-        if (!$token) {
-            return [
-                'type' => 'error',
-                'message' => $hasFullAccess ? __('[reCAPTCHA] Error retrieving token.', 'breakdance') : $errorMessage
-            ];
-        }
-        $verified = \Breakdance\Forms\Recaptcha\verify($token, $ip, 'breakdance_submit', $settings['advanced']['recaptcha']['api_key_input']['apiKey']);
-
-        if (!$verified) {
-            return [
-                'type' => 'error',
-                'message' => $hasFullAccess ? __('[reCAPTCHA] Invalid challenge. Please reload and try again.', 'breakdance') : $errorMessage
-            ];
-        }
-    }
-
-    // Validate honeypot field
-    $honeypotEnabled = $settings['advanced']['honeypot_enabled'] ?? false;
-    if ($honeypotEnabled) {
-        if (array_key_exists('hpname', $fields) && !empty($fields['hpname'])) {
-            // failed the honeypot test. Ignore this
-            // submission but return a success response
-            return [
-                'type' => 'success',
-                'message' => $successMessage,
-            ];
-        }
-    }
-
-    $uploads = [];
-    if (array_key_exists('fields', $_FILES)) {
-        /** @psalm-suppress MixedArgument */
-        $uploads = getFilesNormalized($_FILES['fields']);
-    }
-
-    // Validate form. Validators available: Required, email, and files.
-    $validation = validateFormData($form, $uploads);
-
+    $validation = validateFormData($fieldsAndValues, $uploads, $formId, $postId);
     if (is_wp_error($validation)) {
         /** @psalm-suppress PossiblyInvalidMethodCall */
+        return createErrorResponse($validation->get_error_message());
+    }
+
+    $files = handleUploadedFiles($formId, $uploads, $settings);
+    $shouldStoreUploadedFiles = $settings['actions']['store_submission']['store_files'] ?? false;
+
+    if (!empty($files) && $shouldStoreUploadedFiles) {
+        updateFieldValuesWithFileUrls($fieldsAndValues, $fields, $files, $postId, $formId);
+    }
+
+    $extra = buildFormExtra($formId, $postId, $fields, $uploads, $files, $metadata);
+    $response = executeActions($actions, [$fieldsAndValues, $settings, $extra]);
+
+    handleSubmissionCleanup($response, $files, $shouldStoreUploadedFiles);
+
+    return handleSubmissionResponse($response, $messages['success'], $messages['error'], $hasFullAccess);
+}
+
+/**
+ * @param string $message
+ * @return FormError
+ */
+function createErrorResponse($message)
+{
+    return [
+        'type' => 'error',
+        'message' => $message
+    ];
+}
+
+/**
+ * @return array{ip: string, referer: string|false, userAgent: string, userId: int}
+ */
+function extractSubmissionMetadata()
+{
+    return [
+        'ip'        => (string) ($_SERVER['REMOTE_ADDR'] ?? ''),
+        'referer'   => wp_get_referer(),
+        'userAgent' => (string) ($_SERVER['HTTP_USER_AGENT'] ?? ''),
+        'userId'    => get_current_user_id(),
+    ];
+}
+
+/**
+ * @return bool
+ */
+function checkUserHasFullAccess()
+{
+    $breakdancePermissions = \Breakdance\Permissions\getUserPermission();
+    return $breakdancePermissions && $breakdancePermissions['slug'] === 'full';
+}
+
+/**
+ * @param FormSettings $settings
+ * @return array{success: string, error: string}
+ */
+function extractFormMessages($settings)
+{
+    return [
+        'success' => $settings['form']['success_message'] ?? 'Your message has been received!',
+        'error'   => $settings['form']['error_message'] ?? 'Something went wrong.',
+    ];
+}
+
+/**
+ * @param FormSettings $settings
+ * @param FormUserSubmittedContents $fields
+ * @param string $ip
+ * @param bool $hasFullAccess
+ * @param array{success: string, error: string} $messages
+ * @return FormError|FormSuccess|null
+ */
+function validateSecurityMeasures($settings, &$fields, $ip, $hasFullAccess, $messages)
+{
+    $csrfError = validateCsrfToken($settings, $fields, $hasFullAccess, $messages['error']);
+    if ($csrfError !== null) {
+        return $csrfError;
+    }
+
+    $recaptchaError = validateRecaptcha($settings, $ip, $hasFullAccess, $messages['error']);
+    if ($recaptchaError !== null) {
+        return $recaptchaError;
+    }
+
+    $honeypotTriggered = checkHoneypot($settings, $fields);
+    if ($honeypotTriggered) {
+        bdox_run_action('breakdance_form_honeypot_triggered', $settings, $fields, $ip);
+
         return [
-            'type' => 'error',
-            'message' => $validation->get_error_message()
+            'type' => 'success',
+            'message' => $messages['success'],
         ];
     }
 
-    // Upload files if any is present. Runs after all validations
-    // We don't want to allow spam files in our server.
-    $files = handleUploadedFiles($formId, $uploads, $settings);
-    $storeUploadedFiles = $settings['actions']['store_submission']['store_files'] ?? false;
+    return null;
+}
 
-    if (!empty($files) && $storeUploadedFiles) {
-        // If we have files, assign the URLs to
-        // the value for both $form and $extra
-        foreach ($form as &$field) {
-            $fieldId = getIdFromField($field);
-            if ($field['type'] === 'file' && array_key_exists($fieldId, $files)) {
-                $commaSeparatedFileUrls = implode(', ', array_map(static function($file) use ($postId, $formId, $fieldId) {
-                    return getSecureFileUrl($postId, $formId, $fieldId, $file['url'], false);
-                }, $files[$fieldId]));
-                $fields[$fieldId] =  $commaSeparatedFileUrls;
-                $field['value'] =  $commaSeparatedFileUrls;
-            }
-        }
-        unset($field);
+/**
+ * @param FormSettings $settings
+ * @param FormUserSubmittedContents $fields
+ * @param bool $hasFullAccess
+ * @param string $errorMessage
+ * @return FormError|null
+ */
+function validateCsrfToken($settings, &$fields, $hasFullAccess, $errorMessage)
+{
+    $csrfEnabled = $settings['advanced']['csrf_enabled'] ?? false;
+
+    if (!$csrfEnabled) {
+        return null;
     }
 
-    // Run all actions set for this form
-    /** @var FormExtra $extra */
-    $extra = [
-        'formId'  => $formId,
-        'postId'  => $postId,
-        'fields'   => $fields,
-        'uploads'    => $uploads,
-        'files'    => $files,
-        'ip'      => $ip,
-        'referer' => $referer,
-        'userAgent' => $userAgent,
-        'userId' => $userId,
-    ];
+    /** @psalm-suppress MixedArgument */
+    $isValid = array_key_exists('csrfToken', $fields)
+        && is_string($fields['csrfToken'])
+        && wp_verify_nonce($fields['csrfToken'], get_nonce_key_for_ajax_requests());
 
-    $response = executeActions($actions, [$form, $settings, $extra]);
+    if (!$isValid) {
+        return createErrorResponse(
+            $hasFullAccess ? __('Invalid CSRF token', 'breakdance') : $errorMessage
+        );
+    }
+
+    unset($fields['csrfToken']);
+    return null;
+}
+
+/**
+ * @param FormSettings $settings
+ * @param string $ip
+ * @param bool $hasFullAccess
+ * @param string $errorMessage
+ * @return FormError|null
+ */
+function validateRecaptcha($settings, $ip, $hasFullAccess, $errorMessage)
+{
+    $recaptchaEnabled = $settings['advanced']['recaptcha']['enabled'] ?? false;
+
+    if (!$recaptchaEnabled) {
+        return null;
+    }
+
+    $token = (string) ($_POST['recaptcha_token'] ?? '');
+    if (!$token) {
+        return createErrorResponse(
+            $hasFullAccess ? __('[reCAPTCHA] Error retrieving token.', 'breakdance') : $errorMessage
+        );
+    }
+
+    $apiKey = $settings['advanced']['recaptcha']['api_key_input']['apiKey'];
+    $verified = \Breakdance\Forms\Recaptcha\verify($token, $ip, 'breakdance_submit', $apiKey);
+
+    if (!$verified) {
+        return createErrorResponse(
+            $hasFullAccess ? __('[reCAPTCHA] Invalid challenge. Please reload and try again.', 'breakdance') : $errorMessage
+        );
+    }
+
+    return null;
+}
+
+/**
+ * @param FormSettings $settings
+ * @param FormUserSubmittedContents $fields
+ * @return bool
+ */
+function checkHoneypot($settings, $fields)
+{
+    $honeypotEnabled = $settings['advanced']['honeypot_enabled'] ?? false;
+
+    if (!$honeypotEnabled) {
+        return false;
+    }
+
+    /** @psalm-suppress MixedArgument */
+    return array_key_exists('hpname', $fields) && !empty($fields['hpname']);
+}
+
+/**
+ * @return NormalizedUploadedFiles
+ */
+function extractUploadedFiles()
+{
+    if (!array_key_exists('fields', $_FILES)) {
+        return [];
+    }
+
+    /** @psalm-suppress MixedArgument */
+    return getFilesNormalized($_FILES['fields']);
+}
+
+/**
+ * @param FormData $fieldsAndValues
+ * @param FormUserSubmittedContents $fields
+ * @param FormFileGroup $files
+ * @param int $postId
+ * @param int $formId
+ * @return void
+ */
+function updateFieldValuesWithFileUrls(&$fieldsAndValues, &$fields, $files, $postId, $formId)
+{
+    foreach ($fieldsAndValues as &$field) {
+        $fieldId = getIdFromField($field);
+
+        if ($field['type'] !== 'file' || !array_key_exists($fieldId, $files)) {
+            continue;
+        }
+
+        $commaSeparatedFileUrls = implode(', ', array_map(
+            static function($file) use ($postId, $formId, $fieldId) {
+                return getSecureFileUrl($postId, $formId, $fieldId, $file['url'], false);
+            },
+            $files[$fieldId]
+        ));
+
+        $fields[$fieldId] = $commaSeparatedFileUrls;
+        $field['value'] = $commaSeparatedFileUrls;
+    }
+    unset($field);
+}
+
+/**
+ * @param int $formId
+ * @param int $postId
+ * @param FormUserSubmittedContents $fields
+ * @param NormalizedUploadedFiles $uploads
+ * @param FormFileGroup $files
+ * @param array{ip: string, referer: string|false, userAgent: string, userId: int} $metadata
+ * @return FormExtra
+ */
+function buildFormExtra($formId, $postId, $fields, $uploads, $files, $metadata)
+{
+    return [
+        'formId'    => $formId,
+        'postId'    => $postId,
+        'fields'    => $fields,
+        'uploads'   => $uploads,
+        'files'     => $files,
+        'ip'        => $metadata['ip'],
+        'referer'   => $metadata['referer'] !== false ? $metadata['referer'] : '',
+        'userAgent' => $metadata['userAgent'],
+        'userId'    => $metadata['userId'],
+    ];
+}
+
+/**
+ * @param array<string, ActionSuccess|ActionError> $response
+ * @param FormFileGroup $files
+ * @param boolean $shouldStoreUploadedFiles
+ * @return void
+ */
+function handleSubmissionCleanup($response, $files, $shouldStoreUploadedFiles)
+{
     /** @var int|null $submissionId */
     $submissionId = $response['store_submission']['id'] ?? null;
 
     if ($submissionId) {
-        unset($response['store_submission']); // We don't care for the 'store submission' action.
+        unset($response['store_submission']);
         \Breakdance\Forms\Submission\saveActionsLog($submissionId, $response);
 
-        // We delete the files outside the `store_submission` action,
-        // because we want to keep the files for all actions to use.
-        if (!$storeUploadedFiles) {
+        if (!$shouldStoreUploadedFiles) {
             cleanUpFiles($files);
         }
     } else {
-        // If there is no stored submission, delete any uploaded files
         cleanUpFiles($files);
     }
-
-    return handleSubmissionResponse($response, $successMessage, $errorMessage, $hasFullAccess);
 }
 
 /**
  * @param array<string, ActionSuccess|ActionError> $response
  * @param string|null $successMessage
  * @param string|null $errorMessage
- * @param bool $hasFullAccess
+ * @param boolean $hasFullAccess
  * @return FormSuccess|FormError|FormError[]
  */
 function handleSubmissionResponse($response, $successMessage, $errorMessage, $hasFullAccess)
@@ -203,6 +351,38 @@ function handleSubmissionResponse($response, $successMessage, $errorMessage, $ha
 }
 
 /**
+ * Evaluate a set of conditions against form fields.
+ *
+ * @param FormCondition[] $conditions
+ * @param FormData $form
+ * @return bool Indicates whether all conditions are met.
+ */
+function evaluateConditions($conditions, $form)
+{
+    $allFields = array_combine(
+        array_map(fn($field) => getIdFromField($field), $form),
+        array_column($form, 'value')
+    );
+
+    foreach ($conditions as $row) {
+        $condition = $row['condition'] ?? [];
+
+        if (isset($condition['field'], $condition['operand'])) {
+            $fieldId = $condition['field'];
+            $operand = $condition['operand'];
+            $fieldValue = $allFields[$fieldId] ?? null;
+            $conditionValue = $condition['value'] ?? null;
+
+            if (!compareFieldValue($fieldValue, $operand, $conditionValue)) {
+                return false;
+            }
+        }
+    }
+
+    return true;
+}
+
+/**
  * @param Action $action
  * @param FormData $form
  * @param FormSettings $settings
@@ -215,31 +395,11 @@ function shouldActionRun($action, $form, $settings, $extra)
     $actionData = $settings['actions'][$action::slug()] ?? false;
     $runConditionally = $actionData['run_action_conditionally'] ?? false;
     $conditions = $actionData['conditions'] ?? [];
-    $allFields = array_combine(
-        array_map(fn($field) => getIdFromField($field), $form),
-        array_column($form, 'value')
-    );
 
     $canExecute = true;
 
     if ($runConditionally && !empty($conditions)) {
-        foreach ($conditions as $row) {
-            $condition = $row['condition'] ?? [];
-
-            if (isset($condition['field'], $condition['operand'])) {
-                $fieldId = $condition['field'];
-                $operand = $condition['operand'];
-                $fieldValue = $allFields[$fieldId] ?? null;
-                $conditionValue = $condition['value'] ?? null;
-
-                $isFieldValid = compareFieldValue($fieldValue, $operand, $conditionValue);
-
-                if (!$isFieldValid) {
-                    $canExecute = false;
-                    break;
-                }
-            }
-        }
+        $canExecute = evaluateConditions($conditions, $form);
     }
 
     /**
@@ -270,7 +430,7 @@ function executeActions($actions, $args)
             $output['type'] = 'success';
             $output['message'] = '';
 
-            /** @var ActionConditions $conditions */
+            /** @var FormCondition[] $conditions */
             $conditions = $settings['actions'][$action::slug()]['conditions'] ?? [];
             $output['conditions'] = $conditions;
         } else if (is_wp_error($canExecute)) {
@@ -310,8 +470,8 @@ function getActionsErrors($responses)
             return false;
         }
 
-        $action = ActionProvider::getInstance()->getActionBySlug((string) $slug);
-        $actionName     = $action ? $action->name() : $slug;
+        $action = getAction((string) $slug);
+        $actionName = $action ? $action->name() : $slug;
         $response['message'] = "[$actionName]: " . $response['message'];
         return $response;
     }, $responses, array_keys($responses))));
@@ -451,9 +611,11 @@ function getFormData($storedFields, $values)
 /**
  * @param FormData $form
  * @param NormalizedUploadedFiles $files
+ * @param int $formId
+ * @param int $postId
  * @return \WP_Error|true
  */
-function validateFormData($form, $files)
+function validateFormData($form, $files, $formId, $postId)
 {
     $bag = new \WP_Error();
     $fileFieldIds = [];
@@ -465,6 +627,39 @@ function validateFormData($form, $files)
         // Skip fields that are not required
         if (in_array($field['type'], ['step', 'html'])) {
             continue;
+        }
+
+        /**
+         * Allow third-party developers to add custom field validation
+         *
+         * Developers receive a WP_Error object and can add errors to it directly.
+         *
+         * Example:
+         * add_filter('breakdance_form_validate_field', function($fieldErrors, $field, $formId, $postId) {
+         *     if ($field['type'] === 'tel' && !empty($field['value'])) {
+         *         if (!preg_match('/^\d{10}$/', $field['value'])) {
+         *             $fieldErrors->add('invalid_phone', 'Please enter a valid 10-digit phone number.');
+         *         }
+         *     }
+         *     return $fieldErrors;
+         * }, 10, 4);
+         *
+         * @param \WP_Error $fieldErrors WP_Error object to add validation errors to
+         * @param array $field The field being validated (includes 'type', 'value', 'label', 'advanced', etc.)
+         * @param int $formId The form ID
+         * @param int $postId The post ID
+         * @return \WP_Error Return the WP_Error object with any errors added
+         */
+
+        /**
+         * @psalm-suppress TooManyArguments
+         * @var \WP_Error $fieldErrors
+         */
+        $fieldErrors = apply_filters('breakdance_form_validate_field', new \WP_Error(), $field, $formId, $postId);
+
+        if ($fieldErrors->has_errors()) {
+            /** @psalm-suppress UndefinedMethod */
+            $bag->merge_from($fieldErrors);
         }
 
         if ($required && array_key_exists('conditional', $field['advanced']) && $field['advanced']['conditional'] === true) {
@@ -498,7 +693,7 @@ function validateFormData($form, $files)
             if ($fieldFiles) {
                 $maxNumOfFiles = $field['max_number_of_files'] ?? 1;
                 $maxFileSizeInMB = $field['max_file_size'] ?? 10;
-                $maxFileSizeInBytes = $maxFileSizeInMB * pow(1024, 2);
+                $maxFileSizeInBytes = $maxFileSizeInMB * 1024 ** 2;
                 $allowedFileTypes = $field['allowed_file_types'] ?? [];
 
                 if (count($fieldFiles) > $maxNumOfFiles) {

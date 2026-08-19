@@ -103,6 +103,7 @@ function globalPropertyPathsToWhitelistInFlatProps()
         [
             'settings.woocommerce.other.stack_vertically_at',
             'settings.forms.submit_button.styles.size.full_width_at',
+            'settings.buttons.button_presets.button_presets[].id',
             'builderPrefix'
         ],
         $additionalProps

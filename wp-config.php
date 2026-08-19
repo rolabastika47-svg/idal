@@ -20,7 +20,7 @@
 
 // ** Database settings - You can get this info from your web host ** //
 /** The name of the database for WordPress */
-define( 'DB_NAME', 'idal' );
+define( 'DB_NAME', 'idal_web' );
 
 /** Database username */
 define( 'DB_USER', 'root' );
@@ -48,14 +48,14 @@ define( 'DB_COLLATE', '' );
  *
  * @since 2.6.0
  */
-define( 'AUTH_KEY',         '/IG=Bs9T&4`k[9e4xr hi3s2&p+QC7b,]Gxg5+N*Tj~exA ^GQ`+9XT[ cj`[IWP' );
-define( 'SECURE_AUTH_KEY',  'Dbxj7&)hjLj~DuafM~yahGkdl$c@Kfc7||Z8i6=V[i/%,kyLNDbJfR1Y1Bo.(HYH' );
-define( 'LOGGED_IN_KEY',    'g?t=y#nI1MFc_4tw/Dd|kFE,U%n:]S)|HPVs[M_hwq}BZ%Co#/m?ffu9-UYQ3mQ=' );
-define( 'NONCE_KEY',        'yj:!J*g0C5E()F Cvp?OZCc|m(}On_3?[@4ZF%s{D<!:i|$D0C+AJMZJ,B}`+nU#' );
-define( 'AUTH_SALT',        '>~*dwpM*.-6Vdjm2hRw>/g`+*69<W*!qYN00PR%ua#:lo,?vQ+zR+{BI;u1#Y#]_' );
-define( 'SECURE_AUTH_SALT', 'w~WF[:;uqyz#iGlX;Mw9lz =bj]{)aO >%Q0C|q<+DYNJvnGn4(tjg^H{`j9{,*f' );
-define( 'LOGGED_IN_SALT',   '=WZ9U{ N hB?#2D)<F&/lg_u+4w#1wZ% _m3y?dDh?z`~b>t]XO|h^H>m)=  !Y`' );
-define( 'NONCE_SALT',       'g7yK`v$_u4i,&n/#MgAU5+yy4hT&HA6gRdXB9LkW I2_OXwa95#_-&I?tG:I/eMp' );
+define( 'AUTH_KEY',         'EK]M42B9+z:5|7VDvB|||<mdcma<a0HNF)N9,z/0J7rkLp9ACsOJwQd+qbn%J*4q' );
+define( 'SECURE_AUTH_KEY',  ' <A{v&Uhk+o0CDqi2Z4xS7NfwW+cYJz,F8{64U9!Nmp?)RA2M[0X2}@~Jd-cA=Cd' );
+define( 'LOGGED_IN_KEY',    'Tj-~>lenXu8[DiFBg,]HuVXtm$<(ws0DBEqJk9ag)Q6im4/ET&vh f~-0+y56c=}' );
+define( 'NONCE_KEY',        'SV6!kR9>Rrq$#XT*lvxOOPEVXK>Zzm]={-)$y8u?/ez(n_b9Hx#q,v@_0W@#y%/0' );
+define( 'AUTH_SALT',        '*8MWz(CIZ9 :9U`Uo7u[$*_}6CZ=HnIwG!l|Y+Yq*;X9u`l#Jq{xM0>Gm`W^J$%h' );
+define( 'SECURE_AUTH_SALT', '[z}58]!f#i-3%qE7^vv;X:CbNhg7iJ>j7:78jGw_=08[L1Ar`&SP0&Wq$kt7`*Xp' );
+define( 'LOGGED_IN_SALT',   'XMkuYPN1B{%i!3F12%!8KDf.K{=jeJS)C$_iUR8`6gwOS1}GQo[)|-Y!f<a.;<=k' );
+define( 'NONCE_SALT',       'E:I&|4<7%cK=r`L6/k1zzaH^J1*E80a^Pf]0_nwO:,8Y;ufz2{e4nf1:lNZA;GiV' );
 
 /**#@-*/
 
@@ -71,7 +71,7 @@ define( 'NONCE_SALT',       'g7yK`v$_u4i,&n/#MgAU5+yy4hT&HA6gRdXB9LkW I2_OXwa95#
  *
  * @link https://developer.wordpress.org/advanced-administration/wordpress/wp-config/#table-prefix
  */
-$table_prefix = 'om_';
+$table_prefix = 'wp_';
 
 /**
  * For developers: WordPress debugging mode.
@@ -89,11 +89,6 @@ define( 'WP_DEBUG', false );
 
 /* Add any custom values between this line and the "stop editing" line. */
 
-@ini_set( 'upload_max_filesize', '51200M' );
-@ini_set( 'post_max_size', '55000M' );
-@ini_set( 'memory_limit', '1024M' );
-@ini_set( 'max_execution_time', '1200' );
-@ini_set( 'max_input_time', '1200' );
 
 
 /* That's all, stop editing! Happy publishing. */

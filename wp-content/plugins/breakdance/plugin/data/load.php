@@ -10,6 +10,7 @@ use function Breakdance\DynamicData\get_dynamic_data_post_type;
 use function Breakdance\Preferences\get_preferences;
 use function Breakdance\Util\get_menu_page_url;
 use function Breakdance\BreakdanceOxygen\Strings\__bdox;
+use function Breakdance\Tracking\is_tracking_enabled;
 
 add_action('breakdance_loaded', function () {
     \Breakdance\AJAX\register_handler(
@@ -124,6 +125,9 @@ function load_document()
         $tree = get_tree($id);
 
         $tree_elements = $tree ? array_unique(get_tree_elements($tree['root']['children'])) : [];
+        // Filter out class elements that don't exist
+        $tree_elements = array_filter($tree_elements, fn($element) => class_exists($element));
+        $tree_elements[] = 'EssentialElements\\MissingElement';
 
         $document = [
             'tree' => $tree,
@@ -145,29 +149,7 @@ function load_document()
          * @psalm-suppress MixedArgument
          * @var array
          */
-        $elements = array_values(
-            array_filter(
-                \Breakdance\Elements\get_elements_for_builder(),
-                /**
-                 * @psalm-suppress MixedInferredReturnType
-                 * @param array{slug:string} $el
-                 * @return bool
-                 */
-                function ($el) use ($tree_elements) {
-                    /**
-                     * @psalm-suppress UndefinedClass
-                     * @psalm-suppress MixedAssignment
-                     *
-                     * @var string
-                     */
-                    $missingElementSlug = MissingElement::slug();
-
-                    return in_array($el['slug'], $tree_elements) ||
-                        // An element in the Tree may be missing, so we always have to send MissingElement
-                        $el['slug'] === $missingElementSlug;
-                }
-            ),
-        );
+        $elements = \Breakdance\Elements\get_elements_for_builder($tree_elements);
 
         $dynamicDataPostType = get_dynamic_data_post_type();
         $dynamicFields = \Breakdance\DynamicData\get_dynamic_fields_for_builder($dynamicDataPostType);
@@ -183,8 +165,7 @@ function load_document()
 
     $element_categories = \Breakdance\Elements\get_element_categories();
 
-    $selectors
-        = \Breakdance\ClassesSelectors\getSelectorsDataForBuilder();
+    $selectors = \Breakdance\ClassesSelectors\getSelectorsDataForBuilder();
 
     $conditions = \Breakdance\Conditions\get_conditions_for_builder();
 
@@ -197,13 +178,21 @@ function load_document()
     $builtinBreakpoints = \Breakdance\Config\Breakpoints\get_builtin_breakpoints();
 
     $variables = \Breakdance\Variables\getVariablesDataForBuilder();
+
     $presets = \Breakdance\DesignPresets\getPresetsDataForBuilder();
+
     $oxySelectors = \Breakdance\BreakdanceOxygen\Selectors\getOxySelectorsDataForBuilder();
 
     $globalSettingsControlsAndTemplate = [
         'controls' => \Breakdance\GlobalSettings\globalSettingsControlSections(),
         'template' => \Breakdance\GlobalSettings\globalSettingsCssTemplate(),
         'propertyPathsToWhitelistInFlatProps' => \Breakdance\GlobalSettings\globalPropertyPathsToWhitelistInFlatProps(),
+    ];
+
+    $universalControlsAndTemplate = [
+        'controls' => \Breakdance\Elements\UniversalControls\getUniversalControls(),
+        'template' => \Breakdance\Elements\UniversalControls\getUniversalCssTemplate(),
+        'propertyPathsToWhitelistInFlatProps' => \Breakdance\Elements\UniversalControls\getPropertyPathsToWhitelistInFlatProps(),
     ];
 
     $elementExternalProperties = [
@@ -226,6 +215,22 @@ function load_document()
         ? getFutureLayerSettings()
         : false;
 
+    $designLibrary = getDesignLibraryData();
+
+    $subscriptionMode = \Breakdance\Subscription\getSubscriptionMode();
+
+    $experiments = \Breakdance\Experiments\getExperiments();
+
+    $aiData = getAiData();
+
+    $interactions = \Breakdance\Interactions\getInteractionsData();
+
+    /**
+     * @psalm-suppress MixedFunctionCall
+     * @var array{url: string, jwt: string|null, jwtExpiresAt: string|null, isAnonymousToken: string|null}|null
+     */
+    $aiServer = function_exists('getFutureLayerConfigForBuilderLoad') ? getFutureLayerConfigForBuilderLoad() : null;
+
     /** @psalm-suppress UndefinedConstant */
     $load = array_merge($load, [
         'environment' => get_env(),
@@ -245,20 +250,23 @@ function load_document()
         'plugins' => $plugins,
         'fonts' => $fonts,
         'globalSettingsControlsAndTemplate' => $globalSettingsControlsAndTemplate,
+        'universalControlsAndTemplate' => $universalControlsAndTemplate,
         'builtinBreakpoints' => $builtinBreakpoints,
         'twigMacros' => $twigMacros,
         'twigMacrosHash' => $twigMacrosHash,
-        'designLibrary' => getDesignLibraryData(),
-        'subscriptionMode' => \Breakdance\Subscription\getSubscriptionMode(),
+        'designLibrary' => $designLibrary,
+        'subscriptionMode' => $subscriptionMode,
         'builderMode' => BREAKDANCE_MODE,
-        'experiments' => \Breakdance\Experiments\getExperiments(),
+        'experiments' => $experiments,
         'variables' => $variables,
         'oxySelectors' => $oxySelectors,
-        'ai' => getAiData(),
-        'interactions' => \Breakdance\Interactions\getInteractionsData(),
-        'aiServer' => function_exists('getFutureLayerConfigForBuilderLoad') ? getFutureLayerConfigForBuilderLoad() : null,
+        'ai' => $aiData,
+        'interactions' => $interactions,
+        'aiServer' => $aiServer,
         'aiSettings' => $aiSettings,
-        'futureLayerSettings' => $futureLayerSettings
+        'futureLayerSettings' => $futureLayerSettings,
+        'trackingEnabled' => is_tracking_enabled(),
+        'integrationsEnabled' => areBuilderIntegrationsEnabled()
     ]);
 
     return $load;
@@ -503,4 +511,31 @@ function getAiData()
     return [
         'enabled' => (bool) bdox_run_filters('breakdance_ai_enabled', true),
     ];
+}
+
+/**
+ * @param bool $enabled
+ * @return bool
+ */
+function isAiEnabled($enabled)
+{
+    if (\Breakdance\Data\get_global_option('settings_hide_builder_integration') === 'yes') {
+        return false;
+    }
+
+    return $enabled;
+}
+
+add_filter('breakdance_ai_enabled', '\Breakdance\Data\isAiEnabled');
+
+/**
+ * @return bool
+ */
+function areBuilderIntegrationsEnabled()
+{
+    if (\Breakdance\Data\get_global_option('settings_hide_builder_integration') === 'yes') {
+        return false;
+    }
+
+    return true;
 }

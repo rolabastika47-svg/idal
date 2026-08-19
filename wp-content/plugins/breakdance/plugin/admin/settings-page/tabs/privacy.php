@@ -33,6 +33,12 @@ function tab()
         } else {
             \Breakdance\Data\set_global_option('settings_hide_partner_discounts', 'no');
         }
+
+        if (filter_input(INPUT_POST, 'builder_integration')) {
+            \Breakdance\Data\set_global_option('settings_hide_builder_integration', 'yes');
+        } else {
+            \Breakdance\Data\set_global_option('settings_hide_builder_integration', 'no');
+        }
     }
 
     /** @var string|false $disable_page_and_session_tracking_cookies */
@@ -43,6 +49,9 @@ function tab()
 
     /** @var string|false $hide_partner_discounts */
     $hide_partner_discounts = \Breakdance\Data\get_global_option('settings_hide_partner_discounts');
+
+    /** @var string|false $builder_integration */
+    $builder_integration = \Breakdance\Data\get_global_option('settings_hide_builder_integration');
 
     $plugin_name = __bdox('plugin_name');
 ?>
@@ -98,12 +107,24 @@ function tab()
                 </tr>
                 <tr>
                     <th scope="row">
-                        Partner Discounts
+                        <?php esc_html_e('Partner Discounts', 'breakdance'); ?>
                     </th>
                     <td>
                         <fieldset>
                             <label for="hide_partner_discounts_page">
-                                <input type="checkbox" <?php echo $hide_partner_discounts === 'yes' ? 'checked' : ''; ?> name="hide_partner_discounts_page" value="yes" id="hide_partner_discounts_page"> Hide the Partner Discounts page from the admin menu
+                                <input type="checkbox" <?php echo $hide_partner_discounts === 'yes' ? 'checked' : ''; ?> name="hide_partner_discounts_page" value="yes" id="hide_partner_discounts_page"> <?php esc_html_e('Hide the Partner Discounts page from the admin menu', 'breakdance'); ?>
+                            </label>
+                        </fieldset>
+                    </td>
+                </tr>
+
+                <tr>
+                    <th scope="row"><?php esc_html_e('Builder Integration', 'breakdance'); ?></th>
+                    <td>
+                        <fieldset>
+                            <label for="builder_integration">
+                                <input type="checkbox" id="builder_integration" name="builder_integration" value="true" <?= $builder_integration === 'yes' ? 'checked' : '' ?> />
+                                <?php esc_html_e('Hide integrations in the builder (Breakdance AI and Codebox)', 'breakdance'); ?>
                             </label>
                         </fieldset>
                     </td>

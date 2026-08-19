@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'matthiasmullie/minify',
-        'pretty_version' => 'dev-4e9c4a11c6936504e865f05ba886a830b92be6de',
-        'version' => 'dev-4e9c4a11c6936504e865f05ba886a830b92be6de',
-        'reference' => '4e9c4a11c6936504e865f05ba886a830b92be6de',
+        'pretty_version' => 'dev-d70bb0253bd2f83420d94e87beaea21e43914e7e',
+        'version' => 'dev-d70bb0253bd2f83420d94e87beaea21e43914e7e',
+        'reference' => 'd70bb0253bd2f83420d94e87beaea21e43914e7e',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -11,9 +11,9 @@
     ),
     'versions' => array(
         'matthiasmullie/minify' => array(
-            'pretty_version' => 'dev-4e9c4a11c6936504e865f05ba886a830b92be6de',
-            'version' => 'dev-4e9c4a11c6936504e865f05ba886a830b92be6de',
-            'reference' => '4e9c4a11c6936504e865f05ba886a830b92be6de',
+            'pretty_version' => 'dev-d70bb0253bd2f83420d94e87beaea21e43914e7e',
+            'version' => 'dev-d70bb0253bd2f83420d94e87beaea21e43914e7e',
+            'reference' => 'd70bb0253bd2f83420d94e87beaea21e43914e7e',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

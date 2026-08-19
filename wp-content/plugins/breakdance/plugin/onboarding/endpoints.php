@@ -27,23 +27,6 @@ use function Breakdance\BreakdanceOxygen\Strings\__bdox;
     ]
 );
 
-add_action('breakdance_loaded', function () {
-    \Breakdance\AJAX\register_handler(
-        'breakdance_onboarding_talk_to_unsplash',
-        'Breakdance\Onboarding\talkToUnsplash',
-        'edit',
-        false,
-        [
-            'args' => [
-                'prompt' => FILTER_UNSAFE_RAW,
-                'limit' => FILTER_UNSAFE_RAW,
-
-            ]
-        ]
-    );
-});
-
-
 \Breakdance\AJAX\register_handler(
     'breakdance_save_document_ai_settings',
     '\Breakdance\Onboarding\saveDocumentAISettings',
@@ -151,45 +134,4 @@ function getSettings()
     ];
 
     return array_merge($defaults, $settings);
-}
-
-
-
-/**
- * @param string|null $prompt
- * @param string|null $limit
- * @return array
- */
-function talkToUnsplash($prompt, $limit)
-{
-    $url = 'https://breakdance.com/wp-json/breakdance/v1/onboarding/unsplash';
-
-    $params = [
-        'per_page' => $limit ?? 10,
-        'query' => $prompt ?? 'People',
-    ];
-
-    $request = wp_remote_get($url . '?' . http_build_query($params));
-    $body = wp_remote_retrieve_body($request);
-    /**
-     * @psalm-suppress MixedAssignment
-     * @var array{data: array} $response
-     */
-    $response = json_decode($body, true);
-
-    if (is_wp_error($body)) {
-        return ['type' => 'error', 'message' => 'Could not fetch images from Unsplash.'];
-    }
-
-    return [
-        /**
-         * @psalm-suppress MixedArrayAccess
-         * @psalm-suppress PossiblyUndefinedStringArrayOffset
-         * @psalm-suppress MixedArrayOffset
-         * @psalm-suppress MixedPropertyFetch
-         * @psalm-suppress MixedArgument
-         *
-         */
-        'data' => $response['data']
-    ];
 }

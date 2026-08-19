@@ -26,12 +26,13 @@ require_once __DIR__ . "/lib/base.php";
  * Load plugin text domain for translations.
  * This works both when standalone and when bundled into the main Breakdance plugin.
  */
-add_action('plugins_loaded', function() {
+// WordPress 6.7+ requires text domains to load on init or later (not plugins_loaded).
+add_action('init', function () {
     // When bundled, this will be something like: breakdance/subplugins/breakdance-elements
     // When standalone, this will be: breakdance-elements
     $plugin_rel_path = dirname(plugin_basename(__FILE__));
     load_plugin_textdomain('breakdance-elements', false, $plugin_rel_path . '/languages');
-});
+}, 0);
 
 add_action('breakdance_loaded', function() {
     \Breakdance\I18n\Elements\registerElementTranslations( 'EssentialElements', 'breakdance-elements' );

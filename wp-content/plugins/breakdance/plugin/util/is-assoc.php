@@ -11,7 +11,7 @@ namespace Breakdance\Util;
  */
 function isAssoc(array $arr)
 {
-    if (array() === $arr) {
+    if ([] === $arr) {
         return false;
     }
 

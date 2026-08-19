@@ -5,6 +5,7 @@ namespace Breakdance\Fonts;
 include __DIR__ . '/get-json-of-fonts.php';
 include __DIR__ . '/integrations/google-fonts/constants.php';
 include __DIR__ . '/integrations/google-fonts/google-fonts.php';
+include __DIR__ . '/integrations/google-fonts/google-fonts-variable.php';
 include __DIR__ . '/integrations/custom/base.php';
 include __DIR__ . '/fonts.php';
 

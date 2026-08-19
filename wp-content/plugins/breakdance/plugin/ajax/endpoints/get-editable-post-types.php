@@ -21,7 +21,7 @@ function getEditablePostTypes()
     $postTypeSlugs = get_public_and_allowed_post_types();
     /** @var string[] $bdPostTypeSlugs */
     $bdPostTypeSlugs = BREAKDANCE_ALL_TEMPLATE_POST_TYPES;
-    $bdGlobalBlockSlugs = array(BREAKDANCE_BLOCK_POST_TYPE);
+    $bdGlobalBlockSlugs = [BREAKDANCE_BLOCK_POST_TYPE];
 
     $slugs = array_merge($postTypeSlugs, $bdPostTypeSlugs, $bdGlobalBlockSlugs);
 

@@ -13,6 +13,7 @@ use function Breakdance\Filesystem\HelperFunctions\get_file_url;
 use function Breakdance\Filesystem\HelperFunctions\is_fs_error;
 use function Breakdance\Filesystem\write_file_to_bucket;
 use function Breakdance\Fonts\font;
+use function Breakdance\CustomFonts\getVariantsFromCustomFont;
 use function Breakdance\Preferences\get_preferences;
 use function Breakdance\Render\appendHashToFilePathAsUrlQueryForCacheBusting;
 
@@ -66,6 +67,8 @@ function save_font_families($customFontFamilies)
         $fontFamily = (string) $fontObj['family'];
         $fallbackString = $fontObj['fallbackString'];
         $id = $fontObj['id'];
+        $variants = getVariantsFromCustomFont($fontObj);
+        $isVariable = $fontObj['isVariable'] ?? false;
 
         if ($fontObj['hasExternalCssUrl']) {
             $cssUrl = $fontObj['cssUrl'];
@@ -87,7 +90,7 @@ function save_font_families($customFontFamilies)
 
         } else {
             $outputFileBasename = $id . '.css';
-            $fontFacesCss = generate_css_for_font_faces($fontFamily, $fontObj['faces']);
+            $fontFacesCss = generate_css_for_font_faces($fontFamily, $fontObj['faces'], $variants);
             $writeErrorOrFilename = write_file_to_bucket(Consts::BREAKDANCE_FS_BUCKET_FONT_FAMILIES, $outputFileBasename, $fontFacesCss);
 
             if (!is_fs_error($writeErrorOrFilename)) {
@@ -104,7 +107,10 @@ function save_font_families($customFontFamilies)
                     addQuotesToCssNameIfNecessary($fontFamily),
                     $fontFamily,
                     $fallbackString,
-                    $dependencies
+                    $dependencies,
+                    null,
+                    null,
+                    $variants
                 );
 
                 $response[] = [
@@ -200,9 +206,10 @@ function validate_remote_font_css($cssUrl)
 /**
  * @param string $fontFamily
  * @param array $fontFaces
+ * @param BreakdanceFontVariants|null $variants
  * @return string
  */
-function generate_css_for_font_faces(string $fontFamily, array $fontFaces): string
+function generate_css_for_font_faces(string $fontFamily, array $fontFaces, $variants = null): string
 {
     $fontFacesCss = '';
     foreach ($fontFaces as $font) {
@@ -217,17 +224,72 @@ function generate_css_for_font_faces(string $fontFamily, array $fontFaces): stri
             $srcString .= "url('{$src['fileUrl']}') format('{$src['format']}')";
         }
 
+        // Build font-face properties
+        $fontFaceProperties = [
+            "font-family: '$fontFamily'",
+            "font-style: {$font['style']}",
+            "font-display: swap"
+        ];
+
+        // Add variable font support
+        if ($variants) {
+            $axesByTag = array_column($variants, null, 'tag');
+
+            $weightAxis = $axesByTag['wght'] ?? null;
+            $fontFaceProperties[] = formatFontProperty(
+                'font-weight',
+                $weightAxis['start'] ?? null,
+                $weightAxis['end'] ?? null,
+                '300 900'
+            );
+
+            // Note: font-stretch is deprecated in favor of font-width,
+            // however, font-width is not supported by any browsers yet (07/2025).
+            $widthAxis = $axesByTag['wdth'] ?? null;
+            $stretchProperty = formatFontProperty(
+                'font-stretch',
+                isset($widthAxis['start']) ? $widthAxis['start'] . '%' : null,
+                isset($widthAxis['end']) ? $widthAxis['end'] . '%' : null
+            );
+
+            if ($stretchProperty) {
+                $fontFaceProperties[] = $stretchProperty;
+            }
+        } else {
+            $fontFaceProperties[] = "font-weight: {$font['weight']}";
+        }
+
         // White space is added to the file so we avoid it here
         $fontFacesCss .= "
 @font-face {
-  font-family: '$fontFamily';
-  font-style: {$font['style']};
-  font-weight: {$font['weight']};
-  font-display: swap;
+  " . implode(";\n  ", $fontFaceProperties) . ";
   src: $srcString;
 }
 ";
     }
 
     return $fontFacesCss;
+}
+
+/**
+ * Format a font property with min/max values
+ *
+ * @param string $property The CSS property name
+ * @param mixed $min Minimum value
+ * @param mixed $max Maximum value
+ * @param string|null $default Default value if both min/max are null
+ * @return string|null The formatted CSS property or null if no values
+ */
+function formatFontProperty($property, $min, $max, $default = null) {
+    if ($min !== null && $max !== null) {
+        return "{$property}: {$min} {$max}";
+    } elseif ($min !== null) {
+        return "{$property}: {$min}";
+    } elseif ($max !== null) {
+        return "{$property}: {$max}";
+    } elseif ($default !== null) {
+        return "{$property}: {$default}";
+    }
+
+    return null;
 }

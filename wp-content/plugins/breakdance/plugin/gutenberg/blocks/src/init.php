@@ -33,8 +33,8 @@ function breakdance_global_block_assets()
 	// Register block editor script for backend.
 	wp_register_script(
 		'breakdance-global-block-js', // Handle.
-		plugins_url('/dist/blocks.build.js', dirname(__FILE__)), // Block.build.js: We register the block here. Built with Webpack.
-		array('wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor'), // Dependencies, defined above.
+		plugins_url('/dist/blocks.build.js', __DIR__), // Block.build.js: We register the block here. Built with Webpack.
+		['wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor'], // Dependencies, defined above.
 		(string) filemtime(plugin_dir_path(__DIR__) . 'dist/blocks.build.js'), // Version: filemtime — Gets file modification time.
 		true// Enqueue the script in the footer.
 	);
@@ -42,8 +42,8 @@ function breakdance_global_block_assets()
 	// Register block editor styles for backend.
 	wp_register_style(
 		'breakdance-global-block-editor-css', // Handle.
-		plugins_url('dist/blocks.editor.build.css', dirname(__FILE__)), // Block editor CSS.
-		array('wp-edit-blocks'), // Dependency to include the CSS after it.
+		plugins_url('dist/blocks.editor.build.css', __DIR__), // Block editor CSS.
+		['wp-edit-blocks'], // Dependency to include the CSS after it.
 		(string) filemtime(plugin_dir_path(__DIR__) . 'dist/blocks.editor.build.css') // Version: File modification time.
 	);
 

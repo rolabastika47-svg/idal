@@ -208,7 +208,7 @@ function dynamicPropertyPaths($element)
     /**
      * @var DynamicPropertyPath[]
      */
-    return bdox_run_filters('breakdance_element_dynamic_property_paths', $paths ? $paths : []);
+    return bdox_run_filters('breakdance_element_dynamic_property_paths', $paths ?: []);
 }
 
 /**

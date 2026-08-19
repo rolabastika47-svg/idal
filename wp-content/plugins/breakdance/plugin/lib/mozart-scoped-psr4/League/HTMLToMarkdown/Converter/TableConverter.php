@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Breakdance\Lib\Vendor\League\HTMLToMarkdown\Converter;
 
+use Breakdance\Lib\Vendor\League\HTMLToMarkdown\Coerce;
 use Breakdance\Lib\Vendor\League\HTMLToMarkdown\Configuration;
 use Breakdance\Lib\Vendor\League\HTMLToMarkdown\ConfigurationAwareInterface;
 use Breakdance\Lib\Vendor\League\HTMLToMarkdown\ElementInterface;
@@ -89,7 +90,7 @@ class TableConverter implements ConverterInterface, PreConverterInterface, Confi
                 }
 
                 $value = \str_replace("\n", ' ', $value);
-                $value = \str_replace('|', $this->config->getOption('table_pipe_escape') ?? '\|', $value);
+                $value = \str_replace('|', Coerce::toString($this->config->getOption('table_pipe_escape') ?? '\|'), $value);
 
                 return '| ' . \trim($value) . ' ';
             case 'thead':

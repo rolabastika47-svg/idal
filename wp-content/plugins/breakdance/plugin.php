@@ -7,7 +7,7 @@
  * Plugin URI: https://breakdance.com/
  * Description: The Breakdance website builder for WordPress makes it easy to create incredible websites with 100+ elements, mega menu builder, form builder, WooCommerce, dynamic data, and much more.
  * Author: Breakdance
- * Version: 2.7.2
+ * Version: 2.8.1
  * Author URI: https://breakdance.com/
  * Text Domain: breakdance
  * Domain Path: /languages
@@ -24,7 +24,7 @@ turn your breakdance install into an oxygen install or vice versa
 */
 
 if (!defined('BREAKDANCE_MODE')) {
-    die('For development, please define BREAKDANCE_MODE in wp-config.php, i.e. define("BREAKDANCE_MODE", "oxygen") or define("BREAKDANCE_MODE", "breakdance")');
+    wp_die('For development, please define BREAKDANCE_MODE in wp-config.php, i.e. define("BREAKDANCE_MODE", "oxygen") or define("BREAKDANCE_MODE", "breakdance")');
 }
 
 if (
@@ -38,7 +38,7 @@ if (
 const __BREAKDANCE_PLUGIN_FILE__ = __FILE__;
 const __BREAKDANCE_DIR__ = __DIR__;
 const __BREAKDANCE_MIN_PHP_VERSION__ = '7.4';
-const __BREAKDANCE_VERSION = '2.7.2';
+const __BREAKDANCE_VERSION = '2.8.1';
 // const __BREAKDANCE_BETA_EXPIRATION = 'September 20 2022'; // comment this out for no expiration
 const __BREAKDANCE_CLEAR_CSS_CACHE_FLAG__ = 16;
 const __BREAKDANCE_AI_SUPPORTED__ = true;

@@ -196,7 +196,7 @@ function getDocumentMetaFromPost($post)
      * @psalm-suppress MixedArgument
      * @psalm-suppress PossiblyFalseArgument
      */
-    $singularityMeta = json_decode(\Breakdance\Data\get_meta($post->ID, __bdox('_meta_prefix') . 'singularity_meta'));
+    $futureLayerMeta = json_decode(\Breakdance\Data\get_meta($post->ID, __bdox('_meta_prefix') . 'futurelayer_meta'));
 
     /*
      * @psalm-suppress MixedArrayAccess
@@ -213,7 +213,7 @@ function getDocumentMetaFromPost($post)
         'id' => $post->ID,
         'templateSettingsType' => $templateSettingsType,
         'blockSettings' => $blockSettings,
-        'singularityMeta' => $singularityMeta ? $singularityMeta : false,
+        'futureLayerMeta' => $futureLayerMeta ?: false,
         'aiSettings' => $aiSettings
     ];
 }

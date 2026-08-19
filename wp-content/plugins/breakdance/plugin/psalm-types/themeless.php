@@ -22,7 +22,7 @@
  *  field?: string,
  *  operator?: string,
  *  taxonomy: string,
- *  terms: WP_Term[]|int[],string[]
+ *  terms: WP_Term[]|int[]|string[]
  * }
  * @psalm-type WordPressDateQuery = array{
  *  before: string,
@@ -82,7 +82,7 @@
  *   operands: string[],
  *   valueInputType?: "dropdown" | "datepicker" | "timepicker" | "number",
  *   values: Closure():ConditionValuesCallbackReturnType,
- *   callback: Closure(string=,mixed=,string=):boolean,
+*   callback: Closure(string=,mixed=,string=,?string=):boolean,
  *   queryCallback?: Closure(WordPressQueryVars=,string=,mixed=):WordPressQueryVars,
  *   templatePreviewableItems: false|Closure(string,mixed,string):TemplatePreviewableItem[],
  *   availableForType: TemplateTypeSlug[],

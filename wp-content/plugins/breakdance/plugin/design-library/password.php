@@ -80,10 +80,10 @@ function setPasswordForExternalDesignSet($url, $password)
     // Parse the URL to separate base URL and existing query string (if any)
     $parts = parse_url($url);
     $scheme = isset($parts['scheme']) ? $parts['scheme'] . '://' : '';
-    $host = isset($parts['host']) ? $parts['host'] : '';
-    $path = isset($parts['path']) ? $parts['path'] : '';
+    $host = $parts['host'] ?? '';
+    $path = $parts['path'] ?? '';
 
-    $existingQueryString = isset($parts['query']) ? $parts['query'] : '';
+    $existingQueryString = $parts['query'] ?? '';
     parse_str($existingQueryString, $queryParameters);
 
     // Replace or add the new password

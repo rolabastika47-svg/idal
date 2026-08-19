@@ -26,9 +26,9 @@ function trackViewAndSessionCounts()
             isset($_COOKIE['breakdance_last_session_id'])
         ) {
 
-            setcookie('breakdance_view_count', '', time() - 3600);
-            setcookie('breakdance_session_count', '', time() - 3600);
-            setcookie('breakdance_last_session_id', '', time() - 3600);
+            setcookie('breakdance_view_count', '', ['expires' => time() - 3600]);
+            setcookie('breakdance_session_count', '', ['expires' => time() - 3600]);
+            setcookie('breakdance_last_session_id', '', ['expires' => time() - 3600]);
         }
 
         return;

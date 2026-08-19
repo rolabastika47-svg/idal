@@ -505,7 +505,7 @@ function map_db_icon_to_webapp_icon($icon_from_db)
  */
 function get_stock_icons_filepath()
 {
-    return dirname(__FILE__) . '/stock-icons.csv';
+    return __DIR__ . '/stock-icons.csv';
 }
 
 

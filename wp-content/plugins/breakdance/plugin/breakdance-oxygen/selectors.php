@@ -309,7 +309,7 @@ function cssForSelectors($selectors)
 
 /**
  * @param TreeNode $node
- * @return array
+ * @return OxygenSelector[]
  */
 function getElementOxySelectors($node)
 {
@@ -321,12 +321,15 @@ function getElementOxySelectors($node)
     $availableClasses = getOxySelectors();
     $classMap = array_column($availableClasses, null, 'id');
 
-    return array_filter(
+    /** @var OxygenSelector[] $elementClasses */
+    $elementClasses = array_filter(
         array_map(
             fn($oxySelectorId) => $classMap[$oxySelectorId] ?? null,
             $ids
         )
     );
+
+    return $elementClasses;
 }
 
 /**
@@ -490,4 +493,25 @@ function getCssAndFontsForSelector(
     );
 
     return [$css, getFontsForSelector($selector)];
+}
+
+/**
+ *
+ * @param OxygenSelector $selector
+ * @param TreeNode $node
+ * @return boolean
+ */
+function shouldSelectorApply($selector, $node)
+{
+    /** @var array<string, array{ruleGroups: TemplateRuleGroup[], builderPreview: bool}> $allConditions */
+    $allConditions = $node['data']['properties']['meta']['classes_conditions'] ?? [];
+    $selectorConditions = $allConditions[$selector['id']] ?? null;
+    $ruleGroups = $selectorConditions['ruleGroups'] ?? null;
+
+    if ($ruleGroups) {
+        $evaluatedRuleGroups = array_map('\Breakdance\Themeless\doesRuleGroupApply', $ruleGroups);
+        return in_array(true, $evaluatedRuleGroups, true);
+    }
+
+    return true;
 }

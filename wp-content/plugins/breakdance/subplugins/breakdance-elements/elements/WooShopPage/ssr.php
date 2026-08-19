@@ -53,13 +53,21 @@ if (is_shop() || is_product_taxonomy()) {
             }
         });
 } else {
-    echo <<<HTML
-     <div class="breakdance-empty-ssr-message breakdance-empty-ssr-message-error">
-        <div>
-            The <b>"Shop Page"</b> element can only be added to a shop archive template or a template for product taxonomies.<br /><br />
-            Create one in the WP admin at <b>Breakdance &gt; Templates</b>.
-        </div>
-    </div>
-HTML;
-
+    $builderName = \Breakdance\BreakdanceOxygen\Strings\__bdox('plugin_name');
+    $line1 = sprintf(
+        __('The %s element can only be added to a shop archive template or a template for product taxonomies.', 'breakdance'),
+        '<b>"Shop Page"</b>'
+    );
+    $line2 = sprintf(
+        __('Create one in the WP admin at %s.', 'breakdance'),
+        '<b>' . esc_html($builderName) . ' &gt; Templates</b>'
+    );
+    echo wp_kses(
+        '<div class="breakdance-empty-ssr-message breakdance-empty-ssr-message-error"><div>' . $line1 . '<br /><br />' . $line2 . '</div></div>',
+        [
+            'div' => ['class' => []],
+            'b'   => [],
+            'br'  => [],
+        ]
+    );
 }
