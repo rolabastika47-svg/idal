@@ -15,6 +15,7 @@ $is_arabic_idal_page = (
     $current_lang === 'ar'
     || is_page(26862)
     || is_page(26916)
+    || is_page(26953)
     || is_page_template('page-home-arabic.php')
 );
 
@@ -82,7 +83,7 @@ if (!empty($style_parts)) {
 
 <?php if (
     is_front_page()
-    || is_page(array(26733, 26862, 26916, 26920))
+    || is_page(array(26733, 26862, 26916, 26920, 26953))
     || is_page_template('page-home-arabic.php')
 ) : ?>
 
