@@ -86,13 +86,14 @@ if (!empty($style_parts)) {
 | Arabic Export: 26962
 | English Information Center: information-center
 | Arabic Information Center: information-center-arabic
+| English Contact Us: contact-us
 |--------------------------------------------------------------------------
 */
 ?>
 
 <?php if (
     is_front_page()
-    || is_page(array(44, 77, 26733, 26862, 26916, 26920, 26953, 26961, 26962, 'information-center', 'information-center-arabic'))
+    || is_page(array(44, 77, 26733, 26862, 26916, 26920, 26953, 26961, 26962, 'information-center', 'information-center-arabic', 'contact-us'))
     || is_page_template('page-home-arabic.php')
 ) : ?>
 
