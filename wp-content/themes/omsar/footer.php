@@ -19,6 +19,7 @@ $is_arabic_idal_page = (
     || is_page(26953)
     || is_page(26962)
     || is_page('information-center-arabic')
+    || is_page('contact-us-arabic')
     || is_page_template('page-home-arabic.php')
 );
 
@@ -87,13 +88,14 @@ if (!empty($style_parts)) {
 | English Information Center: information-center
 | Arabic Information Center: information-center-arabic
 | English Contact Us: contact-us
+| Arabic Contact Us: contact-us-arabic
 |--------------------------------------------------------------------------
 */
 ?>
 
 <?php if (
     is_front_page()
-    || is_page(array(44, 77, 26733, 26862, 26916, 26920, 26953, 26961, 26962, 'information-center', 'information-center-arabic', 'contact-us'))
+    || is_page(array(44, 77, 26733, 26862, 26916, 26920, 26953, 26961, 26962, 'information-center', 'information-center-arabic', 'contact-us', 'contact-us-arabic'))
     || is_page_template('page-home-arabic.php')
 ) : ?>
 
