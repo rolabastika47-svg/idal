@@ -762,7 +762,7 @@ if (!empty($style_parts)) {
                 href="<?php
                 echo esc_url(
                     $is_arabic_idal_page
-                        ? home_url('/investment/')
+                        ? home_url('/investment-arabic/')
                         : home_url('/en/investment/')
                 );
                 ?>"
@@ -788,7 +788,7 @@ if (!empty($style_parts)) {
                 href="<?php
                 echo esc_url(
                     $is_arabic_idal_page
-                        ? home_url('/export/')
+                        ? home_url('/export-arabic/')
                         : home_url('/en/export/')
                 );
                 ?>"
@@ -808,13 +808,39 @@ if (!empty($style_parts)) {
 
 
 
+            <!-- INFORMATION CENTER -->
+
+            <a
+                href="<?php
+                echo esc_url(
+                    $is_arabic_idal_page
+                        ? home_url('/information-center-arabic/')
+                        : home_url('/en/information-center/')
+                );
+                ?>"
+            >
+
+                <?php if ($is_arabic_idal_page) : ?>
+
+                    مركز المعلومات
+
+                <?php else : ?>
+
+                    Information Center
+
+                <?php endif; ?>
+
+            </a>
+
+
+
             <!-- CONTACT -->
 
             <a
                 href="<?php
                 echo esc_url(
                     $is_arabic_idal_page
-                        ? home_url('/contact-us/')
+                        ? home_url('/contact-us-arabic/')
                         : home_url('/en/contact-us/')
                 );
                 ?>"
