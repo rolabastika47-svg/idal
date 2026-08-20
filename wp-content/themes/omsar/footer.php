@@ -17,6 +17,8 @@ $is_arabic_idal_page = (
     || is_page(26862)
     || is_page(26916)
     || is_page(26953)
+    || is_page(26962)
+    || is_page('information-center-arabic')
     || is_page_template('page-home-arabic.php')
 );
 
@@ -81,13 +83,16 @@ if (!empty($style_parts)) {
 | English Investment: 26961
 | Arabic Investment: 77
 | English Export: 44
+| Arabic Export: 26962
+| English Information Center: information-center
+| Arabic Information Center: information-center-arabic
 |--------------------------------------------------------------------------
 */
 ?>
 
 <?php if (
     is_front_page()
-    || is_page(array(44, 77, 26733, 26862, 26916, 26920, 26953, 26961))
+    || is_page(array(44, 77, 26733, 26862, 26916, 26920, 26953, 26961, 26962, 'information-center', 'information-center-arabic'))
     || is_page_template('page-home-arabic.php')
 ) : ?>
 
