@@ -1681,3 +1681,36 @@ add_action( 'init', function () {
 		add_post_type_support( $post_type, 'revisions' );
 	}
 }, 99 );
+
+/**
+ * About Us Breakdance sidebar toggle.
+ * Uses element IDs because custom classes/selectors require Breakdance Pro.
+ */
+add_action('wp_footer', function () {
+    // Only load on the Breakdance About Us page.
+    if (!is_page(26920)) {
+        return;
+    }
+    ?>
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const toggle = document.getElementById("aboutSidebarToggle");
+        const sidebar = document.getElementById("aboutSidebar");
+
+        if (!toggle || !sidebar) {
+            return;
+        }
+
+        toggle.setAttribute("aria-expanded", "true");
+
+        toggle.addEventListener("click", function (e) {
+            e.preventDefault();
+
+            const isHidden = sidebar.style.display === "none";
+            sidebar.style.display = isHidden ? "" : "none";
+            toggle.setAttribute("aria-expanded", isHidden ? "true" : "false");
+        });
+    });
+    </script>
+    <?php
+}, 100);
