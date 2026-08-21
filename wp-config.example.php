@@ -20,13 +20,13 @@
 
 // ** Database settings - You can get this info from your web host ** //
 /** The name of the database for WordPress */
-define( 'DB_NAME', 'idal' );
+define( 'DB_NAME', 'YOUR_DATABASE_NAME' );
 
 /** Database username */
-define( 'DB_USER', 'root' );
+define( 'DB_USER', 'YOUR_DATABASE_USER' );
 
 /** Database password */
-define( 'DB_PASSWORD', '' );
+define( 'DB_PASSWORD', 'YOUR_DATABASE_PASSWORD' );
 
 /** Database hostname */
 define( 'DB_HOST', 'localhost' );
@@ -48,14 +48,14 @@ define( 'DB_COLLATE', '' );
  *
  * @since 2.6.0
  */
-define( 'AUTH_KEY',         '/IG=Bs9T&4`k[9e4xr hi3s2&p+QC7b,]Gxg5+N*Tj~exA ^GQ`+9XT[ cj`[IWP' );
-define( 'SECURE_AUTH_KEY',  'Dbxj7&)hjLj~DuafM~yahGkdl$c@Kfc7||Z8i6=V[i/%,kyLNDbJfR1Y1Bo.(HYH' );
-define( 'LOGGED_IN_KEY',    'g?t=y#nI1MFc_4tw/Dd|kFE,U%n:]S)|HPVs[M_hwq}BZ%Co#/m?ffu9-UYQ3mQ=' );
-define( 'NONCE_KEY',        'yj:!J*g0C5E()F Cvp?OZCc|m(}On_3?[@4ZF%s{D<!:i|$D0C+AJMZJ,B}`+nU#' );
-define( 'AUTH_SALT',        '>~*dwpM*.-6Vdjm2hRw>/g`+*69<W*!qYN00PR%ua#:lo,?vQ+zR+{BI;u1#Y#]_' );
-define( 'SECURE_AUTH_SALT', 'w~WF[:;uqyz#iGlX;Mw9lz =bj]{)aO >%Q0C|q<+DYNJvnGn4(tjg^H{`j9{,*f' );
-define( 'LOGGED_IN_SALT',   '=WZ9U{ N hB?#2D)<F&/lg_u+4w#1wZ% _m3y?dDh?z`~b>t]XO|h^H>m)=  !Y`' );
-define( 'NONCE_SALT',       'g7yK`v$_u4i,&n/#MgAU5+yy4hT&HA6gRdXB9LkW I2_OXwa95#_-&I?tG:I/eMp' );
+define( 'AUTH_KEY', 'PUT-YOUR-UNIQUE-KEY-HERE' );
+define( 'SECURE_AUTH_KEY', 'PUT-YOUR-UNIQUE-KEY-HERE' );
+define( 'LOGGED_IN_KEY', 'PUT-YOUR-UNIQUE-KEY-HERE' );
+define( 'NONCE_KEY', 'PUT-YOUR-UNIQUE-KEY-HERE' );
+define( 'AUTH_SALT', 'PUT-YOUR-UNIQUE-KEY-HERE' );
+define( 'SECURE_AUTH_SALT', 'PUT-YOUR-UNIQUE-KEY-HERE' );
+define( 'LOGGED_IN_SALT', 'PUT-YOUR-UNIQUE-KEY-HERE' );
+define( 'NONCE_SALT', 'PUT-YOUR-UNIQUE-KEY-HERE' );
 
 /**#@-*/
 
@@ -105,3 +105,4 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /** Sets up WordPress vars and included files. */
 require_once ABSPATH . 'wp-settings.php';
+
